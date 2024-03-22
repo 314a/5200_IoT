@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Pia Bereuter">
+<meta name="keywords" content="iot, ubiquitous computing, digital earth">
+<meta name="description" content="Einführung in Internet of Things IoT und deren Bedeutung für die Geomatik.">
+
+<title>Einführung in IoT - 1&nbsp; Internet of Things IoT</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02_Sensoren.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./images/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_IoT.html">Theorie</a></li><li class="breadcrumb-item"><a href="./01_IoT.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Internet of Things IoT</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/logo.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Einführung in IoT</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/314a/5200_IoT" title="Quellcode" class="quarto-navigation-tool px-1" aria-label="Quellcode"><i class="bi bi-github"></i></a>
+    <a href="./5200_IoT.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inhalt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Theorie</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_IoT.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Internet of Things IoT</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Sensoren.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sensoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Datenübertragung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datenübertragung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literatur</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Praktika</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E01 Luftqualitätmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E02 Spektralmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E03 Bewegungsmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E04 Distanzmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E06 Biometrie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E07 MQTT</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Anhang</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A2_Sensorbox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Raspberry Pi Sensorbox</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A3_CheatSheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Shell Cheat Sheet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A4_Setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul class="collapse">
+  <li><a href="#ubiquitous-computing" id="toc-ubiquitous-computing" class="nav-link active" data-scroll-target="#ubiquitous-computing">Ubiquitous Computing</a></li>
+  <li><a href="#internet-of-things" id="toc-internet-of-things" class="nav-link" data-scroll-target="#internet-of-things">Internet of Things</a></li>
+  <li><a href="#digital-earth-und-iot" id="toc-digital-earth-und-iot" class="nav-link" data-scroll-target="#digital-earth-und-iot">Digital Earth und IoT</a></li>
+  <li><a href="#iot-und-gis" id="toc-iot-und-gis" class="nav-link" data-scroll-target="#iot-und-gis">IoT und GIS</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/01_IoT.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_IoT.html">Theorie</a></li><li class="breadcrumb-item"><a href="./01_IoT.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Internet of Things IoT</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Internet of Things IoT</span></h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autor</div>
+  <div class="quarto-title-meta-heading">Zugehörigkeit</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Pia Bereuter </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Fachhochschlue Nordwestschweiz
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">22. März. 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Zusammenfassung</div>
+    Einführung in Internet of Things IoT und deren Bedeutung für die Geomatik.
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Schlüsselwörter</div>
+    <p>iot, ubiquitous computing, digital earth</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="ubiquitous-computing" class="level2">
+<h2 class="anchored" data-anchor-id="ubiquitous-computing">Ubiquitous Computing</h2>
+<p>Aus dem Bestreben der 1980er Jahre, Technologie in den Hintergrund des Alltags einzubetten, in dem entstehenden Forschungsgebiet <em>Ubiquitous Computing</em> definierte dies Weiser <em>Ubiquitous Computing</em> <span class="citation" data-cites="rogers2006">(<a href="references.html#ref-rogers2006" role="doc-biblioref">Rogers 2006</a>)</span> als “die physische Welt, die reichhaltig und unsichtbar mit Sensoren, Aktoren, Anzeigen und Computerelementen verwoben ist, die nahtlos in die alltäglichen Objekte unseres Lebens eingebettet und durch ein kontinuierliches Netzwerk verbunden ist” mit dem Ziel im täglichen Leben unterstützend zu sein und nicht zu überladen.</p>
+<dl>
+<dt>Ubiquitous Computing</dt>
+<dd>
+<p>Vision der Informatik allgegenwärtige Datenverarbeitung und Nutzung von Systemen ohne Bedienungsanforderung und Hardwarebelastung für die Nutzenden. Ubiquitäre Systeme agieren quasi unsichtbar im Hintergrund von Handlungsfelder <span class="citation" data-cites="wiegerling2013">(<a href="references.html#ref-wiegerling2013" role="doc-biblioref">Wiegerling 2013</a>)</span>.</p>
+</dd>
+</dl>
+<p>Ethnographische Studien über den Alltag zeigen, dass der Kontext des Alltags der Menschen viel subtiler, fliessender und eigenwilliger ist, als das die Theorien über den Kontext glauben machen <span class="citation" data-cites="salvador2003">(<a href="references.html#ref-salvador2003" role="doc-biblioref">Salvador und Anderson 2003</a>)</span>. Dies erschwert eine praktische Umsetzung und Vorhersage von Bedürfnissen auf Basis von Kontextinformationen erheblich. Zusätzlich stellen sich auch ethische und soziale Fragen. <span class="citation" data-cites="rogers2006">Rogers (<a href="references.html#ref-rogers2006" role="doc-biblioref">2006</a>)</span> plädiert für einen proaktiven Ansatz weg von <em>proactive Computing</em> zu <em>proactive people</em> und propagiert eine fachspezifische Nutzung für bestimmte Bereiche wie beispielsweise Landwirtschaft oder Umeltsanierung und weg von der Idee von <em>pervasive Computing</em>. Zwei Technologien sind kritisch für diese Ansätze <em>Cloud Computing</em> und <em>Internet of Things</em>.</p>
+</section>
+<section id="internet-of-things" class="level2">
+<h2 class="anchored" data-anchor-id="internet-of-things">Internet of Things</h2>
+<p>Es existiert keine einheitliche Definition für <em>Internet of Things</em> IoT oder das Internet der Dinge. Es ist eine Bezeichnung oder Sammelbegriff für ein Netzwerk von physischen Objekten “Things”, die untereinander vernetzt sind, mit Sensoren, Software und unterschiedlichen Technologien ausgestattet sind, und somit einen direkten Datenaustausch ermöglichen. Dies reicht von Monitoringsystemen, über Wildtierbeobachtungen, Smart City Anwendungen bis in die Haushalte die mit IoT Geräten ausgestattet sind.</p>
+<p>Der Standardisierungsausschuss der International Telecommunication Union (ITU) definiert IoT als eine</p>
+<blockquote class="blockquote">
+<p>.. a global&nbsp;infrastructure&nbsp;for the information society, enabling advanced services by interconnecting&nbsp;(physical and virtual)&nbsp;Things based on existing and evolving interoperable information and communication technologies <span class="citation" data-cites="ITU2005">(<a href="references.html#ref-ITU2005" role="doc-biblioref">ITU 2005</a>)</span>.</p>
+</blockquote>
+<p><span class="citation" data-cites="ashton2009">Ashton (<a href="references.html#ref-ashton2009" role="doc-biblioref">2009</a>)</span> beschrieb als früher Ideengeber zu Internets der Dinge im Kontext von Supply Chain Management folgendes:</p>
+<blockquote class="blockquote">
+<p>.. Ideas and information are important, but things matter much more. Yet today’s information technology is so dependent on data originated by people that our computers know more about ideas than things. If we had computers that knew everything there was to know about things — using data they gathered without any help from us—we would be able to track and count everything, and greatly reduce waste, loss and cost. We would know when things needed replacing, repairing or recalling, and whether they were fresh or past their best. We need to empower computers with their own means of gathering information, so they can see, hear and smell the world for themselves, in all its random glory. RFID and sensor technology enable computers to observe, identify and understand the world—without the limitations of human-entered data. [..] The Internet of Things has the potential to change the world, just as the Internet did. Maybe even more so.</p>
+</blockquote>
+<p>Die Kernidee von IoT ist, mit Computer Informationen, <em>ohne</em> menschliches zu tun zu erkennen. Wenn <em>Dinge</em> eigenständig Daten sammeln, diese nach Art, Messung, Messzeit und Messort geordnet werden, ermöglicht dies im Bereich der Geomatik spannende neue Ansätze, Analysen und Anwendungen. IoT ist ein multidisziplinäres Gebiet mit einem breiten Spektrum an Technologien, Protokollen, Anwendungszenarien und Disziplinen und bedingt Kenntnisse der elektronischen Komponenten, Kommunikationsprotokollen, Echtzeitdatenanalysen, und der Lokalisierung von Objekten und Geräten <span class="citation" data-cites="granell2020">(<a href="references.html#ref-granell2020" role="doc-biblioref">Granell <em>u.&nbsp;a.</em> 2020</a>)</span>.</p>
+<p>Für das Konzept <em>Ding</em> oder <em>Thing</em> bestehen unterschiedliche Definitionen. Charakteristisch ist, begrenzte Ressourcen (beispielsweise geringe Rechenleistung), unzuverlässige Netwerkverbindung, geringe Kosten für Hardware und Datenübertragung, keine Stromversorgung dafür Batterienbetrieb und nicht im Office-Umfeld sondern im Feld. Aus <strong>Netzwerksicht</strong> kann es als Entität mit der Möglichkeit sich mit einem Netzwerk lokal oder dem Internet zu verbinden beschrieben werden. Aus <strong><em>ding-zentrierter</em> Sicht</strong> sind die mit den Dingen verbundenen Dienste zentral. Dienste, die Datenmengen, die von intelligenten Objekten durch deren Interaktion mit der Umgebung erfasst werden, verwalten.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/smartes_objekt.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Komponenten eines smarten Objekt “Thing” <span class="citation" data-cites="zaheeruddin2020">(<a href="references.html#ref-zaheeruddin2020" role="doc-biblioref">Zaheeruddin und Gupta 2020</a>)</span></figcaption>
+</figure>
+</div>
+<p>Das Internet entwickelt sich in ein Netzwerk,</p>
+<ul>
+<li>in welchem Objekte miteinander <strong>verbunden</strong> werden,</li>
+<li>Informationen aus der Umwelt gesammelt werden (<strong>Sensorik</strong>),</li>
+<li>mit der physischen Welt interagiert (<strong>Steuerung</strong>) werden und</li>
+<li>bestehende <strong>Standards</strong> für Dienste für den Transfer, Analyse, Anwendung und Kommunikation genutzt werden.</li>
+</ul>
+<p>Die drei wesentlichen technologischen IoT Komponenten sind folglich:</p>
+<ul>
+<li>Hardware mit Sensoren, Aktoren und integrierter Kommunikationstechnologie</li>
+<li>Middleware bedarfsorientierte Speicher- und Datenverarbeitungswerkzeuge für die Datenanalyse</li>
+<li>Präsentation mit zugänglichen und nutzerfreundlichen Visualisierungs- und Interpretationswerkzeuge über unterschiedliche Plattformen und Anwendungen</li>
+</ul>
+<p>Betrachtet man die Dimensionen von IoT fügt sich aus der Sicht der Kommunikationstechnologie das <em>thing</em> mit ein <span class="citation" data-cites="ITU2005">(<a href="references.html#ref-ITU2005" role="doc-biblioref">ITU 2005</a>)</span>. Aus Sicht der Geoinformation, sind diese drei Dimensionen sehr vertraut mit <em>Zeit</em>, <em>Ort</em> und <em>Objekt</em> dem <em>thing</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/iot_dimension.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Dimensionen der IoT, eine neue Dimension aus Sicht der Kommunikationstechnologie</figcaption>
+</figure>
+</div>
+<p>IoT Geräte haben neben der wichtigsten Eigenschaft, dass sie mit dem Netzwerk/Internet kommunizieren können, folgende typischen Eigenschaften. Sie sind oft <strong>funkbasiert</strong> und oft <strong>batteriebetrieben</strong>. Sie lassen sich daher einfach installieren, jedoch muss im Betrieb dem Batteriebetrieb der Verbrauch berücksichtigt werden und nach Anforderung (Laufzeit vs häufige Updates) priorisiert werden<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+</section>
+<section id="digital-earth-und-iot" class="level2">
+<h2 class="anchored" data-anchor-id="digital-earth-und-iot">Digital Earth und IoT</h2>
+<p>Der Vizepräsident der USA AL Gore führte 1998 in seiner Rede das Konzept der digitalen Erde ein mit der Vision die realer Erde mit einer virtuellen Nachbildung zu erweitern, einem virtuellen Zwilling <span class="citation" data-cites="gore1998">(<a href="references.html#ref-gore1998" role="doc-biblioref">Gore 1998</a>)</span>.</p>
+<blockquote class="blockquote">
+<p>I believe we need a “Digital Earth”. A multi-resolution, three-dimensional representation of the planet into which we can embed vast quantities of geo-referenced data. <span class="citation" data-cites="gore1998">Gore (<a href="references.html#ref-gore1998" role="doc-biblioref">1998</a>)</span></p>
+</blockquote>
+<p>Die Umsetzung der Vision “Digital Earth” erfordert wie auch die IoT eine entsprechende Infrastruktur, die das Auffinden, den Zugriff, die Analyse und die Verarbeitung von raumbezogenen Daten ermöglicht. <span class="citation" data-cites="granell2020">Granell <em>u.&nbsp;a.</em> (<a href="references.html#ref-granell2020" role="doc-biblioref">2020</a>)</span> fordern eine permanente und verstärkte Zusammenarbeit beider Bereiche. Betrachtet man die Rolle der Netzwerke und Interaktion in beiden Bereichen, kann ein Worklow von (1) der Auffindbarkeit, Erfassung und Kommunikation räumlicher Informationen, zu (2) Verständnis räumlicher Objekte und ihrer Beziehungen, dann (3) Bestimmung des raum-zeitlichen Verhaltens und der Simulationsregeln und dem (4) Handeln und Ergreifen fundierter Maßnahmen gezeichnet werden. Bei (1) kann IoT mit neuen Quellen und höheren Aufnahme- und Übertragungsfrequenzen den Workflow anreichern und (2) erfordert eine kontinuierliche vertiefte Zusammenarbeit beider Infrastrukturen. Im Bereich IoT werden räumlichen Analysen wird aufgrund der aufkommenden Edge-Fog-Cloud Paradigmen zunehmen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/digital_earth_iot.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>IoT und Digital Earth Workflow <span class="citation" data-cites="granell2020">Granell <em>u.&nbsp;a.</em> (<a href="references.html#ref-granell2020" role="doc-biblioref">2020</a>)</span></figcaption>
+</figure>
+</div>
+<p><strong>Die Auffindbarkeit, Erfassung und Kommunikation</strong> räumlicher Informationen erfordert das Geräte und ihre Daten auffindbar und zugänglich sind mit standardisierten Methoden in globalen zentralisierten Sammlungen, oder über dezentralen oder hierarchischen Ansätzen. Viele dieser Dienste erfordern Fachkenntnisse und einfache Zugänge zu IoT Daten fehlen. Der OGC Standard Sensor Web Enablement SWE standardisiert die Erkennung und der Zugriff auf Sensoren. Bei der räumlichen Datenerfassung in IoT haben Sensor-Metadaten eine hohe Bedeutung, wobei der SensorML-Standard einer der wichtigsten ist <span class="citation" data-cites="granell2020">(<a href="references.html#ref-granell2020" role="doc-biblioref">Granell <em>u.&nbsp;a.</em> 2020</a>)</span>.</p>
+<dl>
+<dt>Sensor Model Language SensorML-Standard</dt>
+<dd>
+Der OGC <a href="https://www.ogc.org/standard/sensorml">SensorML-Standard</a> beschreibt umfassend Sensor-Metadaten und bietet eine Schnittstelle, die das Auffinden von Sensoren und Beobachtungen folglich das Erstellen von Suchindizes erleichtert. Elemente sind Betreiber, Dienste, Standort, beobachtetes Phänomen und der zeitliche Verlauf.
+</dd>
+<dt>Sensor Web Enablement SWE standards suite</dt>
+<dd>
+Der OGC <a href="https://www.ogc.org/standard/swes">SWE Standard</a> ermöglicht die Erkennung und den Zugriff auf Sensoren und zugehörige Beobachtungsdaten über Standardprotokolle und Anwendungsprogrammierschnittstellen. Anwendung in der Erdbeobachtung, beispielsweise für das Katastrophenmanagement wie Brände, Überschwemmungen oder Vulkanausbrüche. Wobei die Unterstützung der Semantik eine Schwäche des Standards ist, <em>Semantic Sensor Network SSN</em> und Weiterentwicklungen wie <em>Internet of Things Ontology IoT-O</em> oder die <em>Sensor, Observation, Sample, and Actuator (SOSA) Ontology</em>, eine Zusammenarbeit zwischen W3C und OGC, nutzen Ontologien um die Semantik in IoT besser abzubilden.
+</dd>
+</dl>
+<p>SWE umfasst zwei Suchtypen das Auffinden einzelner Sensorinstanzen und Sensordienste, wobei ersteres sich auf einzelne Geräte oder Sensornetzwerke bezieht und das Zweite die Dienste, die mit dem Sensor interagieren. Die Suche kann grob in drei Gruppen unterteilt werden:</p>
+<ul>
+<li><em>thematisch</em>: Art der Phänomene, die ein Sensor beobachtet, z. B. Temperatur, Windstärke oder Luftdruck</li>
+<li><em>räumlich</em>: Ort, an dem der Sensor eingesetzt wird</li>
+<li><em>zeitlich</em>: Zeitraum, in dem die Beobachtungen gemacht werden</li>
+</ul>
+<p>Weiterentwicklungen im Bereich der Kommunikation zwischen <em>things</em> Geräten brachte neue Schnittstellen und über die Zeit geringere Kosten und Stromverbrauch der Kommunikationsschnittstellen wie <em>Bluetooth, Wi-Fi, ZigBee, 3G-5G</em> oder <em>LORA</em>. Während früher einfache Datenlogger nur Daten senden konnten verfügen die Geräte heute über die Möglichkeit Daten zu Senden und zu empfangen. Dies erlaubt die Steuerung und Anpassung des Verhaltens der Geräte. Kommunikationsprotokolle die auf Maschinenkommunikation ausgerichtet sind <em>machine-to-machine M2M</em> wurden entwickelt, wie das <em>Advanced Message Queuing Protokoll</em> (AMQP), <em>MQTT</em> oder das <em>streamingorientierte Protokoll STOMP</em>. Folgende Übersicht zeigt unterschiedliche Eigenschaften von Industriestandards für IoT über die Übertragungsdistanz, Art der Informationsübertragung und typische Anwendungsbereiche.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/iot_standards_range.png" class="img-fluid figure-img"></p>
+<figcaption>IoT Standards, Eigenschaften, Übertragungsdistanzen und Anwendungen <span class="citation" data-cites="links2019">(<a href="references.html#ref-links2019" role="doc-biblioref">Links 2019</a>)</span></figcaption>
+</figure>
+</div>
+</section>
+<section id="iot-und-gis" class="level2">
+<h2 class="anchored" data-anchor-id="iot-und-gis">IoT und GIS</h2>
+<p><em>Smarte</em> Geräte der erzeugen grosse Datenströme mit zeitlichen und räumlichen Merkmalen, für deren Analyse die Entfernung, Fläche, Volumen oder Trajektorien entscheidend für die Datenanalyse von IoT Geräten sind. Die Vielfalt der Geräte bringt neue analytische Herausforderungen mit sich, die in der Lage sein müssen räumlich-zeitliche Echtzeitdaten mit sehr heterogenen <em>smarten</em> Geräten verarbeiten zu können <span class="citation" data-cites="trilles2017">(<a href="references.html#ref-trilles2017" role="doc-biblioref">Trilles <em>u.&nbsp;a.</em> 2017</a>)</span>. Während Werkzeuge für die Analyse von Echtzeitdaten existieren, stellt die räumliche Komponente eine Herausforderung dar. Der Raum, wie der Standort, die Ausrichtung, Form und Grösse spielen eine wesentliche Rolle in IoT, da alle Geräte räumliche Eigenschaften aufweisen und miteinander räumlich zu einander in Beziehung stehen (beispielsweise der Standort, die Grösse und Orientierung von einem Auto und einem Fahrrad auf der gleichen Fahrbahn) <span class="citation" data-cites="granell2020">(<a href="references.html#ref-granell2020" role="doc-biblioref">Granell <em>u.&nbsp;a.</em> 2020</a>)</span>. Erst über den Raum können Sensoren in Beziehung zu einander gebracht werden.</p>
+<p>Ansätze zur räumlichen-zeitlichen Datenanalyse in Echtzeit haben noch keine standardisierten Prozeduren, die einfach und breit angewandt werden können <span class="citation" data-cites="granell2020">(<a href="references.html#ref-granell2020" role="doc-biblioref">Granell <em>u.&nbsp;a.</em> 2020</a>)</span>. Zusätzlich sollten Standards Echtzeitanalysen ermöglichen ohne grossen zusätzlichen Rechenaufwand für Geräte, die eine beschränkte <em>Speicherkapazität</em> und <em>Konnektivität</em> haben und oft mit Batterie betrieben sind. Der OGC Sensor Observation Service SOS bedingt eine eher rechenintensive Verarbeitung von XML-Dokumenten und weitere Ansätze sind in Erarbeitung, die dem Rechnung tragen.</p>
+<p><span class="citation" data-cites="kamilaris2018">Kamilaris und Ostermann (<a href="references.html#ref-kamilaris2018" role="doc-biblioref">2018</a>)</span> klassieren und geben eine Übersicht von IoT Anwendungen und Forschungsprojekte im Kontext der GIScience und IoT. Die Anwendungsbiete sind vielfältig, wie in folgender Abbildung illustriert. In fast allen aufgeführten Anwendungsgebieten sind Aussagen zum Standort relevant.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/iot_ecosystem_mobile.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Ökosystem der Anwendungen in mobile Computing im Zusammenspiel mit Sensoren von IoT Geräten.</figcaption>
+</figure>
+</div>
+<p>Sie führen für die verschiedenen Anwendungsgebiete die benutzten Methodenklassen der räumlichen Analyse.</p>
+<p>Wobei sie die Analysemethoden wie folgt gruppieren:</p>
+<ul>
+<li><strong>Geometric Measures</strong>: distances and proximity of points, adjacency and connectivity</li>
+<li><strong>Data Mining</strong>: discovering patterns from large datasets</li>
+<li><strong>Basic Analytical Operations</strong>: methods such as buffering and overlay</li>
+<li><strong>Basic Analytical Methods</strong>: spatial analysis of point patterns and clusters, kernels and density analysis</li>
+<li><strong>Network Analysis</strong>: graph measures, least-cost shortest path problems and flow modeling</li>
+<li><strong>Surface Analysis &amp; Geostatistics</strong>: Analysis of surfaces and geostatistics deal with interpolation of surfaces and kriging.</li>
+</ul>
+<p>Sie klassieren die Anwendungsgebiete und die räumlichen Analysemethoden in folgender Tabelle.</p>
+<table class="table">
+<caption>IoT Forschungsgebiet und räumliche Analysemethoden <span class="citation" data-cites="kamilaris2018">(<a href="references.html#ref-kamilaris2018" role="doc-biblioref">Kamilaris und Ostermann 2018</a>)</span>.</caption>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>IoT Area</th>
+<th>Geometric Measures</th>
+<th>Data Mining</th>
+<th>Basic Analytical Operations</th>
+<th>Basic Analytical Methods</th>
+<th>Network Analysis</th>
+<th>Surface Analysis &amp; Geostatistics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tourism</td>
+<td>X</td>
+<td>X</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>Utility Network</td>
+<td>X</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Disaster Monitoring</td>
+<td>X</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+</tr>
+<tr class="even">
+<td>Health and disease detection</td>
+<td>X</td>
+<td>X</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>X</td>
+</tr>
+<tr class="odd">
+<td>Transportation</td>
+<td>X</td>
+<td>X</td>
+<td>-</td>
+<td>X</td>
+<td>X</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>Logistics and assets</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Wildlife monitoring</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr class="even">
+<td>Agriculture</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+<tr class="odd">
+<td>Crime prediction</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>Sports and gaming</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>Environment</td>
+<td>-</td>
+<td>-</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<p>In einer zweiten tabellarischen Zusammenfassung führen sie IoT basierte Methoden mit Beispielen von Generalisierung von Punktmessungen auf, welche Aussagen in grösseren Massstäben ermöglichen. Diese sind nach einzelnen IoT Methoden klassiert, wobei die ersten vier Methoden gerade für Generalisierung am beliebtesten sind.</p>
+<table class="table">
+<caption>IoT Methoden für die Generalisierung von Analysen <span class="citation" data-cites="kamilaris2018">(<a href="references.html#ref-kamilaris2018" role="doc-biblioref">Kamilaris und Ostermann 2018</a>)</span>.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">IoT-Based Method</th>
+<th style="text-align: left;">Examples of Generalizations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Participatory sensing</td>
+<td style="text-align: left;">Detecting emergency events at city scale [<a href="https://www.mdpi.com/2220-9964/7/7/269#B23-ijgi-07-00269">1</a>], promoting neighborhood identity and local services [<a href="https://www.mdpi.com/2220-9964/7/7/269#B24-ijgi-07-00269">2</a>], creating a noise map of a city [<a href="https://www.mdpi.com/2220-9964/7/7/269#B25-ijgi-07-00269">3</a>], detecting outbreaks of dengue fever [<a href="https://www.mdpi.com/2220-9964/7/7/269#B48-ijgi-07-00269">4</a>], developing heat maps from cyclists used for better city planning [<a href="https://www.mdpi.com/2220-9964/7/7/269#B45-ijgi-07-00269">5</a>], producing a global spatial distribution of malaria risk [<a href="https://www.mdpi.com/2220-9964/7/7/269#B65-ijgi-07-00269">6</a>].</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vehicular networks and transportation systems</td>
+<td style="text-align: left;">Proactively performing urban traffic monitoring [<a href="https://www.mdpi.com/2220-9964/7/7/269#B54-ijgi-07-00269">7</a>], travel planning based on real-time traffic information [<a href="https://www.mdpi.com/2220-9964/7/7/269#B12-ijgi-07-00269">8</a>].</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fixed IoT sensors</td>
+<td style="text-align: left;">Urban decision-making assistance [<a href="https://www.mdpi.com/2220-9964/7/7/269#B13-ijgi-07-00269">9</a>], wildlife monitoring and understanding of herd behavior [<a href="https://www.mdpi.com/2220-9964/7/7/269#B60-ijgi-07-00269">10</a>], monitoring the area levels of air pollution [<a href="https://www.mdpi.com/2220-9964/7/7/269#B46-ijgi-07-00269">11</a>], creating air temperature and precipitation maps [<a href="https://www.mdpi.com/2220-9964/7/7/269#B70-ijgi-07-00269">12</a>], understanding fish-school characteristics around artificial reefs [<a href="https://www.mdpi.com/2220-9964/7/7/269#B67-ijgi-07-00269">13</a>], estimating the level variations of the sand layer of sandy beaches or dunes [<a href="https://www.mdpi.com/2220-9964/7/7/269#B66-ijgi-07-00269">14</a>].</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Satellite imagery</td>
+<td style="text-align: left;">Understanding how invasive species respond to landscape configuration relative to native species [<a href="https://www.mdpi.com/2220-9964/7/7/269#B49-ijgi-07-00269">15</a>], assessing how the livestock agriculture affects the physical environment [<a href="https://www.mdpi.com/2220-9964/7/7/269#B35-ijgi-07-00269">16</a>,<a href="https://www.mdpi.com/2220-9964/7/7/269#B50-ijgi-07-00269">17</a>], modeling forest fire risk zones [<a href="https://www.mdpi.com/2220-9964/7/7/269#B33-ijgi-07-00269">18</a>], earthquake risk assessment [<a href="https://www.mdpi.com/2220-9964/7/7/269#B34-ijgi-07-00269">19</a>], planning of tsunami evacuation [<a href="https://www.mdpi.com/2220-9964/7/7/269#B36-ijgi-07-00269">20</a>], creating digital maps with information about bacteria habitats [<a href="https://www.mdpi.com/2220-9964/7/7/269#B47-ijgi-07-00269">21</a>], delineating groundwater potential zones in hard rock terrain [<a href="https://www.mdpi.com/2220-9964/7/7/269#B39-ijgi-07-00269">22</a>].</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ground sensor sampling</td>
+<td style="text-align: left;">Estimating the Grand Canyon height map [<a href="https://www.mdpi.com/2220-9964/7/7/269#B63-ijgi-07-00269">23</a>], generating high-risk floodplain maps [<a href="https://www.mdpi.com/2220-9964/7/7/269#B63-ijgi-07-00269">24</a>], creating soil fertility maps [<a href="https://www.mdpi.com/2220-9964/7/7/269#B72-ijgi-07-00269">25</a>], assessing the spatial variation of groundwater quality and producing salinity hazard maps [<a href="https://www.mdpi.com/2220-9964/7/7/269#B69-ijgi-07-00269">26</a>], assessing the heavy metal pollution in soils [<a href="https://www.mdpi.com/2220-9964/7/7/269#B71-ijgi-07-00269">27</a>], estimating the zinc contamination concentrations around a lake [<a href="https://www.mdpi.com/2220-9964/7/7/269#B68-ijgi-07-00269">28</a>].</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Web-based IoT datasets</td>
+<td style="text-align: left;">Estimating traffic from historical traffic flows [<a href="https://www.mdpi.com/2220-9964/7/7/269#B42-ijgi-07-00269">29</a>], optimizing routes of public transportation based on taxi rides [<a href="https://www.mdpi.com/2220-9964/7/7/269#B43-ijgi-07-00269">30</a>], exploring and analyzing attractive areas [<a href="https://www.mdpi.com/2220-9964/7/7/269#B38-ijgi-07-00269">31</a>], associating assault rates to measures of population and place characteristics [<a href="https://www.mdpi.com/2220-9964/7/7/269#B41-ijgi-07-00269">32</a>].</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Combination of IoT methods</td>
+<td style="text-align: left;">Assessing damage in Haiti by earthquake and facilitating emergency response [<a href="https://www.mdpi.com/2220-9964/7/7/269#B61-ijgi-07-00269">33</a>], infrastructure asset management [<a href="https://www.mdpi.com/2220-9964/7/7/269#B58-ijgi-07-00269">34</a>].</td>
+</tr>
+</tbody>
+</table>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ashton2009" class="csl-entry" role="listitem">
+Ashton, K., 2009. That <span>„Internet of Things“</span> Thing. <em>RFID journal</em>, 22 (7), 97–114.
+</div>
+<div id="ref-gore1998" class="csl-entry" role="listitem">
+Gore, A., 1998. <a href="https://doi.org/10.1080/00050348.1998.10558728">The <span>Digital Earth</span></a>. <em>Australian Surveyor</em>, 43 (2), 89–91.
+</div>
+<div id="ref-granell2020" class="csl-entry" role="listitem">
+Granell, C., Kamilaris, A., Kotsev, A., Ostermann, F.O., und Trilles, S., 2020. <a href="https://doi.org/10.1007/978-981-32-9915-3_11">Internet of <span>Things</span></a>. <em>In</em>: H. Guo, M.F. Goodchild, und A. Annoni, Hrsg. <em>Manual of <span>Digital Earth</span></em>. <span>Singapore</span>: <span>Springer</span>, 387–423.
+</div>
+<div id="ref-ITU2005" class="csl-entry" role="listitem">
+ITU, 2005. <em><a href="https://www.itu.int:443/en/publications/gs/Pages/publications.aspx?parent=S-POL-IR.IT-2005\&amp;media=paper"><span>ITU Internet Reports</span> 2005: <span>The Internet</span> of <span>Things</span></a></em>. <span>Geneva</span>: <span>International Telecommunication Union</span>.
+</div>
+<div id="ref-kamilaris2018" class="csl-entry" role="listitem">
+Kamilaris, A. und Ostermann, F.O., 2018. <a href="https://doi.org/10.3390/ijgi7070269">Geospatial <span>Analysis</span> and the <span>Internet</span> of <span>Things</span></a>. <em>ISPRS International Journal of Geo-Information</em>, 7 (7), 269.
+</div>
+<div id="ref-links2019" class="csl-entry" role="listitem">
+Links, C., 2019. <a href="https://www.qorvo.com/design-hub/blog/iot-standards-the-end-game"><span>IoT Standards</span>: <span>The End Game</span> - <span>Qorvo</span></a>.
+</div>
+<div id="ref-rogers2006" class="csl-entry" role="listitem">
+Rogers, Y., 2006. <a href="https://doi.org/10.1007/11853565_24">Moving on from <span>Weiser</span>’s <span>Vision</span> of <span>Calm Computing</span>: <span>Engaging UbiComp Experiences</span></a>. <em>In</em>: P. Dourish und A. Friday, Hrsg. <em><span>UbiComp</span> 2006: <span>Ubiquitous Computing</span></em>. <span>Berlin, Heidelberg</span>: <span>Springer</span>, 404–421.
+</div>
+<div id="ref-salvador2003" class="csl-entry" role="listitem">
+Salvador, T. und Anderson, K., 2003. <a href="https://doi.org/10.1007/978-3-540-39653-6_19">Practical <span>Considerations</span> of <span>Context</span> for <span>Context Based Systems</span>: <span>An Example</span> from an <span>Ethnographic Case Study</span> of a <span>Man Diagnosed</span> with <span>Early Onset Alzheimer</span>’s <span>Disease</span></a>. <em>In</em>: A.K. Dey, A. Schmidt, und J.F. McCarthy, Hrsg. <em><span>UbiComp</span> 2003: <span>Ubiquitous Computing</span></em>. <span>Berlin, Heidelberg</span>: <span>Springer</span>, 243–255.
+</div>
+<div id="ref-trilles2017" class="csl-entry" role="listitem">
+Trilles, S., Belmonte, Ò., Schade, S., und Huerta, J., 2017. <a href="https://doi.org/10.1080/17538947.2016.1209583">A Domain-Independent Methodology to Analyze <span>IoT</span> Data Streams in Real-Time. <span>A</span> Proof of Concept Implementation for Anomaly Detection from Environmental Data</a>. <em>International Journal of Digital Earth</em>, 10 (1), 103–120.
+</div>
+<div id="ref-wiegerling2013" class="csl-entry" role="listitem">
+Wiegerling, K., 2013. <a href="https://doi.org/10.1007/978-3-476-05333-6_71"><span>Ubiquitous Computing</span></a>. <em>In</em>: A. Grunwald und M. Simonidis-Puschmann, Hrsg. <em><span>Handbuch Technikethik</span></em>. <span>Stuttgart</span>: <span>J.B. Metzler</span>, 374–378.
+</div>
+<div id="ref-zaheeruddin2020" class="csl-entry" role="listitem">
+Zaheeruddin und Gupta, H., 2020. <a href="https://doi.org/10.1007/978-3-030-37468-6_1">Foundation of <span>IoT</span>: <span>An Overview</span></a>. <em>In</em>: M. Alam, K.A. Shakil, und S. Khan, Hrsg. <em>Internet of <span>Things</span> (<span>IoT</span>): <span>Concepts</span> and <span>Applications</span></em>. <span>Cham</span>: <span>Springer International Publishing</span>, 3–24.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Der Raspberry Pi ist insofern mit dem verhältnissmässigen hohen Stromverbrauch kein typisches IoT Device<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Inhalt">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Inhalt</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02_Sensoren.html" class="pagination-link" aria-label="Sensoren">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sensoren</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/01_IoT.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Institut Geomatik, Fachhochschule Nordwestschweiz</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

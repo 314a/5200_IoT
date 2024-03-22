@@ -1,6 +1,6 @@
 project:
   type: book
-  output-dir: _docs
+  output-dir: docs
 
 filters:
   - _resources/scripts/filter_styleDiv.lua
