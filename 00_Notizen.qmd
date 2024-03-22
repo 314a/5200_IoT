@@ -1,0 +1,135 @@
+# Notizen
+
+- [GIST Recipe: from MQTT to InfluxDB via Node-Red](https://gist.github.com/Paraphraser/c9db25d131dd4c09848ffb353b69038f) - Tutorial
+- [OSI FAQ](https://www.cl.cam.ac.uk/~mgk25/osi-faq.txt) 
+- [How to Use MQTT in Python with Paho Client](https://www.emqx.com/en/blog/how-to-use-mqtt-in-python)
+
+MQTT - message queuing telemetry transport
+
+- **broker** Zwischenspeicher der Nachricht, da die Geräte nicht zur gleichen Zeit im Netz sind. Dies ist oft bei batteriebetriebenen Geräten der Fall
+- **subscriber** ereignisbasierte Abfrage, abonniert die Nachrichten, welche Informationen / Topics 
+- **publisher** publiziert die Nachrichten, welche Informationen / Topics
+
+Troubleshoting
+
+- *InfluxDB* OSX Safari, InfluxDB blebibt beim Login hängen -> Chrome nutzen
+- *InfluxDB* Organisationsname ändern über Profil / Members, dort ist die Organisation aufgeführt
+- *node-red* flow stoppen -> disable flow und deploy diesen erneut
+- *Service auf Linux* *systemctl* für Automatisierungen nutzen, ermöglicht zu definieren, wann genau ein Skript starten soll im Bootprozess, robuster als rc.local (Tipp Dominique)
+
+
+## Sensoren (vorläufige Liste)
+Bis ich eine kompaktere Möglichkeit gefunden habe diese übersichtlich darzustellen.
+
+
+## BME688 4-in-1 Air Quality Breakout
+
+![BME688](images/Pimoroni_BME688.jpg){.column-margin}
+
+-   Temperatur +/-0.5°C (-40° .. -85°)
+-   Luftdruck +/-0.12hPa (300...1100hPa)
+-   Luftfeuchtigkeit +/-3% (0 ...100%)
+-   Gas Scanner VOC, VSCs (AI)
+-   Qwiic/Stemma QT
+-   Python, C Library
+-   Raspberry Pi Pins 1,3,5,7,9
+
+Datenblatt: [Bosch BME688](https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688)
+Pimoroni: [BME688 Breakout](https://shop.pimoroni.com/products/bme688-breakout?variant=39336951709779)
+
+## ICM20948 9DoF Motion Sensor
+
+![ICM20948](images/Pimoroni_ICM20948.jpg){.column-margin}
+
+-   ±2/±4/±8/±16 g 3-axis accelerometer\
+-   ±250/±500/±1000/±2000 DPS (degrees per second) 3-axis gyroscope
+-   3-axis compass with wide range up to ±4900 μT
+-   Python, C Library
+-   I2C interface (address: 0x68 or0x69)
+-   Qw/ST (Qwiic/STEMMA QT) connector
+-   I2C interface (address 0x68/0x69 (cut trace))
+
+Datenblatt: [ICM 20948](https://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf)
+Pimoroni: [ICM20948 Breakout](https://shop.pimoroni.com/products/icm20948)
+
+## AS7262 6-channel Spectral Sensor (Spectrometer)
+
+![ICM20948](images/Pimoroni_AS7262.jpg){.column-margin}
+
+Spektralsensor
+
+-   6 spectral channels (450, 500, 550, 570, 600, 650nm)
+-   2 on-board illumination LEDs
+-   I2C interface (address: 0x49)
+-   Python Library
+
+Datenblatt:
+[AS7262](https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf)
+Pimoroni: [AS7262 Breakout](https://shop.pimoroni.com/products/as7262-6-channel-spectral-sensor-spectrometer-breakout)
+
+## VL53L5CX 8x8 Time of Flight (ToF) Array Sensor
+
+![ICM20948](images/Pimoroni_VL53L5CX.jpg){.column-margin}
+
+A sophisticated distance sensor with 8x8 multizone ranging and a wide
+field of view - great for robots and advanced motion sensing.
+
+-   8x8 Multizone readings
+-   Distance 2cm - 4m
+-   I2C interface, with address: 0x52
+-   Python, C Library
+
+Datenblatt:
+[VL53L5CX](https://cdn.shopify.com/s/files/1/0174/1800/files/vl53l5cx.pdf)
+Pimoroni: [VL53L5CX Breakout](https://shop.pimoroni.com/products/vl53l5cx-time-of-flight-tof-sensor-breakout)
+
+## MAX30101 Breakout - Heart Rate, Oximeter, Smoke Sensor
+
+![ICM20948](images/Pimoroni_MAX30101.jpg){.column-margin}
+
+-   MAX30101 - heart rate, oximeter, smoke sensor
+-   Green, red, and infra-red LEDs
+-   Photodetectors
+-   Ambient light rejection\
+-   Temperature sensor
+-   I2C interface (address 0x57)
+-   Python library
+
+Datenblatt:
+[MAX30101](https://cdn.shopify.com/s/files/1/0174/1800/files/MAX30101.pdf)
+Pimoroni: [MAX30101 Breakout](https://shop.pimoroni.com/products/max30101-breakout-heart-rate-oximeter-smoke-sensor)
+
+## MLX90640 Thermal Camera Breakout
+
+![ICM20948](images/Pimoroni_thermal_camera_MLX90640.jpg){.column-margin}
+
+Thermalkamera
+
+-   Melexis MLX90640 far-infrared sensor array
+-   32x24 pixels
+-   Field of view: 55°x35° or 110°x75°
+-   Up to 64FPS
+-   -40 to 300°C detection with approximately 1°C accuracy
+-   I2C interface (address 0x33)
+
+Datenblatt:
+[MAX30101](https://cdn.sparkfun.com/assets/7/b/f/2/d/MLX90640-Datasheet-Melexis.pdf)
+Pimoroni: [MAX30101 Breakout](https://shop.pimoroni.com/products/mlx90640-thermal-camera-breakout)
+
+## 1.54" SPI Colour Square LCD (240x240)
+
+![ICM20948](images/Pimoroni_LCD_1.54.jpg){.column-margin}
+
+LCD Bildschirm
+
+-   1.54" colour LCD (240x240 pixels)
+-   SPI interface
+-   3.3V or 5V compatible
+-   Reverse polarity protection
+-   Brightness: 250 cd/m\^2
+-   900:1 contrast ratio
+-   160° viewing angle (horizontal and vertical)
+-   ST7789V driver chip
+
+Pimoroni: [1.54" SPI Colour Square LCD
+(240x240)](https://shop.pimoroni.com/products/1-3-spi-colour-lcd-240x240-breakout)

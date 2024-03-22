@@ -1,0 +1,112 @@
+# E05 Thermale Aufnahmen {.unnumbered}
+
+
+Ziel dieser Übung ist es thermale Kamera mit der MLX90640 Kamera kennen zu lernen und die thermalen Bilddaten auszulesen und testen. Die *MLX90640* ist eine weitwinkel Kamera mit einer Auflösung von 24x32 Pixel. Sie wird über eine I2C Schnittstelle mit dem Raspberry Pi verbunden und kann über eine Python Library angesteuert werden.
+
+**Vorbereitung**
+
+- Schaut folgende von Video von Melexis zur Funktionsweise der MLX90640 Thermalkamera an: [Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)](https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG) 
+- Studiere das Datenblatt zum VL53L5CX [@melexis2019] und beantworte folgende Fragen:
+  - In welchen Temperaturbereichen kann der Sensor eingesetzt werden? 
+  - Welches ist die höchste Abtastrate für die Distanzfeldmessungen?
+  - Was sind Anwendungsgebiete für diesen Sensor?
+
+::: {.content-visible when-format="html"}
+{{< video https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG >}}
+:::
+::: {.content-visible unless-format="html"}
+[![Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)](images/youtube_adafruit_VL53L5CX.png)](https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG)
+:::
+
+| **Unterlagen** |                                                          |
+| ---------- | ------------------------------------------------------------ |
+| Produkt    | [MLX90640 Breakout](https://shop.pimoroni.com/products/mlx90640-thermal-camera-breakout?variant=12549161746515) |
+| Datenblatt | [MLX90640](https://www.melexis.com/-/media/files/documents/datasheets/mlx90640-datasheet-melexis.pdf) |
+| GitHub     | [mlx90640-library](https://github.com/pimoroni/mlx90640-library), [Adafruit MLX90640](https://github.com/adafruit/Adafruit_CircuitPython_MLX90640)   |
+
+## MLX90640 Thermalkamera\index{MLX90640}
+Der MLX90640 ist eine Thermalkamera mit einer Auflösung von 32x24 Pixel mit einem Sichtfeld von 55°. Die Kamera misst in einem Temperaturbereich von  -40° - 300°C mit einer Genauigkeit von etwa 1°C und mit einer Aufnahmerate von bis zu 64 FPS.
+Die Anwendungsbereiche sind vielfältig, von der Temperatur der Kaffeetasse, Hitzeentwicklung in elektronischen Geräten bis hin zur Überwachung von Gebäuden und Anlagen.
+
+MLX90640 Thermal Camera
+
+- Melexis MLX90640 far-infrared sensor array
+- Brennweite: 55°
+- 32x24 pixels
+- I2C interface (address 0x33)
+
+![links: MLX90640 Thermalkamera, oben: schematische Darstellung der Kamera und ihrer Anschlüsse rechts: Pixelpositionaufbau Quelle: @st2023](images/MLX90640_wide.jpg){#fig-MLX90640}
+
+## Übungsaufbau
+
+- Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).
+- Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `MLX90640`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
+- Schliesse den Sensor **MLX90640** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
+- Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x33` erkannt werden.
+- Kontrolliere, ob folgende Libraries `adafruit-blinka`,`adafruit-circuitpython-mlx90640` und `RPI.GPIO` installiert sind mit `python -c "import adafruit_mlx90640"`. Installiere die Library mit `sudo pip3 install RPI.GPIO adafruit-blinka` und `sudo pip3 install adafruit-circuitpython-mlx90640` falls sie nicht installiert ist.
+
+Wechsle in den Ordner *Documents* und kopiere in diesen den Ordner *MLX90640* mit den Code Beispielen.
+
+## Aufgabe 1: Punktuelle Temperaturmessung
+Teste das Beispiel `thermal_camera_average_temperature.py` im Ordner *examples*. Dieses Beispiel liest die Werte aus der Matrix der Thermalkamera und gibt den Mittelwert der Temperatur aus. Die Ausgabe sollte in etwa so aussehen (gekürzt):
+
+``` bash
+python3 average_temperature.py 
+Average MLX90640 Temperature: 23.6C (74.5F)
+```
+
+Folgendes Code Snippet zeigt eine gekürzte Version des `thermal_camera_average_temperature.py` Python Beispiels für die Ausgabe der Distanzmatrix.
+
+```{.python}
+import time,board,busio
+import numpy as np
+import adafruit_mlx90640
+
+i2c = busio.I2C(board.SCL, board.SDA)                           # <1>
+mlx = adafruit_mlx90640.MLX90640(i2c)                           # <1>
+mlx.refresh_rate = adafruit_mlx90640.RefreshRate.REFRESH_2_HZ   # <1>
+
+frame = np.zeros((24*32,))                                      # <2>
+while True:
+    try:
+        mlx.getFrame(frame)                                     # <3>
+        break
+    except ValueError:
+        continue                                                # <4>
+
+# print out the average temperature from the MLX90640
+print('Average MLX90640 Temperature: {0:2.1f}C ({1:2.1f}F)'.\   # <5>
+      format(np.mean(frame),(((9.0/5.0)*np.mean(frame))+32.0))) # <5>
+```
+1. Setup von I2C, Initialisierung des MLX90640 Sensors und Setzen der Abtastrate auf 2 Hz
+2. Numpy Array für das Speichern der 768 Temperaturwerte (24x32 Pixel) erstellen
+3. MLX Temperaturwerte in das Numpy Array speichern
+4. Falls ein Fehler eintritt, nochmals versuchen den Sensor auszulesen
+5. Temperaturmittelwert ausgeben
+
+::: exercise
+**Einzelne Temperaturmessung**
+
+- Führe das Beispiel `average_temperature.py` aus und beobachte die Messwerte.
+- Teste das Script mit unterschiedlichen warmen Objekten (z.B. Kaffeetasse, Hand, etc.).
+:::
+
+## Aufgabe 2: Thermale Aufnahme mit LCD Bildschirm
+Folgende Aufgabe nutzt den 1.54" LCD Bildschirm mit einer 240x240 Pixel Auflösung. Der Ordner enthält mehrere Beispiele zur Thermalkamera, die die Temperaturmatrix auf dem Bildschirm anzeigen. Die Beispiele sind im Ordner `MLX90640` zu finden. 
+
+![Aufbau der Versuchsanordnung für die Distanzmessung mit dem LCD Bildschirm montiert im dem *hinteren* SPI Slot](images/MLX90640_LCD.jpg){#fig-mlx90640-LCD}
+
+**Vorbereitung**
+
+- Kontrolliert mit `python -c "import ST7789"` ob die Library *ST7789* installiert ist. Installiere die Library mit `sudo pip3 install st7789`, falls sie nicht installiert ist. Testet auch, ob die Bibliotheken `numpy` und `matplotlib` installiert sind und installiert diese ansonsten mit `sudo apt install python3-matplotlib python3-numpy`.
+- Kontrolliere, ob der Raspberry Pi den *Breakout Garden HAT* mit den 2 SPI Anschlüssen und 4 I2C Anschlüssen bestückt ist (@fig-mlx90640-LCD).
+- Montiere den Bildschirm im vorderen SPI Slot des *Breakout Garden HAT*s wie in @fig-mlx90640-LCD, oder passe das Script, an so dass die Werte der hinteren SPI Schnittstelle verwendet werden.
+- Teste die Beispiele im Ordner `MLX90640` und beobachte die Ausgabe auf dem LCD Bildschirm.
+
+::: exercise
+- Teste mit unterschiedlichen Objekten die Temperaturmessung und beobachte die Ausgabe auf dem LCD Bildschirm.
+- Wie gut lassen sich Objekte mit unterschiedlichen Temperaturen unterscheiden?
+- Wie gut lassen sich Objekte erkennen, die sich in der Temperatur nur wenig oder stark unterscheiden?
+- Studiere den Code der Beispiele und versuche die Funktionsweise zu verstehen.
+- Überlege Dir, wie Du die Beispiele erweitern könntest.
+:::

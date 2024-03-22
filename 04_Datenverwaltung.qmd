@@ -1,0 +1,31 @@
+# Datenverwaltung, Analyse und Visualisierung WIP
+
+
+## Datenverwaltung und Analyse
+
+Initiativen und Platformen für die Analyse von räumlich-zeitlicher Echtzeitanalyse wie:
+
+- Microsoft Streaminsight,
+- Oracle Spatial Datenbank mit der Oracle Complex Event Processing Engine und der GeoEvent processor Module 
+- ArcGIS Server Umgebung (https://doc.arcgis.com/en/iot/get-started/what-is-arcgis-velocity.htm)
+
+
+## Systemtopologie (ev vorheriges/nächstes Kapitel)
+
+Klassische IoT Topologie ist:
+Das Gerät kommuniziert direkt in das Internet zur Hersteller-Cloud
+Interaktion mit Gerät geht immer über die Cloud als Mittelsmann
+
+![IoT Systemtopologie - Das Gerät kommuniziert über das Internet, d.h. die Kommunikation mit einem IoT Gerät ist nicht direkt mit dem Gerät selbst.](images/iot_systemtopologie.png)
+
+
+Technologien
+
+| **Technologie** |                                                                             |
+| --------------- | ---------------------------------------------------------------------------- |
+| Protokolle^[Eine Schicht des ISO OSI Modells]    | MQTT, AMQP, CoAP, XMPP, KMX IoT             |
+| Bussysteme      | LoRa-WAN, Sigfox, MIOTY, NB IoT..                                            |
+| Werkzeuge       | Node-Red, InfluxDB, Grafana..                                                |
+| Anwendungen     | Geofencing,  Parkplatz Management,  Fahrstuhl-Monitoring, Agrar-Monitoring.. |
+
+Table: IoT Technologien und Anwendungen 

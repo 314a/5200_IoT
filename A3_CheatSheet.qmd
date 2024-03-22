@@ -1,0 +1,57 @@
+# Shell Cheat Sheet
+
+Einen unvollständige Übersicht gängiger Konsolen Befehle in Linux.
+
+**Raspberry Pi runterfahren:** `sudo shutdown now`
+
+| Kommando                                  | Kommentar                                                    |
+| ----------------------------------------- | ------------------------------------------------------------ |
+| `sudo shutdown now`                       | System jetzt runterfahren / beenden                          |
+| `sudo reboot now`                         | System jetzt neustarten                                      |
+| `man <Befehl>`                            | Dokumentation / Manual von Paketen                           |
+| `<Befehl> --help | less`                  | Ruft die Optionen von Befehlen auf, die Option `-less` ermöglicht, dass mit den Cursortasten in den in längeren Hilfeseiten geblättert werden kann. |
+| `whoami`                                  | User Informationen anzeigen                                  |
+| `pwd`                                     | Name des aktuellen Verzeichnisses aufzeigen                  |
+| `ls`                                      | Inhalt des aktuellen Verzeichnis zeigen                      |
+| `ls -l`                                   | Auflisten aller Dateien und deren Details aktuellen Verzeichnis, wie Schreib- und Leseberechtigungen |
+| `ls  -a`                                  | Alle Dateien inklusive der versteckten  anzeigen |
+| `ls  -lh`                                 | Filegrössen menschenfreundlich  darstellen       |
+| `ls  –lah`                                | Alle Dateien anzeigen                            |
+| `find`                                    | Suche von Dateien mit sehr vielen Optionen für die Suche     |
+| `cd`                                      | Verzeichnis wechseln (**c**hange **d**irectory) Beispiel: `cd ../Documents` wechsle in den übergeordneten Ordner mit ".." und gehe in das Verzeichnis "Documents" |
+| `mkdir`                                   | Erstelle ein Verzeichnis  `mkdir Projekt`                    |
+| `cp`                                      | Kopiere eine Datei/Ordner `cp <quell-pfad> <ziel-pfad>`      |
+| `mv`                                      | Verschieben/Umbenennen einer Datei/Ordner `mv <quell-pfad> <ziel-pfad>`   |
+| `rm`                                      | Dateien löschen                                              |
+| `rm -r`                                   | Ordner und Inhalte löschen (alternativ `rmdir`), Option `-f` ohne Bestätigung |
+| `chmod`                                   | Datei- und Verzeichnisrechte ändern (r Lese-,w Schreib- und x Ausführrechte) für Nutzer und Nutzergruppen. Beispiel: `chmod 777 Datei.txt` gibt allen Nutzern Lese-, Schreib- und Ausführrechte. |
+| `zip -r <zip file name> <folder to zip> ` | Dateien in einem Ordner in eine .zip Datei komprimieren. (Installationsbefehl, falls das Paket *zip* nicht installiert ist: `sudo apt install zip unzip`) |
+| `unzip datei.zip`                         | Zip-Datei entzippen                                          |
+
+Table: Nützliche Linux Befehle für die Kommandozeile (Shell) 
+
+| Kommando                                  | Kommentar                                                    |
+| ----------------------------------------- | ------------------------------------------------------------ |
+| `sudo <Befehl>`                           | Einmalig einen Befehl als su (**s**uper **u**ser =Administrator) ausführen (=super user do..) wie beispielsweise eine Installation von Paketen. Beim Ausführen wird das Passwort des su benötigt |
+| `sudo apt install <Paketname>`        | Software über die Software-Verwaltung APT (Advanced Package Tool) installieren |
+| `sudo apt remove <Paketname>`         | Software deinstallieren                                      |
+| `sudo apt purge <Paketname>`          | Konfigurationsdateien nach der Deinstallation entfernen       |
+| `sudo apt autoremove`                 | Alle nicht mehr benötigten Pakete / Software                 |
+| `sudo apt-cache showpkg <Paketname>`      | Zeigt alle Informationen über Pakete, Version, Abhängigkeiten und Installation an. `apt-cache` bietet mit `sudo apt-cache dump` eine Liste aller installierten Pakete, `sudo apt-cache stats` die Anzahl der installierten Pakete und deren Abhängigkeiten. |
+| `sudo apt-cache search <Paketname>`       | Ermöglicht die Suche nach Paketen, beispielsweise `sudo apt-cache search minesweep` |
+| `sudo apt update`                     | Laden der aktuellen Paketliste für das Betriebssystem        |
+| `sudo apt dist-upgrade`               | Aktualisieren des Betriebssystem (nach `sudo apt-get update` ausführen) |
+| `sudo apt autoremove` `sudo apt autoclean`   | Entfernt nicht mehr benötigte Dateien und Pakete |
+| `dpkg --get-selections` `dpkg -l`| Alle Softwarepakete auflisten |
+| `dpkg --get-selections | grep <Paketname>` | Gewünschtes Softwarepaket mit `grep` filtern |
+| `sudo dpkg -S <Paketname>`| Installationsort von einem Softwarepaket anzeigen |
+| `dpkg -l | grep <Keyword>`| Nach einem installieren Softwarepaket suchen |
+| `dpkg -s <Paketname> | grep Version`| Version der installierten Software auflisten |
+| `which <Paketname>` | Pfad zu den installierten Binaries anzeigen |
+| `apt list <Paketname>`| Version von einem Package anzeigen |
+| `apt list <Paketname> -a`| Alle verfügbaren Versionen von einer Software in diesem Repository auflisten |
+| `apt-cache policy <Paketname>`| Metadaten von einem Softwarepaket auflisten |
+| `apt-cache madison <Paketname>`| Metadaten von einem Softwarepaket auflisten |
+| `sudo apt search <Paketname>`  `sudo apt-cache search <Paketname>` | Suche, ob ein Softwarepaket verfügbar ist, ev zuerst die Paketliste mit `sudo apt update` aktualisieren. |
+
+Table: Nützliche Linux Befehle zur Softwareverwaltung und Installation

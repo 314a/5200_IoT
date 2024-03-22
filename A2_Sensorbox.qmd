@@ -1,0 +1,44 @@
+# Raspberry Pi Sensorbox
+## Raspberry Pi 4 Set
+
+![Inhalt des Raspberry Pi 4 Set, mit dem Brekaout Garden HAT, HDMI-HDMI Mini Kabel, Netzteil mit USB-C Anschluss und MicroSD Karte mit Adapter ](images/raspberry_pi_box.jpg)
+
+| Inhalt / Stückliste                                       |                                                              |
+| --------------------------------------------------------- | ------------------------------------------------------------ |
+| Raspberry Pi 4B - 4G                                      | [Raspberry Pi](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) |
+| Pimoroni Breakout Garden HAT (I2C+SPI)                    | [Pimoroni](https://shop.pimoroni.com/products/breakout-garden-hat-i2c-spi) |
+| HighPi Pro Case for Raspberry Pi 4                        | [HiPi](https://www.hipi.io/highpipro/)                       |
+| Raspberry Pi 15W USB-C Netzteil                           | [Raspberry Pi](https://www.raspberrypi.com/products/type-c-power-supply/) |
+| HDMI-HDMI Mini Kabel^[HDMI Mini Anschluss schnell defekt] |                                                              |
+| MicroSD Karte mit SD Adapter - 32Gb                       |                                                              |
+| HDMI-DVI Adapter                                          |                                                              |
+
+Table: Inhalt des Raspberry Pi 4 Set
+
+## Sensorbox
+Folgender Abschnitt gibt eine Übersicht der in diesem Kurs verwendeten Sensoren. Die Sensoren sind auf kleinen Platinen (Pimoroni-Breakouts) mit Randanschlüssen montiert und können einfach auf der *Breakout Garden HAT* Erweiterung auf den Raspberry Pi ohne löten und verkabeln montiert werden.
+
+Die Sensorbox enthält mehrere typische IoT Sensoren, die in vielen IoT Geräten Verwendung finden und im Geomatikkontext von Interesse sind.
+
+| Sensor   | Beschreibung                                             | Produkt, Datenblatt, Library                                                                                                                                                                                                                                                                                                                                             |
+|---------------|-------------------------|--------------------------------|
+| BME688   | Temperatur, Luftdruck, Luftfeuchtigkeit & Gas            | [BME688 Breakout](https://shop.pimoroni.com/products/bme688-breakout?variant=39336951709779), [Bosch BME688](https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688), [bme680-python](https://github.com/pimoroni/bme680-python)                                                                                                              |
+| ICM20948 | 9DoF Motion Accelero-, Gyro-, Magnetometer               | [ICM20948 Breakout](https://shop.pimoroni.com/products/icm20948), [ICM 20948](https://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf), [icm20948-python](https://github.com/pimoroni/icm20948-python)                                                                                                                                        |
+| VL53L5CX | Time of Flight ToF -- 8x8 Multizone                      | [VL53L5CX Breakout](https://shop.pimoroni.com/products/vl53l5cx-time-of-flight-tof-sensor-breakout), [VL53L5CX](https://cdn.shopify.com/s/files/1/0174/1800/files/vl53l5cx.pdf), [vl53l5cx-python](https://github.com/pimoroni/vl53l5cx-python)                                                                                                                          |
+| AS7262   | Spektral Sensor 6 Kanäle: 450, 500,550, 570, 600, 650 nm | [AS7262 Breakout](https://shop.pimoroni.com/products/as7262-6-channel-spectral-sensor-spectrometer-breakout), [AS7262](https://ams.com/documents/20143/36005/AS7262_DS000486_5-00.pdf), [as7262-python](https://github.com/pimoroni/as7262-python)                                                                                                                       |
+| MAX30101 | Herzfrequenz, Oximeter, Rauchsensor                      | [MAX30101 Breakout](https://shop.pimoroni.com/products/max30101-breakout-heart-rate-oximeter-smoke-sensor), [MAX30101](https://cdn.shopify.com/s/files/1/0174/1800/files/MAX30101.pdf), [max30105-python](https://github.com/pimoroni/max30105-python)                                                                                                                   |
+| MLX90640 | Thermal Kamera 32x24pixel Breakout -- Wide angle (110°)  | [MLX90640 Breakout](https://shop.pimoroni.com/products/mlx90640-thermal-camera-breakout?variant=12549161746515), [MLX90640](https://www.melexis.com/-/media/files/documents/datasheets/mlx90640-datasheet-melexis.pdf), [mlx90640-library](https://github.com/pimoroni/mlx90640-library)[Adafruit MLX90640](https://github.com/adafruit/Adafruit_CircuitPython_MLX90640) |
+|          | 1.54'' LCD LCD Bildschirm SPI 240x240pixels              | [1.54" SPI Colour Square LCD (240x240)](https://shop.pimoroni.com/products/1-3-spi-colour-lcd-240x240-breakout), [st7789-python](https://github.com/pimoroni/st7789-python)   |
+|          | Adafruit I2C Hub Qwiic/Stemma QT 5 Port Hub              | [I2C 5 Port Hub](https://shop.pimoroni.com/products/adafruit-qwiic-stemma-qt-5-port-hub)      |
+
+: Sensorbox Inhaltsübersicht
+
+![Raspberry Pi mit der Breakout Garden HAT Erweiterung (1) von Pimoroni und den Sensoren, (2) VL53L5CX Time of Flight, (3) BME688 Temperatur, Luftfeuchtigkeit und Gas, (4) ICM20948 9DoF Motion Accelero-, Gyro-, Magnetometer, (5) AS7262 Spektral Sensor, (6) MAX30101 Herzfrequenz, Oximeter, (7) MLX90640 Thermal Kamera, (8) 1.54" LCD Bildschirm Rauchsensor](images/raspberry_pi_set_number.jpg)
+
+::: hint
+**Sensor Ausrichtung beachten**\
+Beim Anschliessen der Sensoren in die Schnittstellen des Breakout Garden **unbedingt** die korrekte Ausrichtung beachten! Die Beschriftung der Anschlüsse auf dem Sensor und dem Breakout Garden müssen übereinstimmen!
+
+![Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen.](images/raspberry_pi_correct_sensor_mount.png)
+:::
+

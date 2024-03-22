@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Einführung in IoT - Anhang A — Raspberry Pi</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./A2_Sensorbox.html" rel="next">
+<link href="./E07_MQTT.html" rel="prev">
+<link href="./images/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./A1_Rasperry_Pi.html">Anhang</a></li><li class="breadcrumb-item"><a href="./A1_Rasperry_Pi.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/logo.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Einführung in IoT</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/314a/5200_IoT" title="Quellcode" class="quarto-navigation-tool px-1" aria-label="Quellcode"><i class="bi bi-github"></i></a>
+    <a href="./5200_IoT.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inhalt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Theorie</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_IoT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Internet of Things IoT</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_Sensoren.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sensoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Datenübertragung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datenübertragung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literatur</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Praktika</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E01 Luftqualitätmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E02 Spektralmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E03 Bewegungsmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E04 Distanzmessung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E06 Biometrie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E07 MQTT</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Anhang</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A2_Sensorbox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Raspberry Pi Sensorbox</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A3_CheatSheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Shell Cheat Sheet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A4_Setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul class="collapse">
+  <li><a href="#raspberry-pi-image-schreiben" id="toc-raspberry-pi-image-schreiben" class="nav-link active" data-scroll-target="#raspberry-pi-image-schreiben">Raspberry Pi Image schreiben</a></li>
+  <li><a href="#raspberry-pi-einrichten" id="toc-raspberry-pi-einrichten" class="nav-link" data-scroll-target="#raspberry-pi-einrichten">Raspberry Pi einrichten</a></li>
+  <li><a href="#wifi-verbindung-einrichten" id="toc-wifi-verbindung-einrichten" class="nav-link" data-scroll-target="#wifi-verbindung-einrichten">WiFi Verbindung einrichten</a></li>
+  <li><a href="#ssh-verbindung-herstellen" id="toc-ssh-verbindung-herstellen" class="nav-link" data-scroll-target="#ssh-verbindung-herstellen">SSH Verbindung herstellen</a></li>
+  <li><a href="#mobilen-hotspot-nutzen" id="toc-mobilen-hotspot-nutzen" class="nav-link" data-scroll-target="#mobilen-hotspot-nutzen">Mobilen Hotspot nutzen</a></li>
+  <li><a href="#raspberry-pi-config" id="toc-raspberry-pi-config" class="nav-link" data-scroll-target="#raspberry-pi-config">Raspberry Pi Config</a></li>
+  <li><a href="#raspberry-pi-aktualisieren" id="toc-raspberry-pi-aktualisieren" class="nav-link" data-scroll-target="#raspberry-pi-aktualisieren">Raspberry Pi aktualisieren</a></li>
+  <li><a href="#raspberry-pi-im-netzerk-auffinden" id="toc-raspberry-pi-im-netzerk-auffinden" class="nav-link" data-scroll-target="#raspberry-pi-im-netzerk-auffinden">Raspberry Pi im Netzerk auffinden</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/A1_Rasperry_Pi.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./A1_Rasperry_Pi.html">Anhang</a></li><li class="breadcrumb-item"><a href="./A1_Rasperry_Pi.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Anhang A — Raspberry Pi</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Open Source Einplatinenrechner werden in Bildung und Forschung eingesetzt und haben eine breite Anwendung in weiteren Bereichen wie IoT. SBCs haben grosse Bedeutung in der Ingenieur- und Informatikausbildung, da sie sich gut für Hands-on Vermittlung komplexer Themen eignen, und verbessern technische Fähigkeiten, stärken das Interesse und Motivation <span class="citation" data-cites="ariza2022">(<a href="references.html#ref-ariza2022" role="doc-biblioref">Ariza und Baez 2022</a>)</span>.</p>
+<dl>
+<dt>System on Chip SOC </dt>
+<dd>
+integriert die meisten Funktionen und Komponenten auf einem Chip (CPU, RAM, GPU, Schnittstellen) ursprünglich für eingebettete (embedded) Systeme, heute Mobile Geräte (Mobiles, Tablets), Edge Geräte (IoT) etc. → Grössenreduktion, verbesserte Leistung, tiefer Stromverbrauch, kosteneffizient, jedoch lange Entwicklungszeiten und keine Modularität.
+</dd>
+<dt>Single Board Computer SBC </dt>
+<dd>
+ist ein Computer auf einer Leiterplatine mit allen erforderlichen Komponenten und Anschlüssen wie CPU, RAM, GPU I/O Schnittstellen etc. → Einfach zu nutzen, tiefer Stromverbrauch, kosteneffizient, getestete Hardware, tendenziell günstig, jedoch schwierig Anpassungen vorzunehmen, weniger Möglichkeiten als «Multi Board Computer».
+</dd>
+</dl>
+<p>Der <a href="https://www.raspberrypi.com">Raspberry Pi</a> ist ein preisgünstiger Einplatinencomputer (Single Board Computer SBC) in Kreditkartenformat zum Experimentieren und Erlernen des Programmierens. Die Motivation für die Entwicklung des Raspberry Pi war die sinkende Anzahl Informatikstudierender an der Universität Cambridge und der Rückgang der Informatikkenntnisse der Studierenden. Der Raspberry Pi wird von der britischen <a href="https://www.raspberrypi.org">Raspberry Pi Foundation</a> entwickelt seit 2009 entwickelt.</p>
+<p>Url: <a href="https://www.raspberrypi.com">https://www.raspberrypi.com</a></p>
+<p>Raspberry Pi Modelle im Überblick:</p>
+<ul>
+<li>Raspberry Pi 5 (mit 4/8GB RAM ab November 2023)</li>
+<li>Raspberry Pi 4 Model B (mit 1/2/4/8GB RAM)</li>
+<li>Raspberry Pi 3 Model B+</li>
+<li>Raspberry Pi 2 Zero günstige und kompakte Version (mit/ohne Bluetooth und WiFi)</li>
+<li>Raspberry Pi 400 Unit (Tastatur mit integriertem Raspberry Pi)</li>
+<li>Raspberry Pi Pico Series flexible und kompakte Microcontroller mit dem RP2040 Chip</li>
+<li>Raspberry Pi Compute Module 4 (CM4 mit/ohne eMMC)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_modelle.jpg" class="img-fluid figure-img"></p>
+<figcaption>Raspberry Pi Modelle: 1. Raspberry Pi 5, 2. Raspberry Pi 2 Zero, 3. Raspberry Pi 400, 4. Raspberry Pi Pico, 5. Raspberry Pi Compute Module 4, 6. RP2040 Chip</figcaption>
+</figure>
+</div>
+<p>Die Raspberry Pi verfügen über General Purpose Input Output GPIO sogenannte Pins, die für die Verbindung mit Sensoren und Aktoren verwendet werden können. Die Stiftleiste mit den GPIO Pins sind in unterschiedliche Gruppen unterteilt, die unterschiedliche Funktionen haben. Die GPIO Pins können über eine Programmiersprache wie Python oder C angesprochen werden und ermöglichen die Interaktion mit Sensoren oder Aktoren und weiteren Komponenten.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/pinout.png" class="img-fluid figure-img"></p>
+<figcaption>links: Die Website <a href="https://.pinout.xyz" class="uri">https://.pinout.xyz</a> bietet eine interaktive Übersicht und Dokumentation der Pinouts der einzelnen Raspberry Pi Modellen, wie beispielsweise welche Pins die Schnittstelle I2C ansteuern. rechts: Der Befehl <code>pinout</code> liefert direkt über das Terminal das Pinout des Raspberry Pi</figcaption>
+</figure>
+</div>
+<p>Raspberry Pi war von der weltweiten Chip- und Halbleiterknappheit betroffen und hatte seit 2020 tiefe Lagerbestände von elektronischen Komponenten. Die Nachfrage nach Raspberry Pi ist seit 2020 stark gestiegen und die Produktionskapazitäten konnten nicht erhöht werden. Die Produktionsengpässe werden sich voraussichtlich ab Ende 2023 verbessern <span class="citation" data-cites="upton2022">(<a href="references.html#ref-upton2022" role="doc-biblioref">Upton 2022</a>)</span>. Die Knappheit führte zu einem Preisanstieg von 50% bis 100% bei den Raspberry Pi Modellen und zu einer Verknappung der Raspberry Pi Modelle. Der Dienst <a href="https://rpilocator.com/?country=CH">Raspberry Pi Stock Scraper</a> führt eine Übersicht der Verfügbarkeit der weltweiten Raspberry Pi Lagerbeständen von online Shops. Der <a href="https://www.pi-shop.ch/bundles-kits">Pi-Shop</a> hat teilweise Kits und Boards in der Schweiz an Lager.</p>
+<section id="raspberry-pi-image-schreiben" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-image-schreiben">Raspberry Pi Image schreiben</h2>
+<p>Der Raspberry Pi führt keinen internen Speicher mit sich, sondern benötigt eine SD-Karte. Auf dieser SD-Karte wird das Betriebssystem installiert, respektive als Image auf die MicroSD Karte geschrieben. Die SD-Karte muss mindestens 8 GB Speicherplatz haben idealerweise 16 GB oder mehr.</p>
+<p>Software: <a href="https://www.raspberrypi.com/software">Raspberry Pi - Software</a><br>
+Tutorial: <a href="https://www.raspberrypi.com/tutorials/how-to-set-up-raspberry-pi">Raspberry Pi - How to set up Raspberry Pi</a></p>
+<p><strong>Raspberry Pi Imager</strong> ist die von Raspberry Pi erstellte Software für das Schreiben von Images auf eine SD Karte. Der Imager stellt direkt auch weitere Images wie Ubuntu, Medienzentren, 3D Druck etc. zur Verfügung. Alternative <em>Image Burner</em> sind <a href="https://www.balena.io/etcher">Balena Etcher</a> und <a href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a>.</p>
+<p>Das Betriebssystem <strong>Raspberry Pi OS</strong> ist ein auf Debian basiertes Betriebssystem mit Anpassungen für die Hardware auf dem Raspberry Pi. Es gibt eine <strong>Lite</strong> Version ohne Desktop und eine <strong>Desktop</strong> Version mit Desktop. Die <strong>Desktop</strong> Version ist für den Einstieg empfehlenswert, da sie die grafische Oberfläche bietet und die Konsole. Die <strong>Lite</strong> Version ist für den produktiven Einsatz empfehlenswert, da sie weniger Ressourcen benötigt und somit mehr Ressourcen für die Anwendungen zur Verfügung stehen. Dazu muss der Raspberry Pi über das Netzwerk erreichbar sein, beispielsweise über SSH.</p>
+<div class="hint">
+<p>Für die Nutzung am Campus nutzen wir die <strong>Desktop</strong> Version, da wir die grafische Oberfläche für das aktivieren des Internetzugangs benötigen.</p>
+</div>
+<p>Image schreiben mit <strong>Raspberry Pi 64-bit</strong> (Desktop Version) und mit den erweiterten Optionen Voreinstellungen zu <strong>SSH</strong> (Ja), <strong>WiFi</strong> (Heimnetzwerk), <strong>Konto</strong> und unter Sprache die <strong>Zeitzone</strong> Europe/Zurich und das das <strong>Tastaturlayout</strong> CH setzen.</p>
+<div class="hint">
+<p>Die Einstellungen können später in der Konsole mit dem Programm <code>raspi-config</code> geändert werden.</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_image_schreiben.png" class="img-fluid figure-img"></p>
+<figcaption>Rasperry Pi Imager ausführen mit (1) Betriebssystem wählen, (2) Raspberry Pi OS (Other), (3) Raspberry Pi OS 64-bit, (4) erweiterte Einstellungen wählen und unter diesen Voreinstellungen zum Konto, SSH, Zeitzone und Tastaturlayout vordefinieren.</figcaption>
+</figure>
+</div>
+<div class="hint">
+<p>Für Testzwecke kann es sinnvoll sein den Standardkontonamen <code>pi</code> und das Standardpasswort <code>raspberry</code> zu verwenden. Jedoch sollte der Kontonamen und das Passwort für den produktiven Einsatz geändert werden, vor allem wenn der Raspberry Pi mit dem Internet verbunden ist, beispielsweise mit einem aktivierten SSH Zugang.</p>
+</div>
+<div class="exercise">
+<p><strong>Raspberry Pi Image auf SD-Karte schreiben</strong></p>
+<ol type="1">
+<li>Installiere den Raspberry Pi Imager</li>
+<li>Schreibe Raspberry Pi OS 64-bit auf die SD Karte</li>
+<li>Aktiviere SSH und setze die Spracheinstellungen (WiFi Name und Password des Netzwerks von Zuhause oder dem Mobile Hotspot)</li>
+<li>SD Karte in den Raspberry einsetzen</li>
+<li>Maus, Tastatur und Monitor anschliessen und dann mit dem Netzteil mit Strom versehen</li>
+</ol>
+</div>
+</section>
+<section id="raspberry-pi-einrichten" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-einrichten">Raspberry Pi einrichten</h2>
+<p>Für das Einrichten des Raspberry Pi wird die SD-Karte mit dem Image in den Raspberry Pi eingesetzt. Für das erstmalige Einrichten des Raspberry Pi OS ist ein Bildschirm, eine Tastatur und eine Maus erforderlich. Verbunden wird der Raspberry Pi über die HDMI-Schnittstelle mit dem Bildschirm und über die USB Schnittstelle mit der Tastatur und der Maus, dann wird die Stromversorgung über USB-C angeschlossen.</p>
+<div class="info">
+<p><strong>Gehäuse öffnen und SD Karten Slot öffnen</strong></p>
+<p>Den Deckel durch leichtes Drücken mit zwei Finger bei (1) horizontal leicht in Pfeilrichtung drücken, nach einem Klick lässt sich das Gehäuse aufschieben. Der SD Karten-Slot lässt sich mit einem Stift in der Einbuchtung (3) mit leichtem Druck in Pfeilrichtung öffnen (4). Das Raspberry Pi Board kann durch ein leichtes Klicken in Pfeilrichtung (5) aus dem Gehäuse entfernt werden.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_oeffnen_sd_karte_wechseln.jpg" class="img-fluid figure-img"></p>
+<figcaption>Gehäuse öffnen, SD Karte wechesln und das Board aus dem Gehäuse entfernen.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="wifi-verbindung-einrichten" class="level2">
+<h2 class="anchored" data-anchor-id="wifi-verbindung-einrichten">WiFi Verbindung einrichten</h2>
+<p>Das WiFi Network kann auch über den Desktop eingerichtet werden. Das WiFi Symbol in der oberen rechten Ecke des Desktops zeigt die verfügbaren WiFi Netzwerke an. Je nach Einstellungen muss hierbei noch das WiFi Land <code>CH</code> ausgewählt werden. Die WiFi Einstellungen können auch über die Konsole mit dem Programm <code>raspi-config</code> vorgenommen werden.</p>
+<div class="hint">
+<p>Für die Verbindung mit dem Internet am Campus muss das Netzwerk <em>fhnw-public</em> ausgewählt werden. Im Browser kann über die Website <a href="https://mpp.ict.fhnw.ch">https://mpp.ict.fhnw.ch</a> mit dem FHNW Login oder über das Mobiltelefon die Verbindung hergestellt werden.</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_image_wifi_cmu.png" class="img-fluid figure-img"></p>
+<figcaption>WiFi Verbindung über den Desktop auf dem Campus herstellen. Das Netzwerk <em>fhnw-public</em> wählen und auf der Website https://mpp.ict.fhnw.ch die Verbindung mit dem FHNW Account oder via Mobile herstellen.</figcaption>
+</figure>
+</div>
+</section>
+<section id="ssh-verbindung-herstellen" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="ssh-verbindung-herstellen">SSH Verbindung herstellen</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-shell" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shell-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/raspberry_pi_shell.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shell-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abb.&nbsp;A.1: Shell über die Softwareleiste öffnen
+</figcaption>
+</figure>
+</div></div><p>Das SSH Protokoll ermöglicht den direkten auf den Raspberry Pi über das Konsolenfenster. Hierfür wird die IP Adresse des Raspberry Pi benötigt. Die IP Adresse kann über das Programm <code>ifconfig</code> oder <code>ip addr</code> in der Konsole abgefragt werden.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_ifconfig.png" class="img-fluid figure-img"></p>
+<figcaption>Die IP-Adresse für das Wi-Fi ist unter <code>wlan0</code> bei inet aufgeführt. Falls der Raspberry Pi mit einem Ethernet Kabel mit dem Netzwerk verbunden ist, wird die IP Adresse unter <code>eth0</code> bei inet aufgeführt.</figcaption>
+</figure>
+</div>
+<p>Für die Verbindung mit SSH zu Raspberry Pi existieren unterschiedliche Clients:</p>
+<ul>
+<li>Direkt über die Eingabeaufforderung in Windows mit <code>ssh</code></li>
+<li>PuTTY <a href="https://putty.org" class="uri">https://putty.org</a> (win) ein SSH und telnet client für Windows (auch portable Nutzung ohne Installation möglich)</li>
+<li>Tabby <a href="https://tabby.sh" class="uri">https://tabby.sh</a> (win, mac, linux) ein modernes open source Terminal für lokale Shell, Serielle Schnittstelle, SSH und Telnet Verbindungen, File Transfer mit SFTP und Konfigurationsmöglichkeiten (auch portable Nutzung ohne Installation möglich)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_putty.png" class="img-fluid figure-img"></p>
+<figcaption>SSH Verbindung mit Putty einrichten</figcaption>
+</figure>
+</div>
+<section id="tabby" class="level3">
+<h3 class="anchored" data-anchor-id="tabby">Tabby</h3>
+<p>Neues SSH Verbindungsprofil mit Tabby erstellen mit der IP Adresse des Raspberry Pi erstellen.</p>
+<ol type="1">
+<li>Unter Einstellungen / Profile &amp; Verbindungen ein Neues Profil anlegen</li>
+<li>In der Auswahl SSH-Verbindung wählen</li>
+<li>Unter Host die IP Adresse Benutzername des Raspberry Pi setzen und speichern</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_tabby.png" class="img-fluid figure-img"></p>
+<figcaption>SSH Verbindung mit Tabby einrichten (1-5) und anwenden (6).</figcaption>
+</figure>
+</div>
+</section>
+<section id="datentransfer-mit-sftp" class="level3">
+<h3 class="anchored" data-anchor-id="datentransfer-mit-sftp">Datentransfer mit SFTP</h3>
+<p>Remote Datentransfer mit SFTP dem SSH File Transfer Protokoll ermöglicht ein einfaches Verwalten und auch sichern der Daten. Hierbei eignet sich die Software <a href="https://filezilla-project.org/">FileZilla</a> oder <a href="https://winscp.net/eng/docs/lang:de">WinSCP</a> für den Datentransfer.</p>
+<p>In Fillezilla eine SFTP Verbindung über Datei/Servermanager herstellen mit Server: <code>&lt;IP Adresse Raspberry Pi&gt;</code>, Protokoll: <code>SFTP</code>, und bei der Verbindungart <code>normal</code> wählen und dort Benutzername und Passwort des Raspberry Pi Users angeben.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_filezilla.png" class="img-fluid figure-img"></p>
+<figcaption>Datentransfer mit FileZilla. Eine neue Verbindung im Servermanager (1) erstellen unter Server die IP-Adresse des Raspberry Pi setzen mit dem SFTP Prokoll, und bei der Verbindungsart <em>normal</em> wählen und Benutzername und Passwort des Raspberry Pi angeben und mit “Verbinden” (4) die SFTP Verbindung aufbauen und im Hauptfenster (5) Daten transferieren.</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="mobilen-hotspot-nutzen" class="level2">
+<h2 class="anchored" data-anchor-id="mobilen-hotspot-nutzen">Mobilen Hotspot nutzen</h2>
+<p>Auf Windows kann ein mobiler Hotspot eingerichtet werden, um den Raspberry Pi mit dem Internet zu verbinden. Hierfür wird die Internetverbindung des Computers über das WLAN mit dem Raspberry Pi geteilt. Einen Mobilen Hotspot auf Windows einrichten, den Raspberry Pi mit dem Netzwerk verbinden und die IP Adressen der verbundenen Raspberry Pi’s werden im Reiter Mobiler Hotspot aufgeführt.</p>
+</section>
+<section id="raspberry-pi-config" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-config">Raspberry Pi Config</h2>
+<p>Die Grundlegenden Einstellungen des Raspberry Pi können mit dem Programm <code>raspi-config</code> vorgenommen werden, entweder über die Konsole oder über den Desktop. Beispielsweise kann dort SSH aktiviert werden, das Tastaturlayout geändert werden oder die Zeitzone angepasst werden. Oder weitere Schnittstellen wie I2C, SPI oder UART aktiviert werden.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/raspberry_pi_enable_ssh.png" class="img-fluid figure-img"></p>
+<figcaption>Über die Konsole <code>raspi-config</code> starten und über das Konsolenmenu die Einstellungen anpassen. Im Beispiel wird über das Interface Options Menu <em>SSH</em> aktiviert.</figcaption>
+</figure>
+</div>
+</section>
+<section id="raspberry-pi-aktualisieren" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-aktualisieren">Raspberry Pi aktualisieren</h2>
+<p>Generell empfiehlt es sich den Raspberry Pi aktuell zu halten und vor jeder Installation von Softwarepaketen folgende Befehle durchzuführen</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt upgrade</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get clean</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="raspberry-pi-im-netzerk-auffinden" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-im-netzerk-auffinden">Raspberry Pi im Netzerk auffinden</h2>
+<p>Sobald der Raspberry Pi und auch andere Geräte mit dem Netzwerk verbunden sind kann deren IP Adresse mit Scanner Tools wie <a href="https://angryip.org">Angry IP Scanner</a>, <code>arp -a</code>[^ <code>arp -a</code> listet die IP- und die MAC Adressen der einzelnen Geräte. Es kann ohne das Aufführen von Hostnamen jedoch aufwendig werden, die einzelnen Einträge durchzugehen um zu eruieren. Tipp: <code>arp -a</code> vor dem Booten des Raspberry Pi ausführen und ein zweites mal nachdem der Raspberry Pi vollständig gebootet hat nochmals und eruieren welche IP Adresse hinzugekommen ist.] oder <code>nmap</code> gefunden werden. Für Android und iOS existieren diverse Scanner Apps wie <a href="https://www.fing.com/products/fing-app">Fing</a> oder <a href="https://techet.net/netanalyzer">Net Analyzer</a>.</p>
+<p>Dienste, die dass Netzwerk durchleuchten wie der Angry IP Scanner sind in grösseren Netzwerken wie bei Firmen oder Universitäten aus Sicherheitsgründen blockiert. Für den Nutzen im lokalen Netzwerk zu Hause ist der Angry IP Scanner jedoch ein nützliches Tool.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/angryip_scanner.png" class="img-fluid figure-img"></p>
+<figcaption>Beispiel Scan eines lokalen Netzwerks mit dem Angry IP Scanner</figcaption>
+</figure>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-ariza2022" class="csl-entry" role="listitem">
+Ariza, J.Á. und Baez, H., 2022. <a href="https://doi.org/10.1002/cae.22439">Understanding the Role of Single-Board Computers in Engineering and Computer Science Education: <span>A</span> Systematic Literature Review</a>. <em>Computer Applications in Engineering Education</em>, 30 (1), 304–329.
+</div>
+<div id="ref-upton2022" class="csl-entry" role="listitem">
+Upton, E., 2022. <a href="https://www.raspberrypi.com/news/supply-chain-update-its-good-news/">Supply Chain Update - It’s Good News!</a> <em>Raspberry Pi</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./E07_MQTT.html" class="pagination-link" aria-label="E07 MQTT">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">E07 MQTT</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./A2_Sensorbox.html" class="pagination-link" aria-label="Raspberry Pi Sensorbox">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Raspberry Pi Sensorbox</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/A1_Rasperry_Pi.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Institut Geomatik, Fachhochschule Nordwestschweiz</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

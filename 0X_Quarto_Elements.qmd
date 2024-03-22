@@ -1,0 +1,220 @@
+# Elemente und Boxen
+
+## Buttons
+
+[Get Started <i class="bi-file-zip"></i>](docs/get-started/){.btn .btn-primary} [Guide](docs/guide/){.btn .btn-default} [Button](docs/get-started/){.btn .btn-success} [Button](docs/guide/){.btn .btn-info .bi-geo-alt} [Button](docs/guide/){.btn .btn-warning} [Button](docs/guide/){.btn .btn-danger}
+
+## Definitions
+
+Curabitur dictum
+: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
+
+Ut purus elit\index{Ut purus elit}
+: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
+
+## Marginnotes
+
+::: {.column-margin}
+We know from *the first fundamental theorem of calculus* that for $x$:
+$$e=f(x).$$
+:::
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+
+Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. Curabitur dictum gravida mauris. [This is a span that has the class aside which places it in the margin without a footnote number.]{.aside}
+
+## Diagramme
+Dokumentation [Diagrams](https://quarto.org/docs/authoring/diagrams.html)
+```{mermaid}
+%%| fig-width: 4
+%%| label: fig-simple
+%%| fig-cap: "Eine einfache Mermaid Graphik"
+%%| echo: true
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+```
+
+Diagramme für `pdf` und `docx` wird über einen Chrome oder Edge Browser auf dem lokalen System gerendert.
+Installation mit `quarto tools install chromium`.
+
+
+## Quarto Boxen
+Diese können für HTML einfach geändert werden, für Latex jedoch ist die Darstellung "hardcoded" und ein wenig geschmacksache. 
+
+::: callout-note
+There are five types of callouts: 
+`note`, `tip`, `warning`, `caution` and   `important`. 
+:::
+
+::: callout-tip
+## Tip with custom caption
+
+This is an example of a tip with custom caption.
+:::
+    
+::: callout-warning
+foo
+:::
+
+::: {.callout-caution   collapse="true" icon=false}
+## Take care !  
+foo
+:::
+
+::: callout-important
+foo
+:::
+
+
+## Boxen lua 
+Weitere Boxen, die über ein `lua` Skript in Quarto gerendert werden. Diese erfordern für Latex, Docx und Html zusätzliche Styledefinitionen.
+
+
+::: info
+**Tip:** Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+:::
+
+::: exercise
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+::: 
+
+::: {.solution collapse="true" icon=false}
+**Lösung:** Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+:::
+
+::: summary
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+![Some things about projections](images/logo.jpg){#figureWide}
+
+:::
+
+## Angepasste Lua-Boxen
+Weitere Boxen, die über ein `lua` Skript in Quarto gerendert werden. Diese erfordern für Latex, Docx und Html zusätzliche Styledefinitionen.
+
+### Cheatsheet oder Glossar
+Hervorheben von Glossareinträgen und Definitionen.
+
+::: cheatsheet
+
+GIS
+: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. Curabitur dictum gravida mauris.
+
+GIScience
+: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placeratac, adipiscing vitae, felis. 
+
+:::
+
+### Befehlsübersicht
+Kompakte Darstellung von Kommandos zur Übersicht.
+
+::: commands
+
+ALT+F4
+: Schliessen der Applikation
+
+CTRL+B
+: Schrift in Bold Face
+
+CTRL+I
+: Kursive Schrift 
+
+CTRL+ALT+S
+: Speichern der Dateien / Projekt
+
+:::
+
+### Boxen für Notizen und Quotes
+
+::: note
+*Handschriftliche Notiz*, da bin ich neugierig ob dies klappt! Das wäre super cool :-)
+:::
+
+::: pullquote
+*Pullquote* - Lorem ipsum dolor sit **amet**, consectetur *adipisicing* elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+:::
+
+::: sticky
+*Sticky Note* - Lorem ipsum dolor sit amet, **consectetur** adipisicing elit.
+:::
+
+::: typewriter
+*Typewriter Style* - Nam dui ligula, fringilla a, euismod sodales, sollicitudin vel, wisi. Morbi auctor lorem non
+justo. Nam lacus libero, pretium at, lobortis vitae, ultricies et, tellus. Donec aliquet, tortor
+sed accumsan bibendum, erat ligula aliquet magna, vitae ornare odio metus a mi. Morbi ac
+orci et nisl hendrerit mollis. Suspendisse ut massa. Cras nec ante. Pellentesque a nulla. Cum
+sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam
+tincidunt urna.
+:::  
+
+::: notebook
+*Notebook Style* - Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+
+
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+:::  
+
+
+## Video - how to display them
+Einfügen von Video. Damit diese sowohl in HTML als auch in PDF und Docx einfach dargstellt werden können, ist ein praktischer Workaround Video mit Screenshots einzubetten.
+
+
+```{.markdown}
+::: {.content-visible when-format="html"}
+{{< video https://www.youtube.com/embed/4vdliMRtxBY >}}
+:::
+::: {.content-visible unless-format="html"}
+[![Youtube Video: IHow gas sensing gets intelligent with BME688 and BME AI-Studio](images/youtube_bosch_bme688.png)](https://www.youtube.com/embed/4vdliMRtxBY)
+:::
+```
+
+::: {.content-visible when-format="html"}
+{{< video https://www.youtube.com/embed/4vdliMRtxBY >}}
+:::
+::: {.content-visible unless-format="html"}
+[![Youtube Video: IHow gas sensing gets intelligent with BME688 and BME AI-Studio](images/youtube_bosch_bme688.png)](https://www.youtube.com/embed/4vdliMRtxBY)
+:::
+
+## Lernhilfen
+
+### Aufgabenblöcke 
+Fragen und Aufgaben Blöcke mit Linien oder Grid für das aufführen der Antwort. Nur für Latex.
+
+**Aufgabe**: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+\numberedlines[2]{3}
+
+**Aufgabe**: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+\grid{30}
+
+**Aufgabe**: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+\dottedgrid{30}
+
+**Aufgabe**: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+\lines{4}
+
+## XKCD
+\marginnote{\xkcd[So, I'm sitting in a margin note and]{How cool is this..}} Tikz Latex nur für Latex Tikz2png wäre schön.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+\xkcd[Hi there.. you know]{How cool is this.. to just nerd around-}\xkcd[Tell me ..]{In a lecture script. Yes, totally!}
+
+## Tweets - how to include them
+Select Tweet, open the small menu top-right of the tweet and select "Tweet einbeten" (embed tweet) copy the html content to the markdown document.
+
+```{.html}
+<blockquote class="twitter-tweet">
+    <p lang="de" dir="ltr">Infoabend zum CAS Spatial Data Analytics (CAS Start am 22.08.2022) Mo 13.06 ab 17.00 - Stärkt Euch, Euer Team in digitalen Prozessen, Analysen und Dienstleistungen mit Geodaten. <a href="https://t.co/cJ2o6WUNGI">https://t.co/cJ2o6WUNGI</a>
+    </p> &mdash; 3.14a (&#64;314a) 
+    <a href="https://twitter.com/314a/status/1531578910109990913?ref_src=twsrc%5Etfw">May 31, 2022</a>
+</blockquote> 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+```
+
+<blockquote class="twitter-tweet"><p lang="de" dir="ltr">Infoabend zum CAS Spatial Data Analytics (CAS Start am 22.08.2022) Mo 13.06 ab 17.00 - Stärkt Euch, Euer Team in digitalen Prozessen, Analysen und Dienstleistungen mit Geodaten.<a href="https://t.co/cJ2o6WUNGI">https://t.co/cJ2o6WUNGI</a></p>&mdash; 3.14a (&#64;314a) <a href="https://twitter.com/314a/status/1531578910109990913?ref_src=twsrc%5Etfw">May 31, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

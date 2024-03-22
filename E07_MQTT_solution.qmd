@@ -1,0 +1,67 @@
+::: solution
+`mqtt_sub_bme688.py` - Subscriber
+```python
+#!/usr/bin/env python
+import paho.mqtt.publish as publish 
+import bme680
+import time
+
+ip = "127.0.0.1"  
+interval = 3 
+
+try:                                               
+    sensor = bme680.BME680(bme680.I2C_ADDR_PRIMARY)   
+except (RuntimeError, IOError):
+    sensor = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
+
+# Oversampling Einstellungen
+sensor.set_humidity_oversample(bme680.OS_2X)           
+sensor.set_pressure_oversample(bme680.OS_4X)           
+sensor.set_temperature_oversample(bme680.OS_8X)        
+sensor.set_filter(bme680.FILTER_SIZE_3)               
+
+print('Sensordaten:')
+try:
+    while True:
+        if sensor.get_sensor_data():                             
+            temperature = sensor.data.temperature
+            pressure = sensor.data.pressure
+            humidity = sensor.data.humidity
+            publish.single("iot/temperature", temperature, hostname=ip, port=1883)
+            publish.single("iot/pressure", pressure, hostname=ip, port=1883)
+            publish.single("iot/humidity", humidity, hostname=ip, port=1883)
+            output = '{0:.2f} C,{1:.2f} hPa,{2:.3f} %RH'.format( 
+                sensor.data.temperature,                        
+                sensor.data.pressure,                          
+                sensor.data.humidity)                        
+            print(output)
+            time.sleep(interval)
+except KeyboardInterrupt:
+    pass
+```
+
+`mqtt_pub_bme688.py` - Publisher
+```python
+#!/usr/bin/env python
+import paho.mqtt.client as mqtt 
+ip = "127.0.0.1"         
+
+# Callback Funktion für den Verbindungsaufbau
+def on_connect(client, userdata, flags, rc): 
+    print("Connected - code: "+str(rc)) 
+    client.subscribe("iot/temperature")              
+    client.subscribe("iot/pressure")             
+    client.subscribe("iot/humidity")                  
+  
+# Callback Funktion für eingehende Nachrichten
+def on_message(client, userdata, msg):       
+    print(msg.topic+" "+str(msg.payload))    
+  
+# Erstellen des MQTT Clients
+client = mqtt.Client()                       
+client.on_connect = on_connect                
+client.on_message = on_message
+client.connect(ip, 1883, 60)                 
+client.loop_forever()                        
+```
+:::

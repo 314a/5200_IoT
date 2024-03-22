@@ -1,0 +1,786 @@
+%% Package identification and version
+%% date: 02.02.2022
+%% author: 3.14a
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{igeo}[2022/01/17 IGEO]
+
+%% Required packages and definitions to run this package
+\RequirePackage[T1]{fontenc}
+
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{environ}
+\RequirePackage{marginnote}
+\RequirePackage{tikzpagenodes}
+\RequirePackage{graphicx}
+\RequirePackage{pgfplots}
+\RequirePackage{calc}
+\RequirePackage{tcolorbox}
+\RequirePackage{fontspec}
+\RequirePackage{xstring} % command \important - IfSubStr
+\RequirePackage{pgfornament}
+\RequirePackage{calc}% http://ctan.org/pkg/calc
+\usetikzlibrary{calc,shadows,positioning,fit}
+\tcbuselibrary{skins,breakable} % Boxes settings tcolorbox
+%\RequirePackage[ngerman]{babel}
+\RequirePackage{float}
+\floatplacement{figure}{H}% float-package and set default placement for figures to H.
+% Figure settings - float prevent: Not in outer par mode => build something movable inside a box, 
+% such as floating element like figures
+% delete overwrites that change the floatplacement setting such as
+%\makeatletter\def\fps@figure{htbp}\makeatother
+
+%% Package options
+%% Chapter page header image.
+%% Options to include chapterheader, chapterpage images
+\newif\if@chapterheader\@chapterheaderfalse
+\DeclareOption{chapterheader}{\@chapterheadertrue}
+\newif\if@chapterpage\@chapterpagefalse
+\DeclareOption{chapterpage}{\@chapterpagetrue}
+%\ExecuteOptions{}
+\ProcessOptions\relax 
+
+%% Labels and names
+\newcommand*{\abstracttitle}{Abstract} % Title of the abstract environment
+\newcommand*{\impressumtitle}{Impressum} % Title of the abstract environment
+\newcommand*{\keywordstitle}{Keywords} % Title of the keywords environment
+\newcommand*{\indextitle}{Alphabetical Index} % Index title
+\newcommand*{\boxcounterprefix}{Aufgabe} % tcolorbox Prefix Name before counter in tcolorbox eg. Aufgabe 1
+
+\@ifpackagewith{babel}{ngerman}{
+    \addto{\captionsngerman}{\renewcommand{\partname}{Kurs}}
+    \addto{\captionsngerman}{\renewcommand{\chaptername}{Vorlesung}}
+    \addto{\captionsngerman}{\renewcommand{\indextitle}{Alphabetischer Index}}
+    \addto{\captionsngerman}{\renewcommand{\listfigurename}{Abbildungsverzeichnis}}
+    \addto{\captionsngerman}{\renewcommand{\listtablename}{Tabellenverzeichnis}}	
+    \addto{\captionsngerman}{\renewcommand{\impressumtitle}{Impressum}}% Title of the abstract environment
+    \addto{\captionsngerman}{\renewcommand{\abstracttitle}{Abstrakt}}% Title of the abstract environment
+    \addto{\captionsngerman}{\renewcommand{\keywordstitle}{Stichwörter}}% Title of the abstract environment
+    \addto{\captionsngerman}{\renewcommand{\boxcounterprefix}{Aufgabe}}% tcolorbox Prefix Name before counter in tcolorbox eg. Aufgabe 1
+	\addto{\captionsngerman}{\renewcommand{\mtctitle}{Inhalt}}% minitoc title
+}{}
+%% Definitions and Functions
+%% Color definitions
+\definecolor{colPrimary}{HTML}{227FA6}% main leading color of the document
+\definecolor{colShade}{HTML}{227FA6}% shade color - usually light grey 
+\definecolor{colPostIt}{RGB}{242,226,149}% background color for marginnote postits
+\definecolor{colFarbklammer}{cmyk}{0.05,0,1,0}% coverpage color box
+\definecolor{colPen}{HTML}{002133} %227FA6 % marginnote pen color
+\definecolor{colAnswers}{HTML}{227FA6}% answer section line,dot,grid color
+\colorlet{colHighlight}{colPrimary!10}% highlight background color
+\colorlet{colImportant}{colPrimary}% highlight foreground color
+
+% set fonts
+% use \quotefont instead of \fontspec{Times New Roman}
+\newfontfamily\openquotefont[Ligatures=TeX]{Times New Roman}%Linux Libertine O  
+\newfontfamily\quotefont[Ligatures=TeX]{Times New Roman}%Linux Libertine O 
+\newfontfamily\handwrittenfont{Ink Free}%Humor Sans 
+\newfontfamily\typewriterfont{Courier New}%\fontspec{Courier New}
+\newfontfamily\boxfont{Arial}
+
+\newcommand{\logo}{example-image}%Textures/FHNW_HABG_10mm.eps
+\newcommand{\prefiximagechapterfullpage}{example-image}
+\newcommand{\prefiximagechapterimage}{example-image}
+
+% check if KOMA Classes are being applied
+\@ifundefined{KOMAClassName}{}{    
+	% set default class option
+    \if@titlepage% condition for classes with chapter scrbook,book
+        \@chapterprefixtrue % use chapter prefix (todo nice layout without prefix)
+        \addtokomafont{part}{\Large\sffamily\color{colPrimary}}    % text color for part
+        \addtokomafont{chapter}{\Large\sffamily\color{colPrimary}}    % text color for chapter
+    \fi
+    % KOMA Script font settings  
+    \addtokomafont{section}{\Large\sffamily\color{colPrimary}}    % text color for Sections
+    \addtokomafont{subsection}{\large\sffamily\color{colPrimary}} % text color for Subsections
+    \addtokomafont{subsubsection}{\sffamily\color{colPrimary}}    % text color for Subsubections
+    \if@titlepage 
+        \addtokomafont{chapter}{\Huge\sffamily\color{colPrimary}}     % text color for Sections
+		% KOMA Script maketitle settings
+		\addtokomafont{title}{\raggedright}
+		\addtokomafont{author}{\raggedright\setlength{\tabcolsep}{0pt}}
+		\addtokomafont{date}{\raggedright}
+		\addtokomafont{subject}{\raggedright}
+		\addtokomafont{publishers}{\raggedright}
+    \fi    
+}
+
+%\makeatletter
+%\@chapterprefixtrue
+%\renewcommand\chapterlinesformat[3]{\color{colPrimary}\@hangfrom{#2}#3}%\nextcolor
+%\renewcommand\chapterlineswithprefixformat[3]{\color{colPrimary} #2#3}%\nextcolor
+%\makeatother
+
+% derived from https://tex.stackexchange.com/questions/401878/loop-through-letters-and-apply-a-color-to-the-first-3
+% chapter colors to set for each chapter a new primary color
+% define color list and assign a set of colors by name
+\newcounter{listcolor}
+\makeatletter
+\newcommand{\addlistcolor}[1]{%
+  \stepcounter{listcolor}%
+  \@namedef{chaptercolor@\thelistcolor}{#1}%
+}
+\makeatother
+\setcounter{listcolor}{0} % initialise the list at the first position
+
+% command to iterate to the next color in the list and set it globally
+\newcommand{\nextcolor}{ 
+    \stepcounter{listcolor}%
+    \ifnum\value{listcolor}>\listcolorlength
+        \setcounter{listcolor}{1}%
+    \fi    
+    \gdef\tmp{\csname chaptercolor@\thelistcolor\endcsname}
+    \xglobal\colorlet{colPrimary}{\tmp}
+}
+
+% define colors and add them to the list
+\addlistcolor{colPrimary} % dark 970101,
+%\definecolor{habg1}{HTML}{227fa6}\addlistcolor{habg1} % blue
+\definecolor{habg2}{HTML}{ce8243}\addlistcolor{habg2} % orange
+\definecolor{habg3}{HTML}{6c8a98}\addlistcolor{habg3} % greish
+\definecolor{habg4}{HTML}{6e986a}\addlistcolor{habg4} % greenish
+\definecolor{habg5}{HTML}{94807a}\addlistcolor{habg5} % brownish
+
+% rainbow not really good for lead colors - darker variant required
+%\definecolor{red}{HTML}{e40303}\addlistcolor{red} % dark 970101,
+%\definecolor{orange}{HTML}{ff8c00}\addlistcolor{orange} 
+%\definecolor{yellow}{HTML}{ffed00}\addlistcolor{yellow} 
+%\definecolor{green}{HTML}{008026}\addlistcolor{green} 
+%\definecolor{blue}{HTML}{004dff}\addlistcolor{blue} 
+%\definecolor{violet}{HTML}{750787}\addlistcolor{violet} 
+\newcommand{\listcolorlength}{5} % set length of list to iterate the lsit multiple times
+
+% default main leading color of the document
+%\colorlet{colPrimary}{col1} % should be the same as the first one on the list
+% Chapter Settings options chapterpage, chapterheader
+% https://tex.stackexchange.com/questions/159485/huge-ornament-chapter-numbering
+% https://texwelt.de/fragen/12367/wie-kann-ich-bei-einer-koma-script-klasse-kapiteluberschriften-mit-einer-hintergrundfarbe-versehen
+% chapter style and image
+% check if titlepage is defined -> book or scrbook class
+% \chapternumberbackground{\figurechapter[]{Textures/map.jpg}} \chapter{Introduction}
+\makeatletter			 
+\if@titlepage 
+    \renewcommand*{\chapterformat}{%  
+        \newcommand*{\chapvskip}{\vskip 6cm} % vertical skip to chapter
+        \if@chapterpage% chapter fullpage image
+            % renewcommand if file suffix is not given, but file exists	%\IfFileExists{\prefiximagechapterfullpage}{\figurefullpage[]{\prefiximagechapterfullpage}}{} % use clearpage for twocolumn layout            %\IfFileExists{\prefiximagechapterfullpage.jpg}{\figurefullpage[]{{\prefiximagechapterfullpage.jpg}}}{}            %\IfFileExists{\prefiximagechapterfullpage.png}{\figurefullpage[]{{\prefiximagechapterfullpage.png}}}{}
+            \IfFileExists{\prefiximagechapterfullpage}{\figurefullpage[]{\prefiximagechapterfullpage}}{
+				\IfFileExists{\prefiximagechapterfullpage.jpg}{\figurefullpage[]{{\prefiximagechapterfullpage.jpg}}}{
+					\IfFileExists{\prefiximagechapterfullpage.png}{\figurefullpage[]{{\prefiximagechapterfullpage.png}}}{}
+				}
+			} % use clearpage for twocolumn layout
+        \fi
+        % chapter chapter image
+        \if@chapterheader
+			%\IfFileExists{\prefiximagechapterimage}{\newpage\figurechapter[]{\prefiximagechapterimage} \chapvskip}{}
+            % renewcommand if file suffix is not given, but file exists            %\IfFileExists{\prefiximagechapterimage.jpg}{\newpage\figurechapter[]{{\prefiximagechapterimage.jpg}} \chapvskip}{}            %\IfFileExists{\prefiximagechapterimage.png}{\newpage\figurechapter[]{{\prefiximagechapterimage.png}} \chapvskip}{}            
+			\IfFileExists{\prefiximagechapterimage}{\newpage\figurechapter[]{\prefiximagechapterimage} \chapvskip}{
+				\IfFileExists{\prefiximagechapterimage.jpg}{\newpage\figurechapter[]{{\prefiximagechapterimage.jpg}} \chapvskip}{
+					\IfFileExists{\prefiximagechapterimage.png}{\newpage\figurechapter[]{{\prefiximagechapterimage.png}} \chapvskip}{}
+				}
+			} % renewcommand if file suffix is not given, but file exists
+
+            % set the the image
+            %\currentchapternumberbackground \chapvskip%  
+        \fi		 
+        \makebox[0cm][r]{\color{colPrimary}\vspace{1cm}\MakeUppercase{\chapappifchapterprefix{}}}%Chapter name
+        \rlap{\enskip\resizebox{!}{1.2cm}{\color{colPrimary}\thechapter}}%Chapter number
+        \vspace{1em}
+    }
+    \RedeclareSectionCommand[beforeskip=0cm,prefixfont=\raggedleft\Large,innerskip=0pt]{chapter}%font=\normalfont\huge\scshape,			 
+			
+   
+			   
+\newcommand*{\chapternumberbackground}[1]{\renewcommand*{\currentchapternumberbackground}{#1}}
+\newcommand*{\currentchapternumberbackground}{}%\color{gray}\rule{1cm}{1cm}
+\renewcommand*{\partformat}{\color{colPrimary}\partname~\thepart\autodot}
+
+\renewcommand\chapterlinesformat[3]{\color{colPrimary}\@hangfrom{#2}#3}%\nextcolor
+\renewcommand\chapterlineswithprefixformat[3]{
+    \def\tmp{#2} \ifx\tmp\empty 
+    \else\nextcolor\color{colPrimary}
+    \fi
+     #2#3
+}%
+\renewcommand*{\chaptermarkformat}{\thechapter\autodot\enskip}%Chapter mark in header without prefix "Chapter"
+\fi
+\makeatother
+% check if chapter is starred or not starred by checking if there is a number in 
+% chapterlinesformat and chapterlineswithprefixformat with \def\tmp{#2} \ifx\tmp\empty not starred \else starred \fi
+% \renewcommand\chapterlinesformat[3]{#2#3}
+% \renewcommand\chapterlineswithprefixformat[3]{#2#3}
+
+%\newcommand{\figurechapter}[2][]{\begin{tikzpicture}[remember picture,overlay]%
+\newcommand{\figurechapter}[2][]{\begin{tikzpicture}[remember picture,overlay, shift={(current page.south west)},anchor=south west,inner sep=0pt]%
+    \node[anchor=south west,inner sep=0pt,opacity=1] at ($ (current page.north west) + (0cm, -8cm) $){\includegraphics[width=\paperwidth]{#2}};%
+    %\fill[fill=red] (current page.north west) circle(5pt);
+    \end{tikzpicture}}%
+
+																											  
+
+
+% Minitoc Settings https://tools.ietf.org/doc/texlive-doc/latex/minitoc/minitoc.pdf
+\RequirePackage[tight,undotted]{minitoc} % load after RedeclareSectionCommand! otherwise minitoc don't show
+%\mtcsetdepth{minitoc}{2} % set minitoc depth
+% https://tex.stackexchange.com/questions/202889/i-want-to-change-the-font-of-my-minitoc
+\makeatletter
+\if@titlepage%only document class book,scrbook have the command titlepage, instead of using nested conditions
+    \renewcommand{\mtifont}{\large\sffamily\bfseries\color{colPrimary}} %\color{gray}\fontspec{Courier New}
+    \renewcommand{\mtcfont}{\small\sffamily}
+    \renewcommand{\mtcSfont}{\small\sffamily\color{colPrimary}}%\color{gray}
+    \renewcommand{\mtcSSfont}{\small\sffamily\color{colPrimary}}
+    \renewcommand{\mtcSSSfont}{\small\sffamily\color{colPrimary}}
+	%\@ifpackageloaded{babel}{
+	\@ifpackagewith{babel}{ngerman}{
+		\addto{\captionsngerman}{\renewcommand{\mtctitle}{Inhalt}}% add german title to babel
+	}{}
+\fi
+\makeatother
+\tightmtctrue% compact minitoc 
+\nomtcrule% no ruler 
+\setlength{\mtcindent}{0pt}% no intend on left margin
+
+
+% index
+% don't use indeces inside tcolorboxes, they either don't appear or at the wrong places
+%\usepackage{showidx} % load before imakeidx!
+\RequirePackage{imakeidx}
+\makeindex[columns=3,intoc]%title=\indextitle,
+%\let\oldindex\index
+%\renewcommand{\index}[1]{\oldindex{#1}\marginnote{\vskip -10pt\sffamily\color{colPrimary}\small#1}}
+
+% margin notes
+\RequirePackage{fontspec}
+\definecolor{colMargin}{HTML}{002133} % 227FA6
+\renewcommand*{\marginfont}{\small\color{colPen}\handwrittenfont}%\fontspec{Ink Free}, \fontspec{Humor Sans}
+
+% Lists item labels as dash
+\renewcommand\labelitemi{--}
+\renewcommand\labelitemii{--}
+\renewcommand\labelitemiii{--}
+
+% lists
+\RequirePackage{enumitem} % set list margin left to 0 
+\setlist[itemize]{label=--,leftmargin=*,nosep,after=\medskip}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% footnotes
+\renewcommand{\footnoterule}{% Kerns avoid vertical space
+  {\color{colPrimary}\kern -3pt  % This -3 is negative
+  \hrule width  0.1\textwidth height 1pt % of the sum of this 1
+  \kern 5pt}}              % and this 5
+
+
+% include words marked as important to the index
+% https://de.overleaf.com/learn/latex/Writing_your_own_package
+% Important words are included the index and printed in a different colour
+\newcommand{\important}[1]
+{\IfSubStr{#1}{!}
+    %{\textcolor{\colImportant}{{\StrBefore{#1}{!}~\StrBehind{#1}{!}}}\index{#1}\kern-1pt}
+    {\textcolor{colImportant}{\hl{{\StrBefore{#1}{!}~\StrBehind{#1}{!}}}}\index{#1}\kern-1pt}
+    {\textcolor{colImportant}{\hl{#1}}\index{#1}\kern-1pt}
+}
+\RequirePackage{soul}
+\sethlcolor{colHighlight}
+
+
+
+% highlight command taken from the OxThesis file
+% https://github.com/mcmanigle/OxThesis/blob/master/ociamthesis.cls
+% \mccorrect{blah} or (for whole paragraphs) \begin{mccorrection} . . . \end{mccorrection}.
+%\colorlet{colHighlight}{colPrimary!20}
+%\newlength{\mccurrentbaselineskip}
+%\newlength{\mccurrentparskip}
+%\newlength{\mccurrentparindent}
+%\newif\ifcorrections
+%\newif\ifm@csection
+%\m@csectionfalse
+%\correctionsfalse
+
+%\usepackage{framed}
+%\OuterFrameSep=-2pt
+%\newenvironment{mccorrection}
+%{\ifcorrections\if@nobreak\m@csectiontrue\fi\begin{shaded}\ifm@csection\noindent\ignorespaces\fi\fi}
+%{\ifcorrections\end{shaded}\m@csectionfalse\ifx\@captype\@undefined\@nobreakfalse\fi\fi}
+
+%\usepackage{soul}
+%\sethlcolor{colHighlight}
+%\newcommand{\mccorrect}[1]{\ifcorrections\hl{#1}\else#1\fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FHNW Custom Commands Logo und Farbklammer
+
+% define abstract environment only if not already defined
+\ifcsmacro{abstract}{}{
+  \let\endmyenvironment\undefined%
+  \newenvironment{abstract}{\subsection*{\abstracttitle}}{}%
+}
+
+
+
+\newenvironment{keywords}{\vspace*{0.5em}\noindent\textbf{\color{colPrimary}\keywordstitle: }}{\vskip 0.5em}%
+\newenvironment{impressum}{\clearpage\thispagestyle{empty}\vspace*{\fill}
+    \footnotesize\noindent\textbf{\impressumtitle} \\
+}{\clearpage}%
+
+\RequirePackage{scrlayer-scrpage} % header and footer
+\newpairofpagestyles{titleheadings}{% titlepage header-footer style
+    \clearpairofpagestyles
+    \lehead{\headerlogo} % twoside fix ->otherwise use \ihead[]{}
+    \lohead{\headerlogo}
+}
+
+\newcommand{\version}[1]{\def\@version{#1}}
+\version{}
+% http://www.physics.wm.edu/~norman/latexhints/conditional_macros.html
+\makeatletter%
+\newcommand{\fhnwtitlepage}[1]{
+    %\restoregeometry %geometry package probably not needed
+    \begin{titlepage}
+    \thispagestyle{titleheadings}
+    %\renewcommand*{\thispagestyle}{titleheadings}
+    %\AddToShipoutPicture*{\put(36,780){\includegraphics[scale=1]{Textures/FHNW_HABG_10mm.eps}}}
+    %\makeatletter%
+    \begin{flushleft}
+    \noindent
+    \vskip 1em
+    \ifx\@subject\@empty \else
+        \noindent {\Large \textsf{\@subject}}
+    \fi
+    \vskip 3em
+    \ifx\@title\@empty \else
+        \noindent {\huge \color{colPrimary}\textbf{\textsf{\@title}}}
+    \fi
+    \ifx\@subtitle\@empty \else
+        \vskip 0.5em
+        \noindent {\huge \textsf{\@subtitle}}
+        \vskip 2em
+    \fi
+    \vskip 2em
+	
+	\def\optional{#1}\ifx\optional\empty \else 
+
+		\IfFileExists{#1}{
+			\begin{figure*}[ht]
+				\hspace{-1in}\hspace{-\oddsidemargin}\includegraphics[width=1in+\oddsidemargin+\textwidth]{#1} 
+			\end{figure*}
+		}{
+																																					
+		\vskip 2em
+		}
+    \fi	
+    \ifx\@author\@empty \else
+        \vskip 2em
+        \noindent {\large\textsf{\@author}}
+    \fi
+    \ifx\@date\@empty \else
+    \vskip 0.5em
+    \noindent {\large\textsf{\@date}}
+    \fi
+    \ifx\@version\@empty \else
+    %\vskip 0.5em
+    %\noindent {\large\textsf{Version: \@version}}
+    \fi
+    \vskip 1em
+    \noindent {\large\textsf{\@publishers}}
+    \vskip 1em
+    \noindent {\large\textsf{\@thanks}}
+    %\makeatother%
+    
+    \end{flushleft}
+    \end{titlepage}
+}
+\makeatother%
+
+% FHNW HABG logo \headerlogo
+\newcommand{\headerlogo}{\begin{tikzpicture}[remember picture,overlay]%
+  \node[anchor=south west,inner sep=0pt] at (-7mm,-2.5mm)
+    {\includegraphics[height=10mm]{\logo}};
+  %\fill[fill=red] (0,0) circle(2pt);
+  %\fill[fill=yellow,opacity=0.60] (-7mm,-2.5mm) rectangle ++(80mm,10mm);
+  %\fill[fill=lightgray,opacity=0.20] (-17mm,-7.5mm) rectangle ++(100mm,20mm);
+  \end{tikzpicture}} 
+  
+% FHNW Farbklammer \farbklammer[Subtitle]{Title}
+\newcommand{\farbklammer}[2][]{
+    \begin{tikzpicture}[remember picture,overlay, shift={(current page.south west)},anchor=south west,inner sep=0pt]
+    \usetikzlibrary{positioning,fit}
+        \node[inner sep=0pt]at (1,27.75){\includegraphics[]{\logo}};
+        %\tikzset{pt/.style={circle,fill=black,inner sep=0mm,minimum size=4pt}}     node[pt,color=red] (a) at (0,9.25) {}
+        \coordinate(a) at (0cm,9.25cm);
+        \coordinate(b) at (1.5cm,19.75cm);
+        \path 
+        node[above right of = a, node distance=5mm, anchor=north west,rotate=90,text width=105mm,font=\Large](t){\textsf{\textbf{#2}\\#1}}% Title / Subtitle
+        node[behind path, fill=colFarbklammer,anchor=south west,text width=15mm,minimum height=105mm,inner xsep=0mm,inner xsep=2mm,fit=(a)(b)(t)] (a2){};  
+    \end{tikzpicture}
+}
+
+%\tikz[remember picture,overlay] \node[inner sep=0pt] at (current page.center){\includegraphics[height=\paperheight]{Textures/map.jpg}};%width=\paperwidth,
+
+%\IfFileExists{\prefiximagechapterfullpage}{\figurefullpage[]{\prefiximagechapterfullpage}}{}
+% FHNW Farbklammer \fhnwcover[Subtitle]{Title}{Image}
+\newcommand{\fhnwcover}[3][]{									
+    \begin{tikzpicture}[remember picture,overlay, shift={(current page.south west)},anchor=south west,inner sep=0pt]
+	\usetikzlibrary{positioning,fit}
+        \IfFileExists{#3}{
+		    \node[inner sep=0pt] at (current page.south west){\includegraphics[height=\paperheight]{#3}};
+        }{
+		    \node[inner sep=0pt] at (current page.south west){\includegraphics[height=\paperheight]{example-image}};
+        }% no semicolon for latex commands!
+        \node[inner sep=0pt]at (1cm,27.75cm){\includegraphics[]{\logo}};
+        %\tikzset{pt/.style={circle,fill=black,inner sep=0mm,minimum size=4pt}}     node[pt,color=red] (a) at (0,9.25) {}
+        \coordinate(a) at (0cm,9.25cm) ;
+        \coordinate(b) at (1.5cm,19.75cm);
+        \path node[above right of = a, node distance=5mm, anchor=north west,rotate=90,text width=105mm,font=\Large](t){\textsf{\textbf{#2}\\#1}}% Title / Subtitle
+        node[behind path, fill=colFarbklammer,anchor=south west,text width=15mm,minimum height=105mm,inner xsep=0mm,inner xsep=2mm,fit=(a)(b)(t)] (a2){};  
+    \end{tikzpicture}    
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boxes and Environments, Notes
+
+% Sticky Note
+\NewEnviron{sticky} % seems to work with environ package but not with newenvironment{}{}{}
+    % use of marginpar because marginnote positions "origin" to inner right side on twosided docs
+    {\marginpar{\begin{tikzpicture}[remember picture,overlay,font=\handwrittenfont\footnotesize]%
+    \node[xshift=15mm,drop shadow={shadow xshift=2pt,shadow yshift=-4pt},xslant=-0.05,yslant=0.05,text width=30mm,minimum height=20mm,fill=colPostIt,inner xsep=4pt]at(0,0)\bgroup \BODY \egroup;\end{tikzpicture}}}
+    
+% pull quote
+\newenvironment{pquote}{\list{}{\rightmargin\leftmargin}\item\relax}{\endlist}
+\newcommand*{\openquote}{\tikz[remember picture,overlay,xshift=-15pt,yshift=-8pt] \node(OQ) {\openquotefont\fontsize{50}{50}\selectfont``};\kern0pt}
+\newenvironment{pullquote}{\begingroup\addtolength\leftmargini{1cm}\begin{pquote}\color{colPrimary}\openquote\quotefont\itshape\Large}{\hfill\end{pquote}\endgroup}
+
+% Environment for glossary and cheat sheets
+% adapted from: https://www.overleaf.com/project/617558d1f10828b77c50b3d7
+% https://stackoverflow.com/questions/486104/redefining-commands-in-a-new-environment
+% https://www.overleaf.com/project/619745803e5c4cc92ad3657e
+% https://tex.stackexchange.com/questions/193223/itemize-list-like-table-of-contents/193225
+% not breakable! with multicol
+%\let\oldR\R
+%\renewcommand\R{\oldR XXX: }
+\AtBeginEnvironment{cheatsheet}{%
+\let\olddescriptionlabel\descriptionlabel
+\renewcommand{\descriptionlabel}[1]{\color{colPrimary}\sffamily\textbf{#1}}}%
+
+\newenvironment{cheatsheet}[1][Cheat Sheet]{
+\setlist[description]{leftmargin=1em,labelindent=0em ,labelwidth=1cm, labelsep*=1em, leftmargin =!, style = sameline}%
+\begin{boxtoptitle}[0]{#1}{colPrimary} \begin{multicols*}{2}}{\end{multicols*}\end{boxtoptitle}}%
+
+% Environment for commands with description lists
+\AtBeginEnvironment{commands}{% %\LetLtxMacro{\commanditem} {\item} %\LetLtxMacro{\commandlabel} {\descriptionlabel}
+\let\olditem\item
+\renewcommand\item[1][]{\olditem[{#1}]\dotfill\enspace }
+\let\olddescriptionlabel\descriptionlabel
+\renewcommand{\descriptionlabel}[1]{\color{colPrimary}\sffamily\textit{#1}}}%
+
+\newenvironment{commands}[1][Cheat Sheet]{
+\setlist[description]{leftmargin=1em,labelindent=0em ,labelwidth=1cm, labelsep*=0.5em, leftmargin =!, style = sameline, noitemsep}%
+\begin{boxtoptitle}[0]{#1}{colPrimary}\begin{multicols*}{2}}{\end{multicols*}\end{boxtoptitle}}% 
+% Box with shaded background colour \begin{boxshade}{colPrimary}\lipsum[1]\end{boxshade}
+\newtcolorbox{boxshade}[2][]{breakable, float*=!h,width=\textwidth,colback=#2!20,arc=0pt,outer arc=0pt,boxrule=0pt} 
+% Box with title, colour definition e.g. \begin{boxtitle}{Title}{red!40}\lipsum[5]\end{boxtitle}
+\newtcolorbox{boxtitle}[3][]{breakable, float*=!h,width=\textwidth, title=#2, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=5pt, toptitle=3pt, top=0pt, fonttitle=\bfseries} 
+% Box with counter, title and colour e.g. \begin{boxcounter}{Lorem Ipsum}{Cerulean}\lipsum[5]\end{boxcounter} % Exercise Box
+% Set Title for numbered boxes set custom variable/command \newcommand*{\boxcounterprefix}{Aufgabe}
+%\tcbset{countertitle/.style={title={\boxcounterprefix~\thetcbcounter\ifstrempty{#1}{}{: #1}}}}
+%\newtcolorbox[auto counter, number within=chapter, number freestyle={\noexpand\arabic{\tcbcounter}}]{boxcounter}[3][]{%
+%  enhanced, breakable, float*=!h, width=\textwidth, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt, outer arc=0pt, boxrule=0pt,leftrule=5pt,toptitle=3pt,top=0pt,fonttitle=\bfseries,countertitle={#2},#1}
+  
+% Rounded box with title, colour definition e.g. \begin{boxround}{red!40}\lipsum[5]\end{boxround}
+\newtcolorbox{boxround}[2][]{breakable, enhanced,width=\textwidth, float*=!h,boxsep=3pt, arc=1.25ex, colback=white, colframe=#2, boxrule=3pt}
+% Rounded box with title, colour definition e.g. \begin{boxroundtitle}{Title}{red!40}\lipsum[5]\end{boxroundtitle}
+\newtcolorbox{boxroundtitle}[3][]{breakable, enhanced,width=\textwidth, float*=!h,boxsep=3pt, arc=1.25ex, colback=white, colframe=#3, boxrule=3pt,leftrule=20pt, overlay unbroken and first={%
+    \node[rotate=90, minimum width=1cm, anchor=south, font=\sffamily\bfseries, yshift=-19pt, white]at (frame.west) {#2};}}  
+
+% Box in lined paper style font Humor Sans [alternative Courier New]
+% https://tex.stackexchange.com/questions/504761/creating-the-appearance-of-notebook-paper-in-a-tcolorbox-problems-drawing-the-c
+\newtcolorbox{notebook}{enhanced,breakable,width=\textwidth, float*=h!,colback=white, colframe=white,boxrule=0pt,arc=0pt,outer arc=0pt,drop fuzzy shadow southeast, tikz={rotate=0,transform shape}, % rotation breaks distances between paragraph at times
+    left=12mm,fontupper=\handwrittenfont, underlay={%
+        \begin{tcbclipinterior}
+        \draw[help lines, draw=black!15, ystep=\baselineskip, xstep=\linewidth,shift={([yshift=-1mm]interior.north west)}](interior.south west) grid (interior.north east);
+        \draw[help lines, draw = colPrimary] ([xshift=8mm]interior.north west)--([xshift=8mm]interior.south west);
+        \end{tcbclipinterior}}
+    }
+% Box with typewriter font    
+\newtcolorbox{typewriter}{empty, no borderline,breakable,width=\textwidth, float*=h!,frame hidden,fonttitle=\ttfamily\bfseries, fontupper=\typewriterfont, top=0mm,  left=0mm, right=0mm, opacityback=0} 
+
+\newtcolorbox{note}{empty, no borderline,breakable,width=\textwidth, float*=h!,frame hidden,fontupper=\handwrittenfont,colupper=colPen, top=0mm,  left=0mm, right=0mm, opacityback=0} 		
+
+\newtcolorbox{boxtop}[2][3]{breakable, float*=!h,width=\textwidth, natural height=#1cm,add to natural height=#1 cm,
+colback=white, colframe=#2, colupper=black!60, coltitle=#2, colbacktitle=white, arc=0pt,outer arc=0pt, boxrule=0pt,  toprule=0.5pt, toptitle=0.5pt, top=0pt,left=0pt,right=0pt,bottom=0pt, 
+fonttitle=\small\boxfont, fontupper=\small\boxfont} 
+% \begin{boxtoptitle}[3]{Test}{colPrimary}\lipsum[2]\end{boxtoptitle} 
+\newtcolorbox{boxtoptitle}[3][5]{breakable, float*=!h,width=\textwidth, natural height=#1cm,add to natural height=#1 cm,
+title=#2, colback=white, colframe=#3, colupper=black!60, coltitle=#3, colbacktitle=white, arc=0pt,outer arc=0pt, boxrule=0pt,  toprule=0.5pt, toptitle=0.5pt, top=0pt,left=0pt,right=0pt,bottom=0pt, 
+fonttitle=\small\boxfont, fontupper=\small\boxfont} 
+
+\newtcolorbox{boxshadow}{standard jigsaw,enhanced,breakable,colback=white, colframe=gray,boxrule=0.5pt,arc=0pt,outer arc=0pt,drop fuzzy shadow southeast,left=2mm,right=2mm,top=2mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands to generate "spaces" for answers in a document 
+% lines, numbered lines, grid, dotted grids 
+
+%\usetikzlibrary{backgrounds} 
+\newcommand{\numberedlines}[2][1]{%\numberedlines[2]{3}
+    \vskip 0.5em
+    \noindent\begin{tikzpicture}[font=\sffamily,inner sep=0em]%,background rectangle/.style={fill=white}, show background rectangle
+        \pgfmathsetmacro\n{#2}
+        \pgfmathsetmacro\lines{#1}
+        \pgfmathsetlengthmacro\sep{0.5em}
+        \pgfmathsetlengthmacro\lh{1.5em}
+        \foreach \i in {1,...,\n}{
+            \def\b{\i*\lines*\lh-\i*\sep-\lh}
+            \node[left,anchor=south east, yshift=-0.2em,xshift=-0.5em,color=colPrimary] at (0,-\b){\i)};
+        	\foreach \j in {1,...,\lines}{
+        		\def\a{\i*\lines*\lh-\i*\sep-\j*\lh}
+        		%\node[draw,circle,inner sep=1pt,fill] at (0,\a) {};
+        		\draw[color=colAnswers!40,line width=0mm] (0,-\a) -- ({\linewidth-1.5em},-\a);
+        	}
+        }
+    \end{tikzpicture}
+    \vskip 1em
+}%
+\newcommand{\lines}[1]{%\lines{3}
+    \vskip 1em
+    \noindent\begin{tikzpicture}[inner sep=0em,y=1em]%,background rectangle/.style={fill=white}, show background rectangle
+        \pgfmathsetmacro\n{#1}
+        \pgfmathsetlengthmacro\lh{1.5em}
+        \foreach \i in {1,...,\n}{
+            \def\a{\i*\lh}
+        	\draw[color=colAnswers!40,line width=0mm, ultra thin] (0,\a) -- (\linewidth,\a);
+        }
+    \end{tikzpicture}
+    \vskip 1em
+}%
+
+\newcommand{\dottedgrid}[2][5]{%\dottedgrid[5]{50}
+    \vskip 0.5em
+    \noindent\begin{tikzpicture}[x=#1 mm,y=#1 mm,inner sep=0em]
+        \pgfmathsetmacro{\step}{#1}% no ; after pgf..commands otherwise there's a tikz nullfont error!
+        \pgfmathsetmacro\w{floor((\the\linewidth/1mm)/\step)}% no ; after pgf..commands otherwise there's a tikz nullfont error!
+        \pgfmathsetmacro\h{floor(#2/\step)}% no ; after pgf..commands otherwise there's a tikz nullfont error!
+        \foreach \x in {0,1,...,\w} {
+            \foreach \y in {0,1,...,\h} {
+                \fill[color=colAnswers!40] (\x,\y) circle (0.2 mm);
+            }
+        }
+    \end{tikzpicture}
+    \vskip 1em
+}%
+\newcommand{\grid}[2][5]{%\grid[5]{50}
+    \vskip 0.5em
+    \noindent\begin{tikzpicture}[x=1mm,y=1mm,inner sep=0em]
+        % linewidth without units rounded to the next lower divisor (by step)
+        % eg. sep 5, linewidth=147 -> 145
+        \pgfmathsetmacro{\step}{#1}% no ; after pgf..commands otherwise there's a tikz nullfont error!
+        \pgfmathsetmacro\w{floor((\the\linewidth/1mm)/\step)*\step}% no ; after pgf..commands otherwise there's a tikz nullfont error!
+        \draw[step=\step mm,colAnswers!10,very thin] (0,0) grid (\w,#2);
+    \end{tikzpicture}    
+    \vskip 1em
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% xkcd figure - speech random women/men
+% https://tex.stackexchange.com/questions/74878/create-xkcd-style-diagram-in-tex
+% adaption of: https://github.com/rg3915/LaTeX/blob/master/latexteste/xkcd/xkcd_style_draw.tex
+% requires: \usetikzlibrary{positioning} \usepackage{tikz}
+% usage: \xkcd[How come..]{This is interesting} or \xkcd{This is interesting}
+%https://www.mathcha.io/editor
+\usetikzlibrary{positioning}
+\newcommand{\xkcd}[2][]{
+    \begin{tikzpicture}[font=\handwrittenfont\small,x=1mm,y=1mm]%remember picture,overlay
+        %\fill[fill=red] (0cm,0cm) circle(1pt);
+        % head random women/men head looking to the left or right
+        \begin{scope}[rotate around={-10+rnd*20:(0.4cm,0.3cm)}, shift={(0cm-rnd*0.1cm,0cm)}] % random angles: -10 - 10; 
+        \draw[line join=round,decorate] (0.6cm,0.5cm) arc (45:275:0.29cm) arc (275:410:0.27cm);  % head
+        \pgfmathparse{rnd}
+        \ifdim\pgfmathresult cm > 0.4cm % woman
+            \ifdim\pgfmathresult cm < 0.7cm % which side to look
+                % look left
+                \draw[decorate](3.24,4.33) .. controls (3.47,3.31) and (2.62,2.91) .. (1.37,3.08); % pony right
+                \draw[decorate] (3.24,4.33) .. controls (3.58,1.26) and (6.54,4.9) .. (6.37,1.83); % pony left
+                \draw[decorate] (7.61,-0.55) .. controls (6.42,0.7) and (9.77,5.36) .. (6.2,4.84); % tail right
+                \draw[decorate] (6.42,1.43) .. controls (6.25,0.52) and (7.05,-0.04) .. (7.61,-0.55); % tail left
+            \else
+                % look right
+                \draw[decorate] (4.53,4.11) .. controls (4.3,3.08) and (5.16,2.68) .. (6.41,2.85); % pony right
+                \draw[decorate] (4.53,4.11) .. controls (4.19,1.02) and (1.22,4.68) .. (1.39,1.59); % pony left
+                \draw[decorate] (0.14,-0.8) .. controls (1.34,0.45) and (-2.03,5.14) .. (1.56,4.62); % tail left
+                \draw[decorate] (1.34,1.19) .. controls (1.51,0.28) and (0.71,-0.29) .. (0.14,-0.8); % tail right
+            \fi
+        \fi
+        \end{scope} 
+        \draw[decorate] (0.4cm,-0.05cm) coordinate (n) -- ++(0.1,-0.7cm) coordinate (a) -- +(-70:0.9cm) (a) --+(-110:0.9cm); % torso legs
+        \draw[decorate] (n) -- ++(-110-rnd*60:0.3cm) --+(-90-rnd*100:0.4cm); % left arm random angles: -110 --170; -90--190, 
+        \draw[decorate] (n) -- ++(-5-rnd*60:0.3cm) --+(10-rnd*90:0.4cm); % right arm random angles:-5 - -70; -80 - 10
+        % talk
+        \coordinate (o) at (0.4cm,0.8cm); % top of head \fill[fill=red] (0.4cm,0.6cm) circle(2pt);
+        \node[scale=0.5,align=left,text width=4cm, above = 0.4cm of o] (a) {#2};
+        \draw[thin] (a) to[in=80,out=-90, anchor=south] (o); 
+        \def\optional{#1}\ifx\optional\empty \else 
+            \node[scale=0.5,align=left,text width=4cm, above = 0.2cm of a] (b) {#1};
+            \draw[thin] (b) to[in=110,out=-90] (a) ; 
+        \fi
+    \end{tikzpicture}} 
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure Functions - Bilder, die sich bis zum Seitenrand strecken
+% https://tex.stackexchange.com/questions/6143/if-then-else-for-odd-page-even-page
+% Figure Commands with caption
+% Figure paperwidth
+% \figurepaperwidth[Full paper width image caption]{example-image-a}
+\newcommand{\figurepaperwidth}[2][]{\begin{figure*}[ht] % can be left out
+    \Ifthispageodd{\hspace{-1in}\hspace{-\oddsidemargin}}{\hspace{-1in}\hspace{-\evensidemargin}}\includegraphics[width=\paperwidth]{#2}%
+    \caption{#1}%
+\end{figure*}}%
+% Full paper figure scaled to paperheight left left border
+% \figurefullpage[Fullpage figure with caption]{example-image-a}
+\newcommand{\figurefullpage}[2][]{
+	\clearpage
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture,overlay]
+		\node[anchor=north west,inner sep=0pt,opacity=1] at (current page.north west){\includegraphics[height=\paperheight]{#2}};
+		\node[inner sep=5pt,text width=\textwidth,anchor= south east,align=right,font=\small] at ($ (current page.south east) + (-2cm, 0.6 cm) $) {{\normalfont #1}};%fill=white,opacity=0.6,
+	\end{tikzpicture}
+  \newpage} 
+  
+% Full double page with check to start on the "left" side
+\newcommand{\figurefulldoublepage}[2][]{
+\Ifthispageodd{}{\cleardoublepage}%
+\clearpage\newpage\thispagestyle{empty}%  ?
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0pt,opacity=1] at (current page.north west){\includegraphics[height=\paperheight]{#2}};
+  %\node[text width=\textwidth,anchor= south east,align=right,font=\small] at ($ (current page.south east) + (-2cm, 0.5 cm) $) {{\normalfont left page #1}};
+  \end{tikzpicture}
+  \newpage
+  \thispagestyle{empty}%
+\begin{tikzpicture}[remember picture,overlay,opacity=1]
+  \node[opacity=1,anchor=north west,inner sep=0pt] at ($(current page.north west)-(\paperwidth,0cm)$){\includegraphics[height=\paperheight]{#2}};
+  \node[inner sep=5pt,text width=\textwidth,anchor= south east,align=right,font=\small] at ($ (current page.south east) + (-2cm, 0.6 cm) $) {{\normalfont#1}}; %fill=white,opacity=0.6,
+  \end{tikzpicture}
+  \newpage
+} 
+
+% Extend figure to right paper border
+% \figurealignright[Right border extended figure width caption]{example-image-a}
+\newcommand{\figurealignright}[2][]{\begin{figure*}[ht] % align to right border
+    \Ifthispageodd{%
+    \includegraphics[width=\paperwidth-1in-\oddsidemargin]{#2}}{%
+    \includegraphics[width=\paperwidth-1in-\evensidemargin]{#2}}%
+    \caption{\raggedright#1}%\caption* <- ohne Nummerierung
+\end{figure*}}%
+
+% Extend figure to left paper border
+% \figurealignleft[Left border extended figure width caption]{example-image-a}
+\newcommand{\figurealignleft}[2][]{\begin{figure*}[ht] % align to left border
+    \Ifthispageodd{
+    \hspace{-1in}\hspace{-\oddsidemargin}\includegraphics[width=1in+\oddsidemargin+\textwidth]{#2}}{
+    \hspace{-1in}\hspace{-\evensidemargin}\includegraphics[width=1in+\evensidemargin+\textwidth]{#2}}
+    \caption{\raggedleft#1}%\caption* <- ohne Nummerierung
+\end{figure*}} 
+
+% Extend figure to inner border with caption in marginnotes area
+% define twice the same function for either oneside/twoside documents
+\makeatletter%
+\if@twoside% 
+\newcommand{\figurealigninnermargin}[2][]{%
+\begin{figure*}[ht]% two side: rechts/linksseitige Anordnung nach odd/even page\hskip\marginparsep
+    \Ifthispageodd{\marginnote{\vspace{-2.5em}\caption*{\footnotesize#1}}\hspace{-1in}\hspace{-\oddsidemargin}\includegraphics[width=\textwidth+1in+\oddsidemargin]{#2}%\\[0.5em]
+    }{\marginnote{\vspace{-2.5em}\caption*{\footnotesize#1}}\includegraphics[width=\textwidth+1in+\oddsidemargin]{#2}%
+    }% 
+\end{figure*}}%
+\else%
+\newcommand{\figurealigninnermargin}[2][]{%
+\begin{figure*}[ht]% onseside: linksseitige Anordnung 
+    \marginnote{\vspace{-2.5em}\caption*{#1}}\hspace{-1in}\hspace{-\evensidemargin}\includegraphics[width=\textwidth+1in+\oddsidemargin]{#2}%
+\end{figure*}}%
+\fi%
+\makeatother%
+
+% Bild nach innen ausrichten und bis zum Papierrand skalieren even->rechter Rand, odd->linker Rand
+% rechts/linksseitige Anordnung nach odd/even page\hskip\marginparsep
+% define twice the same function for either oneside/twoside documents
+\makeatletter%
+\if@twoside% 
+\newcommand{\figurealigninner}[2][]{\begin{figure*}[ht]% align to inner border
+    \Ifthispageodd{\hspace{-1in}\hspace{-\oddsidemargin}\includegraphics[width=\textwidth+1in+\oddsidemargin]{#2}%\\[0.5em]
+    }{\includegraphics[width=\textwidth+1in+\oddsidemargin]{#2}}%
+    \caption{\Ifthispageodd{\raggedleft}{\raggedright}#1}
+    %\caption{#1}%%\caption*{\Ifthispageodd{odd: }{even: }#1}%
+\end{figure*}}%
+\else%
+\newcommand{\figurealigninner}[2][]{%
+\begin{figure*}[ht]% onseside: linksseitige Anordnung 
+    \hspace{-1in}\hspace{-\evensidemargin}\includegraphics[width=\textwidth+1in+\oddsidemargin]{#2}%
+    \caption{\raggedleft#1}%%\caption*{\Ifthispageodd{odd: }{even: }#1}%
+\end{figure*}}%
+\fi%
+\makeatother%
+
+% Bild nach aussen ausrichten und bis zum Papierrand skalieren 
+% define twice the same function for either oneside/twoside documents
+\makeatletter%
+\if@twoside% 
+\newcommand{\figurealignouter}[2][]{\begin{figure*}[ht]% align to inner border
+    \Ifthispageodd{\includegraphics[width=\textwidth+\marginparwidth+\marginparsep-\oddsidemargin]{#2}%\\[0.5em]
+    }{\hspace{-1in}\hspace{-\evensidemargin}\includegraphics[width=1in+\evensidemargin+\textwidth]{#2}}% 
+    \caption{\Ifthispageodd{\raggedright}{\raggedleft}#1}
+    %\caption{#1}%%\caption{Figure extend to outer \Ifthispageodd{odd: }{even: }#1}%
+\end{figure*}}%
+\else%
+\newcommand{\figurealignouter}[2][]{\begin{figure*}[ht]% align to inner border
+    \includegraphics[width=\textwidth+\marginparwidth+\marginparsep-\oddsidemargin]{#2}% 
+    \caption{\raggedright#1}%%\caption{Figure extend to outer \Ifthispageodd{odd: }{even: }#1}%
+\end{figure*}}%
+\fi%
+\makeatother%			 
+% Figure half left within text width
+\newcommand{\figurehalfright}[2][]{%!!! empty spaces after, otherwise there is a ghost figure mask
+\begin{wrapfigure}{r}{0.5\textwidth}\centering\includegraphics[width=0.5\textwidth]{#2}\caption{\raggedright#1}\end{wrapfigure}}%
+
+
+% add random spots to every page 
+\newcommand{\addrandomspot}[1]{%\dorandomspot{spot1.png}
+    \AddToShipoutPicture{%
+      \randomspot{#1}
+    }
+}
+% add background image to every odd/even page
+%\addbackgroundimage[Textures/even_page.jpg]{Textures/odd_page.jpg}
+%\addbackgroundimage{Textures/odd_page.jpg}
+% add background image to every odd/even page
+\RequirePackage{eso-pic} % für Funktion AddToShipoutPicture
+\newcommand{\addbackgroundimage}[2][]{%\addbackgroundimage[Textures/even_page.jpg]{Textures/odd_page.jpg}
+    \AddToShipoutPicture{%
+      \checkoddpage
+      \ifoddpage
+        \put(0,0){%
+          \includegraphics[width=\paperwidth,height=\paperheight]{#2}}
+      \else
+        \put(0,0){%
+        \def\optional{#1}\ifx\optional\empty 
+            \includegraphics[width=\paperwidth,height=\paperheight]{#2}
+            \else 
+            \includegraphics[width=\paperwidth,height=\paperheight]{#1}
+            \fi        
+        }
+      \fi
+    }
+}
+
+% old book randomspot function
+% https://latex.org/forum/viewtopic.php?t=25013&start=10
+% \AddToShipoutPicture{\randomspot{spot1.png}}
+\pgfmathsetseed{1}% define just some fixed start for pseudo random
+\newcommand*{\randomspot}[1]{
+  \begin{tikzpicture}[overlay,remember picture]
+    \node [xshift = rnd*\paperwidth,yshift = rnd*\paperheight,
+           rotate=rnd*360]
+      at (current page.south west) {%
+        \pgfmathrnd
+        \pgfmathmultiply{\pgfmathresult}{0.8}
+        % use result with text width as scale is not applied given the above 
+        % setting with the graphicx package
+        % \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+        \includegraphics[width=\pgfmathresult\textwidth,keepaspectratio]{#1}};
+  \end{tikzpicture}
+}    

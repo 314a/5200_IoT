@@ -1,0 +1,246 @@
+# E07 MQTT {.unnumbered}
+ 
+
+Ein IoT Datenfluss erstreckt sich über verschiedene Instanzen, die für die einzelnen Prozesse zuständig sind, von der Erfassung von Sensormesswerten im IoT Gerät über die Kommunikation der Messwerte bis zur Datenverarbeitung, Speicherung und Visualisierung (@fig-iotpipeline). Hierbei können alle Schritte auf einem Gerät durchgeführt werden oder jeder einzelne über ein anderes Gerät oder Server. 
+In der Abbildung aufgezeigt sind typische Softwarekomponenten, die in IoT eingesetzt werden, wie Node-Red für die Datenverarbeitung, die InfluxDB Datenbank, welche für das Speichern von Zeitreihendaten entwickelt wurde und Grafana eine Visualisierungsplattform, die für Messdaten optimiert ist. Es sind Werkzeuge die über ihre graphische Oberfläche einen guten Einstieg ermöglichen, sogenannte *low-code* Tools, die sich gut eignen für die Entwicklung von Prototypen mit geringem zeitlichen Aufwand. Je nach Anwendung können die einzelnen Prozessschritte auch gut in einer Scriptsprache wie Python durchgeführt oder eine andere Datenbank verwendet werden.
+
+![Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, von dem IoT Gerät mit Sensorik, Datenkommunikation mit MQTT und dem MQTT Broker, zur Datenprozessierung mit Node-Red, Datenspeicherung und und Visalisierung.](images/mqtt-node-red-inffluxdb-grafana.jpg){#fig-iotpipeline}
+
+Ziel dieser Übung ist es MQTT näher kennenzulernen und die MQTT Kommunikation mit dem Raspberry Pi zu testen. MQTT ist ein leichtgewichtiges Kommunikationsprotokoll, welches das *Publish-Subscribe* Muster verwendet und gut für die Anwendung in IoT Projekten geeignet.
+
+## Übungsaufbau
+
+- Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).
+- Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `mqtt`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
+- Schliesse den Sensor **BME688** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
+- Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x76` erkannt werden.
+- Kontrolliere, ob die Library `sudo pip3 install bme680` installiert ist mit `python -c "import sudo pip3 install bme680"`. Installiere die Library mit `sudo pip3 install sudo pip3 install bme680` falls sie nicht installiert ist.
+- Wechsle in den Ordner *Documents* und erstelle einen Ordner *mqtt* für diese Übung.
+
+## Aufgabe 1: MQTT kennenlernen
+
+Testen ob der [Mosquitto](https://mosquitto.org) Broker und Clients lokal auf dem Raspberry Pi funktionieren.
+
+![](images/mqtt-publish-subscribe.jpg)
+
+Erstelle einen Subscriber der für das Topic `iot/temperature` eine Subscription erstellt.
+```bash 
+mosquitto_sub -h 127.0.0.1 -v -t 'iot/temperature'
+```
+Öffne ein zweite Shell und erstelle einen Publisher für dasselbe Topic
+```bash
+mosquitto_pub -h 127.0.0.1 -t 'iot/temperature' -m 'Aussentemperatur: 22° Celsius'
+```
+
+::: exercise
+- Teste nun den MQTT mit unterschiedlichen Topics und Nachrichten.
+- Teste einen weiteren Mosquitto Server auf einem anderen Raspberry Pi und teste die Kommunikation. Hierbei muss die IP Adresse entsprechend angepasst werden.
+:::
+
+Falls der Mosquitto Brokers und Clients nicht installiert sind, können diese mit folgenden Befehlen installiert werden.
+
+``` bash
+sudo apt install mosquitto -y
+sudo apt install mosquitto-clients -y
+sudo systemctl enable mosquitto.service
+```
+
+::: hint
+[MQTTBox](https://apps.microsoft.com/detail/9NBLGGH55JZG) und [MQTT Explorer](https://mqtt-explorer.com) sind zwei MQTT Clients, die für die Entwicklung und das Testen von MQTT Applikationen verwendet werden können. Jedoch scheinen diese nicht mehr oder eher sporadisch weiterentwickelt zu werden. 
+:::
+
+## Aufgabe 2: MQTT mit Python verwenden
+Nun verwenden wir die Bibliothek `paho-mqtt` in Python um MQTT zu verwenden. Folgende zwei Code Snippets zeigen wie ein Publisher und Subscriber in Python implementiert werden können.
+
+![](images/mqtt-sensor-subscribe.jpg)
+
+**Script 1:** `mqtt_sub.py` - Subscriber
+```python
+import paho.mqtt.client as mqtt 
+ip = "127.0.0.1"                             # <1>
+topic = "iot/temperature"                    # <2>
+
+# Callback Funktion für den Verbindungsaufbau
+def on_connect(client, userdata, flags, rc): # <3>
+    print("Connected - code: "+str(rc)) 
+    client.subscribe(topic)                  # <4>
+  
+# Callback Funktion für eingehende Nachrichten
+def on_message(client, userdata, msg):       # <5>
+    print(msg.topic+" "+str(msg.payload))    # <5>
+  
+# Erstellen des MQTT Clients
+client = mqtt.Client()                       # <6>
+client.on_connect = on_connect               # <6> 
+client.on_message = on_message               # <6>   
+client.connect(ip, 1883, 60)                 # <7>
+client.loop_forever()                        # <7>
+```
+1. IP Adresse des MQTT Brokers
+2. Topic auf welches der Subscriber hört
+3. Callback Funktion on_connect wird ausgeführt, wenn die Verbidnung steht
+4. Subscription für das Topic
+5. Callback Funktion on_publish wird ausgeführt, wenn eine Nachricht empfangen (publish) wird
+6. Erstellen eines MQTT Clients und Zuweisung der Callback Funktionen
+7. Verbindung zum MQTT Broker herstellen und auf eingehende Nachrichten warten (loop_forever)
+
+**Script 2: **`mqtt_pub.py` - Publisher
+```python
+import paho.mqtt.publish as publish 
+ip = "127.0.0.1"                                      # <1>
+topic = "iot/temperature"                             # <1>
+publish.single(topic, "22.0", hostname=ip, port=1883) # <2>
+```
+1. IP Adresse des MQTT Brokers und Topic definieren
+2. Nachricht mit Topic an den MQTT Broker (ip,port) senden
+
+::: exercise
+- Speichere die beiden Dateien `mqtt_pub.py` und `mqtt_sub.py` im Ordner `mqtt` ab. 
+- (Optional: Passe die IP Adresse des MQTT Brokers an, falls ein anderer MQTT Broker genutzt werden soll.) 
+- Öffne zwei Terminals und führe diese mit `python3 mqtt_pub.py` und `python3 mqtt_sub.py` aus.
+:::
+
+Falls die Library paho-mqtt nicht installiert ist, kann diese mit `sudo pip3 install paho-mqtt` installiert werden.
+
+## Aufgabe 3: Sensordaten mit MQTT übertragen
+
+Passe nun das Script `mqtt_pub.py` an, so dass die Temperatur vom Sensor `BME688` ausgelesen und über MQTT übertragen wird. Die Temperatur soll alle 10 Sekunden übertragen werden.
+Nutze hierfür das Script zum Auslesen der Sensordaten aus der Übung [E01 Luftqualität](E01_Luftqualitaet.qmd) und passe dieses an.
+
+::: exercise
+- Speichere das `mqtt_pub.py` als `mqtt_pub_bme688.py` im Ordner `mqtt` ab.
+- Ergänze das Script um die Funktionen zum auslesen der Temperatur des BME688 Sensors.
+- Ergänze das Script für das Auslesen der Luftfeuchtigkeit und Luftdruck und ergänze die topics mit `iot/humidity` und `iot/pressure`.
+- Erweitere das Script `mqtt_sub.py` um die Subscription für die Topics `iot/humidity` und `iot/pressure` und speichere es als `mqtt_sub_bme688.py` ab.
+- Öffne zwei Terminals und führe diese mit `python3 mqtt_pub_bme688.py` und `python3 mqtt_sub_bme688.py` aus.
+:::
+
+## Aufgabe 4: MQTT mit Node-RED verwenden
+Node-Red\index{Node-Red} ist ein grafisches Entwicklungswerkzeug für IoT, ein low-code Tool für *event-driven applications*. Es bietet eine browserbasierte und datenstromorientierte "Flow" Programmierung für die Verarbeitung von Sensordaten (ähnlich wie FME oder graphische Modellierungswerkzeuge in GIS). Die Implementation von Node-Red ist in JavaScript und basiert auf node.js. Datenverarbeitungsflows können gespeichert und wiederverwendet werden. Im Arbeitsbereich (@fig-noderedmqttflow) können sogenannte Nodes, die unterschiedliche Funktionen erfüllen, zu einem Daten-"Flow" werden. Nodes können auch selbst erstellt werden. Es gibt eine Vielzahl von Nodes, die von der Community entwickelt wurden, die über den Node-Red Palette Manager installiert werden können. Core Nodes von Node-Red sind: 
+
+- **Inject Node**: Kann einen Flow über den Button direkt auslösen oder in regelmässigen Abständen mit Zeitstempel oder vordefinierten Nachrichten (msg) senden.
+- **Debug Node**: Kann die [Nachrichten](https://nodered.org/docs/user-guide/messages) (msg) in Debug Sidebar anzeigen lassen.
+- **Function Node**: Kann mit JavaScript [Funktionen](https://nodered.org/docs/user-guide/writing-functions) den Inhalt der Nachrichten (msg) verändern.
+- **Change Node**: Ermöglicht das Ändern von Eigenschaften einer Nachricht (ohne den Funktion Node zu nützen) um beispielsweise Eigenschaften zu setzen, ändern oder löschen.
+- **Switch Node**: Kann Nachrichten (msg) anhand von Regeln auswerten in verschiedene Ausgänge leiten (wie ein Switch Case in der Programmierung).
+- **Template Node**: Kann über Eigenschaften einer Nachricht und einer Vorlage (Template) neue Nachricht nach Vorlage erstellen: `Nachricht: {{payload}}!` wird `Nachricht: 1570439577309 !`.
+
+Node-Red kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffne den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 1880 ein: `http://<ip-adresse>:1880`. Führt nun das Kurztutorial zu Node-Red aus: [Node-Red Getting Started: First Flow](https://nodered.org/docs/getting-started/first-flow). In diesem Tutorial wird ein Flow erstellt, der eine Nachricht mit einem Zeitstempel ausgibt.
+
+![Node-Red Flow der Daten in das Topic *iot/temperature* published, und Nachrichten aus dem Topic *iot/temperature* subscribed.](images/node-red_mqtt_flow.png){#fig-noderedmqttflow}
+
+::: exercise
+Erstelle einen Flow der Nachrichten an den MQTT Broker senden und Nachrichten vom MQTT Broker empfangen kann. 
+
+1. Füge hierfür einen Inject Node, einen Debug Node und einen MQTT Output Node hinzu. Öffne die Einstellungen des MQTT Output Nodes (siehe @fig-noderedmqttnodesetup) und setze die IP Adresse des MQTT Brokers und das Topic auf `iot/temperature`. Starte den Flow und überprüfe, ob die Nachrichten an den MQTT Broker gesendet werden.
+2. Erstelle nun einen weiteren Flow, der die Nachrichten vom MQTT Broker empfängt und in der Debug Sidebar anzeigt. Füge hierfür einen MQTT Input Node (siehe @fig-noderedmqttnodesetup) und einen Debug Node hinzu. Öffne die Einstellungen des MQTT Input Nodes und setze die IP Adresse des MQTT Brokers und das Topic auf `iot/temperature`. Starte den Flow und überprüfe, ob die Nachrichten vom MQTT Broker empfangen werden.
+3. Ergänze den Flow um einen MQTT Input Node für die Topics `iot/humidity` und `iot/pressure` und je einen Debug Node. Starte den Flow und überprüfe, ob die Nachrichten vom MQTT Broker empfangen werden.
+:::
+
+![Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) Server Einstellungen öffnen und (3) IP Adresse des MQTT Brokers setzen, (4) subscribe to single topic wählen und (5) Topic `iot/temperature` setzen.](images/node-red_mqtt_setup.jpg){#fig-noderedmqttnodesetup}
+
+::: hint 
+Flows stoppen: Um einen Flow in der Ausführung zu stoppen, kann dieser über den Tab (rechte Maustaste) Flow deaktiviert werden (disable flow) und mit einem erneuten Übernehmen (Deploy) wird der Flow gestoppt.  
+:::
+
+## Aufgabe 5: Node-Red MQTT mit InfluxDB verwenden
+InfluxDB ist die Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkt, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regele aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688. InfluxDB organisiert die Zeitreihendaten in Buckets (anstatt Datenbanken) und Messungen. Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können [@influxdata2023]. Eine Messung ist enthält Felder mit key-value Paaren von Messwerten, die sich über die Zeit ändern. Tags sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können. 
+
+Das Tutorial [Getting Started](https://docs.influxdata.com/influxdb/v2/get-started/) zeigt die ersten Schritte mit InfluxDB.
+
+![](images/mqtt-sensor-broker-influxdb.jpg)
+
+Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. 
+
+Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: `http://<ip-adresse>:8086`. 
+Erstellt über die linke Menuleiste unter *Load Data* einen neuen Bucket mit dem Namen `iot`, falls dieser nicht schon existiert. Kopiert unter *load Data / API Tokens* den Token für den Zugang zur Datenbank.
+
+Diese Angaben (*bucket* und *API Token*) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in @fig-noderedinfluxdb) mit Angaben zum Bucket (Datenbankname), Organisation^[wird bei der Erstellung der Datenbank definiert] und measurement und die Serververbindung (rechts in @fig-noderedinfluxdb) mit der IP Adresse und das Token für den Zugang zur Datenbank.
+
+::: hint
+Falls keine Nodes für InfluxDB in Node-Red vorhanden sind, kann die Erweiterung `node-red-contrib-influxdb` über das Hauptmenu *Palette verwalten* im Tab *Installation* installiert werden. 
+:::
+
+![Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung *measurement* (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank.](images/node-red_influxdb_setup.jpg){#fig-noderedinfluxdb}
+
+Die Messwerte können direkt in die InfluxDB geschrieben werden, jedoch fehlen da noch die Tags, die für die Filterung und Gruppierung verwendet werden können. Diese können über den Change Node hinzugefügt werden, wie in @fig-noderedpayload gezeigt. Hierbei wird der Wert der Payload in ein Feld mit dem Namen *temperature* geschrieben und die Tags *device* und *sensor* werden hinzugefügt. 
+Dieselbe Struktur kann alternativ auch mit dem Function Node erstellt werden, siehe @fig-noderedpayload rechts. Hierbei wird der Wert der Payload in ein Feld mit dem Namen *temperature* geschrieben und die Tags *device* und *sensor* werden hinzugefügt. Die Bezeichnung der Messung *temperature* wird im InfluxDB Node definiert oder kann im Function Node überschrieben werden.
+
+![Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden.](images/node-red_influxdb_change_function_node.jpg){#fig-noderedpayload}
+
+```javascript
+msg.payload = [{ 
+    temperature:msg.payload               // <1>
+}, { device:"RPI_01", sensor:"BME688" }]; // <2>
+msg.measurement="temperature";    // <3>
+return msg;
+```
+1. Werte der Payload in Payloadstruktur für die InfluxDB schreiben
+2. Tags der Messung zuweisen
+3. Optional *measurement* kann im InfluxDB Node oder im Funktionsknoten definiert werden
+
+InfluxDB bietet über das Menu *Data Explorer* eine einfache Möglichkeit die Daten zu visualisieren. Der Query Builder (@fig-influxdbdataexplorer) hilft bei der Erstellung von Abfragen mit der über die Fields und Tags gefiltert werden kann, die dann über den Button *Submit* ausgeführt und dargestellt werden können. Die erstellte Query kann über den *Script Editor* (@fig-influxdbdataexplorer) angezeigt werden.
+
+![Über den *Data Explorer* können in InfluxDB einfach Abfragen zusammengestellt und über *submit* visualisiert werden](images/influxdb_data_explorer.png){#fig-influxdbdataexplorer}
+
+::: exercise
+- Erstellt nun einen Flow der die Nachrichten des Topics `iot/temperature` vom MQTT Broker empfängt und in die InfluxDB schreibt.
+- Erstellt erst einen flow der nur die Nachrichten ohne Tags in die InfluxDB schreibt
+- Ergänzt den Flow mit einem Change oder Function Node um die Tags *device* und *sensor* hinzuzufügen.
+- Visualisiert den Temperaturverlauf des BME688 in der InfluxDB mit dem *Data Explorer* und studiert die Flux Abfragesprache.
+- Erstellt einen Flow der die Nachrichten der Topics `iot/humidity` und `iot/pressure` vom MQTT Broker empfängt und in die InfluxDB schreibt.
+- (Optional) erstellt im Menu *Dashboard* eine Visualisierung der Messwerte.
+:::
+
+## Aufgabe 6: InfluxDB mit Grafana verwenden
+Grafana ist eine Open-Source Anwendung für die Darstellung von Daten aus den unterschiedlichsten Messquellen, wie Postgres, SQLite oder InfluxDB. In dieser Übung wird Grafana mit der InfluxDB Datenbank verwendet.
+
+Öffnet nun den Browser und gebt die IP Adresse des Raspberry Pi mit dem Port 3000 ein: `http://<ip-adresse>:3000`. Unter Connections / Data Sources können Grafana Datenquellen hinzugefügt werden, wählt nun *InfluxDB* um Grafana mit der InfluxDB zu verbinden. Setzt folgende Einstellungen (@fig-grafanainfluxdb) und speichert diese:
+
+- *Query Language*: Wählt in den Einstellungen zu *Query Language* die Abfragesprache `Flux`.
+- *HTTP*: Setzt die IP Adresse des Raspberry Pi und den Port 8086: `http://localhost:8086`. 
+- *Auth*: aktiviert *Basic Auth*
+- *Basic Auth Details*: Setzt den InfluxDB Benutzer und das Passwort für die InfluxDB
+- *InfluxDB Details*: Setzt die InfluxDB Organisation *fhnw*, den *API Token*,  und den InfluxDB Bucket *iot*.
+
+![InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben.](images/mqtt_grafana_influxdb_settings.png){#fig-grafanainfluxdb}
+
+Ist die Verbindung erstellt, können neue Dashboards erstellt werden. Die Queries, die für die Visualisierung verwendet werden sollen, können über den *Query Builder* in InfluxDB erstellt und in Grafana beim Erstellen der Panels (@fig-grafanainfluxdbquery) reinkopiert werden.
+
+![Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden.](images/mqtt_grafana_influxdb_query.png){#fig-grafanainfluxdbquery}
+
+::: exercise
+- Erstellt eine Verbindung zwischen Grafana und der InfluxDB.
+- Erstellt ein Dashboard mit einer Visualisierung der Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors.
+:::
+
+
+## Aufgabe 7: InfluxDB mit Python verwenden (optional)
+Anstatt mit Node-Red können die Daten des Sensors direkt in die InfluxDB geschrieben werden. Folgender Code zeigt wie die Daten des BME688 Sensors mit Python ausgelesen und in die InfluxDB geschrieben werden können. Teste erst, ob der `influxdb-client` installiert ist und installiere diesen falls nicht mit dem Befehl `pip3 install influxdb-client`. Folgendes Tutorial zeigt wie die Daten mit Python in die InfluxDB geschrieben werden können: [Getting Started with Python and InfluxDB v2.0](https://www.influxdata.com/blog/getting-started-with-python-and-influxdb-v2-0/).
+
+![](images/mqtt-sensor-influxdb.jpg)
+
+
+```python
+from datetime import datetime
+import time
+
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
+
+# Generieren ein Token in der InfluxDB UI unter dem Tab "Data / Tokens Tab"
+token = "<influxdb-token>"
+org = "fhnw"
+bucket = "iot"
+
+client = InfluxDBClient(url="http://localhost:8086", token= token, org= org)
+write_api = client.write_api(write_options = SYNCHRONOUS)
+
+temperature = 22.0
+data = Point("measures").tag("fields", 2).field("temperature", temperature)
+write_api.write(bucket = bucket, record = data)
+```
+
+::: exercise
+Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und in die InfluxDB schreibt.
+:::

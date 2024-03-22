@@ -1,0 +1,77 @@
+# Sensoren
+
+
+## Sensoren in IoT
+Einer der grossen Treiber von IoT ist die zuhnemende Verfügbarkeit von low-cost Sensoren für viele unterschiedliche Anwendungen. Standard Sensoren sind beispielweise Umweltsensoren wie Temperatur, Luftfeuchtigkeit, Luftdruck, Bewegungssensoren mit Beschleunigung, und Magnetfeld, Neigung, Standort Sensoren wie GPS oder Kamera Licht, Schall, Gas, Flüssigkeit, wie auch Gesundheitssensoren wie Herzfrequenzvariabilität sowie GSR (galvanische Hautreaktion oder Hautleitfähigkeit). Sensoren sind in der Regel mit einem Mikrocontroller verbunden, der die Messwerte verarbeitet und an einen Computer oder ein anderes Gerät überträgt.
+
+Der Trend geht hin zu Miniaturisierung und Multi-Sensor-Geräten mit dem Vorteil, dass über mehrere Sensoren zeitgleich(!) Messungen durchgeführt werden können und so aus der Kombination von Messwerten über Sensordatenfusion (sensor fusion)\index{Sensor Fusion} neue Erkenntnisse gewonnen werden können, beispielsweise die Kombination von GPS und Beschleunigungssensor für die Bestimmung der Position und der Geschwindigkeit (Dead Reckoning, Kalman Filter).
+
+Sensoren können in mehrere Kategorien gruppiert werden: Umweltüberwachung (natürliche und anthropogene), Biophysikalische Sensoren und Gesundheitsüberwachung, Gebäude- und Heimautomatisierung, Automobil- und Transportanwendungen, Mobile Computing und tragbare Elektronik etc.
+
+Viele Sensoren sind in Smartphones integriert, wie z.B. Beschleunigungssensoren, Gyroskope, Magnetometer, GPS, Lichtsensoren, Näherungssensoren, Barometer, Temperatursensoren, Feuchtigkeitssensoren, Mikrofone, Kameras, etc. Ihr Einsatz ist vielfältig, von der Unterhaltung über die Navigation bis hin zur Gesundheitsüberwachung. Mit der Applikation *[phyphox](https://phyphox.org)\index{phyphox} - physical phone experiments* einer digitalien Experimentierbox, entwickelt von der RWTH Aachen University, können die Sensoren von Smartphones für physikalische Experimente genutzt werden.
+
+![phyphox Anwendung für physikalische Experimente mit Sensoren in Mobiletelefonen, Screenshot der Anwendung mit dem Menu und einzelnen Experimenten am Beispiel von Magnetfeld, Licht und Beschleunigung.](images/phyphox.png)
+
+::: exercise
+**Sensorentest mit *phyphox***\
+Installiere auf deinem Smartphone die Applikation *[phyphox](https://phyphox.org)* und teste die Sensoren deines Smartphones, wie die Beschleunigung, Orientierung (Magnetfeld), Standort oder Licht. Führe ein Experiment durch und dokumentiere deine Beobachtungen. Nutze die Anwendung für Vergleiche mit anderen Sensoren während der Übungen.
+:::
+
+## Sensoren
+
+Sensoren\index{Sensoren} sind technische Bauteile, die bestimmte physikalische oder chemische Eigenschaften messen oder eine Beschaffenheit der Umgebung qualitativ oder quantitativ erfasst. 
+Sensoren können unterschiedlich klassiert werden, nach der Art der Erzeugung von Energie in passive und aktive Sensoren, nach dem Messprinzip oder dem Verwendungszweck.
+
+| Wirkprinzip      | Beispiel                                                     |
+| :--------------- | :----------------------------------------------------------- |
+| Mechanisch       | Manometer, Dehnungshebel, Federwaage, Hebelwaage, Thermometer |
+| Thermoelektrisch | Thermoelement                                                |
+| Resistiv         | Dehnungsmessungsstreifen, Hitzdraht, Halbleiter-DMS, Pt100   |
+| Piezoelektrisch  | Beschleunigungssensor                                        |
+| Kapazitiv        | Drucksensor, Regensensor, Luftfeuchtesensor                  |
+| Induktiv         | Neigungssensor, Kraftsensor, Wegaufnehmer                    |
+| Optisch          | CCD-Sensor, Fotozelle                                        |
+| Akustisch        | Füllstandssensor, Doppelbogenkontrolle, Ultraschall-Durchflussmesser |
+| Magnetisch       | Hall-Sensoren, Reed-Kontakt                                  |
+
+Table: Wirkprinzip von Sensoren Quelle: [wikipedia](https://de.wikipedia.org/wiki/Sensor)
+
+Die Wahl von Sensoren für IoT Projekte hängt von der Anwendung ab und der dahinterstehenden Fragestellung. Die Fragestellung führt zur Bestimmung was gemessen wird und wie das was gemessen werden soll operationalisiert wird. Die Operationalisierung definiert die Messgrössen und der Wahl von einem oder mehreren Sensoren (Sensor Fusion) in einem IoT Projekt. Bei der Wahl sind mehrere Faktoren zu berücksichtigen, wie beispielsweise: 
+
+- Welche Messgrösse soll gemessen werden? Welche Genauigkeit ist erforderlich? Welche Einschränkungen gibt es? 
+- Existiert ein Datenblatt mit den technischen Spezifikationen?  
+- Wie wird der Sensor angeschlossen? Wie wird der Sensor angesteuert?  
+- Gibt es eine Einschränkung bezüglich der Temperatur und anderen Faktoren wie Feuchtigkeit? 
+- Wie genau ist die Messung und welche Messabweichungen gibt es?
+- Existiert es eine Library, welche die Ansteuerung des Sensors vereinfacht? Gibt es einfache Beispiele, welche die Ansteuerung des Sensors zeigen? etc.
+
+Für die Auswahl von Sensoren sind unter anderem folgende Aspekte zu beachten:
+
+- Anwendung (z.B. Umweltüberwachung, Gesundheitsüberwachung, Gebäude- und Heimautomatisierung, Automobil- und Transportanwendungen, Mobile Computing und tragbare Elektronik)
+- Messgrösse (z.B. Temperatur, Luftfeuchtigkeit, Luftdruck, Bewegung, Standort, Licht, Schall, Gas etc.) und Kombination von Messgrössen (Sensor Fusion) 
+- Messprinzip (z.B. mechanisch, thermoelektrisch, resistiv, piezoelektrisch, kapazitiv, induktiv, optisch, akustisch, magnetisch)
+- Einschränkungen (z.B. Temperatur, Abschirmung)
+- Messgenauigkeit (z.B. Auflösung, Messbereich)
+- Bibliotheken (z.B. Programmiersprache, Dokumentation, Community, Beispiele, Aktualität)
+- Montage (Schnittstelle, Löten, HAT)
+- Datenschnittstelle (I2C, UART)
+- Platzbedarf 
+- Stromversorgung (z.B. Batterie, Solarzelle, USB)
+- Kosten
+- Verfügbarkeit (z.B. Lagerbestand, Lieferzeit)
+- etc.
+
+Für Prototypenentwicklung können über verschiedene Hersteller und Distributoren Sensoren bezogen werden. Die folgende Liste gibt eine Übersicht über einige Hersteller und Distributoren von Sensoren.
+
+- [Pi-Shop](https://www.pi-shop.ch) ist ein Schweizer Online Händler für Raspberry Pi und Zubehör.
+- [Distrilec](https://www.distrelec.ch) ist ein Distributor für elektronische Bauteile in der Schweiz und Europa.
+- [Adafruit Industries](https://www.adafruit.com) (2005, New York, USA) ist ein Hersteller von Elektronik für Maker gegründet von der MIT-Ingenieurin Limor "Ladyada" Fried.
+- [Sparkfun Electronics](https://www.sparkfun.com) (2003, Colorado, USA) ist Open Source Elektronik Hersteller und produziert und verkauft Mikrocontroller-Plattformen, Sensoren und andere Elektronik-Komponenten.
+- [Seeed Technology](https://www.seeedstudio.com)  (2008, Shenzhen, China) ist eine IoT-Innovationsplattform das sich auf Hardware-Forschung, -Produktion und -Vertrieb für Edge-Computing, Netzwerkkommunikation und Smart-Sensing-Anwendungen spezialisiert hat und viele Produkte für Maker anbietet. 
+- [Pimoroni](https://shop.pimoroni.com) 2012 ist ein Reseller von Raspberry Pi, Adafruit, Micro:bit, Arduino, Sparkfun, etc. Produkten und stellt auch eigene Elektronikprodukte und Kits her^[Trivia: Pimoroni steht für Pirate, Monkey, Robot, Ninja.]. 
+
+
+::: exercise
+**Sensoren**\
+Suche Dir auf den aufgelisteten Websites für elektronische Bauteile und Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren. Suche drei bis vier interessante Sensoren aus und überlege anhand der aufgeführten Aspekte zur Sensorauswahl, was alles benötigt wird um diese zu betreiben und was die Einschränkungen sind.
+:::

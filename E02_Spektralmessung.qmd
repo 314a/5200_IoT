@@ -1,0 +1,140 @@
+# E02 Spektralmessung {.unnumbered}
+
+Ziel dieser Übung ist es den AS7262 Spektralsensor kennen zu lernen und die Sensordaten auszulesen. Der *AS7262* ist ein Spektralsensor, der über eine I2C Schnittstelle mit dem Raspberry Pi verbunden wird und einer Python Library angesteuert werden kann.
+
+**Vorbereitung**
+
+- Schaut das Video von AMS zum [AS7262 Spektralsensor](https://www.youtube.com/embed/KKyHxXyaVPM?si=hvO1IVbdwbjnDI40) (bis Minute 2:20)
+- Lest das White Paper von @jensen2020 über Spektralsensoren
+  - Konzentriere Dich da auf die Beschreibung der *Multi-channel spectral sensors* und in welchen Gebieten diese Sensoren eingesetzt werden
+- Studiert das Datenblatt zum AS7262 Spektralsensor @ams2022
+  - In welchen Temperaturbereichen kann der Sensor eingesetzt werden?
+
+::: {.content-visible when-format="html"}
+{{< video https://www.youtube.com/embed/KKyHxXyaVPM?si=hvO1IVbdwbjnDI40 >}}
+:::
+::: {.content-visible unless-format="html"}
+[![ams Spectral ID iSPI Eval Kit](images/youtube_ams_as7262.png)](https://www.youtube.com/embed/KKyHxXyaVPM?si=hvO1IVbdwbjnDI40)
+:::
+
+| **Unterlagen** |                                                          |
+| ---------- | ------------------------------------------------------------ |
+| Produkt    | [AS7262 Breakout](https://shop.pimoroni.com/products/as7262-6-channel-spectral-sensor-spectrometer-breakout) |
+| Datenblatt | [AS7262](https://ams.com/documents/20143/36005/AS7262_DS000486_5-00.pdf) |
+| GitHub     | [as7262-python](https://github.com/pimoroni/as7262-python)   |
+| Video      | [ams Spectral ID iSPI Eval Kit](https://www.youtube.com/watch?v=KKyHxXyaVPM) |
+
+## Spektrometer
+Spektrometer, sind Sensoren, die das Licht auf einzelne Bänder der Wellenlänge (in Nanometer nm) messen. Für das menschliche Auge wird das sichtbare Spektrum zwischen 360nm bis 830nm angegeben, wobei sich der Bereich unter optimalen Bedingungen in UV und NIR erstrecken kann [@sliney2016].
+
+Auf kleinen Chip verbaute Spektralsensoren ermöglichen zahlreiche neue Anwendungen, die früher mit grossen Spektroskopen durchgeführt wurden. Die Spektralsensorsysteme finden Anwendung wie Farbbestimmung, Authentifizierung und Spektralanalyse von Substanzen, Materialien, Lebensmitteln und Flüssigkeiten und werden in den Bereichen von Konsumgütern, Industrie und Medizin eingesetzt. 
+
+Ein Multispektralsensor liefert die Antwort auf die Frage, ob eine orangefarbene Probe eine Mischung aus Rot und Gelb oder ein reines Orange ist. Multispektralsensoren teilen das gewählte Spektrum in Spektralkanäle auf (siehe @fig-as7262) und sind so angeordnet, dass die Spektralkanäle kontinuierlich gut abgedeckt sind. Die Messung erfolgt im sichtbaren Bereich radiometrisch [@jensen2020]. Das heißt, der Sensor misst die spektrale Leistungsverteilung der Messung. 
+
+## AS7262 Multispektralsensor\index{AS7262}
+Der AS7262 ist ein sehr kompakter Multispektralsensor, der über 6 Spektralkanäle im sichtbaren Bereich misst. Der Sensor eignet sich für spektroskopische Messungen wie *Farbmessung, Absorption, Bestrahlungsstärke, Reflexion* und *Transmission*. Der Sensor ist auf einem Breakout Board verbaut und kann über die I2C Schnittstelle mit dem Raspberry Pi verbunden werden, zusätzlich sind zwei LEDs verbaut, die den Messbereich für Messungen beleuchten können.
+
+AS7262 - 6-Kanal Spektral Sensor (@fig-as7262)
+
+- 6 Spektralkanäle (450, 500, 550, 570, 600, 650nm)
+- 2 on-board Beleuchtungs-LEDs
+- I2C interface (address: 0x49)
+- Python Library
+- werkseitig kalibriert 
+
+![links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout von Pimoroni, unten: AS7262 Photodioden Array ](images/AS7262_wide.jpg){#fig-as7262}
+
+## Übungsaufbau
+
+- Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).
+- Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `AS7262`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
+- Schliesse den Sensor **AS7262** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
+- Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x49` erkannt werden.
+- Kontrolliere, ob die Library `as7262` installiert ist mit `python -c "import as7262"`. Installiere die Library mit `sudo pip3 install as7262` falls sie nicht installiert ist.
+
+Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
+
+``` bash
+cd Documents
+git clone https://github.com/pimoroni/as7262-python
+cd as7262-python/examples
+```
+
+## Aufgabe 1: Spektralmessungen durchführen
+Teste das Beispiel `spectrum.py` im Ordner *examples*. Dieses Beispiel gibt die Messungen der einzelnen Spektralkänale aus.
+
+Startet das Script mit `python3 spectrum.py`. Mit `Ctrl+c` kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
+
+``` bash
+python3 spectrum.py
+Orange: 30.22943878173828
+Red:    14.262250900268555
+Orange: 22.67207908630371
+Yellow: 14.271308898925781
+Green:  13.56598949432373
+Blue:   6.527451515197754
+Violet: 7.2663960456848145
+```
+
+Folgendes Code Snippet zeigt eine gekürzte Version des `spectrum.py` Python Beispiels für die Ausgabe der Spektralmessungen der 6 Kanäle:
+
+```{.python}
+#!/usr/bin/env python
+from as7262 import AS7262
+as7262 = AS7262()
+as7262.set_gain(64)                 # <1>
+as7262.set_integration_time(17.857) # <1>
+as7262.set_measurement_mode(2)      # <1>
+as7262.set_illumination_led(1)      # <1>
+
+try:
+    while True:
+        values = as7262.get_calibrated_values() # <2>
+        print("""
+Red:    {}
+Orange: {}
+Yellow: {}
+Green:  {}
+Blue:   {}
+Violet: {}""".format(*values))
+
+except KeyboardInterrupt:
+    as7262.set_measurement_mode(3)
+    as7262.set_illumination_led(0)
+```
+1. Sensor konfigurieren, setzen des Gains, der Integrationszeit, des Messmodus und der Beleuchtungs LED
+2. Kalibrierte Messwerte auslesen und darstellen
+
+::: exercise
+**AS7262 Messwerte interpretieren**\
+Führt einige Messungen mit unterschiedlichen Lichtquellen und Materialien durch und notiert Euch die Messwerte. Was beobachtet Ihr?
+
+- Messung mit Tageslicht
+- Messung mit LED-Taschenlampe des Smartphones
+- Messung mit LED-Taschenlampe und Farbfilter (Mäppli)
+- Messung mit weissem Papier
+:::
+
+## Aufgabe 2: Spektralmessungen mit Visualisierung in der Konsole
+
+Das Beispiel `bargraph.py` zeigt die Messwerte der Spektralkanäle in einem Balkendiagramm an. Die Messwerte werden in der Konsole ausgegeben, nach einem Weissabgleich. Der Weissabgleich wird benötigt damit der Sensoren die Messwerte korrekt in Referenz zu Weiss interpretiert.
+
+Für diese Aufgabe benötigt Ihr ein weisse Blatt Papier, mit welchem der Sensor den Weissabgleich durchführt. Dafür hält ihr dieses circa 5cm vor den Sensor, drückt eine Taste und der Sensor führt den Weissabgleich durch. Danach könnt Ihr das Papier wieder wegnehmen und die Messungen durchführen.
+
+::: exercise
+**Verteilung der Spektralkanäle untersuchen**
+
+- Führt verschiedene Messungen durch mit unterschiedlichen Lichtquellen und Materialien und interpretiert die Ausgabe des `bargraph.py`.
+- Studiert den Code und versucht die Funktionsweise zu verstehen.
+:::
+
+``` bash
+python3 bargraph.py 
+Setting white point baseline.
+
+Hold a white sheet of paper ~5cm in front of the sensor and press a key...
+
+Baseline set. Press a key to continue...   
+```
+
+![Beispiel Ausgabe von `bargraph.py` Spectrometer Bar Graph](images/as7262_bargraph.png)
