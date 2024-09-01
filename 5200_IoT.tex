@@ -2288,10 +2288,10 @@ Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu
 berechnen. Die Korrektur wird als \emph{Atmosphärenkorrektur} bezeichnet
 und ist abhängig von der \emph{Temperatur}, dem \emph{Luftdruck} und der
 \emph{Luftfeuchtigkeit}. Die Korrektur wird in ppm (parts per million)
-angegeben und kann mit folgender Formel berechnet werden (Leica
-Geosystems 2022, Grimm 2023):
+angegeben und kann mit folgender Formel~\ref{eq-atmosphaerenkorrektur}
+berechnet werden (Leica Geosystems 2022, Grimm 2023):
 
-\[\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}\]
+\begin{equation}\phantomsection\label{eq-atmosphaerenkorrektur}{\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}}\end{equation}
 
 \[\begin{aligned}
 & \Delta D_1 && \text{Atmosphärische Korrektur} && [ppm]\\
@@ -2302,6 +2302,10 @@ Geosystems 2022, Grimm 2023):
 & x && = (7.5 \cdot \frac{t}{237.3 +t}) + 0.7857 \\
 \end{aligned}
 \]
+
+Folgende Funktion in Python berechnet die Atmosphärenkorrektur für
+Geodätische Distanzmessverfahren basierend auf der
+Formel~\ref{eq-atmosphaerenkorrektur}
 
 \begin{Shaded}
 \begin{Highlighting}[]

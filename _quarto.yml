@@ -127,9 +127,11 @@ format:
     crossref:
       fig-title: Abbildung   # (default is "Figure")
       tbl-title: Tabelle     # (default is "Table")
+      eq-title: Formel     # (default is "Equation") 
       title-delim: ":"       # (default is ":")
       fig-prefix: Abbildung  # (default is "Figure")
       tbl-prefix: Tabelle    # (default is "Table")
+      eq-prefix: Formel    # (default is "Equation")
       ref-hyperlink: true    # (default is true)
       labels: arabic         # (default is arabic)
       subref-labels: alpha a # (default is alpha a)

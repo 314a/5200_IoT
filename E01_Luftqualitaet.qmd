@@ -200,9 +200,10 @@ Messwerte in eine Textdatei schreiben `python3 read-all.py > bme680-data.txt`. D
 
 ## Aufgabe 2: Berechnung der Atmosphärenkorrektur für Distanzmessungen (optional)
 
-Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Die Korrektur wird als *Atmosphärenkorrektur* bezeichnet und ist abhängig von der *Temperatur*, dem *Luftdruck* und der *Luftfeuchtigkeit*. Die Korrektur wird in ppm (parts per million) angegeben und kann mit folgender Formel berechnet werden [@grimm2023; @leicageosystems2022]:
+Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Die Korrektur wird als *Atmosphärenkorrektur* bezeichnet und ist abhängig von der *Temperatur*, dem *Luftdruck* und der *Luftfeuchtigkeit*. Die Korrektur wird in ppm (parts per million) angegeben und kann mit folgender  @eq-atmosphaerenkorrektur berechnet werden [@grimm2023; @leicageosystems2022]:
 
-$$\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}$$
+
+$$\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}$$ {#eq-atmosphaerenkorrektur}
 
 $$\begin{aligned}
 & \Delta D_1 && \text{Atmosphärische Korrektur} && [ppm]\\
@@ -214,6 +215,7 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
+Folgende Funktion in Python berechnet die Atmosphärenkorrektur für Geodätische Distanzmessverfahren basierend auf der  @eq-atmosphaerenkorrektur
 
 ``` python
 import math

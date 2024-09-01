@@ -580,8 +580,8 @@ Studiert die Python Skripte und online Tutorial zum Sensor</p>
 </section>
 <section id="aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional">Aufgabe 2: Berechnung der Atmosphärenkorrektur für Distanzmessungen (optional)</h2>
-<p>Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Die Korrektur wird als <em>Atmosphärenkorrektur</em> bezeichnet und ist abhängig von der <em>Temperatur</em>, dem <em>Luftdruck</em> und der <em>Luftfeuchtigkeit</em>. Die Korrektur wird in ppm (parts per million) angegeben und kann mit folgender Formel berechnet werden <span class="citation" data-cites="grimm2023 leicageosystems2022">(<a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems 2022</a>, <a href="references.html#ref-grimm2023" role="doc-biblioref">Grimm 2023</a>)</span>:</p>
-<p><span class="math display">\[\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}\]</span></p>
+<p>Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Die Korrektur wird als <em>Atmosphärenkorrektur</em> bezeichnet und ist abhängig von der <em>Temperatur</em>, dem <em>Luftdruck</em> und der <em>Luftfeuchtigkeit</em>. Die Korrektur wird in ppm (parts per million) angegeben und kann mit folgender <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>1</span></a> berechnet werden <span class="citation" data-cites="grimm2023 leicageosystems2022">(<a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems 2022</a>, <a href="references.html#ref-grimm2023" role="doc-biblioref">Grimm 2023</a>)</span>:</p>
+<p><span id="eq-atmosphaerenkorrektur"><span class="math display">\[\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix} \tag{1}\]</span></span></p>
 <p><span class="math display">\[\begin{aligned}
 &amp; \Delta D_1 &amp;&amp; \text{Atmosphärische Korrektur} &amp;&amp; [ppm]\\
 &amp; p &amp;&amp; \text{Luftdruck} &amp;&amp; [mbar]\\
@@ -591,6 +591,7 @@ Studiert die Python Skripte und online Tutorial zum Sensor</p>
 &amp; x &amp;&amp; = (7.5 \cdot \frac{t}{237.3 +t}) + 0.7857 \\
 \end{aligned}
 \]</span></p>
+<p>Folgende Funktion in Python berechnet die Atmosphärenkorrektur für Geodätische Distanzmessverfahren basierend auf der <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>1</span></a></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_atmospheric_correction(temperature, air_pressure, humidity):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constants</span></span>
