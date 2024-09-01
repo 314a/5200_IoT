@@ -515,9 +515,9 @@
 \setlist[description]{leftmargin=1em,labelindent=0em ,labelwidth=1cm, labelsep*=0.5em, leftmargin =!, style = sameline, noitemsep}%
 \begin{boxtoptitle}[0]{#1}{colPrimary}\begin{multicols*}{2}}{\end{multicols*}\end{boxtoptitle}}% 
 % Box with shaded background colour \begin{boxshade}{colPrimary}\lipsum[1]\end{boxshade}
-\newtcolorbox{boxshade}[2][]{breakable,enhanced, float*=!h,width=\textwidth,colback=#2!20,arc=0pt,outer arc=0pt,boxrule=0pt} 
+\newtcolorbox{boxshade}[2][]{breakable,enhanced, float*=!ht,width=\textwidth,colback=#2!20,arc=0pt,outer arc=0pt,boxrule=0pt} 
 % Box with title, colour definition e.g. \begin{boxtitle}{Title}{red!40}\lipsum[5]\end{boxtitle}
-\newtcolorbox{boxtitle}[3][]{breakable,enhanced, float*=!h,width=\textwidth, title=#2, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=5pt, toptitle=3pt, top=0pt, fonttitle=\bfseries} 
+\newtcolorbox{boxtitle}[3][]{breakable,enhanced, float*=!ht,width=\textwidth, title=#2, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=5pt, toptitle=3pt, top=0pt, fonttitle=\bfseries} 
 % Box with counter, title and colour e.g. \begin{boxcounter}{Lorem Ipsum}{Cerulean}\lipsum[5]\end{boxcounter} % Exercise Box
 % Set Title for numbered boxes set custom variable/command \newcommand*{\boxcounterprefix}{Aufgabe}
 %\tcbset{countertitle/.style={title={\boxcounterprefix~\thetcbcounter\ifstrempty{#1}{}{: #1}}}}

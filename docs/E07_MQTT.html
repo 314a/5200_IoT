@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Einführung in IoT - E07 MQTT</title>
+<title>E07 MQTT – Einführung in IoT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -134,13 +134,13 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E07_MQTT.html">E07 MQTT</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -177,9 +177,9 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Theorie</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -212,9 +212,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Praktika</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -265,9 +265,9 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Anhang</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -342,7 +342,7 @@ div.csl-indent {
 
 
 <p>Ein IoT Datenfluss erstreckt sich über verschiedene Instanzen, die für die einzelnen Prozesse zuständig sind, von der Erfassung von Sensormesswerten im IoT Gerät über die Kommunikation der Messwerte bis zur Datenverarbeitung, Speicherung und Visualisierung (<a href="#fig-iotpipeline" class="quarto-xref">Abb.&nbsp;<span>1</span></a>). Hierbei können alle Schritte auf einem Gerät durchgeführt werden oder jeder einzelne über ein anderes Gerät oder Server. In der Abbildung aufgezeigt sind typische Softwarekomponenten, die in IoT eingesetzt werden, wie Node-Red für die Datenverarbeitung, die InfluxDB Datenbank, welche für das Speichern von Zeitreihendaten entwickelt wurde und Grafana eine Visualisierungsplattform, die für Messdaten optimiert ist. Es sind Werkzeuge die über ihre graphische Oberfläche einen guten Einstieg ermöglichen, sogenannte <em>low-code</em> Tools, die sich gut eignen für die Entwicklung von Prototypen mit geringem zeitlichen Aufwand. Je nach Anwendung können die einzelnen Prozessschritte auch gut in einer Scriptsprache wie Python durchgeführt oder eine andere Datenbank verwendet werden.</p>
-<div id="fig-iotpipeline" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-iotpipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iotpipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mqtt-node-red-inffluxdb-grafana.jpg" class="img-fluid figure-img">
@@ -489,7 +489,7 @@ Abb.&nbsp;1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, 
 <li><strong>Template Node</strong>: Kann über Eigenschaften einer Nachricht und einer Vorlage (Template) neue Nachricht nach Vorlage erstellen: <code>Nachricht: {{payload}}!</code> wird <code>Nachricht: 1570439577309 !</code>.</li>
 </ul>
 <p>Node-Red kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffne den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 1880 ein: <code>http://&lt;ip-adresse&gt;:1880</code>. Führt nun das Kurztutorial zu Node-Red aus: <a href="https://nodered.org/docs/getting-started/first-flow">Node-Red Getting Started: First Flow</a>. In diesem Tutorial wird ein Flow erstellt, der eine Nachricht mit einem Zeitstempel ausgibt.</p>
-<div id="fig-noderedmqttflow" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-noderedmqttflow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedmqttflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/node-red_mqtt_flow.png" class="img-fluid figure-img">
@@ -507,7 +507,7 @@ Abb.&nbsp;2: Node-Red Flow der Daten in das Topic <em>iot/temperature</em> publi
 <li>Ergänze den Flow um einen MQTT Input Node für die Topics <code>iot/humidity</code> und <code>iot/pressure</code> und je einen Debug Node. Starte den Flow und überprüfe, ob die Nachrichten vom MQTT Broker empfangen werden.</li>
 </ol>
 </div>
-<div id="fig-noderedmqttnodesetup" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-noderedmqttnodesetup" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedmqttnodesetup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/node-red_mqtt_setup.jpg" class="img-fluid figure-img">
@@ -532,7 +532,7 @@ Abb.&nbsp;3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) Serv
 <div class="hint">
 <p>Falls keine Nodes für InfluxDB in Node-Red vorhanden sind, kann die Erweiterung <code>node-red-contrib-influxdb</code> über das Hauptmenu <em>Palette verwalten</em> im Tab <em>Installation</em> installiert werden.</p>
 </div>
-<div id="fig-noderedinfluxdb" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-noderedinfluxdb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedinfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/node-red_influxdb_setup.jpg" class="img-fluid figure-img">
@@ -543,7 +543,7 @@ Abb.&nbsp;4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen z
 </figure>
 </div>
 <p>Die Messwerte können direkt in die InfluxDB geschrieben werden, jedoch fehlen da noch die Tags, die für die Filterung und Gruppierung verwendet werden können. Diese können über den Change Node hinzugefügt werden, wie in <a href="#fig-noderedpayload" class="quarto-xref">Abb.&nbsp;<span>5</span></a> gezeigt. Hierbei wird der Wert der Payload in ein Feld mit dem Namen <em>temperature</em> geschrieben und die Tags <em>device</em> und <em>sensor</em> werden hinzugefügt. Dieselbe Struktur kann alternativ auch mit dem Function Node erstellt werden, siehe <a href="#fig-noderedpayload" class="quarto-xref">Abb.&nbsp;<span>5</span></a> rechts. Hierbei wird der Wert der Payload in ein Feld mit dem Namen <em>temperature</em> geschrieben und die Tags <em>device</em> und <em>sensor</em> werden hinzugefügt. Die Bezeichnung der Messung <em>temperature</em> wird im InfluxDB Node definiert oder kann im Function Node überschrieben werden.</p>
-<div id="fig-noderedpayload" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-noderedpayload" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedpayload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/node-red_influxdb_change_function_node.jpg" class="img-fluid figure-img">
@@ -573,7 +573,7 @@ Abb.&nbsp;5: Über den Change Node, wie auch den Function Node kann mit JavaScri
 </dd>
 </dl>
 <p>InfluxDB bietet über das Menu <em>Data Explorer</em> eine einfache Möglichkeit die Daten zu visualisieren. Der Query Builder (<a href="#fig-influxdbdataexplorer" class="quarto-xref">Abb.&nbsp;<span>6</span></a>) hilft bei der Erstellung von Abfragen mit der über die Fields und Tags gefiltert werden kann, die dann über den Button <em>Submit</em> ausgeführt und dargestellt werden können. Die erstellte Query kann über den <em>Script Editor</em> (<a href="#fig-influxdbdataexplorer" class="quarto-xref">Abb.&nbsp;<span>6</span></a>) angezeigt werden.</p>
-<div id="fig-influxdbdataexplorer" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-influxdbdataexplorer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-influxdbdataexplorer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/influxdb_data_explorer.png" class="img-fluid figure-img">
@@ -605,7 +605,7 @@ Abb.&nbsp;6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abfrag
 <li><em>Basic Auth Details</em>: Setzt den InfluxDB Benutzer und das Passwort für die InfluxDB</li>
 <li><em>InfluxDB Details</em>: Setzt die InfluxDB Organisation <em>fhnw</em>, den <em>API Token</em>, und den InfluxDB Bucket <em>iot</em>.</li>
 </ul>
-<div id="fig-grafanainfluxdb" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-grafanainfluxdb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grafanainfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mqtt_grafana_influxdb_settings.png" class="img-fluid figure-img">
@@ -616,7 +616,7 @@ Abb.&nbsp;7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechen
 </figure>
 </div>
 <p>Ist die Verbindung erstellt, können neue Dashboards erstellt werden. Die Queries, die für die Visualisierung verwendet werden sollen, können über den <em>Query Builder</em> in InfluxDB erstellt und in Grafana beim Erstellen der Panels (<a href="#fig-grafanainfluxdbquery" class="quarto-xref">Abb.&nbsp;<span>8</span></a>) reinkopiert werden.</p>
-<div id="fig-grafanainfluxdbquery" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-grafanainfluxdbquery" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grafanainfluxdbquery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mqtt_grafana_influxdb_query.png" class="img-fluid figure-img">
@@ -708,18 +708,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -751,7 +740,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/314a\.github\.io\/5200_IoT");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -786,7 +815,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

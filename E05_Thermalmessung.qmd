@@ -104,6 +104,8 @@ Folgende Aufgabe nutzt den 1.54" LCD Bildschirm mit einer 240x240 Pixel Auflösu
 - Teste die Beispiele im Ordner `MLX90640` und beobachte die Ausgabe auf dem LCD Bildschirm.
 
 ::: exercise
+**Experimente mit der Thermalkamera und dem LCD Bildschirm**
+
 - Teste mit unterschiedlichen Objekten die Temperaturmessung und beobachte die Ausgabe auf dem LCD Bildschirm.
 - Wie gut lassen sich Objekte mit unterschiedlichen Temperaturen unterscheiden?
 - Wie gut lassen sich Objekte erkennen, die sich in der Temperatur nur wenig oder stark unterscheiden?

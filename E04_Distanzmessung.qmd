@@ -164,6 +164,8 @@ Führt nun folgende Scripts aus und beobachtet die Ausgabe auf dem LCD Bildschir
 - `python3 motion_tracking.py`
 
 ::: exercise
+**Distanzmessung**
+
 - Führe die Beispiele aus und beobachte die Ausgabe auf dem LCD Bildschirm.
 - Untersuche die einzelnen Matrizen und versuche die Bedeutung der einzelnen Werte zu verstehen.
 - Führe unterschiedliche Tests durch, indem Du ein Objekt vor den Sensor hälst und bewegst.
