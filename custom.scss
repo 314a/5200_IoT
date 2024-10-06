@@ -24,7 +24,7 @@ $dark:          $gray-800 !default;
 
 div.callout{border-radius: 0px;}
 div.callout.callout-style-default, div.callout.callout-style-simple {
-  border-left: 5px solid;
+  border-left: 0px solid;
   border-right: 0px solid #dee2e6;
   border-top: 0px solid #dee2e6;
   border-bottom: 0px solid #dee2e6
@@ -118,16 +118,16 @@ code {background: $light;}
 }*/
 
 // custom boxes and styles
-.info{ background-color: #d4ecf7; padding: 10px; margin-bottom: 1em; border-left: 5px solid; border-left-color: #1d6c8d;}
+.info{ background-color: #d4ecf7; padding: 10px; margin-bottom: 1em; border-left: 0px solid; border-left-color: #1d6c8d;}
 .hint{ background-color: #d4ecf7; padding: 10px; margin-bottom: 1em;}
-.summary{ background-color: #fef8f0; padding: 10px; border-left:5px solid #f0ad4e; margin-bottom: 1em;}
-.solution{ background-color: #f0f5f0; padding: 10px; border-left: 5px solid #5e815a; margin-bottom: 1em;}
-.exercise{ background-color: #d4ecf7; padding: 10px; border-left: 5px solid #3190A3; margin-bottom: 1em;}
+.summary{ background-color: #fef8f0; padding: 10px; border-left:0px solid #f0ad4e; margin-bottom: 1em;}
+.solution{ background-color: #f0f5f0; padding: 10px; border-left: 0px solid #5e815a; margin-bottom: 1em;}
+.exercise{ background-color: #d4ecf7; padding: 10px; border-left: 0px solid #3190A3; margin-bottom: 1em;}
 .comment{ background-color: #F5F6F7; padding: 10px; margin-bottom: 1em;}
-.note{font-family: Courier New, monospace; background-color: #fcfbd2; padding: 10px;box-shadow: 4px 2px 2px #999999; margin-bottom: 0.5em;}
+.note{font-family: cursive, Courier New, monospace; background-color: #fcfbd2; padding: 10px;box-shadow: 4px 2px 2px #999999; margin-bottom: 0.5em;font-size:smaller;}
 
-.typewriter{font-family: Courier New, monospace; background-color: #ffffff; margin-bottom: 0.5em;}
-.notebook{font-family: Courier New, monospace; background-color: #f5f5f5; margin-bottom: 0.5em;padding: 10px;}
+.typewriter{font-family: Courier New, monospace; background-color: #ffffff; margin-bottom: 0.5em;font-size:smaller;}
+.notebook{font-family: Courier New, monospace; background-color: #f5f5f5; margin-bottom: 0.5em;padding: 10px;font-size:smaller;}
 
 .cheatsheet{ background-color: #f5f6f7; padding: 10px; margin-bottom: 1em; }//border-left: 5px solid; border-left-color: #1d6c8d;
 .commands{ background-color: #f5f6f7; padding: 10px; margin-bottom: 1em;  column-count: 2;} // border-left: 5px solid; border-left-color: #1d6c8d;
@@ -145,6 +145,24 @@ code {background: $light;}
   //vertical-align: -.3em;
 }
 
+.csl-entry  {
+  margin-left: 0.5em!important;
+}
+
+.quarto-appendix-citeas {
+  font-size: .9em;
+  padding: 1em;
+  border: solid 1px #dee2e6;
+  margin-bottom: 1em;
+}
+
+.sourceCode .quarto-appendix-bibtex {
+  font-size: .7em;
+  padding: 1em;
+  //border: solid 1px #dee2e6;
+  //margin-bottom: 1em;
+  background-color: white;
+}
 
 dt {
   font-weight: bold;

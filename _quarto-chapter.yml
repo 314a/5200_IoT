@@ -26,6 +26,7 @@ filters:
   # - _resources/scripts/filter_cite.lua
   - _resources/scripts/filter_styleDiv.lua
 bibliography: references.bib
+csl: "_resources/templates/apa.csl"
 solution: false
 number-depth: 1
 format:

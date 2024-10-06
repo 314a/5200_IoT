@@ -1,5 +1,5 @@
 ---
-title: "Raspberry Pi IoT Image"
+title: "Raspberry Pi"
 author: "Pia Bereuter"
 date: today
 other-links:

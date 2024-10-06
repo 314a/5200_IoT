@@ -799,100 +799,100 @@
   {
     "objectID": "A1_Rasperry_Pi.html",
     "href": "A1_Rasperry_Pi.html",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "",
     "text": "Raspberry Pi Image schreiben\nDer Raspberry Pi führt keinen internen Speicher mit sich, sondern benötigt eine SD-Karte. Auf dieser SD-Karte wird das Betriebssystem installiert, respektive als Image auf die MicroSD Karte geschrieben. Die SD-Karte muss mindestens 8 GB Speicherplatz haben idealerweise 16 GB oder mehr.\nSoftware: Raspberry Pi - Software\nTutorial: Raspberry Pi - How to set up Raspberry Pi\nRaspberry Pi Imager ist die von Raspberry Pi erstellte Software für das Schreiben von Images auf eine SD Karte. Der Imager stellt direkt auch weitere Images wie Ubuntu, Medienzentren, 3D Druck etc. zur Verfügung. Alternative Image Burner sind Balena Etcher und Win32DiskImager.\nDas Betriebssystem Raspberry Pi OS ist ein auf Debian basiertes Betriebssystem mit Anpassungen für die Hardware auf dem Raspberry Pi. Es gibt eine Lite Version ohne Desktop und eine Desktop Version mit Desktop. Die Desktop Version ist für den Einstieg empfehlenswert, da sie die grafische Oberfläche bietet und die Konsole. Die Lite Version ist für den produktiven Einsatz empfehlenswert, da sie weniger Ressourcen benötigt und somit mehr Ressourcen für die Anwendungen zur Verfügung stehen. Dazu muss der Raspberry Pi über das Netzwerk erreichbar sein, beispielsweise über SSH.\nImage schreiben mit Raspberry Pi 64-bit (Desktop Version) und mit den erweiterten Optionen Voreinstellungen zu SSH (Ja), WiFi (Heimnetzwerk), Konto und unter Sprache die Zeitzone Europe/Zurich und das das Tastaturlayout CH setzen.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#raspberry-pi-image-schreiben",
     "href": "A1_Rasperry_Pi.html#raspberry-pi-image-schreiben",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "",
     "text": "Für die Nutzung am Campus nutzen wir die Desktop Version, da wir die grafische Oberfläche für das aktivieren des Internetzugangs benötigen.\n\n\n\nDie Einstellungen können später in der Konsole mit dem Programm raspi-config geändert werden.\n\n\n\n\nRasperry Pi Imager ausführen mit (1) Betriebssystem wählen, (2) Raspberry Pi OS (Other), (3) Raspberry Pi OS 64-bit, (4) erweiterte Einstellungen wählen und unter diesen Voreinstellungen zum Konto, SSH, Zeitzone und Tastaturlayout vordefinieren.\n\n\n\nFür Testzwecke kann es sinnvoll sein den Standardkontonamen pi und das Standardpasswort raspberry zu verwenden. Jedoch sollte der Kontonamen und das Passwort für den produktiven Einsatz geändert werden, vor allem wenn der Raspberry Pi mit dem Internet verbunden ist, beispielsweise mit einem aktivierten SSH Zugang.\n\n\nRaspberry Pi Image auf SD-Karte schreiben\n\nInstalliere den Raspberry Pi Imager\nSchreibe Raspberry Pi OS 64-bit auf die SD Karte\nAktiviere SSH und setze die Spracheinstellungen (WiFi Name und Password des Netzwerks von Zuhause oder dem Mobile Hotspot)\nSD Karte in den Raspberry einsetzen\nMaus, Tastatur und Monitor anschliessen und dann mit dem Netzteil mit Strom versehen",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#raspberry-pi-einrichten",
     "href": "A1_Rasperry_Pi.html#raspberry-pi-einrichten",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "Raspberry Pi einrichten",
     "text": "Raspberry Pi einrichten\nFür das Einrichten des Raspberry Pi wird die SD-Karte mit dem Image in den Raspberry Pi eingesetzt. Für das erstmalige Einrichten des Raspberry Pi OS ist ein Bildschirm, eine Tastatur und eine Maus erforderlich. Verbunden wird der Raspberry Pi über die HDMI-Schnittstelle mit dem Bildschirm und über die USB Schnittstelle mit der Tastatur und der Maus, dann wird die Stromversorgung über USB-C angeschlossen.\n\nGehäuse öffnen und SD Karten Slot öffnen\nDen Deckel durch leichtes Drücken mit zwei Finger bei (1) horizontal leicht in Pfeilrichtung drücken, nach einem Klick lässt sich das Gehäuse aufschieben. Der SD Karten-Slot lässt sich mit einem Stift in der Einbuchtung (3) mit leichtem Druck in Pfeilrichtung öffnen (4). Das Raspberry Pi Board kann durch ein leichtes Klicken in Pfeilrichtung (5) aus dem Gehäuse entfernt werden.\n\n\n\nGehäuse öffnen, SD Karte wechesln und das Board aus dem Gehäuse entfernen.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#wifi-verbindung-einrichten",
     "href": "A1_Rasperry_Pi.html#wifi-verbindung-einrichten",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "WiFi Verbindung einrichten",
     "text": "WiFi Verbindung einrichten\nDas WiFi Network kann auch über den Desktop eingerichtet werden. Das WiFi Symbol in der oberen rechten Ecke des Desktops zeigt die verfügbaren WiFi Netzwerke an. Je nach Einstellungen muss hierbei noch das WiFi Land CH ausgewählt werden. Die WiFi Einstellungen können auch über die Konsole mit dem Programm raspi-config vorgenommen werden.\n\nFür die Verbindung mit dem Internet am Campus muss das Netzwerk fhnw-public ausgewählt werden. Im Browser kann über die Website https://mpp.ict.fhnw.ch mit dem FHNW Login oder über das Mobiltelefon die Verbindung hergestellt werden.\n\n\n\n\nWiFi Verbindung über den Desktop auf dem Campus herstellen. Das Netzwerk fhnw-public wählen und auf der Website https://mpp.ict.fhnw.ch die Verbindung mit dem FHNW Account oder via Mobile herstellen.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#ssh-verbindung-herstellen",
     "href": "A1_Rasperry_Pi.html#ssh-verbindung-herstellen",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "SSH Verbindung herstellen",
     "text": "SSH Verbindung herstellen\n{#fig-shell width=“30%”“}\nDas SSH Protokoll ermöglicht den direkten auf den Raspberry Pi über das Konsolenfenster. Hierfür wird die IP Adresse des Raspberry Pi benötigt. Die IP Adresse kann über das Programm ifconfig oder ip addr in der Konsole abgefragt werden.\n\n\n\nDie IP-Adresse für das Wi-Fi ist unter wlan0 bei inet aufgeführt. Falls der Raspberry Pi mit einem Ethernet Kabel mit dem Netzwerk verbunden ist, wird die IP Adresse unter eth0 bei inet aufgeführt.\n\n\nFür die Verbindung mit SSH zu Raspberry Pi existieren unterschiedliche Clients:\n\nDirekt über die Eingabeaufforderung in Windows mit ssh\nPuTTY https://putty.org (win) ein SSH und telnet client für Windows (auch portable Nutzung ohne Installation möglich)\nTabby https://tabby.sh (win, mac, linux) ein modernes open source Terminal für lokale Shell, Serielle Schnittstelle, SSH und Telnet Verbindungen, File Transfer mit SFTP und Konfigurationsmöglichkeiten (auch portable Nutzung ohne Installation möglich)\n\n\n\n\nSSH Verbindung mit Putty einrichten\n\n\n\nTabby\nNeues SSH Verbindungsprofil mit Tabby erstellen mit der IP Adresse des Raspberry Pi erstellen.\n\nUnter Einstellungen / Profile & Verbindungen ein Neues Profil anlegen\nIn der Auswahl SSH-Verbindung wählen\nUnter Host die IP Adresse Benutzername des Raspberry Pi setzen und speichern\n\n\n\n\nSSH Verbindung mit Tabby einrichten (1-5) und anwenden (6).\n\n\n\n\nDatentransfer mit SFTP\nRemote Datentransfer mit SFTP dem SSH File Transfer Protokoll ermöglicht ein einfaches Verwalten und auch sichern der Daten. Hierbei eignet sich die Software FileZilla oder WinSCP für den Datentransfer.\nIn Fillezilla eine SFTP Verbindung über Datei/Servermanager herstellen mit Server: &lt;IP Adresse Raspberry Pi&gt;, Protokoll: SFTP, und bei der Verbindungart normal wählen und dort Benutzername und Passwort des Raspberry Pi Users angeben.\n\n\n\nDatentransfer mit FileZilla. Eine neue Verbindung im Servermanager (1) erstellen unter Server die IP-Adresse des Raspberry Pi setzen mit dem SFTP Prokoll, und bei der Verbindungsart normal wählen und Benutzername und Passwort des Raspberry Pi angeben und mit “Verbinden” (4) die SFTP Verbindung aufbauen und im Hauptfenster (5) Daten transferieren.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#mobilen-hotspot-nutzen",
     "href": "A1_Rasperry_Pi.html#mobilen-hotspot-nutzen",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "Mobilen Hotspot nutzen",
     "text": "Mobilen Hotspot nutzen\nAuf Windows kann ein mobiler Hotspot eingerichtet werden, um den Raspberry Pi mit dem Internet zu verbinden. Hierfür wird die Internetverbindung des Computers über das WLAN mit dem Raspberry Pi geteilt. Einen Mobilen Hotspot auf Windows einrichten, den Raspberry Pi mit dem Netzwerk verbinden und die IP Adressen der verbundenen Raspberry Pi’s werden im Reiter Mobiler Hotspot aufgeführt.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#raspberry-pi-config",
     "href": "A1_Rasperry_Pi.html#raspberry-pi-config",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "Raspberry Pi Config",
     "text": "Raspberry Pi Config\nDie Grundlegenden Einstellungen des Raspberry Pi können mit dem Programm raspi-config vorgenommen werden, entweder über die Konsole oder über den Desktop. Beispielsweise kann dort SSH aktiviert werden, das Tastaturlayout geändert werden oder die Zeitzone angepasst werden. Oder weitere Schnittstellen wie I2C, SPI oder UART aktiviert werden.\n\n\n\nÜber die Konsole raspi-config starten und über das Konsolenmenu die Einstellungen anpassen. Im Beispiel wird über das Interface Options Menu SSH aktiviert.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#raspberry-pi-aktualisieren",
     "href": "A1_Rasperry_Pi.html#raspberry-pi-aktualisieren",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "Raspberry Pi aktualisieren",
     "text": "Raspberry Pi aktualisieren\nGenerell empfiehlt es sich den Raspberry Pi aktuell zu halten und vor jeder Installation von Softwarepaketen folgende Befehle durchzuführen\nsudo apt update\nsudo apt upgrade\nsudo apt-get clean",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
     "objectID": "A1_Rasperry_Pi.html#raspberry-pi-im-netzwerk-auffinden",
     "href": "A1_Rasperry_Pi.html#raspberry-pi-im-netzwerk-auffinden",
-    "title": "Anhang A — Raspberry Pi IoT Image",
+    "title": "Anhang A — Raspberry Pi",
     "section": "Raspberry Pi im Netzwerk auffinden",
     "text": "Raspberry Pi im Netzwerk auffinden\nSobald der Raspberry Pi und auch andere Geräte mit dem Netzwerk verbunden sind kann deren IP Adresse mit Scanner Tools wie Angry IP Scanner, arp -a[^ arp -a listet die IP- und die MAC Adressen der einzelnen Geräte. Es kann ohne das Aufführen von Hostnamen jedoch aufwendig werden, die einzelnen Einträge durchzugehen um zu eruieren. Tipp: arp -a vor dem Booten des Raspberry Pi ausführen und ein zweites mal nachdem der Raspberry Pi vollständig gebootet hat nochmals und eruieren welche IP Adresse hinzugekommen ist.] oder nmap gefunden werden. Für Android und iOS existieren diverse Scanner Apps wie Fing oder Net Analyzer.\nDienste, die dass Netzwerk durchleuchten wie der Angry IP Scanner sind in grösseren Netzwerken wie bei Firmen oder Universitäten aus Sicherheitsgründen blockiert. Für den Nutzen im lokalen Netzwerk zu Hause ist der Angry IP Scanner jedoch ein nützliches Tool.\n\n\n\nBeispiel Scan eines lokalen Netzwerks mit dem Angry IP Scanner\n\n\n\n\n\n\nAriza, J. Á., & Baez, H. (2022). Understanding the Role of Single-Board Computers in Engineering and Computer Science Education: A Systematic Literature Review. Computer Applications in Engineering Education, 30(1), 304–329. https://doi.org/10.1002/cae.22439\n\n\nUpton, E. (2022). Supply Chain Update - It’s Good News! In Raspberry Pi.",
     "crumbs": [
       "Anhang",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi IoT Image</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Raspberry Pi</span>"
     ]
   },
   {
