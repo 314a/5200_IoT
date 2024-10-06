@@ -169,6 +169,9 @@
 
 % default main leading color of the document
 %\colorlet{colPrimary}{col1} % should be the same as the first one on the list
+
+
+
 % Chapter Settings options chapterpage, chapterheader
 % https://tex.stackexchange.com/questions/159485/huge-ornament-chapter-numbering
 % https://texwelt.de/fragen/12367/wie-kann-ich-bei-einer-koma-script-klasse-kapiteluberschriften-mit-einer-hintergrundfarbe-versehen
@@ -372,7 +375,7 @@
     \fi
     \ifx\@subtitle\@empty \else
         \vskip 0.5em
-        \noindent {\huge \textsf{\@subtitle}}
+        \noindent {\Large \textsf{\@subtitle}}
         \vskip 1em
     \fi
     \vskip 1em
@@ -515,14 +518,14 @@
 \setlist[description]{leftmargin=1em,labelindent=0em ,labelwidth=1cm, labelsep*=0.5em, leftmargin =!, style = sameline, noitemsep}%
 \begin{boxtoptitle}[0]{#1}{colPrimary}\begin{multicols*}{2}}{\end{multicols*}\end{boxtoptitle}}% 
 % Box with shaded background colour \begin{boxshade}{colPrimary}\lipsum[1]\end{boxshade}
-\newtcolorbox{boxshade}[2][]{breakable,enhanced, float*=!ht,width=\textwidth,colback=#2!20,arc=0pt,outer arc=0pt,boxrule=0pt} 
+\newtcolorbox{boxshade}[2][]{breakable,enhanced, float*=!h,width=\textwidth,colback=#2!20,arc=0pt,outer arc=0pt,boxrule=0pt} 
 % Box with title, colour definition e.g. \begin{boxtitle}{Title}{red!40}\lipsum[5]\end{boxtitle}
-\newtcolorbox{boxtitle}[3][]{breakable,enhanced, float*=!ht,width=\textwidth, title=#2, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=5pt, toptitle=3pt, top=0pt, fonttitle=\bfseries} 
+\newtcolorbox{boxtitle}[3][]{breakable,enhanced, float*=!h,width=\textwidth, title=#2, colback=#3!20, colframe=#3!20, coltitle=#3, colbacktitle=#3!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=0pt, toptitle=3pt, top=3pt, fonttitle=\bfseries} 
 % Box with counter, title and colour e.g. \begin{boxcounter}{Lorem Ipsum}{Cerulean}\lipsum[5]\end{boxcounter} % Exercise Box
 % Set Title for numbered boxes set custom variable/command \newcommand*{\boxcounterprefix}{Aufgabe}
 %\tcbset{countertitle/.style={title={\boxcounterprefix~\thetcbcounter\ifstrempty{#1}{}{: #1}}}}
 %\newtcolorbox[auto counter, number within=chapter, number freestyle={\noexpand\arabic{\tcbcounter}}]{boxcounter}[3][]{%
-%  enhanced, breakable, float*=!h, width=\textwidth, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt, outer arc=0pt, boxrule=0pt,leftrule=5pt,toptitle=3pt,top=0pt,fonttitle=\bfseries,countertitle={#2},#1}
+%  enhanced, breakable, float*=!h, width=\textwidth, colback=#3!20, colframe=#3, coltitle=#3, colbacktitle=#3!20, arc=0pt, outer arc=0pt, boxrule=0pt,leftrule=0pt,toptitle=3pt,top=0pt,fonttitle=\bfseries,countertitle={#2},#1}
 
  
 
@@ -551,11 +554,19 @@
 colback=white, colframe=#2, colupper=black!60, coltitle=#2, colbacktitle=white, arc=0pt,outer arc=0pt, boxrule=0pt,  toprule=0.5pt, toptitle=0.5pt, top=0pt,left=0pt,right=0pt,bottom=0pt, 
 fonttitle=\small\boxfont, fontupper=\small\boxfont} 
 % \begin{boxtoptitle}[3]{Test}{colPrimary}\lipsum[2]\end{boxtoptitle} 
-\newtcolorbox{boxtoptitle}[3][5]{breakable, float*=!h,width=\textwidth, natural height=#1cm,add to natural height=#1 cm,
+\newtcolorbox{boxtoptitle}[3][5]{breakable,width=\textwidth, natural height=#1cm,add to natural height=#1 cm, %float*=!h,
 title=#2, colback=white, colframe=#3, colupper=black!60, coltitle=#3, colbacktitle=white, arc=0pt,outer arc=0pt, boxrule=0pt,  toprule=0.5pt, toptitle=0.5pt, top=0pt,left=0pt,right=0pt,bottom=0pt, 
 fonttitle=\small\boxfont, fontupper=\small\boxfont} 
 
 \newtcolorbox{boxshadow}{standard jigsaw,enhanced,breakable,colback=white, colframe=gray,boxrule=0.5pt,arc=0pt,outer arc=0pt,drop fuzzy shadow southeast,left=2mm,right=2mm,top=2mm}
+% https://tex.stackexchange.com/questions/606305/how-to-colour-the-background-of-a-theorem
+%\newtheorem{exercise}{Übungsaufgabe}[chapter]
+\definecolor{colSolution}{HTML}{6E986A} 
+\tcolorboxenvironment{exercise}{breakable,enhanced, float*=!h,width=\textwidth,top=3mm, colback=colPrimary!20, colframe=colPrimary, coltitle=colPrimary,  colbacktitle=colPrimary!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=0pt, toptitle=3pt, top=3pt, fonttitle=\bfseries} 
+\tcolorboxenvironment{solution}{breakable,enhanced, float*=!h,width=\textwidth,top=3mm, colback=colSolution!20, colframe=colSolution, coltitle=colSolution,  colbacktitle=colSolution!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=0pt, toptitle=3pt, top=3pt, fonttitle=\bfseries} 
+\tcolorboxenvironment{refsolution}{breakable,enhanced, float*=!h,width=\textwidth,top=3mm, colback=colSolution!20, colframe=colSolution, coltitle=colSolution,  colbacktitle=colSolution!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=0pt, toptitle=3pt, top=3pt, fonttitle=\bfseries} 
+\tcolorboxenvironment{example}{breakable,enhanced, float*=!h,width=\textwidth,top=3mm, colback=colPrimary!20, colframe=colPrimary, coltitle=colPrimary,  colbacktitle=colPrimary!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=0pt, toptitle=3pt, top=3pt, fonttitle=\bfseries} 
+\tcolorboxenvironment{refremark}{breakable,enhanced, float*=!h,width=\textwidth,top=3mm, colback=colPrimary!20, colframe=colPrimary, coltitle=colPrimary,  colbacktitle=colPrimary!20, arc=0pt,outer arc=0pt, boxrule=0pt, leftrule=0pt, toptitle=3pt, top=3pt, fonttitle=\bfseries} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Commands to generate "spaces" for answers in a document 
 % lines, numbered lines, grid, dotted grids 

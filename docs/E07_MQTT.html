@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pia Bereuter">
 
-<title>E07 MQTT – Einführung in IoT</title>
+<title>10&nbsp; IoT Monitoring – Einführung in IoT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,6 +97,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -137,7 +141,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E07_MQTT.html">E07 MQTT</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E07_MQTT.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -222,43 +226,43 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,7 +279,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -307,8 +311,9 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
-  <ul class="collapse">
-  <li><a href="#übungsaufbau" id="toc-übungsaufbau" class="nav-link active" data-scroll-target="#übungsaufbau">Übungsaufbau</a></li>
+  <ul>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
+  <li><a href="#übungsaufbau" id="toc-übungsaufbau" class="nav-link" data-scroll-target="#übungsaufbau">Übungsaufbau</a></li>
   <li><a href="#aufgabe-1-mqtt-kennenlernen" id="toc-aufgabe-1-mqtt-kennenlernen" class="nav-link" data-scroll-target="#aufgabe-1-mqtt-kennenlernen">Aufgabe 1: MQTT kennenlernen</a></li>
   <li><a href="#aufgabe-2-mqtt-mit-python-verwenden" id="toc-aufgabe-2-mqtt-mit-python-verwenden" class="nav-link" data-scroll-target="#aufgabe-2-mqtt-mit-python-verwenden">Aufgabe 2: MQTT mit Python verwenden</a></li>
   <li><a href="#aufgabe-3-sensordaten-mit-mqtt-übertragen" id="toc-aufgabe-3-sensordaten-mit-mqtt-übertragen" class="nav-link" data-scroll-target="#aufgabe-3-sensordaten-mit-mqtt-übertragen">Aufgabe 3: Sensordaten mit MQTT übertragen</a></li>
@@ -317,42 +322,64 @@ div.csl-indent {
   <li><a href="#aufgabe-6-influxdb-mit-grafana-verwenden" id="toc-aufgabe-6-influxdb-mit-grafana-verwenden" class="nav-link" data-scroll-target="#aufgabe-6-influxdb-mit-grafana-verwenden">Aufgabe 6: InfluxDB mit Grafana verwenden</a></li>
   <li><a href="#aufgabe-7-influxdb-mit-python-verwenden-optional" id="toc-aufgabe-7-influxdb-mit-python-verwenden-optional" class="nav-link" data-scroll-target="#aufgabe-7-influxdb-mit-python-verwenden-optional">Aufgabe 7: InfluxDB mit Python verwenden (optional)</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/E07_MQTT.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/E07_MQTT.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div><div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="chapters/E07_MQTT.pdf"><i class="bi bi-file-pdf"></i>Kapitel PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code-Links</h2><ul><li><a href="data/E07_MQTT.zip"><i class="bi bi-file-zip"></i>Ausgangsdaten</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E07_MQTT.html">E07 MQTT</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E07_MQTT.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">E07 MQTT</h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor:in</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pia Bereuter </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">6. Oktober. 2024</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Zusammenfassung</div>
+    IoT Monitoring ermöglicht die Erfassung von Sensordaten, die Kommunikation und Visualisierung von Daten in Echtzeit. Dies erfordert eine Architektur, die die Daten erfasst, Echtzeitkommunikation, asynchroner Kommunikation, Datenspeicherung und Visualisierung ermöglicht. Diese Übung baut einen typischen IoT Stack auf mit MQTT, Node-Red, InfluxDB und Grafana und zeigt wie Sensordaten über MQTT publiziert und abonniert werden können.
+  </div>
+</div>
 
 
 </header>
 
 
-<p>Ein IoT Datenfluss erstreckt sich über verschiedene Instanzen, die für die einzelnen Prozesse zuständig sind, von der Erfassung von Sensormesswerten im IoT Gerät über die Kommunikation der Messwerte bis zur Datenverarbeitung, Speicherung und Visualisierung (<a href="#fig-iotpipeline" class="quarto-xref">Abb.&nbsp;<span>1</span></a>). Hierbei können alle Schritte auf einem Gerät durchgeführt werden oder jeder einzelne über ein anderes Gerät oder Server. In der Abbildung aufgezeigt sind typische Softwarekomponenten, die in IoT eingesetzt werden, wie Node-Red für die Datenverarbeitung, die InfluxDB Datenbank, welche für das Speichern von Zeitreihendaten entwickelt wurde und Grafana eine Visualisierungsplattform, die für Messdaten optimiert ist. Es sind Werkzeuge die über ihre graphische Oberfläche einen guten Einstieg ermöglichen, sogenannte <em>low-code</em> Tools, die sich gut eignen für die Entwicklung von Prototypen mit geringem zeitlichen Aufwand. Je nach Anwendung können die einzelnen Prozessschritte auch gut in einer Scriptsprache wie Python durchgeführt oder eine andere Datenbank verwendet werden.</p>
+<section id="einführung" class="level2">
+<h2 class="anchored" data-anchor-id="einführung">Einführung</h2>
+<p>Ein IoT Datenfluss erstreckt sich über verschiedene Instanzen, die für die einzelnen Prozesse zuständig sind, von der Erfassung von Sensormesswerten im IoT Gerät über die Kommunikation der Messwerte bis zur Datenverarbeitung, Speicherung und Visualisierung (<a href="#fig-iotpipeline" class="quarto-xref">Abb.&nbsp;<span>10.1</span></a>). Hierbei können alle Schritte auf einem Gerät durchgeführt werden oder jeder einzelne über ein anderes Gerät oder Server. In der Abbildung aufgezeigt sind typische Softwarekomponenten, die in IoT eingesetzt werden, wie Node-Red für die Datenverarbeitung, die InfluxDB Datenbank, welche für das Speichern von Zeitreihendaten entwickelt wurde und Grafana eine Visualisierungsplattform, die für Messdaten optimiert ist. Es sind Werkzeuge die über ihre graphische Oberfläche einen guten Einstieg ermöglichen, sogenannte <em>low-code</em> Tools, die sich gut eignen für die Entwicklung von Prototypen mit geringem zeitlichen Aufwand. Je nach Anwendung können die einzelnen Prozessschritte auch gut in einer Scriptsprache wie Python durchgeführt oder eine andere Datenbank verwendet werden.</p>
 <div id="fig-iotpipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iotpipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/mqtt-node-red-inffluxdb-grafana.jpg" class="img-fluid figure-img">
+<a href="images/mqtt-node-red-inffluxdb-grafana.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;10.1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, von dem IoT Gerät mit Sensorik, Datenkommunikation mit MQTT und dem MQTT Broker, zur Datenprozessierung mit Node-Red, Datenspeicherung und und Visalisierung."><img src="images/mqtt-node-red-inffluxdb-grafana.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iotpipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, von dem IoT Gerät mit Sensorik, Datenkommunikation mit MQTT und dem MQTT Broker, zur Datenprozessierung mit Node-Red, Datenspeicherung und und Visalisierung.
+Abb.&nbsp;10.1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, von dem IoT Gerät mit Sensorik, Datenkommunikation mit MQTT und dem MQTT Broker, zur Datenprozessierung mit Node-Red, Datenspeicherung und und Visalisierung.
 </figcaption>
 </figure>
 </div>
-<p>Ziel dieser Übung ist es MQTT näher kennenzulernen und die MQTT Kommunikation mit dem Raspberry Pi zu testen. MQTT ist ein leichtgewichtiges Kommunikationsprotokoll, welches das <em>Publish-Subscribe</em> Muster verwendet und gut für die Anwendung in IoT Projekten geeignet.</p>
+<p>Ziel dieser Übung ist es MQTT näher kennenzulernen und die MQTT Kommunikation mit dem Raspberry Pi zu testen. MQTT ist ein leichtgewichtiges Kommunikationsprotokoll, welches das <em>Publish-Subscribe</em> Muster verwendet und sich gut für die Anwendung in IoT Projekten geeignet.</p>
+<p><strong>Unterlagen:</strong> <em><i class="bi-file-zip"></i> E07_MQTT.zip</em></p>
+</section>
 <section id="übungsaufbau" class="level2">
 <h2 class="anchored" data-anchor-id="übungsaufbau">Übungsaufbau</h2>
 <ul>
@@ -360,36 +387,64 @@ Abb.&nbsp;1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, 
 <li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>mqtt</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
 <li>Schliesse den Sensor <strong>BME688</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
 <li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x76</code> erkannt werden.</li>
-<li>Kontrolliere, ob die Library <code>sudo pip3 install bme680</code> installiert ist mit <code>python -c "import sudo pip3 install bme680"</code>. Installiere die Library mit <code>sudo pip3 install sudo pip3 install bme680</code> falls sie nicht installiert ist.</li>
+<li>Kontrolliere, ob die Library <code>bme680</code> installiert ist mit <code>python -c "import bme680"</code>. Installiere die Library mit in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install bme680</code>, falls sie nicht installiert ist.</li>
 <li>Wechsle in den Ordner <em>Documents</em> und erstelle einen Ordner <em>mqtt</em> für diese Übung.</li>
 </ul>
 </section>
 <section id="aufgabe-1-mqtt-kennenlernen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1-mqtt-kennenlernen">Aufgabe 1: MQTT kennenlernen</h2>
-<p>Testen ob der <a href="https://mosquitto.org">Mosquitto</a> Broker und Clients lokal auf dem Raspberry Pi funktionieren.</p>
-<p><img src="images/mqtt-publish-subscribe.jpg" class="img-fluid"></p>
+<p><a href="https://mosquitto.org">Mosquitto</a> ist eine kompakter open-source Message Broker der Eclipse Foundation, welcher das MQTT Protokoll implementiert und auf Produktionsserver, wie auch auf stromsparenden Geräten wie dem Raspberry Pi eingesetzt werden kann. Wir testen die Kommunikation mit dem MQTT Broker und den Clients auf dem Raspberry Pi. Der Mosquitto Broker ist auf dem Raspberry Pi Image vorkonfiguriert und läuft als Service im Hintegrund. Die Clients <code>mosquitto_pub</code> und <code>mosquitto_sub</code> sind ebenfalls installiert und können für das Testen der Kommunikation MQTT verwendet werden. Mosquitto Dokumentation: <a href="https://mosquitto.org/documentation">https://mosquitto.org/documentation</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/mqtt-publish-subscribe.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="MQTT Device publiziert an den MQTT Broker über ein definiertes Topic Messdaten. Der Broker publiziert die Daten über die definierten Topics. Diese werden vom Subscriber abonniert und empfangen mit dem Vorteil, dass keines der Geräte zur gleichen Zeit synchron senden und empfangen muss."><img src="images/mqtt-publish-subscribe.jpg" class="img-fluid figure-img" alt="MQTT Device publiziert an den MQTT Broker über ein definiertes Topic Messdaten. Der Broker publiziert die Daten über die definierten Topics. Diese werden vom Subscriber abonniert und empfangen mit dem Vorteil, dass keines der Geräte zur gleichen Zeit synchron senden und empfangen muss."></a></p>
+<figcaption>MQTT Device publiziert an den MQTT Broker über ein definiertes Topic Messdaten. Der Broker publiziert die Daten über die definierten Topics. Diese werden vom Subscriber abonniert und empfangen mit dem Vorteil, dass keines der Geräte zur gleichen Zeit synchron senden und empfangen muss.</figcaption>
+</figure>
+</div>
 <p>Erstelle einen Subscriber der für das Topic <code>iot/temperature</code> eine Subscription erstellt.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_sub</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-v</span> <span class="at">-t</span> <span class="st">'iot/temperature'</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Öffne ein zweite Shell und erstelle einen Publisher für dasselbe Topic</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_pub</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-t</span> <span class="st">'iot/temperature'</span> <span class="at">-m</span> <span class="st">'Aussentemperatur: 22° Celsius'</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="exercise">
+<dl>
+<dt>MQTT Message</dt>
+<dd>
+Die MQTT Nachrichten (Messages) bestehen aus einem <em>Topic</em> (Thema) und einer <em>Payload</em> dem Nachrichteninhalt.
+</dd>
+<dt>MQTT Topics</dt>
+<dd>
+MQTT verwendet Themen (Topic) und hierarchische Themenebenden getrennt über einem Schrägstrich <code>/</code> ähnlich einem Ordnersystem auf einem Computer. Dies ermöglicht eine Strukturierung und auch Filterung der Messages. Topics sind case-sensitive, sollten nicht mit einem <code>/</code>, <code>$</code> beginnen und keine Leerzeichen enthalten, sowie kurz und aussagekräftig sein. Filtern von Topics ist mit dem Wildcard <code>+</code> für ein einzelnes Thema und <code>#</code> für alle Themen möglich<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.
+</dd>
+<dt>MQTT Payload</dt>
+<dd>
+Die Nachrichten (Messages) die über MQTT übertragen werden, werden als Payload bezeichnet. Diese Payload ist nicht an eine bestimmte Struktur gebunden und kann ein Text- oder Binärformat sein. Eine festgelegte Struktur für die Payload ist jedoch sinnvoll für eine reibungslose Datenverarbeitung beispielsweise im JSON Format. Übliche Fromate sind Text, JSON, Binärdaten, Hex Strings oder auch Protocol Buffer.
+</dd>
+</dl>
+<div id="exr-mqtt" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.1</strong></span> &nbsp;</p>
 <ul>
 <li>Teste nun den MQTT mit unterschiedlichen Topics und Nachrichten.</li>
 <li>Teste einen weiteren Mosquitto Server auf einem anderen Raspberry Pi und teste die Kommunikation. Hierbei muss die IP Adresse entsprechend angepasst werden.</li>
+<li>Einigt Euch auf einen MQTT Broker und eine Topic-Struktur beispielweise <code>iot/temperature</code> und <code>iot/humidity</code> und publiziert und abonniert Nachrichten. Was fällt Euch auf, wenn Ihr die Nachrichten empfängt?</li>
+<li>Welche Angaben sollten zusätzlich zu den Messwerten in der Payload der Nachrichten enthalten sein?</li>
 </ul>
 </div>
 <p>Falls der Mosquitto Brokers und Clients nicht installiert sind, können diese mit folgenden Befehlen installiert werden.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mosquitto <span class="at">-y</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mosquitto-clients <span class="at">-y</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable mosquitto.service</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable mosquitto.service</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status mosquitto</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="hint">
 <p><a href="https://apps.microsoft.com/detail/9NBLGGH55JZG">MQTTBox</a> und <a href="https://mqtt-explorer.com">MQTT Explorer</a> sind zwei MQTT Clients, die für die Entwicklung und das Testen von MQTT Applikationen verwendet werden können. Jedoch scheinen diese nicht mehr oder eher sporadisch weiterentwickelt zu werden.</p>
 </div>
 </section>
 <section id="aufgabe-2-mqtt-mit-python-verwenden" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-mqtt-mit-python-verwenden">Aufgabe 2: MQTT mit Python verwenden</h2>
-<p>Nun verwenden wir die Bibliothek <code>paho-mqtt</code> in Python um MQTT zu verwenden. Folgende zwei Code Snippets zeigen wie ein Publisher und Subscriber in Python implementiert werden können.</p>
-<p><img src="images/mqtt-sensor-subscribe.jpg" class="img-fluid"></p>
+<p>Nun verwenden wir die Bibliothek <code>paho-mqtt</code> in Python um MQTT Messages zu senden oder empfangen. Folgende zwei Code Snippets zeigen wie ein Publisher und Subscriber in Python minimal implementiert werden können.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/mqtt-sensor-subscribe.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Device sendet Sensordaten und Topic an den MQTT Broker, ein weiteres Gerät abonniert (subscribe) dieses Topic und kann so die gesendeten Daten an das entsprechende Topic empfangen. In dieser Übung über ein Python Script für Publish und Subscribe"><img src="images/mqtt-sensor-subscribe.jpg" class="img-fluid figure-img" alt="Device sendet Sensordaten und Topic an den MQTT Broker, ein weiteres Gerät abonniert (subscribe) dieses Topic und kann so die gesendeten Daten an das entsprechende Topic empfangen. In dieser Übung über ein Python Script für Publish und Subscribe"></a></p>
+<figcaption>Device sendet Sensordaten und Topic an den MQTT Broker, ein weiteres Gerät abonniert (subscribe) dieses Topic und kann so die gesendeten Daten an das entsprechende Topic empfangen. In dieser Übung über ein Python Script für <em>Publish</em> und <em>Subscribe</em></figcaption>
+</figure>
+</div>
 <p><strong>Script 1:</strong> <code>mqtt_sub.py</code> - Subscriber</p>
 <div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> paho.mqtt.client <span class="im">as</span> mqtt </span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>ip <span class="op">=</span> <span class="st">"127.0.0.1"</span></span>
@@ -455,31 +510,33 @@ Abb.&nbsp;1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, 
 <span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="2">Nachricht mit Topic an den MQTT Broker (ip,port) senden</span>
 </dd>
 </dl>
-<div class="exercise">
+<div id="exr-mqtt-python" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.2</strong></span> &nbsp;</p>
 <ul>
 <li>Speichere die beiden Dateien <code>mqtt_pub.py</code> und <code>mqtt_sub.py</code> im Ordner <code>mqtt</code> ab.</li>
 <li>(Optional: Passe die IP Adresse des MQTT Brokers an, falls ein anderer MQTT Broker genutzt werden soll.)</li>
-<li>Öffne zwei Terminals und führe diese mit <code>python3 mqtt_pub.py</code> und <code>python3 mqtt_sub.py</code> aus.</li>
+<li>Öffne zwei Terminals und führe diese mit <code>python mqtt_pub.py</code> und <code>python mqtt_sub.py</code> aus.</li>
 </ul>
 </div>
-<p>Falls die Library paho-mqtt nicht installiert ist, kann diese mit <code>sudo pip3 install paho-mqtt</code> installiert werden.</p>
+<p>Falls die Library paho-mqtt nicht installiert ist, kann diese in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install paho-mqtt</code>.</p>
 </section>
 <section id="aufgabe-3-sensordaten-mit-mqtt-übertragen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3-sensordaten-mit-mqtt-übertragen">Aufgabe 3: Sensordaten mit MQTT übertragen</h2>
 <p>Passe nun das Script <code>mqtt_pub.py</code> an, so dass die Temperatur vom Sensor <code>BME688</code> ausgelesen und über MQTT übertragen wird. Die Temperatur soll alle 10 Sekunden übertragen werden. Nutze hierfür das Script zum Auslesen der Sensordaten aus der Übung <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a> und passe dieses an.</p>
-<div class="exercise">
+<div id="exr-mqtt-bme688" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.3</strong></span> &nbsp;</p>
 <ul>
 <li>Speichere das <code>mqtt_pub.py</code> als <code>mqtt_pub_bme688.py</code> im Ordner <code>mqtt</code> ab.</li>
 <li>Ergänze das Script um die Funktionen zum auslesen der Temperatur des BME688 Sensors.</li>
 <li>Ergänze das Script für das Auslesen der Luftfeuchtigkeit und Luftdruck und ergänze die topics mit <code>iot/humidity</code> und <code>iot/pressure</code>.</li>
 <li>Erweitere das Script <code>mqtt_sub.py</code> um die Subscription für die Topics <code>iot/humidity</code> und <code>iot/pressure</code> und speichere es als <code>mqtt_sub_bme688.py</code> ab.</li>
-<li>Öffne zwei Terminals und führe diese mit <code>python3 mqtt_pub_bme688.py</code> und <code>python3 mqtt_sub_bme688.py</code> aus.</li>
+<li>Öffne zwei Terminals und führe diese mit <code>python mqtt_pub_bme688.py</code> und <code>python mqtt_sub_bme688.py</code> aus.</li>
 </ul>
 </div>
 </section>
 <section id="aufgabe-4-mqtt-mit-node-red-verwenden" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4-mqtt-mit-node-red-verwenden">Aufgabe 4: MQTT mit Node-RED verwenden</h2>
-<p>Node-Red ist ein grafisches Entwicklungswerkzeug für IoT, ein low-code Tool für <em>event-driven applications</em>. Es bietet eine browserbasierte und datenstromorientierte “Flow” Programmierung für die Verarbeitung von Sensordaten (ähnlich wie FME oder graphische Modellierungswerkzeuge in GIS). Die Implementation von Node-Red ist in JavaScript und basiert auf node.js. Datenverarbeitungsflows können gespeichert und wiederverwendet werden. Im Arbeitsbereich (<a href="#fig-noderedmqttflow" class="quarto-xref">Abb.&nbsp;<span>2</span></a>) können sogenannte Nodes, die unterschiedliche Funktionen erfüllen, zu einem Daten-“Flow” werden. Nodes können auch selbst erstellt werden. Es gibt eine Vielzahl von Nodes, die von der Community entwickelt wurden, die über den Node-Red Palette Manager installiert werden können. Core Nodes von Node-Red sind:</p>
+<p>Node-Red ist ein grafisches Entwicklungswerkzeug für IoT, ein low-code Tool für <em>event-driven applications</em>. Es bietet eine browserbasierte und datenstromorientierte “Flow” Programmierung für die Verarbeitung von Sensordaten (ähnlich wie FME oder graphische Modellierungswerkzeuge in GIS). Die Implementation von Node-Red ist in JavaScript und basiert auf node.js. Datenverarbeitungsflows können gespeichert und wiederverwendet werden. Im Arbeitsbereich (<a href="#fig-noderedmqttflow" class="quarto-xref">Abb.&nbsp;<span>10.2</span></a>) können sogenannte Nodes, die unterschiedliche Funktionen erfüllen, zu einem Daten-“Flow” werden. Nodes können auch selbst erstellt werden. Es gibt eine Vielzahl von Nodes, die von der Community entwickelt wurden, die über den Node-Red Palette Manager installiert werden können. Core Nodes von Node-Red sind:</p>
 <ul>
 <li><strong>Inject Node</strong>: Kann einen Flow über den Button direkt auslösen oder in regelmässigen Abständen mit Zeitstempel oder vordefinierten Nachrichten (msg) senden.</li>
 <li><strong>Debug Node</strong>: Kann die <a href="https://nodered.org/docs/user-guide/messages">Nachrichten</a> (msg) in Debug Sidebar anzeigen lassen.</li>
@@ -492,64 +549,70 @@ Abb.&nbsp;1: Typischer IoT Datenfluss und Verarbeitung über diverse Instanzen, 
 <div id="fig-noderedmqttflow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedmqttflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/node-red_mqtt_flow.png" class="img-fluid figure-img">
+<a href="images/node-red_mqtt_flow.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Abb.&nbsp;10.2: Node-Red Flow der Daten in das Topic iot/temperature published, und Nachrichten aus dem Topic iot/temperature subscribed."><img src="images/node-red_mqtt_flow.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noderedmqttflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;2: Node-Red Flow der Daten in das Topic <em>iot/temperature</em> published, und Nachrichten aus dem Topic <em>iot/temperature</em> subscribed.
+Abb.&nbsp;10.2: Node-Red Flow der Daten in das Topic <em>iot/temperature</em> published, und Nachrichten aus dem Topic <em>iot/temperature</em> subscribed.
 </figcaption>
 </figure>
 </div>
-<div class="exercise">
-<p>Erstelle einen Flow der Nachrichten an den MQTT Broker senden und Nachrichten vom MQTT Broker empfangen kann.</p>
+<div id="exr-nodered-flow" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.4</strong></span> Erstelle einen Flow der Nachrichten an den MQTT Broker senden und Nachrichten vom MQTT Broker empfangen kann.</p>
 <ol type="1">
-<li>Füge hierfür einen Inject Node, einen Debug Node und einen MQTT Output Node hinzu. Öffne die Einstellungen des MQTT Output Nodes (siehe <a href="#fig-noderedmqttnodesetup" class="quarto-xref">Abb.&nbsp;<span>3</span></a>) und setze die IP Adresse des MQTT Brokers und das Topic auf <code>iot/temperature</code>. Starte den Flow und überprüfe, ob die Nachrichten an den MQTT Broker gesendet werden.</li>
-<li>Erstelle nun einen weiteren Flow, der die Nachrichten vom MQTT Broker empfängt und in der Debug Sidebar anzeigt. Füge hierfür einen MQTT Input Node (siehe <a href="#fig-noderedmqttnodesetup" class="quarto-xref">Abb.&nbsp;<span>3</span></a>) und einen Debug Node hinzu. Öffne die Einstellungen des MQTT Input Nodes und setze die IP Adresse des MQTT Brokers und das Topic auf <code>iot/temperature</code>. Starte den Flow und überprüfe, ob die Nachrichten vom MQTT Broker empfangen werden.</li>
+<li>Füge hierfür einen Inject Node, einen Debug Node und einen MQTT Output Node hinzu. Öffne die Einstellungen des MQTT Output Nodes (siehe <a href="#fig-noderedmqttnodesetup" class="quarto-xref">Abb.&nbsp;<span>10.3</span></a>) und setze die IP Adresse des MQTT Brokers und das Topic auf <code>iot/temperature</code>. Starte den Flow und überprüfe, ob die Nachrichten an den MQTT Broker gesendet werden.</li>
+<li>Erstelle nun einen weiteren Flow, der die Nachrichten vom MQTT Broker empfängt und in der Debug Sidebar anzeigt. Füge hierfür einen MQTT Input Node (siehe <a href="#fig-noderedmqttnodesetup" class="quarto-xref">Abb.&nbsp;<span>10.3</span></a>) und einen Debug Node hinzu. Öffne die Einstellungen des MQTT Input Nodes und setze die IP Adresse des MQTT Brokers und das Topic auf <code>iot/temperature</code>. Starte den Flow und überprüfe, ob die Nachrichten vom MQTT Broker empfangen werden.</li>
 <li>Ergänze den Flow um einen MQTT Input Node für die Topics <code>iot/humidity</code> und <code>iot/pressure</code> und je einen Debug Node. Starte den Flow und überprüfe, ob die Nachrichten vom MQTT Broker empfangen werden.</li>
 </ol>
 </div>
 <div id="fig-noderedmqttnodesetup" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedmqttnodesetup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/node-red_mqtt_setup.jpg" class="img-fluid figure-img">
+<a href="images/node-red_mqtt_setup.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Abb.&nbsp;10.3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) Server Einstellungen öffnen und (3) IP Adresse des MQTT Brokers setzen, (4) subscribe to single topic wählen und (5) Topic iot/temperature setzen."><img src="images/node-red_mqtt_setup.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noderedmqttnodesetup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) Server Einstellungen öffnen und (3) IP Adresse des MQTT Brokers setzen, (4) subscribe to single topic wählen und (5) Topic <code>iot/temperature</code> setzen.
+Abb.&nbsp;10.3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) Server Einstellungen öffnen und (3) IP Adresse des MQTT Brokers setzen, (4) subscribe to single topic wählen und (5) Topic <code>iot/temperature</code> setzen.
 </figcaption>
 </figure>
 </div>
 <div class="hint">
-<p>Flows stoppen: Um einen Flow in der Ausführung zu stoppen, kann dieser über den Tab (rechte Maustaste) Flow deaktiviert werden (disable flow) und mit einem erneuten Übernehmen (Deploy) wird der Flow gestoppt.</p>
+<p>Flows stoppen: Um einen Flow in der Ausführung zu stoppen, kann dieser über den Tab Flow (rechte Maustaste) deaktiviert werden (disable flow) und mit einem erneuten Übernehmen (Deploy) wird der Flow gestoppt.</p>
 </div>
 </section>
 <section id="aufgabe-5-node-red-mqtt-mit-influxdb-verwenden" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-5-node-red-mqtt-mit-influxdb-verwenden">Aufgabe 5: Node-Red MQTT mit InfluxDB verwenden</h2>
-<p>InfluxDB ist die Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkt, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regele aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688. InfluxDB organisiert die Zeitreihendaten in Buckets (anstatt Datenbanken) und Messungen. Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können <span class="citation" data-cites="influxdata2023">(<a href="references.html#ref-influxdata2023" role="doc-biblioref">influxdata 2023</a>)</span>. Eine Messung ist enthält Felder mit key-value Paaren von Messwerten, die sich über die Zeit ändern. Tags sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können.</p>
+<p>InfluxDB ist die Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regele aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688.</p>
+<p>InfluxDB organisiert die Zeitreihendaten in <em>Buckets</em> (anstatt Datenbanken) und Messungen (Measurements). Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können <span class="citation" data-cites="influxdata2023">(<a href="references.html#ref-influxdata2023" role="doc-biblioref">influxdata, 2023</a>)</span>. Eine Messung enthält <em>Felder</em> mit key-value Paaren von Messwerten, die sich über die Zeit ändern. <em>Tags</em> sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können.</p>
 <p>Das Tutorial <a href="https://docs.influxdata.com/influxdb/v2/get-started/">Getting Started</a> zeigt die ersten Schritte mit InfluxDB.</p>
-<p><img src="images/mqtt-sensor-broker-influxdb.jpg" class="img-fluid"></p>
-<p>Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden.</p>
-<p>Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: <code>http://&lt;ip-adresse&gt;:8086</code>. Erstellt über die linke Menuleiste unter <em>Load Data</em> einen neuen Bucket mit dem Namen <code>iot</code>, falls dieser nicht schon existiert. Kopiert unter <em>load Data / API Tokens</em> den Token für den Zugang zur Datenbank.</p>
-<p>Diese Angaben (<em>bucket</em> und <em>API Token</em>) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>4</span></a>) mit Angaben zum Bucket (Datenbankname), Organisation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> und measurement und die Serververbindung (rechts in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>4</span></a>) mit der IP Adresse und das Token für den Zugang zur Datenbank.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/mqtt-sensor-broker-influxdb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank."><img src="images/mqtt-sensor-broker-influxdb.jpg" class="img-fluid figure-img" alt="IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank."></a></p>
+<figcaption>IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank.</figcaption>
+</figure>
+</div>
+<p>Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: <code>http://&lt;ip-adresse&gt;:8086</code>.</p>
+<p>Erstellt über die linke Menuleiste unter <em>Load Data</em> einen neuen Bucket mit dem Namen <code>iot</code>, falls dieser nicht schon existiert. Kopiert unter <em>load Data / API Tokens</em> den Token für den Zugang zur Datenbank.</p>
+<p>Diese Angaben (<em>bucket</em> und <em>API Token</em>) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit Angaben zum Bucket (Datenbankname), Organisation<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> und measurement und die Serververbindung (rechts in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit der IP Adresse und das Token für den Zugang zur Datenbank.</p>
 <div class="hint">
 <p>Falls keine Nodes für InfluxDB in Node-Red vorhanden sind, kann die Erweiterung <code>node-red-contrib-influxdb</code> über das Hauptmenu <em>Palette verwalten</em> im Tab <em>Installation</em> installiert werden.</p>
 </div>
 <div id="fig-noderedinfluxdb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedinfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/node-red_influxdb_setup.jpg" class="img-fluid figure-img">
+<a href="images/node-red_influxdb_setup.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Abb.&nbsp;10.4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung measurement (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank."><img src="images/node-red_influxdb_setup.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noderedinfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung <em>measurement</em> (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank.
+Abb.&nbsp;10.4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung <em>measurement</em> (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank.
 </figcaption>
 </figure>
 </div>
-<p>Die Messwerte können direkt in die InfluxDB geschrieben werden, jedoch fehlen da noch die Tags, die für die Filterung und Gruppierung verwendet werden können. Diese können über den Change Node hinzugefügt werden, wie in <a href="#fig-noderedpayload" class="quarto-xref">Abb.&nbsp;<span>5</span></a> gezeigt. Hierbei wird der Wert der Payload in ein Feld mit dem Namen <em>temperature</em> geschrieben und die Tags <em>device</em> und <em>sensor</em> werden hinzugefügt. Dieselbe Struktur kann alternativ auch mit dem Function Node erstellt werden, siehe <a href="#fig-noderedpayload" class="quarto-xref">Abb.&nbsp;<span>5</span></a> rechts. Hierbei wird der Wert der Payload in ein Feld mit dem Namen <em>temperature</em> geschrieben und die Tags <em>device</em> und <em>sensor</em> werden hinzugefügt. Die Bezeichnung der Messung <em>temperature</em> wird im InfluxDB Node definiert oder kann im Function Node überschrieben werden.</p>
+<p>Die Messwerte können direkt in die InfluxDB geschrieben werden, jedoch fehlen da noch die Tags, die für die Filterung und Gruppierung verwendet werden können. Diese können über den Change Node hinzugefügt werden, wie in <a href="#fig-noderedpayload" class="quarto-xref">Abb.&nbsp;<span>10.5</span></a> gezeigt. Hierbei wird der Wert der Payload in ein Feld mit dem Namen <em>temperature</em> geschrieben und die Tags <em>device</em> und <em>sensor</em> werden hinzugefügt. Dieselbe Struktur kann alternativ auch mit dem Function Node erstellt werden, siehe <a href="#fig-noderedpayload" class="quarto-xref">Abb.&nbsp;<span>10.5</span></a> rechts. Hierbei wird der Wert der Payload in ein Feld mit dem Namen <em>temperature</em> geschrieben und die Tags <em>device</em> und <em>sensor</em> werden hinzugefügt. Die Bezeichnung der Messung <em>temperature</em> wird im InfluxDB Node definiert oder kann im Function Node überschrieben werden.</p>
 <div id="fig-noderedpayload" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedpayload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/node-red_influxdb_change_function_node.jpg" class="img-fluid figure-img">
+<a href="images/node-red_influxdb_change_function_node.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Abb.&nbsp;10.5: Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden."><img src="images/node-red_influxdb_change_function_node.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noderedpayload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;5: Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden.
+Abb.&nbsp;10.5: Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden.
 </figcaption>
 </figure>
 </div>
@@ -572,18 +635,19 @@ Abb.&nbsp;5: Über den Change Node, wie auch den Function Node kann mit JavaScri
 <span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="3">Optional <em>measurement</em> kann im InfluxDB Node oder im Funktionsknoten definiert werden</span>
 </dd>
 </dl>
-<p>InfluxDB bietet über das Menu <em>Data Explorer</em> eine einfache Möglichkeit die Daten zu visualisieren. Der Query Builder (<a href="#fig-influxdbdataexplorer" class="quarto-xref">Abb.&nbsp;<span>6</span></a>) hilft bei der Erstellung von Abfragen mit der über die Fields und Tags gefiltert werden kann, die dann über den Button <em>Submit</em> ausgeführt und dargestellt werden können. Die erstellte Query kann über den <em>Script Editor</em> (<a href="#fig-influxdbdataexplorer" class="quarto-xref">Abb.&nbsp;<span>6</span></a>) angezeigt werden.</p>
+<p>InfluxDB bietet über das Menu <em>Data Explorer</em> eine einfache Möglichkeit die Daten zu visualisieren. Der Query Builder (<a href="#fig-influxdbdataexplorer" class="quarto-xref">Abb.&nbsp;<span>10.6</span></a>) hilft bei der Erstellung von Abfragen mit der über die Fields und Tags gefiltert werden kann, die dann über den Button <em>Submit</em> ausgeführt und dargestellt werden können. Die erstellte Query kann über den <em>Script Editor</em> (<a href="#fig-influxdbdataexplorer" class="quarto-xref">Abb.&nbsp;<span>10.6</span></a>) angezeigt werden.</p>
 <div id="fig-influxdbdataexplorer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-influxdbdataexplorer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/influxdb_data_explorer.png" class="img-fluid figure-img">
+<a href="images/influxdb_data_explorer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Abb.&nbsp;10.6: Über den Data Explorer können in InfluxDB einfach Abfragen zusammengestellt und über submit visualisiert werden"><img src="images/influxdb_data_explorer.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-influxdbdataexplorer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abfragen zusammengestellt und über <em>submit</em> visualisiert werden
+Abb.&nbsp;10.6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abfragen zusammengestellt und über <em>submit</em> visualisiert werden
 </figcaption>
 </figure>
 </div>
-<div class="exercise">
+<div id="exr-nodered-influxb" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.5</strong></span> &nbsp;</p>
 <ul>
 <li>Erstellt nun einen Flow der die Nachrichten des Topics <code>iot/temperature</code> vom MQTT Broker empfängt und in die InfluxDB schreibt.</li>
 <li>Erstellt erst einen flow der nur die Nachrichten ohne Tags in die InfluxDB schreibt</li>
@@ -596,8 +660,17 @@ Abb.&nbsp;6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abfrag
 </section>
 <section id="aufgabe-6-influxdb-mit-grafana-verwenden" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-6-influxdb-mit-grafana-verwenden">Aufgabe 6: InfluxDB mit Grafana verwenden</h2>
-<p>Grafana ist eine Open-Source Anwendung für die Darstellung von Daten aus den unterschiedlichsten Messquellen, wie Postgres, SQLite oder InfluxDB. In dieser Übung wird Grafana mit der InfluxDB Datenbank verwendet.</p>
-<p>Öffnet nun den Browser und gebt die IP Adresse des Raspberry Pi mit dem Port 3000 ein: <code>http://&lt;ip-adresse&gt;:3000</code>. Unter Connections / Data Sources können Grafana Datenquellen hinzugefügt werden, wählt nun <em>InfluxDB</em> um Grafana mit der InfluxDB zu verbinden. Setzt folgende Einstellungen (<a href="#fig-grafanainfluxdb" class="quarto-xref">Abb.&nbsp;<span>7</span></a>) und speichert diese:</p>
+<p>Grafana ist eine Open-Source Anwendung für die grafische Darstellung von Daten aus den verschiedenen Datenquellen, wie Postgres, SQLite oder InfluxDB. Über Grafana können interaktive Dashboards mit vielen Visualisierungsansätzen erstellt werden. In dieser Übung wird Grafana mit der InfluxDB Datenbank verwendet.</p>
+<div class="hint">
+<p><strong>Monitoring der Lichtverschmutzung am Nachthimmel</strong> TESS (Telescope Encoder and Sky Sensor) ist ein Photometer <span class="citation" data-cites="Zamorano2016">(<a href="references.html#ref-Zamorano2016" role="doc-biblioref">Zamorano et al., 2016</a>)</span> für das Stars4All Citizen Science Projekt mit dem Ziel die Lichtverschmutzung weltweit in der Nacht zu vermessen, welche nicht nur für die Umwelt problematisch ist, sondern auch für astronomische Beobachtungen. Die TESS Geräte senden von verschiedenen Standorten weltweit ihre Messungen welche über der folgende Dashboard mit Grafana der Öffentlichkeit zur Verfügung gestellt werden. Dashboard: <a href="https://tess.dashboards.stars4all.eu/">https://tess.dashboards.stars4all.eu/</a>, Messungen der Lichtverschmutzung am Beispiel des Naturparks Gantrisch in der Schweiz. <a href="https://tess.dashboards.stars4all.eu/d/datasheet_stars926/stars926?orgId=1">https://tess.dashboards.stars4all.eu/d/datasheet_stars926/stars926?orgId=1</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/mqtt_grafana_tess4all.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz"><img src="images/mqtt_grafana_tess4all.png" class="img-fluid figure-img" alt="Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz"></a></p>
+<figcaption>Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz</figcaption>
+</figure>
+</div>
+</div>
+<p>Öffnet nun den Browser und gebt die IP Adresse des Raspberry Pi mit dem Port 3000 ein: <code>http://&lt;ip-adresse&gt;:3000</code>. Unter Connections / Data Sources können Grafana Datenquellen hinzugefügt werden, wählt nun <em>InfluxDB</em> um Grafana mit der InfluxDB zu verbinden. Setzt folgende Einstellungen (<a href="#fig-grafanainfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.7</span></a>) und speichert diese:</p>
 <ul>
 <li><em>Query Language</em>: Wählt in den Einstellungen zu <em>Query Language</em> die Abfragesprache <code>Flux</code>.</li>
 <li><em>HTTP</em>: Setzt die IP Adresse des Raspberry Pi und den Port 8086: <code>http://localhost:8086</code>.</li>
@@ -608,25 +681,26 @@ Abb.&nbsp;6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abfrag
 <div id="fig-grafanainfluxdb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grafanainfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/mqtt_grafana_influxdb_settings.png" class="img-fluid figure-img">
+<a href="images/mqtt_grafana_influxdb_settings.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Abb.&nbsp;10.7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben."><img src="images/mqtt_grafana_influxdb_settings.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grafanainfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben.
+Abb.&nbsp;10.7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben.
 </figcaption>
 </figure>
 </div>
-<p>Ist die Verbindung erstellt, können neue Dashboards erstellt werden. Die Queries, die für die Visualisierung verwendet werden sollen, können über den <em>Query Builder</em> in InfluxDB erstellt und in Grafana beim Erstellen der Panels (<a href="#fig-grafanainfluxdbquery" class="quarto-xref">Abb.&nbsp;<span>8</span></a>) reinkopiert werden.</p>
+<p>Ist die Verbindung erstellt, können neue Dashboards erstellt werden. Die Queries, die für die Visualisierung verwendet werden sollen, können über den <em>Query Builder</em> in InfluxDB erstellt und in Grafana beim Erstellen der Panels (<a href="#fig-grafanainfluxdbquery" class="quarto-xref">Abb.&nbsp;<span>10.8</span></a>) reinkopiert werden.</p>
 <div id="fig-grafanainfluxdbquery" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grafanainfluxdbquery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/mqtt_grafana_influxdb_query.png" class="img-fluid figure-img">
+<a href="images/mqtt_grafana_influxdb_query.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden."><img src="images/mqtt_grafana_influxdb_query.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grafanainfluxdbquery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;8: Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden.
+Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden.
 </figcaption>
 </figure>
 </div>
-<div class="exercise">
+<div id="exr-influxb-grafana" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.6</strong></span> &nbsp;</p>
 <ul>
 <li>Erstellt eine Verbindung zwischen Grafana und der InfluxDB.</li>
 <li>Erstellt ein Dashboard mit einer Visualisierung der Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors.</li>
@@ -636,7 +710,12 @@ Abb.&nbsp;8: Flux Queries der Datenabfragen im Data Explorer können in Grafana 
 <section id="aufgabe-7-influxdb-mit-python-verwenden-optional" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-7-influxdb-mit-python-verwenden-optional">Aufgabe 7: InfluxDB mit Python verwenden (optional)</h2>
 <p>Anstatt mit Node-Red können die Daten des Sensors direkt in die InfluxDB geschrieben werden. Folgender Code zeigt wie die Daten des BME688 Sensors mit Python ausgelesen und in die InfluxDB geschrieben werden können. Teste erst, ob der <code>influxdb-client</code> installiert ist und installiere diesen falls nicht mit dem Befehl <code>pip3 install influxdb-client</code>. Folgendes Tutorial zeigt wie die Daten mit Python in die InfluxDB geschrieben werden können: <a href="https://www.influxdata.com/blog/getting-started-with-python-and-influxdb-v2-0/">Getting Started with Python and InfluxDB v2.0</a>.</p>
-<p><img src="images/mqtt-sensor-influxdb.jpg" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/mqtt-sensor-influxdb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben."><img src="images/mqtt-sensor-influxdb.jpg" class="img-fluid figure-img" alt="Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben."></a></p>
+<figcaption>Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben.</figcaption>
+</figure>
+</div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -654,21 +733,25 @@ Abb.&nbsp;8: Flux Queries der Datenabfragen im Data Explorer können in Grafana 
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">22.0</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> Point(<span class="st">"measures"</span>).tag(<span class="st">"fields"</span>, <span class="dv">2</span>).field(<span class="st">"temperature"</span>, temperature)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>write_api.write(bucket <span class="op">=</span> bucket, record <span class="op">=</span> data)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="exercise">
-<p>Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und in die InfluxDB schreibt.</p>
+<div id="exr-python-influxb" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 10.7</strong></span> Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und in die InfluxDB schreibt.</p>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-influxdata2023" class="csl-entry" role="listitem">
-influxdata, 2023. <a href="https://docs.influxdata.com/influxdb/v2/get-started/">Get Started with <span>InfluxDB</span> <span></span> <span>InfluxDB OSS</span> v2 <span>Documentation</span></a>.
+influxdata. (2023). <em>Get Started with <span>InfluxDB</span> <span></span> <span>InfluxDB OSS</span> v2 <span>Documentation</span></em>. https://docs.influxdata.com/influxdb/v2/get-started/.
+</div>
+<div id="ref-Zamorano2016" class="csl-entry" role="listitem">
+Zamorano, J., García, C., Tapia, C., Miguel, A. S. de, Pascual, S., &amp; Gallego, J. (2016). <span>STARS4ALL Night Sky Brightness Photometer</span>. <em>International Journal of Sustainable Lighting</em>, <em>18</em>, 49–54. <a href="https://doi.org/10.26607/ijsl.v18i0.21">https://doi.org/10.26607/ijsl.v18i0.21</a>
 </div>
 </div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>wird bei der Erstellung der Datenbank definiert<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Topics, die mit <code>$</code> beginnen sind reserviert für interne Informationen des Brokers und Clientstatistiken, oft in der Form <code>$SYS/</code>. Beispielsweise zeigt <code>$SYS/broker/clients/connected</code> die Anzahl der verbundenen Clients. Mit dem Wildcard <code>#</code> Filter könnt Ihr mit <code>$SYS/#</code> alle Systeminformationen der Brokers anzeigen lassen.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>wird bei der Erstellung der Datenbank definiert<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1095,13 +1178,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./E06_Biometrie.html" class="pagination-link" aria-label="E06 Biometrie">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">E06 Biometrie</span>
+      <a href="./E06_Biometrie.html" class="pagination-link" aria-label="Biometrie">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./A1_Rasperry_Pi.html" class="pagination-link" aria-label="Raspberry Pi\index{Raspberry Pi}">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./A1_Rasperry_Pi.html" class="pagination-link" aria-label="Raspberry Pi IoT Image">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1109,7 +1192,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -1119,6 +1202,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

@@ -83,6 +83,7 @@ $endfor$
 % uncomment: \makeatletter\def\fps@figure{htbp}\makeatother
 \PassOptionsToPackage{headsepline,footsepline}{scrlayer-scrpage}
 \PassOptionsToPackage{ngerman}{babel}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 
 
@@ -290,10 +291,11 @@ $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
 \usepackage{xcolor}
-\definecolor{default-linkcolor}{HTML}{A50000}
-\definecolor{default-filecolor}{HTML}{A50000}
-\definecolor{default-citecolor}{HTML}{4077C0}
-\definecolor{default-urlcolor}{HTML}{4077C0}
+% remove colordefinitions, as they are defined in igeo.sty
+% \definecolor{default-linkcolor}{HTML}{A50000}
+% \definecolor{default-filecolor}{HTML}{A50000}
+% \definecolor{default-citecolor}{HTML}{4077C0}
+% \definecolor{default-urlcolor}{HTML}{4077C0}
 $if(footnotes-pretty)$
 % load footmisc in order to customize footnotes (footmisc has to be loaded before hyperref, cf. https://tex.stackexchange.com/a/169124/144087)
 \usepackage[hang,flushmargin,bottom,multiple]{footmisc}
@@ -378,7 +380,7 @@ $highlighting-macros$
 % the help of fvextra). Redefinition is necessary because it is unlikely that
 % pandoc includes fvextra in the default template.
 \usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=$if(code-block-font-size)$$code-block-font-size$$else$\small$endif$,commandchars=\\\{\}, breaknonspaceingroup}
 
 $endif$
 $if(tables)$
@@ -565,6 +567,7 @@ $endif$
 \floatplacement{figure}{$if(float-placement-figure)$$float-placement-figure$$else$H$endif$}
 
 \usepackage{xparse}
+$if(book)$
 $if(minitoc)$
 %\RequirePackage[tight,undotted]{minitoc} % load after RedeclareSectionCommand! otherwise minitoc don't show
 % add minitoc automatically add the beginning of each unstarred chapter
@@ -633,6 +636,8 @@ $endif$
 $if(prefixchapterfullpage)$
 \renewcommand{\prefiximagechapterimage}{$prefixchapterfullpage$\thechapter.jpg}
 $endif$
+$endif$	
+
 
 $if(logo)$
 \IfFileExists{$logo$}{\renewcommand{\logo}{$logo$}}{}
@@ -644,6 +649,50 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 %%%% header-includes end
+
+% Quarto Environment codelisting mit caption z.B. Dateiname für ein Codebeispiel
+% Listings ohne floatstyle "ruled" überschreiben des Stils "plaintop"
+% Folgender Befehl reicht nicht:
+% reduziert den Abstand oberhalb der Bildunterschrift (nicht nur bei codelisting)
+% \setlength{\abovecaptionskip}{0.5em} 
+% Folglich den floatstyle: plaintop ändern mit reduziertem Abstand zum Code
+% http://mirrors.ctan.org/macros/latex/contrib/float/float.pdf Seite 11
+\makeatletter
+\renewcommand\fs@plaintop{\fs@plain
+\def\@fs@mid{\vspace{-0.5em}\relax}%
+\let\@fs@iftopcapt\iftrue}
+\let\floatc@plaintop=\floatc@plain
+\makeatother
+\floatstyle{plaintop}
+\restylefloat{codelisting}
+
+% Line Breaks in Verbatim Environment https://github.com/jgm/pandoc/issues/4302
+% addition of breknonspaceingroup and breakanywhere leads to error
+%\usepackage{fancyvrb}
+%\usepackage{fvextra}
+%\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breaknonspaceingroup, breakanywhere,fontsize=\small,commandchars=\\\{\}}
+%\fvset{breaklines}
+%\fvset{breaknonspaceingroup}
+%\fvset{breakanywhere}
+
+
+% redefine maketitle for scrbook as well, used only for printing single chapters left aligned
+% similar to scrartcl 
+% source https://tex.stackexchange.com/questions/494198/customising-the-koma-scrartcl-maketitle-environment
+% Redefine \maketitle to be left-aligned
+\renewcommand*{\maketitle}{
+  \begin{flushleft}
+    \vspace*{1em} % Adjust the vertical space as needed
+    {\LARGE \bfseries \title} % Title in large bold font
+    \vspace{1em} % Adjust the vertical space as needed
+    \par
+    {\large \author} % Author in large font
+    \vspace{1em} % Adjust the vertical space as needed
+    \par
+    {\large \date} % Date in large font
+  \end{flushleft}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -860,6 +909,21 @@ $endif$
 $if(beamer)$
 $else$
 \usepackage{titling}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% customise settings for the titling package
+% Redefine \maketitle to be left-aligned
+\pretitle{\begin{flushleft}\vspace{-4em}\Huge\bfseries}
+\posttitle{\par 
+$if(subtitle)$
+\par \huge\mdseries $subtitle$
+$endif$
+\vspace{1em}\end{flushleft}}
+\preauthor{\begin{flushleft}\large}
+\postauthor{\par\vspace{-0.5em}\end{flushleft}}
+\predate{\begin{flushleft}\large}
+\postdate{\par\vspace{1.5em}\end{flushleft}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{$title$}
 \author{$for(author)$$author$$sep$, $endfor$}
 \date{$date$}
@@ -1053,8 +1117,9 @@ $else$
 % header footer that work with two-sided layout
 % header-footer 
 
-
+$if(book)$
 \renewcommand*{\chaptermarkformat}{} % no numbers in header
+$endif$
 \renewcommand*{\sectionmarkformat}[1]{}
 %\automark{chapter}
 \makeatletter%
@@ -1062,7 +1127,7 @@ $else$
 \newpairofpagestyles{eisvogel-header-footer}{%chapter header-footer style
     \clearpairofpagestyles
     \lehead{\headerlogo} % twoside fix ->otherwise use \ihead[]{}
-    \lohead{\headerlogo}
+    \lohead{\headerlogo} % e=even, o=odd, l=left, c=center, r=right
     \rehead{\headmark}
     \rohead{\headmark}
     \rehead*{\headmark}
@@ -1075,10 +1140,26 @@ $else$
 \makeatother%
 \pagestyle{eisvogel-header-footer}
 
+\newpairofpagestyles{scrartcl-header-footer}{% style for scrartcl
+    \clearpairofpagestyles
+    \lehead{\headerlogo} % twoside fix ->otherwise use \ihead[]{}
+    \lohead{\headerlogo} % e=even, o=odd, l=left, c=center, r=right
+    \rehead{}
+    \rohead{}
+    \rehead*{}
+    \rohead*{}
+    \refoot[]{\thepage}% twoside Jane Doe, John Snow
+    \rofoot[]{\thepage}
+}
+
+
+
 $if(book)$
 \deftripstyle{ChapterStyle}{}{}{}{}{\pagemark}{}
 \renewcommand*{\chapterpagestyle}{ChapterStyle}
 \renewcommand*{\chapterpagestyle}{eisvogel-header-footer}% Chapter Style schon initiieren
+$else$
+\pagestyle{scrartcl-header-footer}
 $endif$
 
 % Workaround da book.lua in quarto bei section noch zusätzlich ein markright einfügt sind die 
@@ -1086,8 +1167,9 @@ $endif$
 % zu lange sind und dann das Logo überdecken
 % siehe: https://github.com/quarto-dev/quarto-cli/blob/ddaaa39e6f30a72807ab14c1a634d9929cce229b/src/resources/filters/quarto-post/book.lua
 % lokal ist dies in der Datei: main.lua
+$if(book)$
 \renewcommand{\markright}[1]{\def\chaptertitle{#1}} % workaround for quarto book.lua
-
+$endif$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $if(page-background)$
 \backgroundsetup{
@@ -1146,6 +1228,17 @@ $endif$
 % New title page
 $if(titlepage)$
 \fhnwtitlepage{$title-image$}
+% $else$
+% $if(coverpage)$
+% $else$
+
+% % if book has no titlepage or coverpage den set a title
+% \maketitle
+% % $if(minitoc)$
+% % \dominitoc
+% % \minitoc
+% % $endif$
+% $endif$
 $endif$
 % prepend to lof,lot
 % \setcounter{tocdepth}{1}% otherwise lof,lot result empty if depth is 0 for tableofcontents 

@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pia Bereuter">
 
-<title>E06 Biometrie – Einführung in IoT</title>
+<title>9&nbsp; Biometrie – Einführung in IoT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,6 +97,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -137,7 +141,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E06_Biometrie.html">E06 Biometrie</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E06_Biometrie.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -222,43 +226,43 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,7 +279,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -307,40 +311,62 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
-  <ul class="collapse">
-  <li><a href="#max30101-breakout-heart-rate-oximeter-smoke-sensor" id="toc-max30101-breakout-heart-rate-oximeter-smoke-sensor" class="nav-link active" data-scroll-target="#max30101-breakout-heart-rate-oximeter-smoke-sensor">MAX30101 Breakout Heart Rate, Oximeter, Smoke Sensor</a></li>
+  <ul>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
+  <li><a href="#max30101-breakout-heart-rate-oximeter-smoke-sensor" id="toc-max30101-breakout-heart-rate-oximeter-smoke-sensor" class="nav-link" data-scroll-target="#max30101-breakout-heart-rate-oximeter-smoke-sensor">MAX30101 Breakout Heart Rate, Oximeter, Smoke Sensor</a></li>
   <li><a href="#übungsaufbau" id="toc-übungsaufbau" class="nav-link" data-scroll-target="#übungsaufbau">Übungsaufbau</a></li>
-  <li><a href="#aufgabe-1-distanzmessung-konsole" id="toc-aufgabe-1-distanzmessung-konsole" class="nav-link" data-scroll-target="#aufgabe-1-distanzmessung-konsole">Aufgabe 1: Distanzmessung Konsole</a></li>
+  <li><a href="#aufgabe-1-biometriemessung-konsole" id="toc-aufgabe-1-biometriemessung-konsole" class="nav-link" data-scroll-target="#aufgabe-1-biometriemessung-konsole">Aufgabe 1: Biometriemessung Konsole</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/E06_Biometrie.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/E06_Biometrie.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div><div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="chapters/E06_Biometrie.pdf"><i class="bi bi-file-pdf"></i>Kapitel PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code-Links</h2><ul><li><a href="data/E06_Biometrie.zip"><i class="bi bi-file-zip"></i>Ausgangsdaten</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E06_Biometrie.html">E06 Biometrie</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E06_Biometrie.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">E06 Biometrie</h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor:in</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pia Bereuter </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">6. Oktober. 2024</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Zusammenfassung</div>
+    Biometrische Messungen ermöglichen die Erfassung von physiologischen Daten wie Herzfrequenz oder Sauerstoffsättigung. Während diese Sensoren nicht typische Sensoren für IoT Projekte sind, können sie für spezielle Anwendungen wie Gesundheitsüberwachung oder Fitness eingesetzt werden. Diese Übung führt in die biometrischen Messungen mit dem MAX30101 Sensor ein und zeigt wie die Herzfrequenz gemessen werden kann.
+  </div>
+</div>
 
 
 </header>
 
 
+<section id="einführung" class="level2">
+<h2 class="anchored" data-anchor-id="einführung">Einführung</h2>
 <p>Ziel dieser Übung ist es biometrische Messungen mit dem <em>MAX30101</em> Sensor durchzuführen und den Sensor in seiner funktionsweise zu untersuchen. Der <em>MAX30101</em> ist ein Sensor zur Messung der Herzfrequenz und der Sauerstoffsättigung im Blut und ein Rauch-/Partikelsensor. Er verfügt über eine I2C Schnittstelle und kann über eine Python Library angesteuert werden.</p>
+<p><strong>Unterlagen:</strong> <em><i class="bi-file-zip"></i> E06_Biometrie.zip</em></p>
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Schaut Euch folgendes von Video von Peter Charlton zur Funktionsweise der Herzfrequenzmessung an: <a href="https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof">Photoplethysmography in a minute (and a bit) - Peter Charlton</a></li>
-<li>Studiere das Datenblatt zum MAX30101 <span class="citation" data-cites="maximintegrated2020">(<a href="references.html#ref-maximintegrated2020" role="doc-biblioref">maxim integrated 2020</a>)</span>
+<li>Studiere das Datenblatt zum MAX30101 <span class="citation" data-cites="maximintegrated2020">(<a href="references.html#ref-maximintegrated2020" role="doc-biblioref">maxim integrated, 2020</a>)</span>
 <ul>
 <li>In welchen Temperaturbereichen kann der Sensor eingesetzt werden?</li>
 <li>Welches ist die höchste Abtastrate für die Sauerstoffmessungen?</li>
@@ -370,6 +396,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+</section>
 <section id="max30101-breakout-heart-rate-oximeter-smoke-sensor" class="level2">
 <h2 class="anchored" data-anchor-id="max30101-breakout-heart-rate-oximeter-smoke-sensor">MAX30101 Breakout Heart Rate, Oximeter, Smoke Sensor</h2>
 <p>Der MAX30101 ist hochentwickelter Herzfrequenz-, Oximeter- und Rauch-/Partikelsensor. Der Sensor verfügt über drei LEDs (rot, grün, IR) und Photodetektoren. Mit der Photoplethysmographie (photoplethysmography PPG) kann über die Farbveränderung der Haut bei jedem Herzschlag dieser detektiert werden, wenn der Sensor leicht auf den Finger gedrückt wird. Der Sensor kann auch dazu benutzt werden um Partikel in der Luft wie rauch zu erkennen, in dem er die Lichtmenge, die von Partikeln in der Luft zurückgeworfen wird misst.</p>
@@ -384,10 +411,10 @@ div.csl-indent {
 <div id="fig-MAX30101" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-MAX30101-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/MAX30101_wide.jpg" class="img-fluid figure-img">
+<a href="images/MAX30101_wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram des MAX30101 Moduls Quelle: @maximintegrated2020"><img src="images/MAX30101_wide.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MAX30101-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram des MAX30101 Moduls Quelle: <span class="citation" data-cites="maximintegrated2020">maxim integrated (<a href="references.html#ref-maximintegrated2020" role="doc-biblioref">2020</a>)</span>
+Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram des MAX30101 Moduls Quelle: <span class="citation" data-cites="maximintegrated2020">maxim integrated (<a href="references.html#ref-maximintegrated2020" role="doc-biblioref">2020</a>)</span>
 </figcaption>
 </figure>
 </div>
@@ -399,18 +426,18 @@ Abb.&nbsp;1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram 
 <li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>MAX30101</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
 <li>Schliesse den Sensor <strong>MAX30101</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
 <li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x29</code> erkannt werden.</li>
-<li>Kontrolliere, ob die Library <code>vl53l5cx_ctypes</code> installiert ist mit <code>python -c "import vl53l5cx_ctypes"</code>. Installiere die Library mit <code>sudo pip3 install vl53l5cx-ctypes</code> falls sie nicht installiert ist.</li>
+<li>Kontrolliere, ob die Library <code>vl53l5cx_ctypes</code> installiert ist mit <code>python -c "import vl53l5cx_ctypes"</code>. Installiere die Library mit in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install vl53l5cx_ctypes</code>, falls sie nicht installiert ist</li>
 </ul>
 <p>Wechsle in den Ordner <em>Documents</em> und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/max30105-python</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> max30105-python/examples</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="aufgabe-1-distanzmessung-konsole" class="level2">
-<h2 class="anchored" data-anchor-id="aufgabe-1-distanzmessung-konsole">Aufgabe 1: Distanzmessung Konsole</h2>
+<section id="aufgabe-1-biometriemessung-konsole" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-1-biometriemessung-konsole">Aufgabe 1: Biometriemessung Konsole</h2>
 <p>Teste das Beispiel <code>read-heartbeat.py</code> im Ordner <em>examples</em>. Dieses Beispiel liest die Pulsschläge pro Minute in PPM (beats per minute). Ein erkannter Pulsschlag wird mit einem <code>&lt;3</code> angezeigt.</p>
-<p>Startet das Script mit <code>python3 read-heartbeat.py</code>. Mit <code>Ctrl+c</code> kann das Script wieder gestopppt wrden. Die Ausgabe sollte in etwa so aussehen (gekürzt):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> read-heartbeat.py </span>
+<p>Startet das Script mit <code>python read-heartbeat.py</code>. Mit <code>Ctrl+c</code> kann das Script wieder gestopppt wrden. Die Ausgabe sollte in etwa so aussehen (gekürzt):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> read-heartbeat.py </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">NOTE!</span> This code should not be used for medical diagnosis. </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Starting</span> readings in 10 seconds...</span>
@@ -482,8 +509,8 @@ Abb.&nbsp;1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram 
 <span data-code-cell="annotated-cell-3" data-code-lines="29" data-code-annotation="6">Bei einem erkannten Herzschlag wird die Funktion <code>display_heartrate</code> aufgerufen und der Herzschlag wird über 4 Sekunden gemittelt in der Konsole ausgegeben.</span>
 </dd>
 </dl>
-<div class="exercise">
-<p><strong>Pulsmessung</strong></p>
+<div id="exr-pulsmessung" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 9.1</strong></span> <strong>Pulsmessung</strong></p>
 <ul>
 <li>Führe das Beispiel <code>read-heartbeat.py</code> aus und beobachte die Messwerte.</li>
 <li>Führe unterschiedliche Tests durch und behandle den Sensor freundlich.</li>
@@ -493,9 +520,9 @@ Abb.&nbsp;1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram 
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-maximintegrated2020" class="csl-entry" role="listitem">
-maxim integrated, 2020. <span>MAX30101 High-Sensitivity Pulse Oximeter</span> and <span>Heart-Rate Sensor</span> for <span>Wearable Health</span>.
+maxim integrated. (2020). <em><span>MAX30101 High-Sensitivity Pulse Oximeter</span> and <span>Heart-Rate Sensor</span> for <span>Wearable Health</span></em>.
 </div>
 </div>
 </section>
@@ -923,13 +950,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./E05_Thermalmessung.html" class="pagination-link" aria-label="E05 Thermale Aufnahmen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">E05 Thermale Aufnahmen</span>
+      <a href="./E05_Thermalmessung.html" class="pagination-link" aria-label="Thermale Aufnahmen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./E07_MQTT.html" class="pagination-link" aria-label="E07 MQTT">
-        <span class="nav-page-text">E07 MQTT</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./E07_MQTT.html" class="pagination-link" aria-label="IoT Monitoring">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -937,7 +964,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -947,6 +974,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

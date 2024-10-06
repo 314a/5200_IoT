@@ -1,161 +1,24 @@
 project:
-  type: book
-  output-dir: docs
+  type: default
+  
+profile:
+  default: chapters
+  # output-dir: chapters
+  # render:
+  #   #- "intro.qmd"
+  #   - L00_minimal_chapter.qmd
 
-filters:
-  - _resources/scripts/filter_styleDiv.lua
-  #- _resources/scripts/filter_hideSolution.lua
-citation: true
-book:
-  title: "Einführung in IoT"
-  subtitle: "Modulübergreifender Kurs Vertiefung II"
-  #abstract: "Einführung in IoT ist ein Modulübergreifender Kurs Vertiefung II des Bachelor Geomatik. Er behandelt IoT-Grundlagen, Sensoren, Datenverwaltung, Datenübertragung und Visualisierung mit praktischen Übungen mit dem Raspberry Pi mit einem Fokus auf Sensoren."
-  output-file: "5200_IoT"
-  author:
-    - name: Pia Bereuter
-      url: https://www.fhnw.ch/de/personen/pia-bereuter
-      affiliation: Institut Geomatik, Fachhoschule Nordwestschweiz
-      affiliation-url: https://fhnw.ch/igeo
+# pre-render:
+# - quarto --version
 
-  date: today  
-  cover-image: images/cover.png
-  site-url: https://314a.github.io/5200_IoT
-  repo-url: https://github.com/314a/5200_IoT
-  repo-branch: master
-  repo-actions: [edit, issue]
-  downloads: [pdf]
-  page-navigation: true
-  license: CC BY
-  favicon: images/favicon.ico
-  sidebar:
-    logo: images/logo.jpg
-  #navbar:  
-  #  logo: images/fhnw.png
-  #  search: true
-  page-footer: 
-    left: "![](images/fhnw_white.png)"
-    center: "Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
-    right: "Institut Geomatik, Fachhochschule Nordwestschweiz" 
-    border: false
-  chapters:
-    - index.qmd
-    - part: "Theorie"
-      chapters:
-      - 01_IoT.qmd
-      - 02_Sensoren.qmd
-      - 03_Datenübertragung.qmd
-      #- 04_Datenverwaltung.qmd
-      #- 05_Visualisierung.qmd
-      - references.qmd
-      #- summary.qmd
-    - part: "Praktika"
-      chapters:
-      - E01_Luftqualitaet.qmd
-      - E02_Spektralmessung.qmd
-      - E03_Bewegungsmessung.qmd
-      - E04_Distanzmessung.qmd
-      - E05_Thermalmessung.qmd
-      - E06_Biometrie.qmd
-      - E07_MQTT.qmd
-  appendices: 
-    - A1_Rasperry_Pi.qmd
-    - A2_Sensorbox.qmd
-    - A3_CheatSheet.qmd
-    - A4_Setup.qmd
-    #- 0X_Quarto_Elements.qmd
+
 bibliography: references.bib
 csl: "_resources/templates/harvard-x.csl"
-date-format: "D. MMMM. YYYY"
-highlight-style: arrow
-toc-depth: 2
-number-depth: 1  
-lang: de
+date-format: "DD.MM.YYYY"
+lang: de-CH
 #code-block-background: true      
 #code-block-border-left: true
-callout-appearance: default
-quarto-callout-color: ff6600
-quarto-callout-note-color: ff6600
-quarto-callout-note-color-frame: ff6600
+# callout-appearance: default
 thanks: Thanks to the Quarto team for their great work on this project.
 copyright: Pia Bereuter © 2024 
 license: Diese Arbeit ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
-format:
-  html:
-    theme:
-      - cosmo
-      - custom.scss
-    mermaid:
-      theme: neutral
-    cover-image: images/cover.png
-    code-link: true
-    # self-contained: true führt bei grossen Dokumenten zu out of memory
-    # self-contained: true
-    # self-contained-math: true
-
-  docx:
-    reference-doc: _resources/templates/template.dotx
-  pdf:
-    documentclass: scrbook
-    classoption: oneside, openany
-    single-file-book: true
-    keep-tex: true
-    template: "_resources/templates/eisvogel_314a.tex"
-    #template: "_resources/templates/eisvogel.tex"
-    mermaid:
-      theme: neutral
-    links-as-notes: false # https://github.com/quarto-dev/quarto-cli/discussions/907
-    papersize: a4
-    fontfamily: arial
-    fontsize: 11pt
-    mainfont: Arial
-    sansfont: Arial
-    monofont: "Courier New"
-    monofontoptions: "Scale=0.9"
-    #geometry: inner=2.5cm, outer=4cm, top=3cm, bottom=2.5cm,marginpar=3cm,headsep=8mm
-    geometry: inner=2.1cm, outer=4cm, top=3cm, bottom=3cm,marginpar=3cm,headsep=8mm
-    #bookclass: false
-    chapterPrefix: false
-    # add \adjustmtc \mtcaddchapter after unnumbered chapters to update minitoc
-    minitoc: false
-    titlepage: false
-    coverpage: true
-    colorlinks: true
-    linkcolor: gray
-    title-image: images/title-image.jpg
-    cover-image: images/background.jpg
-    logo: images/fhnw.eps
-    crossref:
-      fig-title: Abbildung   # (default is "Figure")
-      tbl-title: Tabelle     # (default is "Table")
-      eq-title: Formel     # (default is "Equation") 
-      title-delim: ":"       # (default is ":")
-      fig-prefix: Abbildung  # (default is "Figure")
-      tbl-prefix: Tabelle    # (default is "Table")
-      eq-prefix: Formel    # (default is "Equation")
-      ref-hyperlink: true    # (default is true)
-      labels: arabic         # (default is arabic)
-      subref-labels: alpha a # (default is alpha a)
-    include-in-header: 
-      text: |
-        \usepackage{makeidx}
-        \makeindex      
-        %\renewcommand{\markright}[1]{\def\chaptertitle{#1}} % workaround for quarto book.lua
-        % https://github.com/quarto-dev/quarto-cli/blob/ddaaa39e6f30a72807ab14c1a634d9929cce229b/src/resources/filters/quarto-post/book.lua <- markright command
-    include-after-body: 
-      text: |
-        \printindex
-    impressum: |
-      Module 5200 Einführung in IoT Skript  
-      Herbstsemester 2023, 2024
-
-      Institut Geomatik, Fachhochschule Nordwestschweiz, Hofackerstrasse 30, 4132 Muttenz   
-      Autorin: Prof. Dr. Pia Bereuter  
-      Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) 
-      
-      Titelbild: Rasperry Pi mit Sensoren, 2022, Bereuter
-
-
-
-      \includegraphics[height=8mm]{images/fhnw.eps}
-
-

@@ -1,7 +1,25 @@
-# E06 Biometrie {.unnumbered}
+---
+title: "Biometrie"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/E06_Biometrie.pdf
+code-links:
+  - text: Ausgangsdaten
+    icon: file-zip
+    href: data/E06_Biometrie.zip
+resources:
+  - data/E06_Biometrie.zip
+abstract: "Biometrische Messungen ermöglichen die Erfassung von physiologischen Daten wie Herzfrequenz oder Sauerstoffsättigung. Während diese Sensoren nicht typische Sensoren für IoT Projekte sind, können sie für spezielle Anwendungen wie Gesundheitsüberwachung oder Fitness eingesetzt werden. Diese Übung führt in die biometrischen Messungen mit dem MAX30101 Sensor ein und zeigt wie die Herzfrequenz gemessen werden kann."
+---
 
+## Einführung
 
 Ziel dieser Übung ist es biometrische Messungen mit dem *MAX30101* Sensor durchzuführen und den Sensor in seiner funktionsweise zu untersuchen. Der *MAX30101* ist ein Sensor zur Messung der Herzfrequenz und der Sauerstoffsättigung im Blut und ein Rauch-/Partikelsensor. Er verfügt über eine I2C Schnittstelle und kann über eine Python Library angesteuert werden.
+
+**Unterlagen:** *<i class="bi-file-zip"></i> E06_Biometrie.zip* 
 
 **Vorbereitung**
 
@@ -15,7 +33,7 @@ Ziel dieser Übung ist es biometrische Messungen mit dem *MAX30101* Sensor durch
 {{< video https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof >}}
 :::
 ::: {.content-visible unless-format="html"}
-[![Photoplethysmography in a minute (and a bit) - Peter Charlton](images/youtube_photoplethysmography.png)](https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof)
+![Photoplethysmography in a minute (and a bit) - Peter Charlton [Youtube Video](https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof)](images/youtube_photoplethysmography.png)
 :::
 
 | **Unterlagen** |                                                          |
@@ -44,7 +62,7 @@ MAX30101 Breakout - Heart Rate, Oximeter, Smoke Sensor Breakout
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `MAX30101`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **MAX30101** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x29` erkannt werden.
-- Kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Installiere die Library mit `sudo pip3 install vl53l5cx-ctypes` falls sie nicht installiert ist.
+- Kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install vl53l5cx_ctypes`, falls sie nicht installiert ist
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 
@@ -54,13 +72,13 @@ git clone https://github.com/pimoroni/max30105-python
 cd max30105-python/examples
 ```
 
-## Aufgabe 1: Distanzmessung Konsole
+## Aufgabe 1: Biometriemessung Konsole
 Teste das Beispiel `read-heartbeat.py` im Ordner *examples*. Dieses Beispiel liest die Pulsschläge pro Minute in PPM (beats per minute). Ein erkannter Pulsschlag wird mit einem `<3` angezeigt. 
 
-Startet das Script mit `python3 read-heartbeat.py`. Mit `Ctrl+c` kann das Script wieder gestopppt wrden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
+Startet das Script mit `python read-heartbeat.py`. Mit `Ctrl+c` kann das Script wieder gestopppt wrden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
 
 ``` bash
-python3 read-heartbeat.py 
+python read-heartbeat.py 
 NOTE! This code should not be used for medical diagnosis. 
 ...
 Starting readings in 10 seconds...
@@ -119,11 +137,21 @@ except KeyboardInterrupt:
 6. Bei einem erkannten Herzschlag wird die Funktion `display_heartrate` aufgerufen und der Herzschlag wird über 4 Sekunden gemittelt in der Konsole ausgegeben.
 
 
-::: exercise
+::: {#exr-pulsmessung}
 **Pulsmessung**
 
 - Führe das Beispiel `read-heartbeat.py` aus und beobachte die Messwerte.
 - Führe unterschiedliche Tests durch und behandle den Sensor freundlich.
 - Vergleiche die Messwerte und kontrolliere die Werte in dem Du den eigenen Puls misst oder mit einem Sportuhr vergleichst.
 - Studiere den Code der Beispiele und versuche die Funktionsweise zu verstehen.
+:::
+
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-pulsmessung}
+Je nach dem wie der Sensor auf dem Finger platziert wird, können die Messwerte stark variieren. Der Finger sollte leicht auf den Sensor gedrückt werden. Die Messwerte können durch Bewegungen oder Lichtveränderungen beeinflusst werden. Die Messwerte sollten in etwa mit der eigenen Pulsmessung übereinstimmen.
+:::
+:::
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
 :::

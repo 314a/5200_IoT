@@ -1,7 +1,26 @@
-# E04 Distanzmessung {.unnumbered}
+---
+title: "Distanzmessung"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/E04_Distanzmessung.pdf
+code-links:
+  - text: Ausgangsdaten
+    icon: file-zip
+    href: data/E04_Distanzmessung.zip
+resources:
+  - data/E04_Distanzmessung.zip
+abstract: "Distanzmessungen sind essentiell im Bereich der Geomatik. Unterschiedliche Messverfahren ermöglichen Distanzmessungen unter anderem Time-of-Flight Sensoren, die in dieser Übung praktisch genutzt und getestet werden."
+---
 
+
+## Einführung
 
 Ziel dieser Übung ist es Distanzmessungen mit dem VL53L5CX Sensor kennen zu lernen und die Sensordaten auszulesen und testen. Der *VL53L5CX* ist ein 8x8 Time of Flight (ToF) Array Sensor, der über eine I2C Schnittstelle mit dem Raspberry Pi verbunden wird und einer Python Library angesteuert werden kann.
+
+**Unterlagen:** *<i class="bi-file-zip"></i> E04_Distanzmessung.zip* 
 
 **Vorbereitung**
 
@@ -15,7 +34,7 @@ Ziel dieser Übung ist es Distanzmessungen mit dem VL53L5CX Sensor kennen zu ler
 {{< video https://www.youtube.com/embed/nf527vcKRSE?si=Q2Wm_pS2O1n99-ha >}}
 :::
 ::: {.content-visible unless-format="html"}
-[![Adafruit - EYE ON NPI - ST VL53L5CX Time-of-Flight Ranging Sensor](images/youtube_adafruit_VL53L5CX.png)](https://www.youtube.com/embed/nf527vcKRSE?si=Q2Wm_pS2O1n99-ha)
+![Adafruit - EYE ON NPI - ST VL53L5CX Time-of-Flight Ranging Sensor [Youtube Video](https://www.youtube.com/embed/nf527vcKRSE?si=Q2Wm_pS2O1n99-ha)](images/youtube_adafruit_VL53L5CX.png)
 :::
 
 | **Unterlagen** |                                                          |
@@ -46,7 +65,7 @@ VL53L5CX 8x8 Time of Flight (ToF) Array Sensor Breakout
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `VL53L5CX`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **VL53L5CX** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x29` erkannt werden.
-- Kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Installiere die Library mit `sudo pip3 install vl53l5cx-ctypes` falls sie nicht installiert ist.
+- Kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install st7789`, falls sie nicht installiert ist
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 
@@ -63,7 +82,7 @@ Teste das Beispiel `test.py` im Ordner *examples*. Dieses Beispiel liest die Wer
 Das Script startet langsam, da die Library jeweils die Firmware beim Starten lädt. 
 :::
 
-Startet das Script mit `python3 test.py`. Mit `Ctrl+c` kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
+Startet das Script mit `python test.py`. Mit `Ctrl+C` kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
 
 ``` bash
 python3 test.py 
@@ -136,13 +155,19 @@ while True:
 3. Messung initialisieren
 4. Warten 0.1 Sekunden (damit die Ausgabe nicht zu schnell ist)
 
-::: exercise
+::: {#exr-distanzmessung}
 **Bewegungsmessung**
 
 - Führe das Beispiel `test.py` aus und beobachte die Messwerte.
 - Führe unterschiedliche Tests durch, indem Du ein Objekt vor den Sensor hältst und bewegst.
 - Vergleiche die Messwerte und kontrolliere die gemessenen Distanzen.
 - Untersuche die einzelnen Matrizen und versuche die Bedeutung der einzelnen Werte zu verstehen.
+:::
+
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-distanzmessung}
+Das Beispiel `test.py` liest die Werte der 8x8 Time of Flight Messung aus mit Werten als 4x4 / 8x8 Matrizen zu *motion, distance, reflectance* und *status* aus.
+:::
 :::
 
 ## Aufgabe 2: Distanzmessung mit LCD Bildschirm
@@ -152,18 +177,18 @@ Folgende Aufgabe nutzt den 1.54" LCD Bildschirm mit einer 240x240 Pixel Auflösu
 
 **Vorbereitung**
 
-- Kontrolliert mit `python -c "import ST7789"` ob die Library *ST7789* installiert ist. Installiere die Library mit `sudo pip3 install st7789`, falls sie nicht installiert ist. Testet auch, ob die Bibliotheken `numpy` und `matplotlib` installiert sind und installiert diese ansonsten mit `sudo apt install python3-matplotlib python3-numpy`.
+- Kontrolliert mit `python -c "import st7789"` ob die Library *st7789* installiert ist. Testet auch, ob die Bibliotheken `numpy` und `matplotlib` installiert sind und installiert diese ansonsten mit `sudo apt install python3-matplotlib python3-numpy`.
 - Kontrolliere, ob der Raspberry Pi den *Breakout Garden HAT* mit den 2 SPI Anschlüssen und 4 I2C Anschlüssen bestückt ist (@fig-vl53l5cx-LCD).
 - Montiere den Bildschirm im hinteren SPI Slot des *Breakout Garden HAT*s wie in @fig-vl53l5cx-LCD, da er sonst die Messung des VL53L5CX Sensors verdeckt.
 
 Führt nun folgende Scripts aus und beobachtet die Ausgabe auf dem LCD Bildschirm. Auch hier braucht es etwas Geduld, da die Firmware beim Starten geladen wird.
 
-- `python3 distance_240x240_lcd.py`
-- `python3 motion_240x240_lcd.py`
-- `python3 reflectance_240x240_lcd.py`
-- `python3 motion_tracking.py`
+- `python distance_240x240_lcd.py`
+- `python motion_240x240_lcd.py`
+- `python reflectance_240x240_lcd.py`
+- `python motion_tracking.py`
 
-::: exercise
+::: {#exr-distanzmessung-LCD}
 **Distanzmessung**
 
 - Führe die Beispiele aus und beobachte die Ausgabe auf dem LCD Bildschirm.
@@ -172,5 +197,16 @@ Führt nun folgende Scripts aus und beobachtet die Ausgabe auf dem LCD Bildschir
 - Was passiert wenn Du ein Objekt vor den Sensor hältst? Ist die Form erkennbar?
 - Was passiert wenn Du ein Objekt vor den Sensor hältst und bewegst?
 - Studiere den Code der Beispiele und versuche die Funktionsweise zu verstehen.
-- Überlege Dir wie Du die Beispiele erweitern könntest.
+- Überlege Dir Anwendungsfälle für diesen Sensor allgemein und im speziellen für die Geomatik.
+:::
+
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-distanzmessung-LCD}
+Die Distanzmatrix stellt ein grob aufgelöstes Tiefenbild auf dem LCD Bildschirm dar und ist von den ausgegebenen Werten am einfachsten interpretierbar. Auch sind einfach Elemente gut zu erkennen. Schwieriger ist die Interpretation von Bewegung und Reflektanz. 
+Anwendungsbereiche für diese Sensoren sind z.B. in der Robotik, um Hindernisse zu erkennen und zu umfahren oder in der Automobilindustrie für die Abstandsmessung. Im Bereich der Geomatik liegt die Anwendung von ToF Flightsensoren in der Messtechnik, z.B. für die Erfassung von 3D Punktwolken.
+:::
+:::
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
 :::

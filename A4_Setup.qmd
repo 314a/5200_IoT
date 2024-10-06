@@ -1,4 +1,22 @@
-# Raspberry Pi IoT Image
+---
+title: "Raspberry Pi IoT Image"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/A4_Setup.pdf
+code-links:
+  - text: Installations Script
+    icon: file-code
+    href: data/install_iot_software.sh
+  - text: requirements.txt
+    icon: file-code
+    href: data/requirements.txt
+resources:
+  - data/install_iot_software.sh
+  - data/requirements.txt
+---
 
 Für eine möglichst reibungslose Durchführung der Übungen ist ein vorkonfiguriertes Image hilfreich. Dies gewährleistet, dass alle Studierenden mit der gleichen Software arbeiten und die Übungen nicht durch Installationsprobleme verzögert werden
 
@@ -34,7 +52,8 @@ InfluxDB Version: Die Version der InfluxDB auf die neuste Version im Script anpa
 
 Shell Script: `install_iot_software.sh` - Bash Script zu Installation der Software und Libraries für das fächerübergreifende Modul 5200 IoT 
 Installation von:
-- Python Libraries für die Pimoroni Sensoren
+
+- Python Libraries Beispielcode für die Pimoroni Sensoren
 - Klonen der Libraries mit Beispielen in Documents/Libraries 
 - Jupyter Notebook
 - MQTT, Mosquitto Broker und Clients
@@ -43,10 +62,19 @@ Installation von:
 - Grafana
 - VNC
 
-```bash
+::: hint
+**Zeilenumbrüche EOL**
+Zeilenunterbrüche von Textdateien unterscheiden sich zwischen Unix `LF` und Windows `CRLF` Systemen. Bash Script müssen auf Linux Systemen Unix Zeilenumbrüche (EOL) `LF` aufweisen. Dies ist vor allem dann wichtig, wenn das Script auf einem Windows System erstellt wird. Windows verwendet standardmässig `CRLF` Zeilenumbrüche. In Visual Studio Code können die EOL Zeichen mit `Ctrl+Shift+P` und `Change End of Line Sequence` auf `LF` umgestellt werden oder über die Statusleiste unten rechts bei `CRLF`. In Notepad++ kann dies über `Edit/EOL Conversion/Unix (LF)` umgestellt werden.
+:::
+
+*install_iot_software.sh*: Bash Installations-Script mit Unix Zeilenumbrüchen EOL
+```{.bash}
 #!/bin/bash
-COL='\033[0;32m' # Farbcodes für die Shell setzen
+COL='\033[0;32m' # Primary Color
 NC='\033[0m' # No Color
+echo "${COL}Raspberry Pi Version${NC}"
+hostnamectl
+cat /proc/cpuinfo | grep Model
 
 echo "${COL}Raspberry Pi aktualisieren${NC}"
 sudo apt update
@@ -61,44 +89,17 @@ echo "${COL}i2c-tools Installation${NC}"
 sudo apt install python3-smbus
 sudo apt install -y i2c-tools
 
-echo "${COL}Installation der Python Bibliotheken${NC}"
-sudo pip3 install matplotlib scipy pigments numpy
-sudo pip3 install jupyter
-echo "${COL}Installation der Pimoroni & Adafruit Python Bibliotheken${NC}"
-sudo apt install python3-rpi.gpio python3-spidev python3-pip python3-pil python3-numpy
-sudo pip3 install st7789
-sudo pip3 install bme680
-sudo pip3 install icm20948
-sudo pip3 install as7262
-sudo pip3 install max30105
-sudo pip3 install vl53l5cx-ctypes
-sudo pip3 install RPI.GPIO adafruit-blinka
-sudo pip3 install adafruit-circuitpython-mlx90640
-
-echo "${COL}Klonen der Pimoroni Python Bibliotheken${NC}"
-echo "${COL}in Documents/Libraries${NC}"
-cd Documents
-mkdir Libraries
-cd Libraries
-git clone https://github.com/pimoroni/st7789-python
-git clone https://github.com/pimoroni/bme680-python 
-git clone https://github.com/pimoroni/icm20948-python
-git clone https://github.com/pimoroni/as7262-python
-git clone https://github.com/pimoroni/max30105-python
-git clone https://github.com/pimoroni/vl53l5cx-python
-git clone https://github.com/pimoroni/mlx90640-library
-cd ../../
-
 echo "${COL}Mosquitto Server, Clients und Python Libraries Installation${NC}"
 sudo apt install mosquitto -y
 sudo apt install mosquitto-clients -y
 sudo systemctl enable mosquitto.service
 sudo systemctl restart mosquitto
-sudo pip3 install paho-mqtt
 
 echo "${COL}Node-Red Installation${NC}"
-# add --help to display install options
-bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered) --confirm-root --confirm-pi --confirm-install
+curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered -o update-nodejs-and-nodered.sh
+chmod +x update-nodejs-and-nodered.sh
+bash update-nodejs-and-nodered.sh --confirm-root --confirm-pi --confirm-install --no-init
+rm update-nodejs-and-nodered.sh
 sudo systemctl enable nodered.service
 sudo systemctl start nodered.service
 
@@ -119,26 +120,87 @@ sudo systemctl daemon-reload
 sudo systemctl start grafana-server
 sudo systemctl enable grafana-server.service
 sudo apt autoremove -y
+
+echo "${COL}Klonen der Pimoroni Python Bibliotheken${NC}"
+echo "${COL}in Documents/Libraries${NC}"
+cd Documents
+mkdir Libraries
+cd Libraries
+git clone https://github.com/pimoroni/st7789-python
+git clone https://github.com/pimoroni/bme680-python 
+git clone https://github.com/pimoroni/icm20948-python
+git clone https://github.com/pimoroni/as7262-python
+git clone https://github.com/pimoroni/max30105-python
+git clone https://github.com/pimoroni/vl53l5cx-python
+git clone https://github.com/pimoroni/mlx90640-library
+cd ../../
+```
+
+Zip Datei des Ordners Libraries erstellen für das Backup der Beispielcode der einzelnen Sensoren.
+
+```bash	 
+cd ~/Documents/
+zip -r Libraries.zip Libraries
+```
+
+
+### Installation der Python Libraries mit *venv*
+Mit dem Upgrade auf *Raspberry Pi Bookworm* wird Python auf die Version 3.11 aktualisiert. Ab dieser Version können Python Libraries nicht mehr systemweit installiert werden. *Python Virtual Environment* sind nun erfordert, entweder pro Projekt oder pro Userkonto siehe [http://rptl.io/venv](http://rptl.io/venv) für weitere Informationen.
+
+Erstelle eine Python Virtual Environment `.env` im Homeordner `~/` mit folgenden Befehlen für den User `iot` und aktiviere die Virtual Environment mit `source ~/.env/bin/activate` und deaktiviere die Virtual Environment mit `deactivate`. Wenn die Virtual Environment projetbasiert im Projektordner erstellt wird reicht es den Pfad zum Projektordner anzugeben z.B. `python -m venv ~/Development/Projekt1/env` und die Virtual Environment wird im Projektordner erstellt.
+
+```bash
+python -m venv ~/.env
+source ~/.env/bin/activate
+```
+
+Requirements.txt Datei erstellen mit den Python Libraries, die in der Virtual Environment installiert werden sollen. Die Datei kann mit `nano requirements.txt` erstellt und mit `Ctrl+o` und `Ctrl+x` gespeichert werden.
+Python Libraries in der Virtual Environment installieren mit `pip install -r requirements.txt`. Nutze für die Installation folgende `requirements.txt` Datei. Kontrolliere mit `pip list` ob die Libraries installiert wurden.
+
+*requirements.txt*: Python Libraries für die Pimoroni Sensoren
+```{.txt}
+matplotlib
+scipy
+pigments
+numpy
+jupyter
+rpi.gpio
+spidev
+pillow
+numpy
+st7789
+bme680
+icm20948
+as7262
+max30105
+vl53l5cx-ctypes
+RPI.GPIO
+adafruit-blinka
 ```
 
 ## Konfigurationsdateien editieren
 ### Raspberry Pi Einstellungen für I2C, SPI, SSH, VNC anpassen
-**Interface Options aktivieren** In den Raspberry Pi Konfigurationseinstellungen mit `sudo raspi-config` die Interface Optionen *I2C, SPI, SSH und ev VNC* (Virtual Network Computing) aktivieren.
+**Interface Options aktivieren** In den Raspberry Pi Konfigurationseinstellungen mit `sudo raspi-config` die Interface Optionen *I2C, SPI, SSH und ev VNC (Virtual Network Computing) oder RPi Connect* aktivieren. VNC, RPi Connect [@RaspberryPiLtd2024,@Hollingworth2024]^[RPI Connect erlaubt über einen Relay Server die Verbindung zu einem Raspberry Pi herzustellen über WebRTC wie Browser Clients für Zoom, Slack, Microsoft Teams. Der Relay Server wird nur für die Erstellung der Verbindung benötigt und wird von Raspberry Pi kostenlos betrieben. RPi Connect installieren mit `sudo apt install rpi-connect` und mit `sudo reboot` neu starten.] werden nur benötigt, wenn der Raspberry Pi über Fernzugriff gesteuert werden soll.
+
+![Über die Konsole `raspi-config` starten und über das Konsolenmenu (links) die Einstellungen in den *Interface Options* (rechts) *I2C, SPI, SSH und ev VNC* aktivieren.](images/raspberry_pi_enable_ssh_spi_i2c.png)
 
 ### Baud rate des I2C Protokolls anpassen
-Baud rate des I2C Protokolls  mit `sudo nano /boot/config.txt` öffnen und folgende Zeile ergänzen. Mit `Ctrl+o` und  `Ctrl+x` speichern.
-```
+Baud rate des I2C Protokolls mit `sudo nano /boot/firmware/config.txt` öffnen und folgende Zeile ergänzen. Mit `Ctrl+o` und  `Ctrl+x` speichern [siehe @RaspberryPiLtd2024a].
+
+``` bash
 dtparam=i2c_arm=on,i2c_arm_baudrate=400000
 ```
 ### Mosquitto Server Konfiguration
-**Mosquitto Server Konfiguration** anpassen mit `sudo nano /etc/mosquitto/mosquitto.conf`# und am Ende der Datei folgendes einfügen ohne #! 
-```
+**Mosquitto Server Konfiguration** anpassen mit `sudo nano /etc/mosquitto/mosquitto.conf` und am Ende der Datei folgendes einfügen [@EclipseFoundation2021].
+
+``` bash
 listener 1883
 allow_anonymous true
 ```
 Mosquitto Server neu starten mit `sudo systemctl restart mosquitto`
 
-**Node-Red Einstellungen initialisieren** mit `node-red admin init`
+**Node-Red Einstellungen initialisieren** mit `sudo node-red admin init`
+
 - *yes* installation customise settings
 - *yes* keep settings file at default location 
 - *no* setup user security
@@ -151,7 +213,7 @@ Mosquitto Server neu starten mit `sudo systemctl restart mosquitto`
 Node-RED Settings File initialisation
 =====================================
 This tool will help you create a Node-RED settings file.
-✔ Settings file · /home/iot/.node-red/settings.js
+✔ Settings file · /root/.node-red/settings.js
 
 User Security
 =============
@@ -160,6 +222,7 @@ User Security
 Projects
 ========
 The Projects feature allows you to version control your flow using a local git repository.
+
 ✔ Do you want to enable the Projects feature? · Yes
 ✔ What project workflow do you want to use? · manual - you must manually commit changes
 
@@ -171,6 +234,8 @@ Editor settings
 Node settings
 =============
 ✔ Allow Function nodes to load external modules? (functionExternalModules) · Yes
+
+Settings file written to /root/.node-red/settings.js
 ```
 
 ## Installationen testen und initialisieren
@@ -226,7 +291,7 @@ VNC Viewer auf dem PC installieren. [Real VNC Viewer](https://www.realvnc.com/en
 Das Raspberry Pi Image kann mit dem Tool [PiShrink](https://github.com/Drewsif/PiShrink) verkleinert werden. PiShrink kann auf dem Raspberry Pi oder auf einen anderen Linux System wie Ubuntu oder einer virtuellen Machine mit einem Linux installiert und genutzt werden.
 
 
-1. Backup Image auf den lokalen Rechner mit [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) schreiben.
+1. Backup Image auf den lokalen Rechner mit [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) *lesen* und in eine Image Datei schreiben.
 2. Virtuelle Machine mit Linux Ubuntu/Debian mit *gemeinsamen Ordner* starten
 3. Mit dem Script https://github.com/Drewsif/PiShrink das Image verkleinern
 4. SD Karte Formatieren mit [SD Card Formatter ](https://www.sdcard.org/downloads/formatter)
@@ -235,11 +300,11 @@ Das Raspberry Pi Image kann mit dem Tool [PiShrink](https://github.com/Drewsif/P
 
 Tutorial: [How I Backup and Shrink My SD Card Images - Youtube](https://www.youtube.com/watch?v=5pdgO3Ncl6k)
 
-Backup Image mit Win32DiskImager schreiben
+Backup Image mit Win32DiskImager schreiben, mit der Funktion *Lesen/Read* und diese als Image Datei auf den lokalen Rechner speichern.
 
-![Backup Image mit Win32DiskImager schreiben](images/raspberrypi_image_verkleinern_01.png)
+![Backup Image der SD Karte schreiben mit Win32DiskImager und der Funktion *Lesen/Read*](images/raspberrypi_image_verkleinern_01.png)
 
-Virtuelle Machine mit VM VirtualBox starten und in den Einstellungen der VM über *Geräte/Gemeinsame Ordner* einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.
+Virtuelle Machine mit VM [VirtualBox](https://www.virtualbox.org/) starten und in den Einstellungen der VM über *Geräte/Gemeinsame Ordner* einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.
 
 ![Gemeinsamer Ordner in der VM VirtualBox einrichten](images/raspberrypi_image_verkleinern_02.png)
 
@@ -252,13 +317,10 @@ Das Image sollte nun im File Explorer unter "+ Other Locations" als Ordner *host
 
 **Tipp:** Falls das Terminal nicht öffnet mit `Ctrl+Alt+F3` in das TTY Terminal wechseln.
 
-**Tipp:** Falls der VM User noch keine Adminrechte hat (per Default hat der *User* kein Adminrechte), können diese nachträglich gesetzt werden mit:
-``` bash
-su - 
-usermod -a -G sudo vboxuser
-```
+**Tipp:** Falls der VM User noch keine Adminrechte hat (bei einer Neuinstallation von Ubuntu ist das `root` Passwort nocht nicht gesetzt), können diese nachträglich gesetzt werden mit `sudo passwd`. Bei der Passwortabfrage das aktuelle User Passwort eingeben und das neue Root Passwort zweimal eingeben. Anschliessend als Root User anmelden mit `su -`.^[Einem User Adminrechte zuweisen:  `sudo usermod -a -G sudo <username>`, Kontoinformationen `id <username>` aufzeigen.]
 
 GitHub: <https://github.com/Drewsif/PiShrink>
+
 ```bash
 # install prerequisites
 sudo apt install parted xz-utils
@@ -267,14 +329,20 @@ wget -O ./pishrink.sh https://raw.githubusercontent.com/Drewsif/PiShrink/master/
 # make the script executable
 chmod +x ./pishrink.sh
 # run pishrink on the .img file
-sudo ./pishrink.sh -v /host/≪%imagename.img%≫
+sudo ./pishrink.sh -v /host/<rpi-imagefile>.img
+# Komprimiere die Image als .xz Archive (eher langsam)
+xz -z -9e /host/<rpi-imagefile>.img
 ```
 ![Screenshot des Terminals während der Ausführung von pishrink](images/raspberrypi_image_verkleinern_04.png){width=50%}
 
-Image mit 7-Zip zusätzlich komprimieren File Kontextmenu  *7-Zip/Add to Archive* und als Archive Format `.xz` sowie den Compression Level *9-Utlra* wählen.
+Image mit 7-Zip zusätzlich komprimieren File Kontextmenu  *7-Zip/Add to Archive* und als Archive Format `.xz` sowie den Compression Level *9-Ultra* wählen.
 
 ![7-Zip Einstellungen für die zusätzliche Kompression des Images mit `.xz`.](images/raspberrypi_image_verkleinern_05.png){width=50%}
 
 Falls die SD Karte schon früher für Raspberry Pi Images benutzt wurde und mehrerere Partionen aufweist, kann es helfen die Karte mit dem [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) nochmals von Grund auf zu formatieren.
 
 ![Screenshot des SD Card Formatter](images/raspberrypi_image_verkleinern_06.png){width=50%}
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
+:::

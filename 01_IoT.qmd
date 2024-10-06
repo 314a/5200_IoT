@@ -1,30 +1,31 @@
 ---
 title: "Internet of Things IoT"
-author:
-  name: Pia Bereuter
-  affiliation: 
-    name: Fachhochschlue Nordwestschweiz
-    department: Institut Geomatik
-license: "CC BY"
-copyright: 
-  holder: Pia Bereuter
-  year: 2023
-keywords: 
-  - iot
-  - ubiquitous computing
-  - digital earth
-description: | 
-  Einführung in Internet of Things IoT und deren Bedeutung für die Geomatik.
-date: today
-abstract: Einführung in Internet of Things IoT und deren Bedeutung für die Geomatik.
-citation:
-  title: "Internet of Things IoT"
-  type: manuscript
-  container-title: Lecture Notes
-  issued: today
-bibliography: references.bib
+# author:
+#   name: Pia Bereuter
+#   affiliation: 
+#     name: Fachhochschlue Nordwestschweiz
+#     department: Institut Geomatik
+# license: "CC BY"
+# copyright: 
+#   holder: Pia Bereuter
+#   year: 2023
+# keywords: 
+#   - iot
+#   - ubiquitous computing
+#   - digital earth
+# description: | 
+#   Einführung in Internet of Things IoT und deren Bedeutung für die Geomatik.
+# date: today
+# abstract: Einführung in Internet of Things IoT und deren Bedeutung für die Geomatik.
+# citation:
+#   title: "Internet of Things IoT"
+#   type: manuscript
+#   container-title: Lecture Notes
+#   issued: today
+# bibliography: references.bib
 ---
 
+Das Internet der Dinge (IoT) bietet für die Geomatik und Geoinformationswissenschaften zahlreiche Anwedungsgebiete, durch die Automatisierung und Vernetzung von Sensoren in Echtzeit. Dies ermöglichen effeziente und präzise Überwachung von Prozessen und Umgebung (Kontext) gerade im Bereich der Smart Cities oder Geomonitoring. Beispielsweise bei Sanierungen Brücken oder bei Neubauten können Sensoren die Belastung und Verformung von Bauwerken überwachen und so frühzeitig auf Probleme hinweisen. Vorteile wie Echtzeitdaten, Automatisierung von Messprozessen, Genauigkeit und Repetition von Messungen, Kosteneffizienz durch die Reduzierung von manuellen Eingriffen und die Integration von mehreren Datenquellen unterstützen die Entscheidungsfindung in Planung und Durchführung von Projekten. Dieses Kapitel gibt eine Einführung in das Thema IoT und dessen Bedeutung für die Geomatik und Geoinformationswissenschaften.
 
 ## Ubiquitous Computing
 
@@ -156,3 +157,6 @@ In einer zweiten tabellarischen Zusammenfassung führen sie IoT basierte Methode
 Table: IoT Methoden für die Generalisierung von Analysen [@kamilaris2018]. 
 
 
+::: {.content-visible when-profile="chapter"}
+## Referenzen
+:::

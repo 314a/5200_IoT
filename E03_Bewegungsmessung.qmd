@@ -1,7 +1,25 @@
-# E03 Bewegungsmessung {.unnumbered}
+---
+title: "Bewegungsmessung"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/E03_Bewegungsmessung.pdf
+code-links:
+  - text: Ausgangsdaten
+    icon: file-zip
+    href: data/E03_Bewegungsmessung.zip
+resources:
+  - data/E03_Bewegungsmessung.zip
+abstract: "Bewegungssensoren werden heute fast allgegenwärtig in vielen Bereichen eingesetzt, wie in Smartphones oder auch vielen Messgeräten der Geomatik. Diese Übung führt in die Funktionsweise von MEMS Bewegungssensoren ein und zeigt wie Bewegungsmessungen mit einem ICM20948 9DoF Motion Sensor durchgeführt werden können."
+---
 
+## Einführung
 
 Ziel dieser Übung ist es Bewegungsmessung mit inertialen Messeinheiten (IMU)\index{IMU} über den ICM20948 Bewegungssensor kennen zu lernen und die Sensordaten auszulesen und testen. Der *ICM20948* ist ein 9DoF Bewegungssensor, der über eine I2C Schnittstelle mit dem Raspberry Pi verbunden wird und einer Python Library angesteuert werden kann.
+
+**Unterlagen:** *<i class="bi-file-zip"></i> E03_Bewegungsmessung.zip* 
 
 **Vorbereitung**
 
@@ -17,7 +35,7 @@ Ziel dieser Übung ist es Bewegungsmessung mit inertialen Messeinheiten (IMU)\in
 {{< video https://www.youtube.com/embed/swCTbz5sIQM?si=Uga2sPKfiQW7EO6z >}}
 :::
 ::: {.content-visible unless-format="html"}
-[![How MEMS Accelerometer Gyroscope Magnetometer Work & Arduino Tutorial](images/youtube_bosch_beschleunigungssensor.png)](https://www.youtube.com/embed/swCTbz5sIQM?si=Uga2sPKfiQW7EO6z)
+![How MEMS Accelerometer Gyroscope Magnetometer Work & Arduino Tutorial [Youtube Video](https://www.youtube.com/embed/swCTbz5sIQM?si=Uga2sPKfiQW7EO6z)](images/youtube_bosch_beschleunigungssensor.png)
 :::
 
 | **Unterlagen** |                                                          |
@@ -63,7 +81,7 @@ MEMS\index{MEMS} sind mikroelektromechanische Systeme, die aus mikroskopisch kle
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `ICM20948`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **ICM20948** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x68` erkannt werden.
-- Kontrolliere, ob die Library `icm20948` installiert ist mit `python -c "import icm20948"`. Installiere die Library mit `sudo pip3 install icm20948` falls sie nicht installiert ist.
+- Kontrolliere, ob die Library `icm20948` installiert ist mit `python -c "import icm20948"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install icm20948`, falls sie nicht installiert ist.
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 
@@ -76,10 +94,10 @@ cd icm20948-python/examples
 ## Aufgabe 1: Bewegungsmessungen durchführen
 Teste das Beispiel `read-all.py` im Ordner *examples*. Dieses Beispiel gibt die Messungen der einzelnen Bewegungsmessungen aus, der Beschleunigung, Winkelgeschwindigkeit und Orientierung mit dem Accelerometer, Gyrometer und Magnetometer.
 
-Startet das Script mit `python3 read-all.py`. Mit `Ctrl+c` kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
+Startet das Script mit `python read-all.py`^[Nicht vergessen zuerst die korrekte virtuelle Environment mit den installierten Libraries über `source ~/.env/bin/activate` zu starten]. Mit `Ctrl+c` kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
 
 ``` bash
-python3 read-all.py
+python read-all.py
 read-all.py
 Reads all ranges of movement: accelerometer, gyroscope and compass heading.
 Press Ctrl+C to exit!
@@ -120,7 +138,7 @@ Mag:   {:05.2f} {:05.2f} {:05.2f}""".format(
 3. Messwerte auf der Konsole ausgeben
 4. Warten 0.25 Sekunden (damit die Ausgabe nicht zu schnell ist)
 
-::: exercise
+::: {#exr-bewegungsmessung}
 **Bewegungsmessung**\
 
 - Führe das Beispiel `read-all.py` aus und beobachte die Messwerte.
@@ -128,10 +146,11 @@ Mag:   {:05.2f} {:05.2f} {:05.2f}""".format(
 - Versuche den Sensor zu leicht zu schütteln und beobachte die Messwerte.
 - Vergleiche die Messwerte mit den Messwerten deines Smartphones mit der App *phyphox*.
 - Versucht zu eruieren wie die Achsen orientiert sind und vergleicht mit anderen Gruppen.
-- Schreibe die Messwerte in eine Datei und visualisiere diese mit einem Plot, modifiziere dazu das Beispiel `read-all.py` und speichere die Datei als `read-csv.py`, so dass die Messungen zeilenweise mit einem Separator gespeichert werden. Ausgaben aus einem Plot können mit dem Befehl `python3 read-csv.py > imu_horizontal.csv` in eine Datei geschrieben werden. Nun könnt ihr verschiedene Versuche mit der IMU durchführen und in einer Datei speichern. Die Datei könnt ihr beispielsweise mit *LibreOffice Calc* oder *Excel* öffnen und die Daten visualisieren.
+- Schreibe die Messwerte in eine Datei und visualisiere diese mit einem Plot, modifiziere dazu das Beispiel `read-all.py` und speichere die Datei als `read-csv.py`, so dass die Messungen zeilenweise mit einem Separator gespeichert werden. Ausgaben aus einem Plot können mit dem Befehl `python read-csv.py > imu_horizontal.csv` in eine Datei geschrieben werden. Nun könnt ihr verschiedene Versuche mit der IMU durchführen und in einer Datei speichern. Die Datei könnt ihr beispielsweise mit *LibreOffice Calc* oder *Excel* öffnen und die Daten visualisieren.
 :::
 
-::: solution
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-bewegungsmessung}
 Die Datei `read-csv.py` mit den Messwerten mit Semikolon als Separator:
 ``` python
 #!/usr/bin/env python
@@ -147,16 +166,16 @@ while True:
         ax, ay, az, gx, gy, gz, x, y, z ))
     time.sleep(0.25)
 ```
-
+:::
 :::
 
 ## Aufgabe 2: Magnetometer
 
-Das Beispiel `bargraph.py` zeigt die Messwerte des Magnetometers in einem Balkendiagramm an und zeigt die Orientierung des Sensors an je nach dem über welche Achse gemessen wird. Der Befehl `python3 bargraph.py --help` zeigt die Optionen des Skripts an. 
+Das Beispiel `bargraph.py` zeigt die Messwerte des Magnetometers in einem Balkendiagramm an und zeigt die Orientierung des Sensors an je nach dem über welche Achse gemessen wird. Der Befehl `python bargraph.py --help` zeigt die Optionen des Skripts an. 
 
 Die Ausgabe sollte für die Option `--graph` in etwa so aussehen:
 ``` bash
-python3 bargraph.py --graph
+python bargraph.py --graph
 bargraph.py - Convert raw values to heading
 
 Rotate the sensor through 360 degrees to calibrate.
@@ -166,10 +185,20 @@ Press Ctrl+C to exit!
 043.5 █████████████                                                                                                     
 ```
 
-::: exercise
+::: {#exr-bewegungsmessung-heading}
 **Bar graph**
 
 - Kalibriere den Sensor und vergleiche die Orientierung des Sensors mit den Himmelsrichtungen
-- Vergleiche die Ausgaben auch mit der Orientierung des Smartphones und den Messwerten der App *phyphox*.
+- Vergleiche die Ausgaben auch mit der Orientierung des Smartphones und den Messwerten der App *[phyphox](https://phyphox.org)*.
 - Studiert den Code und versucht die Funktionsweise zu verstehen.
+:::
+
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-bewegungsmessung-heading}
+Nach einer Kalibrierung des Sensors sind die Daten konsistenter und geben die Heading des Sensors in Grad an. Falls kein rudimentärer Graph in der Konsolenausgabe angezeigt wird, wurde das Skript ohne die Option `--graph` aufgerufen.
+:::
+:::
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
 :::

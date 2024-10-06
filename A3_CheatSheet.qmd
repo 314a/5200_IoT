@@ -2,7 +2,9 @@
 
 Einen unvollständige Übersicht gängiger Konsolen Befehle in Linux.
 
-**Raspberry Pi runterfahren:** `sudo shutdown now`
+- **Raspberry Pi runterfahren:** `sudo shutdown now`
+- **Raspberry Pi neu starten:** `sudo reboot now`
+
 
 | Kommando                                  | Kommentar                                                    |
 | ----------------------------------------- | ------------------------------------------------------------ |

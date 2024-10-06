@@ -47,7 +47,7 @@
 %
 \documentclass[
   11pt,
-  a4paper,
+  a4paperpaper,
   oneside, openany  ,captions=tableheading
 ]{scrbook}
 
@@ -62,6 +62,7 @@
 % uncomment: \makeatletter\def\fps@figure{htbp}\makeatother
 \PassOptionsToPackage{headsepline,footsepline}{scrlayer-scrpage}
 \PassOptionsToPackage{ngerman}{babel}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 
 
@@ -104,10 +105,11 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\definecolor{default-linkcolor}{HTML}{A50000}
-\definecolor{default-filecolor}{HTML}{A50000}
-\definecolor{default-citecolor}{HTML}{4077C0}
-\definecolor{default-urlcolor}{HTML}{4077C0}
+% remove colordefinitions, as they are defined in igeo.sty
+% \definecolor{default-linkcolor}{HTML}{A50000}
+% \definecolor{default-filecolor}{HTML}{A50000}
+% \definecolor{default-citecolor}{HTML}{4077C0}
+% \definecolor{default-urlcolor}{HTML}{4077C0}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Einführung in IoT},
@@ -172,7 +174,7 @@ bottom=3cm,marginpar=3cm,headsep=8mm]{geometry}
 % the help of fvextra). Redefinition is necessary because it is unlikely that
 % pandoc includes fvextra in the default template.
 \usepackage{fvextra}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}, breaknonspaceingroup}
 
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
@@ -312,22 +314,25 @@ bottom=3cm,marginpar=3cm,headsep=8mm]{geometry}
 
 
 
+	
+
 
 \IfFileExists{images/fhnw.eps}{\renewcommand{\logo}{images/fhnw.eps}}{}
 
 																			 
 %%%% header-includes start					  
-	%\@ifpackageloaded{igeo}{}{
-	%	\usepackage[]{igeo}%check if option can be reset
-	%}
-	\definecolor{colShade}{HTML}{DCE6EB}% shade color - usually light grey 
-	\definecolor{colPrimary}{HTML}{227FA6} 
-	\definecolor{colSecondary}{HTML}{6E986A}      
-	\definecolor{colTertiary}{HTML}{CE8243}  
+%\@ifpackageloaded{igeo}{}{
+%	\usepackage[]{igeo}%check if option can be reset
+%}
+\definecolor{colShade}{HTML}{DCE6EB}% shade color - usually light grey 
+\definecolor{colPrimary}{HTML}{227FA6} 
+\definecolor{colSecondary}{HTML}{6E986A}      
+\definecolor{colTertiary}{HTML}{CE8243}  
 \usepackage{makeidx}
-\makeindex      
-%\renewcommand{\markright}[1]{\def\chaptertitle{#1}} % workaround for quarto book.lua
-% https://github.com/quarto-dev/quarto-cli/blob/ddaaa39e6f30a72807ab14c1a634d9929cce229b/src/resources/filters/quarto-post/book.lua <- markright command
+\makeindex     \makeatletter\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{plain}
+\@ifundefined{c@chapter}{\newfloat{video}{h}{lovid}}{\newfloat{video}{h}{lovid}[chapter]}
+\floatname{video}{Video}\newcommand*\listofvideos{\listof{video}{List of Videos}}\makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
 \makeatother
@@ -350,14 +355,14 @@ bottom=3cm,marginpar=3cm,headsep=8mm]{geometry}
   \newcommand\listtablename{Tabellenverzeichnis}
 \fi
 \ifdefined\figurename
-  \renewcommand*\figurename{Abbildung}
+  \renewcommand*\figurename{Abb.}
 \else
-  \newcommand\figurename{Abbildung}
+  \newcommand\figurename{Abb.}
 \fi
 \ifdefined\tablename
-  \renewcommand*\tablename{Tabelle}
+  \renewcommand*\tablename{Tab.}
 \else
-  \newcommand\tablename{Tabelle}
+  \newcommand\tablename{Tab.}
 \fi
 }
 \@ifpackageloaded{float}{}{\usepackage{float}}
@@ -367,6 +372,8 @@ bottom=3cm,marginpar=3cm,headsep=8mm]{geometry}
 \newcommand*\listoflistings{\listof{codelisting}{Listingverzeichnis}}
 \captionsetup{labelsep=colon}
 \usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exercise}{Übung}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Beweis}}
 \newtheorem*{remark}{Anmerkung}
@@ -381,16 +388,56 @@ bottom=3cm,marginpar=3cm,headsep=8mm]{geometry}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 \makeatletter
-\@ifpackageloaded{sidenotes}{}{\usepackage{sidenotes}}
-\@ifpackageloaded{marginnote}{}{\usepackage{marginnote}}
-\makeatother
-\makeatletter
 \@ifpackageloaded{tikz}{}{\usepackage{tikz}}
 \makeatother
         \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
           \node[shape=circle,draw,inner sep=1pt] (char) {{\scriptsize#1}};}}  
                   
 %%%% header-includes end
+
+% Quarto Environment codelisting mit caption z.B. Dateiname für ein Codebeispiel
+% Listings ohne floatstyle "ruled" überschreiben des Stils "plaintop"
+% Folgender Befehl reicht nicht:
+% reduziert den Abstand oberhalb der Bildunterschrift (nicht nur bei codelisting)
+% \setlength{\abovecaptionskip}{0.5em} 
+% Folglich den floatstyle: plaintop ändern mit reduziertem Abstand zum Code
+% http://mirrors.ctan.org/macros/latex/contrib/float/float.pdf Seite 11
+\makeatletter
+\renewcommand\fs@plaintop{\fs@plain
+\def\@fs@mid{\vspace{-0.5em}\relax}%
+\let\@fs@iftopcapt\iftrue}
+\let\floatc@plaintop=\floatc@plain
+\makeatother
+\floatstyle{plaintop}
+\restylefloat{codelisting}
+
+% Line Breaks in Verbatim Environment https://github.com/jgm/pandoc/issues/4302
+% addition of breknonspaceingroup and breakanywhere leads to error
+%\usepackage{fancyvrb}
+%\usepackage{fvextra}
+%\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breaknonspaceingroup, breakanywhere,fontsize=\small,commandchars=\\\{\}}
+%\fvset{breaklines}
+%\fvset{breaknonspaceingroup}
+%\fvset{breakanywhere}
+
+
+% redefine maketitle for scrbook as well, used only for printing single chapters left aligned
+% similar to scrartcl 
+% source https://tex.stackexchange.com/questions/494198/customising-the-koma-scrartcl-maketitle-environment
+% Redefine \maketitle to be left-aligned
+\renewcommand*{\maketitle}{
+  \begin{flushleft}
+    \vspace*{1em} % Adjust the vertical space as needed
+    {\LARGE \bfseries \title} % Title in large bold font
+    \vspace{1em} % Adjust the vertical space as needed
+    \par
+    {\large \author} % Author in large font
+    \vspace{1em} % Adjust the vertical space as needed
+    \par
+    {\large \date} % Date in large font
+  \end{flushleft}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -419,7 +466,7 @@ great work on this project.}}
 \makeatother
 \subtitle{Modulübergreifender Kurs Vertiefung II}
 \author{Pia Bereuter}
-\date{1. September. 2024}
+\date{6. Oktober. 2024}
 
 
 
@@ -485,9 +532,22 @@ great work on this project.}}
 % variables for title, author and date
 %
 \usepackage{titling}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% customise settings for the titling package
+% Redefine \maketitle to be left-aligned
+\pretitle{\begin{flushleft}\vspace{-4em}\Huge\bfseries}
+\posttitle{\par 
+\par \huge\mdseries Modulübergreifender Kurs Vertiefung II
+\vspace{1em}\end{flushleft}}
+\preauthor{\begin{flushleft}\large}
+\postauthor{\par\vspace{-0.5em}\end{flushleft}}
+\predate{\begin{flushleft}\large}
+\postdate{\par\vspace{1.5em}\end{flushleft}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Einführung in IoT}
 \author{Pia Bereuter}
-\date{1. September. 2024}
+\date{6. Oktober. 2024}
 
 %
 % tables
@@ -525,7 +585,7 @@ great work on this project.}}
   % \clearpairofpagestyles
   % \ihead*{Einführung in IoT}
   % \chead*{}
-  % \ohead*{1. September. 2024}
+  % \ohead*{6. Oktober. 2024}
   % \ifoot*{Pia Bereuter}
   % \cfoot*{}
   % \ofoot*{\thepage}
@@ -537,7 +597,6 @@ great work on this project.}}
 % header footer that work with two-sided layout
 % header-footer 
 
-
 \renewcommand*{\chaptermarkformat}{} % no numbers in header
 \renewcommand*{\sectionmarkformat}[1]{}
 %\automark{chapter}
@@ -546,7 +605,7 @@ great work on this project.}}
 \newpairofpagestyles{eisvogel-header-footer}{%chapter header-footer style
     \clearpairofpagestyles
     \lehead{\headerlogo} % twoside fix ->otherwise use \ihead[]{}
-    \lohead{\headerlogo}
+    \lohead{\headerlogo} % e=even, o=odd, l=left, c=center, r=right
     \rehead{\headmark}
     \rohead{\headmark}
     \rehead*{\headmark}
@@ -559,6 +618,20 @@ great work on this project.}}
 \makeatother%
 \pagestyle{eisvogel-header-footer}
 
+\newpairofpagestyles{scrartcl-header-footer}{% style for scrartcl
+    \clearpairofpagestyles
+    \lehead{\headerlogo} % twoside fix ->otherwise use \ihead[]{}
+    \lohead{\headerlogo} % e=even, o=odd, l=left, c=center, r=right
+    \rehead{}
+    \rohead{}
+    \rehead*{}
+    \rohead*{}
+    \refoot[]{\thepage}% twoside Jane Doe, John Snow
+    \rofoot[]{\thepage}
+}
+
+
+
 \deftripstyle{ChapterStyle}{}{}{}{}{\pagemark}{}
 \renewcommand*{\chapterpagestyle}{ChapterStyle}
 \renewcommand*{\chapterpagestyle}{eisvogel-header-footer}% Chapter Style schon initiieren
@@ -569,7 +642,6 @@ great work on this project.}}
 % siehe: https://github.com/quarto-dev/quarto-cli/blob/ddaaa39e6f30a72807ab14c1a634d9929cce229b/src/resources/filters/quarto-post/book.lua
 % lokal ist dies in der Datei: main.lua
 \renewcommand{\markright}[1]{\def\chaptertitle{#1}} % workaround for quarto book.lua
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%
@@ -598,7 +670,7 @@ great work on this project.}}
 \vspace*{\fill}
 {\footnotesize 
 \textbf{Impressum} \\
-Module 5200 Einführung in IoT Skript\\
+5200 Einführung in IoT\\
 Herbstsemester 2023, 2024
 
 Institut Geomatik, Fachhochschule Nordwestschweiz, Hofackerstrasse 30,
@@ -613,7 +685,7 @@ Titelbild: Rasperry Pi mit Sensoren, 2022, Bereuter
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % New title page
-% prepend to lof,lot
+% % % prepend to lof,lot
 % \setcounter{tocdepth}{1}% otherwise lof,lot result empty if depth is 0 for tableofcontents 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -642,25 +714,23 @@ Titelbild: Rasperry Pi mit Sensoren, 2022, Bereuter
 Internet of Things ermöglicht durch die Vernetzung physischer und
 virtueller Objekte Infrastrukturen auszubauen die Echtzeit
 Datenerfassung und Verarbeitung ermöglichen, was für die Geomatik und
-GIS zunehmend an Bedeutung gewinnt. Dieser zunehmende Fokus spiegelt
-auch den Bedarf an Geomatiker:innen, die sich diesen Themen annehmen,
-innovative Lösungen finden und in Arbeitsprozesse reflektiert einbinden.
+GIS zunehmend an Bedeutung gewinnt. Vor allem in den Bereichen Smart
+Cities oder Geomonitoring wird IoT eingesetzt um automatisiert
+Sensordaten zu erfassen, diese zu analysieren und für
+Entscheidungsprozesse zu nutzen. Dieser zunehmende Fokus spiegelt auch
+den Bedarf an Geomatiker:innen, die sich in diese Themen vertiefen und
+geeignete Lösungen entwickeln können.
 
 In dieser Einführung gibt einen Überblick über die Grundlagen von IoT
 mit einem Fokus auf die Geomatik und Geoinformation und führt
 anwendungsbezogen mit praktischen Beispielen mit Raspberry Pi und
-unterschiedlichen Sensoren in das Thema ein.
-
-\begin{figure}[H]
-
-{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{images/xkcd_1966_smart_home_security.png}
-
-}
-
-\caption{\href{https://xkcd.com/1966/}{xkcd: Smart Home Security},
-cc-by-nc 2.5}
-
-\end{figure}%
+unterschiedlichen Sensoren in das Thema ein. Der Anhang bietet eine
+Einführung in Raspberry Pi mit den wichtigsten Befehlen und Anleitungen
+für die Installation und Konfiguration. Zusätzlich bietet er eine
+praktische Anleitung für den Aufbau des vorkonfigurierten Image mit den
+erforderlichen Installationen wie Python, Python Bibliotheken, MQTT,
+Node-RED, InfluxDB und Grafana, deren Konfiguration und einfache
+Funktionstests.
 
 \section*{Aufbau}\label{aufbau}
 \addcontentsline{toc}{section}{Aufbau}
@@ -669,17 +739,8 @@ cc-by-nc 2.5}
 
 Das Skript führt in Sensorik ein und zeigt typische Anwendungen zum
 Thema IoT, des Weiteren zeigt es auf wie Sensordaten genutzt,
-gespeichert, übertragen und visualisiert werden können.
-
-\begin{itemize}
-\tightlist
-\item
-  Teil 1: Sensoren
-\item
-  Teil 2: Datenspeicherung
-\item
-  Teil 3: Datenkommunikation und Visualisierung
-\end{itemize}
+gespeichert, übertragen und visualisiert werden können mittels
+detaillierten Beispielen und Übungen.
 
 Die begleitenden Übungen nutzen den Einplatinenrechner Raspberry Pi mit
 unterschiedlichen Sensoren für die Datenerfassung, -analyse und
@@ -742,10 +803,10 @@ Code empfohlen.
 \end{itemize}
 
 \section*{Raspberry Pi Image
-Einstellungen}\label{raspberry-pi-image-einstellungen}
-\addcontentsline{toc}{section}{Raspberry Pi Image Einstellungen}
+Kontoinformationen}\label{raspberry-pi-image-kontoinformationen}
+\addcontentsline{toc}{section}{Raspberry Pi Image Kontoinformationen}
 
-\markright{Raspberry Pi Image Einstellungen}
+\markright{Raspberry Pi Image Kontoinformationen}
 
 Für die Übungen wird ein Raspberry Pi Image mit vorinstallierten Paketen
 und Einstellungen verwendet. Die SD-Karte mit dem Image wird von der
@@ -795,37 +856,48 @@ erstellt.
 
 \chapter{Internet of Things IoT}\label{internet-of-things-iot}
 
-Einführung in Internet of Things IoT und deren Bedeutung für die
-Geomatik.
-
-\hfill\break
+Das Internet der Dinge (IoT) bietet für die Geomatik und
+Geoinformationswissenschaften zahlreiche Anwedungsgebiete, durch die
+Automatisierung und Vernetzung von Sensoren in Echtzeit. Dies
+ermöglichen effeziente und präzise Überwachung von Prozessen und
+Umgebung (Kontext) gerade im Bereich der Smart Cities oder
+Geomonitoring. Beispielsweise bei Sanierungen Brücken oder bei Neubauten
+können Sensoren die Belastung und Verformung von Bauwerken überwachen
+und so frühzeitig auf Probleme hinweisen. Vorteile wie Echtzeitdaten,
+Automatisierung von Messprozessen, Genauigkeit und Repetition von
+Messungen, Kosteneffizienz durch die Reduzierung von manuellen
+Eingriffen und die Integration von mehreren Datenquellen unterstützen
+die Entscheidungsfindung in Planung und Durchführung von Projekten.
+Dieses Kapitel gibt eine Einführung in das Thema IoT und dessen
+Bedeutung für die Geomatik und Geoinformationswissenschaften.
 
 \section{Ubiquitous Computing}\label{ubiquitous-computing}
 
 Aus dem Bestreben der 1980er Jahre, Technologie in den Hintergrund des
 Alltags einzubetten, in dem entstehenden Forschungsgebiet
 \emph{Ubiquitous Computing} definierte dies Weiser \emph{Ubiquitous
-Computing} (Rogers 2006) als ``die physische Welt, die reichhaltig und
-unsichtbar mit Sensoren, Aktoren, Anzeigen und Computerelementen
-verwoben ist, die nahtlos in die alltäglichen Objekte unseres Lebens
-eingebettet und durch ein kontinuierliches Netzwerk verbunden ist'' mit
-dem Ziel im täglichen Leben unterstützend zu sein und nicht zu
-überladen.
+Computing} (\citeproc{ref-rogers2006}{Rogers, 2006}) als ``die physische
+Welt, die reichhaltig und unsichtbar mit Sensoren, Aktoren, Anzeigen und
+Computerelementen verwoben ist, die nahtlos in die alltäglichen Objekte
+unseres Lebens eingebettet und durch ein kontinuierliches Netzwerk
+verbunden ist'' mit dem Ziel im täglichen Leben unterstützend zu sein
+und nicht zu überladen.
 
 \begin{description}
 \item[Ubiquitous Computing\index{Ubiquitous Computing}]
 Vision der Informatik allgegenwärtige Datenverarbeitung und Nutzung von
 Systemen ohne Bedienungsanforderung und Hardwarebelastung für die
 Nutzenden. Ubiquitäre Systeme agieren quasi unsichtbar im Hintergrund
-von Handlungsfelder (Wiegerling 2013).
+von Handlungsfelder (\citeproc{ref-wiegerling2013}{Wiegerling, 2013}).
 \end{description}
 
 Ethnographische Studien über den Alltag zeigen, dass der Kontext des
 Alltags der Menschen viel subtiler, fliessender und eigenwilliger ist,
-als das die Theorien über den Kontext glauben machen (Salvador und
-Anderson 2003). Dies erschwert eine praktische Umsetzung und Vorhersage
-von Bedürfnissen auf Basis von Kontextinformationen erheblich.
-Zusätzlich stellen sich auch ethische und soziale Fragen. Rogers (2006)
+als das die Theorien über den Kontext glauben machen
+(\citeproc{ref-salvador2003}{Salvador \& Anderson, 2003}). Dies
+erschwert eine praktische Umsetzung und Vorhersage von Bedürfnissen auf
+Basis von Kontextinformationen erheblich. Zusätzlich stellen sich auch
+ethische und soziale Fragen. Rogers (\citeproc{ref-rogers2006}{2006})
 plädiert für einen proaktiven Ansatz weg von \emph{proactive Computing}
 zu \emph{proactive people} und propagiert eine fachspezifische Nutzung
 für bestimmte Bereiche wie beispielsweise Landwirtschaft oder
@@ -851,11 +923,11 @@ Der Standardisierungsausschuss der International Telecommunication Union
 .. a global~infrastructure~for the information society, enabling
 advanced services by interconnecting~(physical and virtual)~Things based
 on existing and evolving interoperable information and communication
-technologies (ITU 2005).
+technologies (\citeproc{ref-ITU2005}{ITU, 2005}).
 \end{quote}
 
-Ashton (2009) beschrieb als früher Ideengeber zu Internets der Dinge im
-Kontext von Supply Chain Management folgendes:
+Ashton (\citeproc{ref-ashton2009}{2009}) beschrieb als früher Ideengeber
+zu Internets der Dinge im Kontext von Supply Chain Management folgendes:
 
 \begin{quote}
 .. Ideas and information are important, but things matter much more. Yet
@@ -882,7 +954,8 @@ und Anwendungen. IoT ist ein multidisziplinäres Gebiet mit einem breiten
 Spektrum an Technologien, Protokollen, Anwendungszenarien und
 Disziplinen und bedingt Kenntnisse der elektronischen Komponenten,
 Kommunikationsprotokollen, Echtzeitdatenanalysen, und der Lokalisierung
-von Objekten und Geräten (Granell \emph{u.~a.} 2020).
+von Objekten und Geräten (\citeproc{ref-granell2020}{Granell et al.,
+2020}).
 
 Für das Konzept \emph{Ding} oder \emph{Thing} bestehen unterschiedliche
 Definitionen. Charakteristisch ist, begrenzte Ressourcen (beispielsweise
@@ -902,8 +975,8 @@ werden, verwalten.
 
 }
 
-\caption{Komponenten eines smarten Objekt ``Thing'' (Zaheeruddin und
-Gupta 2020)}
+\caption{Komponenten eines smarten Objekt ``Thing''
+(\citeproc{ref-zaheeruddin2020}{Zaheeruddin \& Gupta, 2020})}
 
 \end{figure}%
 
@@ -939,9 +1012,10 @@ Die drei wesentlichen technologischen IoT Komponenten sind folglich:
 \end{itemize}
 
 Betrachtet man die Dimensionen von IoT fügt sich aus der Sicht der
-Kommunikationstechnologie das \emph{thing} mit ein (ITU 2005). Aus Sicht
-der Geoinformation, sind diese drei Dimensionen sehr vertraut mit
-\emph{Zeit}, \emph{Ort} und \emph{Objekt} dem \emph{thing}.
+Kommunikationstechnologie das \emph{thing} mit ein
+(\citeproc{ref-ITU2005}{ITU, 2005}). Aus Sicht der Geoinformation, sind
+diese drei Dimensionen sehr vertraut mit \emph{Zeit}, \emph{Ort} und
+\emph{Objekt} dem \emph{thing}.
 
 \begin{figure}[H]
 
@@ -967,28 +1041,30 @@ werden\footnote{Der Raspberry Pi ist insofern mit dem
 
 Der Vizepräsident der USA AL Gore führte 1998 in seiner Rede das Konzept
 der digitalen Erde ein mit der Vision die realer Erde mit einer
-virtuellen Nachbildung zu erweitern, einem virtuellen Zwilling (Gore
-1998).
+virtuellen Nachbildung zu erweitern, einem virtuellen Zwilling
+(\citeproc{ref-gore1998}{Gore, 1998}).
 
 \begin{quote}
 I believe we need a ``Digital Earth''. A multi-resolution,
 three-dimensional representation of the planet into which we can embed
-vast quantities of geo-referenced data. Gore (1998)
+vast quantities of geo-referenced data. Gore
+(\citeproc{ref-gore1998}{1998})
 \end{quote}
 
 Die Umsetzung der Vision ``Digital Earth''\index{Digital Earth}
 erfordert wie auch die IoT eine entsprechende Infrastruktur, die das
 Auffinden, den Zugriff, die Analyse und die Verarbeitung von
-raumbezogenen Daten ermöglicht. Granell \emph{u.~a.} (2020) fordern eine
-permanente und verstärkte Zusammenarbeit beider Bereiche. Betrachtet man
-die Rolle der Netzwerke und Interaktion in beiden Bereichen, kann ein
-Worklow von (1) der Auffindbarkeit, Erfassung und Kommunikation
-räumlicher Informationen, zu (2) Verständnis räumlicher Objekte und
-ihrer Beziehungen, dann (3) Bestimmung des raum-zeitlichen Verhaltens
-und der Simulationsregeln und dem (4) Handeln und Ergreifen fundierter
-Maßnahmen gezeichnet werden. Bei (1) kann IoT mit neuen Quellen und
-höheren Aufnahme- und Übertragungsfrequenzen den Workflow anreichern und
-(2) erfordert eine kontinuierliche vertiefte Zusammenarbeit beider
+raumbezogenen Daten ermöglicht. Granell et al.
+(\citeproc{ref-granell2020}{2020}) fordern eine permanente und
+verstärkte Zusammenarbeit beider Bereiche. Betrachtet man die Rolle der
+Netzwerke und Interaktion in beiden Bereichen, kann ein Worklow von (1)
+der Auffindbarkeit, Erfassung und Kommunikation räumlicher
+Informationen, zu (2) Verständnis räumlicher Objekte und ihrer
+Beziehungen, dann (3) Bestimmung des raum-zeitlichen Verhaltens und der
+Simulationsregeln und dem (4) Handeln und Ergreifen fundierter Maßnahmen
+gezeichnet werden. Bei (1) kann IoT mit neuen Quellen und höheren
+Aufnahme- und Übertragungsfrequenzen den Workflow anreichern und (2)
+erfordert eine kontinuierliche vertiefte Zusammenarbeit beider
 Infrastrukturen. Im Bereich IoT werden räumlichen Analysen wird aufgrund
 der aufkommenden Edge-Fog-Cloud Paradigmen zunehmen.
 
@@ -998,7 +1074,8 @@ der aufkommenden Edge-Fog-Cloud Paradigmen zunehmen.
 
 }
 
-\caption{IoT und Digital Earth Workflow Granell \emph{u.~a.} (2020)}
+\caption{IoT und Digital Earth Workflow Granell et al.
+(\citeproc{ref-granell2020}{2020})}
 
 \end{figure}%
 
@@ -1011,7 +1088,7 @@ Zugänge zu IoT Daten fehlen. Der OGC Standard Sensor Web Enablement SWE
 standardisiert die Erkennung und der Zugriff auf Sensoren. Bei der
 räumlichen Datenerfassung in IoT haben Sensor-Metadaten eine hohe
 Bedeutung, wobei der SensorML-Standard einer der wichtigsten ist
-(Granell \emph{u.~a.} 2020).
+(\citeproc{ref-granell2020}{Granell et al., 2020}).
 
 \begin{description}
 \tightlist
@@ -1074,7 +1151,7 @@ Anwendungsbereiche.
 }
 
 \caption{IoT Standards, Eigenschaften, Übertragungsdistanzen und
-Anwendungen (Links 2019)}
+Anwendungen (\citeproc{ref-links2019}{Links, 2019})}
 
 \end{figure}%
 
@@ -1086,31 +1163,31 @@ oder Trajektorien entscheidend für die Datenanalyse von IoT Geräten
 sind. Die Vielfalt der Geräte bringt neue analytische Herausforderungen
 mit sich, die in der Lage sein müssen räumlich-zeitliche Echtzeitdaten
 mit sehr heterogenen \emph{smarten} Geräten verarbeiten zu können
-(Trilles \emph{u.~a.} 2017). Während Werkzeuge für die Analyse von
-Echtzeitdaten existieren, stellt die räumliche Komponente eine
-Herausforderung dar. Der Raum, wie der Standort, die Ausrichtung, Form
-und Grösse spielen eine wesentliche Rolle in IoT, da alle Geräte
-räumliche Eigenschaften aufweisen und miteinander räumlich zu einander
-in Beziehung stehen (beispielsweise der Standort, die Grösse und
-Orientierung von einem Auto und einem Fahrrad auf der gleichen Fahrbahn)
-(Granell \emph{u.~a.} 2020). Erst über den Raum können Sensoren in
-Beziehung zu einander gebracht werden.
+(\citeproc{ref-trilles2017}{Trilles et al., 2017}). Während Werkzeuge
+für die Analyse von Echtzeitdaten existieren, stellt die räumliche
+Komponente eine Herausforderung dar. Der Raum, wie der Standort, die
+Ausrichtung, Form und Grösse spielen eine wesentliche Rolle in IoT, da
+alle Geräte räumliche Eigenschaften aufweisen und miteinander räumlich
+zu einander in Beziehung stehen (beispielsweise der Standort, die Grösse
+und Orientierung von einem Auto und einem Fahrrad auf der gleichen
+Fahrbahn) (\citeproc{ref-granell2020}{Granell et al., 2020}). Erst über
+den Raum können Sensoren in Beziehung zu einander gebracht werden.
 
 Ansätze zur räumlichen-zeitlichen Datenanalyse in Echtzeit haben noch
 keine standardisierten Prozeduren, die einfach und breit angewandt
-werden können (Granell \emph{u.~a.} 2020). Zusätzlich sollten Standards
-Echtzeitanalysen ermöglichen ohne grossen zusätzlichen Rechenaufwand für
-Geräte, die eine beschränkte \emph{Speicherkapazität} und
-\emph{Konnektivität} haben und oft mit Batterie betrieben sind. Der OGC
-Sensor Observation Service SOS bedingt eine eher rechenintensive
-Verarbeitung von XML-Dokumenten und weitere Ansätze sind in Erarbeitung,
-die dem Rechnung tragen.
+werden können (\citeproc{ref-granell2020}{Granell et al., 2020}).
+Zusätzlich sollten Standards Echtzeitanalysen ermöglichen ohne grossen
+zusätzlichen Rechenaufwand für Geräte, die eine beschränkte
+\emph{Speicherkapazität} und \emph{Konnektivität} haben und oft mit
+Batterie betrieben sind. Der OGC Sensor Observation Service SOS bedingt
+eine eher rechenintensive Verarbeitung von XML-Dokumenten und weitere
+Ansätze sind in Erarbeitung, die dem Rechnung tragen.
 
-Kamilaris und Ostermann (2018) klassieren und geben eine Übersicht von
-IoT Anwendungen\index{IoT Anwendungen} und Forschungsprojekte im Kontext
-der GIScience und IoT. Die Anwendungsbiete sind vielfältig, wie in
-folgender Abbildung illustriert. In fast allen aufgeführten
-Anwendungsgebieten sind Aussagen zum Standort relevant.
+Kamilaris \& Ostermann (\citeproc{ref-kamilaris2018}{2018}) klassieren
+und geben eine Übersicht von IoT Anwendungen\index{IoT Anwendungen} und
+Forschungsprojekte im Kontext der GIScience und IoT. Die Anwendungsbiete
+sind vielfältig, wie in folgender Abbildung illustriert. In fast allen
+aufgeführten Anwendungsgebieten sind Aussagen zum Standort relevant.
 
 \begin{figure}[H]
 
@@ -1160,8 +1237,9 @@ in folgender Tabelle.
   >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1538}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1026}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2051}}@{}}
-\caption{IoT Forschungsgebiet und räumliche Analysemethoden (Kamilaris
-und Ostermann 2018).}\tabularnewline
+\caption{IoT Forschungsgebiet und räumliche Analysemethoden
+(\citeproc{ref-kamilaris2018}{Kamilaris \& Ostermann,
+2018}).}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 IoT Area
@@ -1223,8 +1301,9 @@ sind.
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2762}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7238}}@{}}
-\caption{IoT Methoden für die Generalisierung von Analysen (Kamilaris
-und Ostermann 2018).}\tabularnewline
+\caption{IoT Methoden für die Generalisierung von Analysen
+(\citeproc{ref-kamilaris2018}{Kamilaris \& Ostermann,
+2018}).}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 IoT-Based Method
@@ -1369,7 +1448,7 @@ Experimenten am Beispiel von Magnetfeld, Licht und Beschleunigung.}
 
 \end{figure}%
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{boxtitle}{Übung}{colPrimary}
 
 \textbf{Sensorentest mit \emph{phyphox}}\\
 Installiere auf deinem Smartphone die Applikation
@@ -1527,12 +1606,13 @@ Distributoren Sensoren bezogen werden. Die folgende Liste gibt eine
     Pimoroni steht für Pirate, Monkey, Robot, Ninja.}.
 \end{itemize}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{boxtitle}{Übung}{colPrimary}
 
 \textbf{Sensoren}\\
 Suche Dir auf den aufgelisteten Websites für elektronische Bauteile und
-Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren. Suche
-drei bis vier interessante Sensoren aus und überlege anhand der
+Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren.
+
+Suche drei bis vier interessante Sensoren aus und überlege anhand der
 aufgeführten Aspekte zur Sensorauswahl, was alles benötigt wird um diese
 zu betreiben und was die Einschränkungen sind.
 
@@ -1541,10 +1621,11 @@ zu betreiben und was die Einschränkungen sind.
 \chapter{Datenübertragung}\label{datenuxfcbertragung}
 
 Drahtlose Kommunikationstechnologien basieren heutzutage auf IEEE
-802.15.4 sowie IEEE 802.15.4e Übertragungsprotokoll (Celebi \emph{u.~a.}
-2020). Das Protokoll beschreibt den die untersten beiden Schichten des
-OSI Modells (Abbildung~\ref{fig-osimodell}), die Bitübertragung und den
-MAC-Layer für Wireless Personal Area Networks (WPAN).
+802.15.4 sowie IEEE 802.15.4e Übertragungsprotokoll
+(\citeproc{ref-celebi2020}{Celebi et al., 2020}). Das Protokoll
+beschreibt den die untersten beiden Schichten des OSI Modells
+(Abb.~\ref{fig-osimodell}), die Bitübertragung und den MAC-Layer für
+Wireless Personal Area Networks (WPAN).
 
 Einige der relevanten Technologien für die Datenübertragung sind, Wi-Fi,
 Bluetooth, ZigBee, LoRa, RFID, SigFox und Mobilfunk. Die Technologien
@@ -1587,12 +1668,12 @@ konzeptuelles Referenzmodell welches die Funktionsweise von
 Netzwerksystemen beschreibt mit dem Ziel Kommunikation über die
 unterschiedlichen Technologien hinweg zu beschreiben von der Übertragung
 von einzelnen Bits über den Datentransport bis hin zur Anwendung
-beispielsweise HTTPS oder FTP (ISO 1994). Das ISO/OSI Schichtenmodell
-besteht aus sieben hierarchisch aufgebauten Schichten und jeder
-einzelnen Schicht ist eine Aufgabe zugeordnet, wobei das
-Übertragungsmedium nicht definiert ist. Die Schichten eins bis vier sind
-transportorientierte Schichten und die Schichten fünf bis sieben sind
-anwendungsorientierte Schichten.
+beispielsweise HTTPS oder FTP (\citeproc{ref-iso1994}{ISO, 1994}). Das
+ISO/OSI Schichtenmodell besteht aus sieben hierarchisch aufgebauten
+Schichten und jeder einzelnen Schicht ist eine Aufgabe zugeordnet, wobei
+das Übertragungsmedium nicht definiert ist. Die Schichten eins bis vier
+sind transportorientierte Schichten und die Schichten fünf bis sieben
+sind anwendungsorientierte Schichten.
 \item[Long Range Wide Area Network (LoRaWAN) oder LoRa\index{LoRaWAN}]
 LoRaWan, Long Range Wide Area Network ermöglicht ein energieeffizientes
 übertragen von kleinen Datenmengen über grosse Distanzen (bis 10km).
@@ -1615,9 +1696,9 @@ Nachricht oder der Daten bekannt sein muss. In der
 \emph{Request-Response} Kommunikation ist der Server zentraler
 Bestandteil der Kommunikation, wohingegen in der
 \emph{Publish-Subscribe} Kommunikation der Broker zentraler Bestandteil
-der Kommunikation ist (Hirmer 2023). Bei \emph{Publish-Subscribe} muss
-der Broker bekannt sein wohingegen die Indentität der Publisher und
-Subscriber nicht erforderlich ist.
+der Kommunikation ist (\citeproc{ref-hirmer2023}{Hirmer, 2023}). Bei
+\emph{Publish-Subscribe} muss der Broker bekannt sein wohingegen die
+Indentität der Publisher und Subscriber nicht erforderlich ist.
 
 \begin{figure}[H]
 
@@ -1654,11 +1735,11 @@ online sind. Eines der verbreitesten Protokolle, die
 eine Nachricht mit einem Zeitstempel oder Interval und einer Geometrie
 zusätzlich dem Topic name hinzugefügt werden. Dies ermöglicht dem
 Subscriber zeitliche oder räumliche Filter zusätzlich zu den
-thematischen \emph{Topic} Filter zu nutzen Herlé \emph{u.~a.} (2019).
-Ein umfangreicherer offener Standard ist AMQP, seit 2010, der auch
-\emph{request-response} Kommunikation ermöglicht\footnote{Diese
-  Protokolle sind nach dem Entwurfsmuster (Design Pattern) Beobachter
-  (Observer) implementiert}.
+thematischen \emph{Topic} Filter zu nutzen Herlé et al.
+(\citeproc{ref-herle2019}{2019}). Ein umfangreicherer offener Standard
+ist AMQP, seit 2010, der auch \emph{request-response} Kommunikation
+ermöglicht\footnote{Diese Protokolle sind nach dem Entwurfsmuster
+  (Design Pattern) Beobachter (Observer) implementiert}.
 
 Eine weitere wichtige Anforderung an IoT ist die asynchrone
 Kommunikation in Echtzeit. Synchrone Kommunikation in Echtzeit bedingt,
@@ -1713,7 +1794,7 @@ eigenen Cloud durchführen.
 
 \caption{Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht
 der ``Hype'' \emph{Cloud-Out to Edge} den Peak of Inflated Expectations
-(Gartner 2023)}
+(\citeproc{ref-gartner2023}{Gartner, 2023})}
 
 \end{figure}%
 
@@ -1725,191 +1806,203 @@ der ``Hype'' \emph{Cloud-Out to Edge} den Peak of Inflated Expectations
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-ams2022}
-AMS OSRAM Group, 2022.
-\href{https://ams.com/documents/20143/36005/AS7262/_DS000486/_5-00.pdf}{Datasheet
-{AS7262} 6-{Channel Visible Spectral}\_{ID Device} with {Electronic
-Shutter} and {Smart Interface}}.
+AMS OSRAM Group. (2022). \emph{Datasheet {AS7262} 6-{Channel Visible
+Spectral}\_{ID Device} with {Electronic Shutter} and {Smart Interface}}.
+AMS OSRAM Group.
 
 \bibitem[\citeproctext]{ref-ariza2022}
-Ariza, J.Á. und Baez, H., 2022.
-\href{https://doi.org/10.1002/cae.22439}{Understanding the Role of
-Single-Board Computers in Engineering and Computer Science Education:
-{A} Systematic Literature Review}. \emph{Computer Applications in
-Engineering Education}, 30 (1), 304--329.
+Ariza, J. Á., \& Baez, H. (2022). Understanding the Role of Single-Board
+Computers in Engineering and Computer Science Education: {A} Systematic
+Literature Review. \emph{Computer Applications in Engineering
+Education}, \emph{30}(1), 304--329.
+\url{https://doi.org/10.1002/cae.22439}
 
 \bibitem[\citeproctext]{ref-ashton2009}
-Ashton, K., 2009. That {„Internet of Things``} Thing. \emph{RFID
-journal}, 22 (7), 97--114.
+Ashton, K. (2009). That {„Internet of Things``} Thing. \emph{RFID
+journal}, \emph{22}(7), 97--114.
 
 \bibitem[\citeproctext]{ref-celebi2020}
-Celebi, H.B., Pitarokoilis, A., und Skoglund, M., 2020.
-\href{https://doi.org/10.1007/978-3-030-42500-5_2}{Wireless
-{Communication} for the {Industrial IoT}}. \emph{In}: I. Butun, Hrsg.
+Celebi, H. B., Pitarokoilis, A., \& Skoglund, M. (2020). Wireless
+{Communication} for the {Industrial IoT}. In I. Butun (Hrsg.),
 \emph{Industrial {IoT} : {Challenges}, {Design Principles},
-{Applications}, and {Security}}. {Cham}: {Springer International
-Publishing}, 57--94.
+{Applications}, and {Security}} (S. 57--94). Springer International
+Publishing. \url{https://doi.org/10.1007/978-3-030-42500-5_2}
+
+\bibitem[\citeproctext]{ref-EclipseFoundation2021}
+Eclipse Foundation. (2021). Authentication Methods. In \emph{Eclipse
+Mosquitto}. https://mosquitto.org/documentation/authentication-methods/.
 
 \bibitem[\citeproctext]{ref-gartner2023}
-Gartner, 2023.
-\href{https://www.gartner.com/en/articles/what-s-new-in-the-2023-gartner-hype-cycle-for-emerging-technologies}{4
-{Exciting New Trends} in the {Gartner Emerging Technologies Hype
-Cycle}}. \emph{Gartner}.
+Gartner. (2023). 4 {Exciting New Trends} in the {Gartner Emerging
+Technologies Hype Cycle}. In \emph{Gartner}.
+https://www.gartner.com/en/articles/what-s-new-in-the-2023-gartner-hype-cycle-for-emerging-technologies.
 
 \bibitem[\citeproctext]{ref-bosch2022}
-\href{https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688/}{Gas
-Sensor {BME688}}, o.~J. \emph{Bosch Sensortec}.
+Gas Sensor {BME688}. (o.~J.). In \emph{Bosch Sensortec}.
+https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688/.
 
 \bibitem[\citeproctext]{ref-gore1998}
-Gore, A., 1998.
-\href{https://doi.org/10.1080/00050348.1998.10558728}{The {Digital
-Earth}}. \emph{Australian Surveyor}, 43 (2), 89--91.
+Gore, A. (1998). The {Digital Earth}. \emph{Australian Surveyor},
+\emph{43}(2), 89--91.
+\url{https://doi.org/10.1080/00050348.1998.10558728}
 
 \bibitem[\citeproctext]{ref-granell2020}
-Granell, C., Kamilaris, A., Kotsev, A., Ostermann, F.O., und Trilles,
-S., 2020. \href{https://doi.org/10.1007/978-981-32-9915-3_11}{Internet
-of {Things}}. \emph{In}: H. Guo, M.F. Goodchild, und A. Annoni, Hrsg.
-\emph{Manual of {Digital Earth}}. {Singapore}: {Springer}, 387--423.
+Granell, C., Kamilaris, A., Kotsev, A., Ostermann, F. O., \& Trilles, S.
+(2020). Internet of {Things}. In H. Guo, M. F. Goodchild, \& A. Annoni
+(Hrsg.), \emph{Manual of {Digital Earth}} (S. 387--423). Springer.
+\url{https://doi.org/10.1007/978-981-32-9915-3_11}
 
 \bibitem[\citeproctext]{ref-grimm2023}
-Grimm, D., 2023.
-\href{https://moodle.fhnw.ch/course/view.php?id=37277}{2030
-{Geod{ä}tische Messtechnik GMT I}}.
+Grimm, D. (2023). \emph{2030 {Geod{ä}tische Messtechnik GMT I}}.
 
 \bibitem[\citeproctext]{ref-herle2019}
-Herlé, S., Bill, R., und Blankenbach, J.M., 2019.
-\href{https://publications.rwth-aachen.de/record/772603/}{{A
-GeoEvent-driven architecture based on GeoMQTT for the Geospatial IoT}}.
-phdthesis No. RWTH-2019-10695. Dissertation, Rheinisch-Westf{ä}lische
+Herlé, S., Bill, R., \& Blankenbach, J. M. (2019). \emph{{A
+GeoEvent-driven architecture based on GeoMQTT for the Geospatial IoT}}
+(phdthesis RWTH-2019-10695). Dissertation, Rheinisch-Westf{ä}lische
 Technische Hochschule Aachen, 2019.
 
 \bibitem[\citeproctext]{ref-hirmer2023}
-Hirmer, P., 2023.
-\href{https://doi.org/10.1007/978-3-031-18884-8_2}{Foundations}.
-\emph{In}: P. Hirmer, Hrsg. \emph{Model-{Based Approaches} to the
-{Internet} of {Things}}. {Cham}: {Springer International Publishing},
-7--15.
+Hirmer, P. (2023). Foundations. In P. Hirmer (Hrsg.), \emph{Model-{Based
+Approaches} to the {Internet} of {Things}} (S. 7--15). Springer
+International Publishing.
+\url{https://doi.org/10.1007/978-3-031-18884-8_2}
+
+\bibitem[\citeproctext]{ref-Hollingworth2024}
+Hollingworth, G. (2024). Raspberry {Pi Connect}. In \emph{Raspberry Pi}.
 
 \bibitem[\citeproctext]{ref-influxdata2023}
-influxdata, 2023.
-\href{https://docs.influxdata.com/influxdb/v2/get-started/}{Get Started
-with {InfluxDB} {\textbar} {InfluxDB OSS} v2 {Documentation}}.
+influxdata. (2023). \emph{Get Started with {InfluxDB} {\textbar}
+{InfluxDB OSS} v2 {Documentation}}.
+https://docs.influxdata.com/influxdb/v2/get-started/.
 
 \bibitem[\citeproctext]{ref-tdk2021}
-InvenSense, T., 2021.
-\href{https://invensense.tdk.com/wp-content/uploads/2021/10/DS-000189-ICM-20948-v1.5.pdf}{{ICM-20948
-World}'s {Lowest Power} 9-{Axis MEMS MotionTracking}™ {Device}}.
+InvenSense, T. (2021). \emph{{ICM-20948 World}'s {Lowest Power} 9-{Axis
+MEMS MotionTracking}™ {Device}}.
 
 \bibitem[\citeproctext]{ref-iso1994}
-ISO, 1994. \href{https://www.iso.org/standard/20269.html}{{ISO}/{IEC}
-7498-1:1994}. \emph{ISO}.
+ISO. (1994). {ISO}/{IEC} 7498-1:1994. In \emph{ISO}.
+https://www.iso.org/standard/20269.html.
 
 \bibitem[\citeproctext]{ref-ITU2005}
-ITU, 2005.
-\emph{\href{https://www.itu.int:443/en/publications/gs/Pages/publications.aspx?parent=S-POL-IR.IT-2005/&media=paper}{{ITU
-Internet Reports} 2005: {The Internet} of {Things}}}. {Geneva}:
-{International Telecommunication Union}.
+ITU. (2005). \emph{{ITU Internet Reports} 2005: {The Internet} of
+{Things}}. International Telecommunication Union.
 
-\bibitem[\citeproctext]{ref-jensen2020}
-Jensen, K., 2020. \emph{White {Paper Chip-scale} Spectral Sensing:
-Understanding the New Uses for Ultra-Precise Light-Source Measurement}.
-{Premstaetten, Austria}: {AMS}, White \{\{Paper\}\}.
+\bibitem[\citeproctext]{ref-Jensen2020}
+Jensen, K. (2020). \emph{White {Paper Chip-scale} Spectral Sensing:
+Understanding the New Uses for Ultra-Precise Light-Source Measurement}
+(S. 10) {[}White \{\{Paper\}\}{]}. AMS.
 
 \bibitem[\citeproctext]{ref-kamilaris2018}
-Kamilaris, A. und Ostermann, F.O., 2018.
-\href{https://doi.org/10.3390/ijgi7070269}{Geospatial {Analysis} and the
-{Internet} of {Things}}. \emph{ISPRS International Journal of
-Geo-Information}, 7 (7), 269.
+Kamilaris, A., \& Ostermann, F. O. (2018). Geospatial {Analysis} and the
+{Internet} of {Things}. \emph{ISPRS International Journal of
+Geo-Information}, \emph{7}(7), 269.
+\url{https://doi.org/10.3390/ijgi7070269}
 
 \bibitem[\citeproctext]{ref-laska2018}
-Laska, M., Herle, S., Klamma, R., und Blankenbach, J., 2018.
-\href{https://doi.org/10.3390/ijgi7070238}{A {Scalable Architecture} for
-{Real-Time Stream Processing} of {Spatiotemporal IoT Stream
-Data}---{Performance Analysis} on the {Example} of {Map Matching}}.
-\emph{ISPRS International Journal of Geo-Information}, 7 (7), 238.
+Laska, M., Herle, S., Klamma, R., \& Blankenbach, J. (2018). A {Scalable
+Architecture} for {Real-Time Stream Processing} of {Spatiotemporal IoT
+Stream Data}---{Performance Analysis} on the {Example} of {Map
+Matching}. \emph{ISPRS International Journal of Geo-Information},
+\emph{7}(7), 238. \url{https://doi.org/10.3390/ijgi7070238}
 
 \bibitem[\citeproctext]{ref-leicageosystems2022}
-Leica Geosystems, 2022. Leica {TS60}/{MS60}/{TM60 Gebrauchsanweisung}.
+Leica Geosystems. (2022). \emph{Leica {TS60}/{MS60}/{TM60
+Gebrauchsanweisung}}.
 
 \bibitem[\citeproctext]{ref-links2019}
-Links, C., 2019.
-\href{https://www.qorvo.com/design-hub/blog/iot-standards-the-end-game}{{IoT
-Standards}: {The End Game} - {Qorvo}}.
+Links, C. (2019). \emph{{IoT Standards}: {The End Game} - {Qorvo}}.
+https://www.qorvo.com/design-hub/blog/iot-standards-the-end-game.
 
 \bibitem[\citeproctext]{ref-maximintegrated2020}
-maxim integrated, 2020. {MAX30101 High-Sensitivity Pulse Oximeter} and
-{Heart-Rate Sensor} for {Wearable Health}.
+maxim integrated. (2020). \emph{{MAX30101 High-Sensitivity Pulse
+Oximeter} and {Heart-Rate Sensor} for {Wearable Health}}.
 
 \bibitem[\citeproctext]{ref-melexis2019}
-Melexis, 2019.
-\href{https://media.melexis.com/-/media/files/documents/datasheets/mlx90640-datasheet-melexis.pdf}{{MLX90640}
-32x24 {IR} Array {Datasheet}}.
+Melexis. (2019). \emph{{MLX90640} 32x24 {IR} Array {Datasheet}}.
+
+\bibitem[\citeproctext]{ref-RaspberryPiLtd2024}
+Raspberry Pi Ltd. (2024a). Raspberry {Pi Connect Beta} - {Access} Your
+{Raspberry Pi} from Anywhere. In \emph{Raspberry Pi}.
+https://www.raspberrypi.com/software/connect/.
+
+\bibitem[\citeproctext]{ref-RaspberryPiLtd2024a}
+Raspberry Pi Ltd. (2024b). Raspberry {Pi Documentation} Config.Txt. In
+\emph{Raspberry Pi}.
+https://www.raspberrypi.com/documentation/computers/config\_txt.html.
 
 \bibitem[\citeproctext]{ref-rogers2006}
-Rogers, Y., 2006. \href{https://doi.org/10.1007/11853565_24}{Moving on
-from {Weiser}'s {Vision} of {Calm Computing}: {Engaging UbiComp
-Experiences}}. \emph{In}: P. Dourish und A. Friday, Hrsg.
-\emph{{UbiComp} 2006: {Ubiquitous Computing}}. {Berlin, Heidelberg}:
-{Springer}, 404--421.
+Rogers, Y. (2006). Moving on from {Weiser}'s {Vision} of {Calm
+Computing}: {Engaging UbiComp Experiences}. In P. Dourish \& A. Friday
+(Hrsg.), \emph{{UbiComp} 2006: {Ubiquitous Computing}} (S. 404--421).
+Springer. \url{https://doi.org/10.1007/11853565_24}
 
 \bibitem[\citeproctext]{ref-salvador2003}
-Salvador, T. und Anderson, K., 2003.
-\href{https://doi.org/10.1007/978-3-540-39653-6_19}{Practical
-{Considerations} of {Context} for {Context Based Systems}: {An Example}
-from an {Ethnographic Case Study} of a {Man Diagnosed} with {Early Onset
-Alzheimer}'s {Disease}}. \emph{In}: A.K. Dey, A. Schmidt, und J.F.
-McCarthy, Hrsg. \emph{{UbiComp} 2003: {Ubiquitous Computing}}. {Berlin,
-Heidelberg}: {Springer}, 243--255.
+Salvador, T., \& Anderson, K. (2003). Practical {Considerations} of
+{Context} for {Context Based Systems}: {An Example} from an
+{Ethnographic Case Study} of a {Man Diagnosed} with {Early Onset
+Alzheimer}'s {Disease}. In A. K. Dey, A. Schmidt, \& J. F. McCarthy
+(Hrsg.), \emph{{UbiComp} 2003: {Ubiquitous Computing}} (S. 243--255).
+Springer. \url{https://doi.org/10.1007/978-3-540-39653-6_19}
 
 \bibitem[\citeproctext]{ref-sliney2016}
-Sliney, D.H., 2016. \href{https://doi.org/10.1038/eye.2015.252}{What Is
-Light? {The} Visible Spectrum and Beyond}. \emph{Eye}, 30 (2), 222--229.
+Sliney, D. H. (2016). What Is Light? {The} Visible Spectrum and Beyond.
+\emph{Eye}, \emph{30}(2), 222--229.
+\url{https://doi.org/10.1038/eye.2015.252}
 
 \bibitem[\citeproctext]{ref-st2021}
-STMicroelectronics, 2021.
-\href{https://www.st.com/resource/en/datasheet/vl53l5cx.pdf}{{VL53L5CX}
-- {Datasheet} - {Time-of-Flight} 8x8 Multizone Ranging Sensor with Wide
-Field of View}.
+STMicroelectronics. (2021). \emph{{VL53L5CX} - {Datasheet} -
+{Time-of-Flight} 8x8 Multizone Ranging Sensor with Wide Field of View}.
 
 \bibitem[\citeproctext]{ref-st2023}
-STMicroelectronics, 2023.
-\href{https://www.st.com/resource/en/application/_note/an5894-description-of-the-fields-of-view-of-stmicroelectronics-timeofflight-sensors-stmicroelectronics.pdf}{Description
-of the Fields of View of {STMicroelectronics}' {Time-of-Flight}
-Sensors}.
+STMicroelectronics. (2023). \emph{Description of the Fields of View of
+{STMicroelectronics}' {Time-of-Flight} Sensors}.
 
 \bibitem[\citeproctext]{ref-trilles2017}
-Trilles, S., Belmonte, Ò., Schade, S., und Huerta, J., 2017.
-\href{https://doi.org/10.1080/17538947.2016.1209583}{A
+Trilles, S., Belmonte, Ò., Schade, S., \& Huerta, J. (2017). A
 Domain-Independent Methodology to Analyze {IoT} Data Streams in
 Real-Time. {A} Proof of Concept Implementation for Anomaly Detection
-from Environmental Data}. \emph{International Journal of Digital Earth},
-10 (1), 103--120.
+from Environmental Data. \emph{International Journal of Digital Earth},
+\emph{10}(1), 103--120.
+\url{https://doi.org/10.1080/17538947.2016.1209583}
 
 \bibitem[\citeproctext]{ref-upton2022}
-Upton, E., 2022.
-\href{https://www.raspberrypi.com/news/supply-chain-update-its-good-news/}{Supply
-Chain Update - It's Good News!} \emph{Raspberry Pi}.
+Upton, E. (2022). Supply Chain Update - It's Good News! In
+\emph{Raspberry Pi}.
 
 \bibitem[\citeproctext]{ref-wiegerling2013}
-Wiegerling, K., 2013.
-\href{https://doi.org/10.1007/978-3-476-05333-6_71}{{Ubiquitous
-Computing}}. \emph{In}: A. Grunwald und M. Simonidis-Puschmann, Hrsg.
-\emph{{Handbuch Technikethik}}. {Stuttgart}: {J.B. Metzler}, 374--378.
+Wiegerling, K. (2013). {Ubiquitous Computing}. In A. Grunwald \& M.
+Simonidis-Puschmann (Hrsg.), \emph{{Handbuch Technikethik}} (S.
+374--378). J.B. Metzler.
+\url{https://doi.org/10.1007/978-3-476-05333-6_71}
 
 \bibitem[\citeproctext]{ref-zaheeruddin2020}
-Zaheeruddin und Gupta, H., 2020.
-\href{https://doi.org/10.1007/978-3-030-37468-6_1}{Foundation of {IoT}:
-{An Overview}}. \emph{In}: M. Alam, K.A. Shakil, und S. Khan, Hrsg.
-\emph{Internet of {Things} ({IoT}): {Concepts} and {Applications}}.
-{Cham}: {Springer International Publishing}, 3--24.
+Zaheeruddin, \& Gupta, H. (2020). Foundation of {IoT}: {An Overview}. In
+M. Alam, K. A. Shakil, \& S. Khan (Hrsg.), \emph{Internet of {Things}
+({IoT}): {Concepts} and {Applications}} (S. 3--24). Springer
+International Publishing.
+\url{https://doi.org/10.1007/978-3-030-37468-6_1}
+
+\bibitem[\citeproctext]{ref-Zamorano2016}
+Zamorano, J., García, C., Tapia, C., Miguel, A. S. de, Pascual, S., \&
+Gallego, J. (2016). {STARS4ALL Night Sky Brightness Photometer}.
+\emph{International Journal of Sustainable Lighting}, \emph{18}, 49--54.
+\url{https://doi.org/10.26607/ijsl.v18i0.21}
 
 \end{CSLReferences}
 
 \part{Praktika}
 
-\chapter*{E01 Luftqualitätmessung}\label{e01-luftqualituxe4tmessung}
-\addcontentsline{toc}{chapter}{E01 Luftqualitätmessung}
+\chapter{Luftqualitätmessung}\label{luftqualituxe4tmessung}
 
-\markboth{E01 Luftqualitätmessung}{E01 Luftqualitätmessung}
+Diese Übung zeigt wie Sensoren mit dem Raspberry Pi genutzt werden
+können am Beispiel des BME688 Sensors. Dieser Sensor erfasst Temperatur,
+Luftdruck, Luftfeuchtigkeit und Gas Scanner VOC. Die Übung zeigt wie der
+Sensor angeschlossen wird, wie die Sensordaten ausgelesen werden und wie
+die Sensordaten in einer Datei gespeichert werden können.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung}
 
 Ziel dieser ersten Übung ist es den BME688 Sensor kennen zu lernen und
 die Sensordaten auszulesen. Der BME688 ist ein 4-in-1 Sensor für
@@ -1917,6 +2010,8 @@ Temperatur, Luftdruck, Luftfeuchtigkeit und Gas Scanner VOC. Der Sensor
 verfügt über eine I2C Schnittstelle, die mit der Python Library
 \href{https://github.com/pimoroni/bme680-python}{bme680-python}
 angesteuert und die Sensordaten ausgelesen werden können.
+
+\textbf{Unterlagen:} \emph{ E01\_Luftqualitaet.zip}
 
 \textbf{Vorbereitung}
 
@@ -1932,7 +2027,8 @@ angesteuert und die Sensordaten ausgelesen werden können.
     Raspberry Pi
   \end{itemize}
 \item
-  Lest die Dokumentation zum BME688 Sensor Gas Sensor {BME688} (o.~J.)
+  Lest die Dokumentation zum BME688 Sensor {„Gas Sensor {BME688}``}
+  (\citeproc{ref-bosch2022}{o.~J.})
 
   \begin{itemize}
   \tightlist
@@ -1949,7 +2045,8 @@ angesteuert und die Sensordaten ausgelesen werden können.
 }
 
 \caption{Youtube Video: How gas sensing gets intelligent with BME688 and
-BME AI-Studio}
+BME AI-Studio \href{https://www.youtube.com/embed/4vdliMRtxBY}{Youtube
+Video}}
 
 \end{figure}%
 
@@ -1978,13 +2075,10 @@ Tutorial &
 started with BME680 Breakout} \\
 \end{longtable}
 
-\section*{\texorpdfstring{BME688\index{BME688}}{BME688}}\label{bme688}
-\addcontentsline{toc}{section}{BME688\index{BME688}}
-
-\markright{BME688\index{BME688}}
+\section{\texorpdfstring{BME688\index{BME688}}{BME688}}\label{bme688}
 
 BME688 - Bosch Sensor für Temperatur, Luftdruck, Luftfeuchtigkeit, Gas
-Scanner VOC (Abbildung~\ref{fig-bme688})
+Scanner VOC (Abb.~\ref{fig-bme688})
 
 \begin{itemize}
 \tightlist
@@ -2015,10 +2109,7 @@ mit Referenzbild für den Grössenvergleich}
 
 \end{figure}%
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau}
-\addcontentsline{toc}{section}{Übungsaufbau}
-
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau}
 
 \begin{itemize}
 \tightlist
@@ -2056,8 +2147,7 @@ angeschlossen.}
 
 \end{boxtitle}
 
-\subsection*{Kontrolle der Hardware}\label{kontrolle-der-hardware}
-\addcontentsline{toc}{subsection}{Kontrolle der Hardware}
+\subsection{Kontrolle der Hardware}\label{kontrolle-der-hardware}
 
 Kontrolliere mit dem Befehl \texttt{i2cdetect\ -y\ 1} ob der Raspberry
 Pi mit dem Sensor verbunden ist und der Raspberry Pi Zugriff auf den
@@ -2096,14 +2186,13 @@ der I2C Bus aktiviert sein. Dies kann mit dem Befehl
 \texttt{sudo\ raspi-config} im Menü \texttt{Interfacing\ Options} und
 \texttt{I2C} aktiviert werden.
 
-\subsection*{Kontrolle der
+\subsection{Kontrolle der
 Installation}\label{kontrolle-der-installation}
-\addcontentsline{toc}{subsection}{Kontrolle der Installation}
 
 Teste ob die für die Übung erforderlichen Python Libraries installiert
 sind.
 
-\phantomsection\label{annotated-cell-4}%
+\phantomsection\label{annotated-cell-5}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \ExtensionTok{python} \AttributeTok{{-}c} \StringTok{"import math"}
@@ -2124,19 +2213,24 @@ sind.
 \end{description}
 
 Installiere das Modul mit folgendem Befehl, falls es nicht installiert
-ist.
+ist. Aktiviere die virtuelle Umgebung (hier unter
+\texttt{\textasciitilde{}/.env}) und installiere das Modul\footnote{In
+  dieser Übung wird die Python Virtual Environment \texttt{.env} im
+  Homeordner \texttt{\textasciitilde{}/} erstellt und aktiviert. Diese
+  kann auch an einem Ort erstellt werden, beispielweise projektbasiert.
+  Erstellen einer Virtual Environment:
+  \texttt{python\ -m\ venv\ \textasciitilde{}/Development/Projekt1/env}}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{sudo}\NormalTok{ pip3 install bme680}
+\BuiltInTok{source}\NormalTok{ \textasciitilde{}/.env/bin/activate}
+\ExtensionTok{pip}\NormalTok{ install bme680}
 \end{Highlighting}
 \end{Shaded}
 
-\subsection*{Kopiere (Clone) die Library mit den Beispielen auf den
+\subsection{Kopiere (Clone) die Library mit den Beispielen auf den
 Raspberry
 Pi}\label{kopiere-clone-die-library-mit-den-beispielen-auf-den-raspberry-pi}
-\addcontentsline{toc}{subsection}{Kopiere (Clone) die Library mit den
-Beispielen auf den Raspberry Pi}
 
 Wechsle in den Ordner \emph{Documents} und kopiere mit folgenden
 Befehlen die Library auf Deinen Raspberry Pi.
@@ -2149,11 +2243,8 @@ Befehlen die Library auf Deinen Raspberry Pi.
 \end{Highlighting}
 \end{Shaded}
 
-\section*{Aufgabe 1: Sensormessungen
+\section{Aufgabe 1: Sensormessungen
 ausführen}\label{aufgabe-1-sensormessungen-ausfuxfchren}
-\addcontentsline{toc}{section}{Aufgabe 1: Sensormessungen ausführen}
-
-\markright{Aufgabe 1: Sensormessungen ausführen}
 
 Teste das Beispiel \texttt{read-all.py} im Ordner \emph{examples}.
 Dieses Beispiel gibt die Temperatur, Luftdruck und Luftfeuchtigkeit des
@@ -2161,7 +2252,7 @@ Sensors BME 688 aus.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ read{-}all.py}
+\ExtensionTok{python}\NormalTok{ read{-}all.py}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2202,7 +2293,7 @@ Folgendes Code Snippet zeigt eine gekürtzte Version des read-all.py
 Python Beispiels, der die \emph{Temperatur}, \emph{Luftdruck} und
 \emph{Luftfeuchtigkeit} mit der BME680 Library ausgibt.
 
-\phantomsection\label{annotated-cell-9}%
+\phantomsection\label{annotated-cell-10}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/usr/bin/env python}
@@ -2243,7 +2334,7 @@ das Rauschen und Drifts reduzieren
 Sensordaten auslesen
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-luftqualitaet}{}\label{exr-luftqualitaet}
 
 \textbf{BME 688}\\
 Studiert die Python Skripte und online Tutorial zum Sensor
@@ -2253,45 +2344,41 @@ Studiert die Python Skripte und online Tutorial zum Sensor
 \item
   Wie wird auf den Sensor zugegriffen?
 \item
-  Wie wir die Temperatur kompensiert?
-\item
-  Wie kann ein Temperaturoffset gesetzt werden?
-\item
   Wie reagiert der Feuchtigkeitssensor auf Änderungen?
 \item
-  Wie sieht es mit dem Luftdruck aus, was sind Vergleichswerte?
+  Wie hoch sind die Werte für den Luftdruck, was sind Vergleichswerte?
 \item
-  Wie könnt ihr einfach Werte in eine Datei schreiben?
+  Wie könnt Ihr einfach Sensorwerte in eine Datei schreiben?
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\begin{solution}
-Messwerte in eine Textdatei schreiben
-\texttt{python3\ read-all.py\ \textgreater{}\ bme680-data.txt}. Die
-erstellte Datei kann mit dem Befehl \texttt{cat\ bme680-data.txt}
-angezeigt werden.
-\end{solution}
-
-\section*{Aufgabe 2: Berechnung der Atmosphärenkorrektur für
+\section{Aufgabe 2: Berechnung der Atmosphärenkorrektur für
 Distanzmessungen
 (optional)}\label{aufgabe-2-berechnung-der-atmosphuxe4renkorrektur-fuxfcr-distanzmessungen-optional}
-\addcontentsline{toc}{section}{Aufgabe 2: Berechnung der
-Atmosphärenkorrektur für Distanzmessungen (optional)}
-
-\markright{Aufgabe 2: Berechnung der Atmosphärenkorrektur für
-Distanzmessungen (optional)}
 
 Geödätische Distanzmessverfahren wie bei der Tachymetrie
 (Totalstationen) und Laserscanning benötigen eine Korrektur der
 Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu
-berechnen. Die Korrektur wird als \emph{Atmosphärenkorrektur} bezeichnet
-und ist abhängig von der \emph{Temperatur}, dem \emph{Luftdruck} und der
-\emph{Luftfeuchtigkeit}. Die Korrektur wird in ppm (parts per million)
-angegeben und kann mit folgender Formel~\ref{eq-atmosphaerenkorrektur}
-berechnet werden (Leica Geosystems 2022, Grimm 2023):
+berechnen. Über eine \emph{Massstabskorrektur} (ppm {[}mm/km{]}) können
+distanzproportionale Reduzierungen berücksichtigt werden, die
+\emph{Projektionsverzerrung}, \emph{Reduktion auf Meereshöhe} und die
+\emph{Atmophärenkorrektur} berücksichtigen. Die Luftfeichtigkeit
+beeinflusst Distanzmessungen in feuchtem und heissen Klima. Diese muss
+den zur Messzeit geltenden atmosphärischen Bedingungen angepasst werden.
 
-\begin{equation}\phantomsection\label{eq-atmosphaerenkorrektur}{\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}}\end{equation}
+Die Korrektur wird als \emph{Atmosphärenkorrektur} bezeichnet und ist
+abhängig von der \emph{Temperatur}, dem \emph{Luftdruck} und der
+\emph{Luftfeuchtigkeit}. Die Korrektur wird in ppm (parts per million
+{[}mm/km{]}) angegeben und kann mit folgender
+Gleichung~\ref{eq-atmosphaerenkorrektur} berechnet werden
+(\citeproc{ref-grimm2023}{Grimm, 2023};
+\citeproc{ref-leicageosystems2022}{Leica Geosystems, 2022, S. 87}) und
+gilt für die Distanzmessung mit sichtbaren roten Laser
+
+\begin{equation}\phantomsection\label{eq-atmosphaerenkorrektur}{
+\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}
+}\end{equation}
 
 \[\begin{aligned}
 & \Delta D_1 && \text{Atmosphärische Korrektur} && [ppm]\\
@@ -2305,7 +2392,7 @@ berechnet werden (Leica Geosystems 2022, Grimm 2023):
 
 Folgende Funktion in Python berechnet die Atmosphärenkorrektur für
 Geodätische Distanzmessverfahren basierend auf der
-Formel~\ref{eq-atmosphaerenkorrektur}
+Gleichung~\ref{eq-atmosphaerenkorrektur}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2337,11 +2424,20 @@ Formel~\ref{eq-atmosphaerenkorrektur}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+Für Distanzmessungen höchster Genauigkeit sollte die atmosphärische
+Korrektur auf \(1 ppm\) genau bestimmt werden, folglich sollten die
+Messwerte mindestens folgenden Genauigkeit aufweisen: die Temperatur auf
+\(1°C\), der Luftdruck auf \(3 mbar\) (\(1 Millibar= 1 hPa\)) und die
+Luftfeuchtigkeit auf \(20 %
+\) genau bestimmt werden (\citeproc{ref-leicageosystems2022}{Leica
+Geosystems, 2022, S. 87}).
+
+\begin{exercise}[]\protect\hypertarget{exr-atmosphaerenkorrektur}{}\label{exr-atmosphaerenkorrektur}
 
 \textbf{Atmosphärenkorrektur}\\
-Nutzt die Funktion \texttt{calculate\_atmospheric\_correction} um die
-Korrektur für die folgenden Messwerte zu berechnen:
+Nutzt die Funktion \texttt{calculate\_atmospheric\_correction} um eine
+atmosphärische Korrektur mit den momentan gemessenen amtmosphärischen
+Bedingungen zu berechnen.
 
 \begin{itemize}
 \tightlist
@@ -2352,19 +2448,30 @@ Korrektur für die folgenden Messwerte zu berechnen:
 \item
   Wie hoch ist die Korrektur bei 20°C, 1000hPa und 50\% sowie 100\%
   Luftfeuchtigkeit?
+\item
+  Erfüllt der BME688 Sensor die Anforderungen für Distanzmessungen
+  höchster Genauigkeit?
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\chapter*{E02 Spektralmessung}\label{e02-spektralmessung}
-\addcontentsline{toc}{chapter}{E02 Spektralmessung}
+\chapter{Spektralmessung}\label{spektralmessung}
 
-\markboth{E02 Spektralmessung}{E02 Spektralmessung}
+Diese Übung führt einen Spektralsensor ein und zeigt wie
+Spektralmessungen durchgeführt werden können. Der AS7262 Spektralsensor
+misst über 6-Kanäle im sichtbaren Bereich und kann für spektroskopische
+Messungen eingesetzt werden.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung-1}
 
 Ziel dieser Übung ist es den AS7262 Spektralsensor kennen zu lernen und
 die Sensordaten auszulesen. Der \emph{AS7262} ist ein Spektralsensor,
 der über eine I2C Schnittstelle mit dem Raspberry Pi verbunden wird und
 einer Python Library angesteuert werden kann.
+
+\textbf{Unterlagen:} \emph{ E02\_Spektralmessung.zip}
 
 \textbf{Vorbereitung}
 
@@ -2375,18 +2482,19 @@ einer Python Library angesteuert werden kann.
   \href{https://www.youtube.com/embed/KKyHxXyaVPM?si=hvO1IVbdwbjnDI40}{AS7262
   Spektralsensor} (bis Minute 2:20)
 \item
-  Lest das White Paper von Jensen (2020) über Spektralsensoren
+  Lest das White Paper von Jensen (\citeproc{ref-Jensen2020}{2020}) über
+  Spektralsensoren
 
   \begin{itemize}
   \tightlist
   \item
     Konzentriere Dich da auf die Beschreibung der \emph{Multi-channel
     spectral sensors} und in welchen Gebieten diese Sensoren eingesetzt
-    werden
+    werden.
   \end{itemize}
 \item
   Studiert das Datenblatt zum AS7262 Spektralsensor AMS OSRAM Group
-  (2022)
+  (\citeproc{ref-ams2022}{2022})
 
   \begin{itemize}
   \tightlist
@@ -2401,7 +2509,8 @@ einer Python Library angesteuert werden kann.
 
 }
 
-\caption{ams Spectral ID iSPI Eval Kit}
+\caption{ams Spectral ID iSPI Eval Kit
+\href{https://www.youtube.com/embed/4vdliMRtxBY}{Youtube Video}}
 
 \end{figure}%
 
@@ -2428,16 +2537,13 @@ Video & \href{https://www.youtube.com/watch?v=KKyHxXyaVPM}{ams Spectral
 ID iSPI Eval Kit} \\
 \end{longtable}
 
-\section*{Spektrometer}\label{spektrometer}
-\addcontentsline{toc}{section}{Spektrometer}
-
-\markright{Spektrometer}
+\section{Spektrometer}\label{spektrometer}
 
 Spektrometer, sind Sensoren, die das Licht auf einzelne Bänder der
 Wellenlänge (in Nanometer nm) messen. Für das menschliche Auge wird das
 sichtbare Spektrum zwischen 360nm bis 830nm angegeben, wobei sich der
 Bereich unter optimalen Bedingungen in UV und NIR erstrecken kann
-(Sliney 2016).
+(\citeproc{ref-sliney2016}{Sliney, 2016}).
 
 Auf kleinen Chip verbaute Spektralsensoren ermöglichen zahlreiche neue
 Anwendungen, die früher mit grossen Spektroskopen durchgeführt wurden.
@@ -2449,17 +2555,14 @@ Konsumgütern, Industrie und Medizin eingesetzt.
 Ein Multispektralsensor liefert die Antwort auf die Frage, ob eine
 orangefarbene Probe eine Mischung aus Rot und Gelb oder ein reines
 Orange ist. Multispektralsensoren teilen das gewählte Spektrum in
-Spektralkanäle auf (siehe Abbildung~\ref{fig-as7262}) und sind so
-angeordnet, dass die Spektralkanäle kontinuierlich gut abgedeckt sind.
-Die Messung erfolgt im sichtbaren Bereich radiometrisch (Jensen 2020).
-Das heißt, der Sensor misst die spektrale Leistungsverteilung der
-Messung.
+Spektralkanäle auf (siehe Abb.~\ref{fig-as7262}) und sind so angeordnet,
+dass die Spektralkanäle kontinuierlich gut abgedeckt sind. Die Messung
+erfolgt im sichtbaren Bereich radiometrisch
+(\citeproc{ref-Jensen2020}{Jensen, 2020}). Das heißt, der Sensor misst
+die spektrale Leistungsverteilung der Messung.
 
-\section*{\texorpdfstring{AS7262
+\section{\texorpdfstring{AS7262
 Multispektralsensor\index{AS7262}}{AS7262 Multispektralsensor}}\label{as7262-multispektralsensor}
-\addcontentsline{toc}{section}{AS7262 Multispektralsensor\index{AS7262}}
-
-\markright{AS7262 Multispektralsensor\index{AS7262}}
 
 Der AS7262 ist ein sehr kompakter Multispektralsensor, der über 6
 Spektralkanäle im sichtbaren Bereich misst. Der Sensor eignet sich für
@@ -2469,7 +2572,7 @@ auf einem Breakout Board verbaut und kann über die I2C Schnittstelle mit
 dem Raspberry Pi verbunden werden, zusätzlich sind zwei LEDs verbaut,
 die den Messbereich für Messungen beleuchten können.
 
-AS7262 - 6-Kanal Spektral Sensor (Abbildung~\ref{fig-as7262})
+AS7262 - 6-Kanal Spektral Sensor (Abb.~\ref{fig-as7262})
 
 \begin{itemize}
 \tightlist
@@ -2498,10 +2601,7 @@ oben: AS7262 Breakout von Pimoroni, unten: AS7262 Photodioden Array}
 
 \end{figure}%
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau-1}
-\addcontentsline{toc}{section}{Übungsaufbau}
-
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau-1}
 
 \begin{itemize}
 \tightlist
@@ -2524,8 +2624,10 @@ oben: AS7262 Breakout von Pimoroni, unten: AS7262 Photodioden Array}
   \texttt{0x49} erkannt werden.
 \item
   Kontrolliere, ob die Library \texttt{as7262} installiert ist mit
-  \texttt{python\ -c\ "import\ as7262"}. Installiere die Library mit
-  \texttt{sudo\ pip3\ install\ as7262} falls sie nicht installiert ist.
+  \texttt{python\ -c\ "import\ as7262"}. Installiere die Library mit in
+  der aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ as7262}, falls sie nicht installiert ist.
 \end{itemize}
 
 Wechsle in den Ordner \emph{Documents} und kopiere mit folgenden
@@ -2539,22 +2641,22 @@ Befehlen die Library auf Deinen Raspberry Pi.
 \end{Highlighting}
 \end{Shaded}
 
-\section*{Aufgabe 1: Spektralmessungen
+\section{Aufgabe 1: Spektralmessungen
 durchführen}\label{aufgabe-1-spektralmessungen-durchfuxfchren}
-\addcontentsline{toc}{section}{Aufgabe 1: Spektralmessungen durchführen}
-
-\markright{Aufgabe 1: Spektralmessungen durchführen}
 
 Teste das Beispiel \texttt{spectrum.py} im Ordner \emph{examples}.
 Dieses Beispiel gibt die Messungen der einzelnen Spektralkänale aus.
 
-Startet das Script mit \texttt{python3\ spectrum.py}. Mit
+Startet das Script mit \texttt{python\ spectrum.py}\footnote{Nicht
+  vergessen zuerst die korrekte virtuelle Environment mit den
+  installierten Libraries über
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} zu starten}. Mit
 \texttt{Ctrl+c} kann das Script wieder gestopppt werden. Die Ausgabe
 sollte in etwa so aussehen (gekürzt):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ spectrum.py}
+\ExtensionTok{python}\NormalTok{ spectrum.py}
 \ExtensionTok{Orange:}\NormalTok{ 30.22943878173828}
 \ExtensionTok{Red:}\NormalTok{    14.262250900268555}
 \ExtensionTok{Orange:}\NormalTok{ 22.67207908630371}
@@ -2569,7 +2671,7 @@ Folgendes Code Snippet zeigt eine gekürzte Version des
 \texttt{spectrum.py} Python Beispiels für die Ausgabe der
 Spektralmessungen der 6 Kanäle:
 
-\phantomsection\label{annotated-cell-13}%
+\phantomsection\label{annotated-cell-15}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/usr/bin/env python}
@@ -2606,7 +2708,7 @@ Messmodus und der Beleuchtungs LED
 Kalibrierte Messwerte auslesen und darstellen
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-spektralmessung}{}\label{exr-spektralmessung}
 
 \textbf{AS7262 Messwerte interpretieren}\\
 Führt einige Messungen mit unterschiedlichen Lichtquellen und
@@ -2624,15 +2726,10 @@ Materialien durch und notiert Euch die Messwerte. Was beobachtet Ihr?
   Messung mit weissem Papier
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\section*{Aufgabe 2: Spektralmessungen mit Visualisierung in der
+\section{Aufgabe 2: Spektralmessungen mit Visualisierung in der
 Konsole}\label{aufgabe-2-spektralmessungen-mit-visualisierung-in-der-konsole}
-\addcontentsline{toc}{section}{Aufgabe 2: Spektralmessungen mit
-Visualisierung in der Konsole}
-
-\markright{Aufgabe 2: Spektralmessungen mit Visualisierung in der
-Konsole}
 
 Das Beispiel \texttt{bargraph.py} zeigt die Messwerte der Spektralkanäle
 in einem Balkendiagramm an. Die Messwerte werden in der Konsole
@@ -2646,7 +2743,7 @@ den Sensor, drückt eine Taste und der Sensor führt den Weissabgleich
 durch. Danach könnt Ihr das Papier wieder wegnehmen und die Messungen
 durchführen.
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-spektralmessung-graph}{}\label{exr-spektralmessung-graph}
 
 \textbf{Verteilung der Spektralkanäle untersuchen}
 
@@ -2660,11 +2757,11 @@ durchführen.
   Studiert den Code und versucht die Funktionsweise zu verstehen.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ bargraph.py }
+\ExtensionTok{python}\NormalTok{ bargraph.py }
 \ExtensionTok{Setting}\NormalTok{ white point baseline.}
 
 \ExtensionTok{Hold}\NormalTok{ a white sheet of paper \textasciitilde{}5cm in front of the sensor and press a key...}
@@ -2684,16 +2781,25 @@ Graph}
 
 \end{figure}%
 
-\chapter*{E03 Bewegungsmessung}\label{e03-bewegungsmessung}
-\addcontentsline{toc}{chapter}{E03 Bewegungsmessung}
+\chapter{Bewegungsmessung}\label{bewegungsmessung}
 
-\markboth{E03 Bewegungsmessung}{E03 Bewegungsmessung}
+Bewegungssensoren werden heute fast allgegenwärtig in vielen Bereichen
+eingesetzt, wie in Smartphones oder auch vielen Messgeräten der
+Geomatik. Diese Übung führt in die Funktionsweise von MEMS
+Bewegungssensoren ein und zeigt wie Bewegungsmessungen mit einem
+ICM20948 9DoF Motion Sensor durchgeführt werden können.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung-2}
 
 Ziel dieser Übung ist es Bewegungsmessung mit inertialen Messeinheiten
 (IMU)\index{IMU} über den ICM20948 Bewegungssensor kennen zu lernen und
 die Sensordaten auszulesen und testen. Der \emph{ICM20948} ist ein 9DoF
 Bewegungssensor, der über eine I2C Schnittstelle mit dem Raspberry Pi
 verbunden wird und einer Python Library angesteuert werden kann.
+
+\textbf{Unterlagen:} \emph{ E03\_Bewegungsmessung.zip}
 
 \textbf{Vorbereitung}
 
@@ -2715,7 +2821,8 @@ verbunden wird und einer Python Library angesteuert werden kann.
     Funktionsprinzip eines Beschleunigungssensors}
   \end{itemize}
 \item
-  Studiere das Datenblatt zum ICM-20948 (InvenSense 2021)
+  Studiere das Datenblatt zum ICM-20948
+  (\citeproc{ref-tdk2021}{InvenSense, 2021})
 
   \begin{itemize}
   \tightlist
@@ -2735,7 +2842,9 @@ verbunden wird und einer Python Library angesteuert werden kann.
 }
 
 \caption{How MEMS Accelerometer Gyroscope Magnetometer Work \& Arduino
-Tutorial}
+Tutorial
+\href{https://www.youtube.com/embed/swCTbz5sIQM?si=Uga2sPKfiQW7EO6z}{Youtube
+Video}}
 
 \end{figure}%
 
@@ -2760,11 +2869,7 @@ GitHub &
 \href{https://github.com/pimoroni/icm20948-python}{icm20948-python} \\
 \end{longtable}
 
-\section*{Beschleunigungssensoren
-IMU}\label{beschleunigungssensoren-imu}
-\addcontentsline{toc}{section}{Beschleunigungssensoren IMU}
-
-\markright{Beschleunigungssensoren IMU}
+\section{Beschleunigungssensoren IMU}\label{beschleunigungssensoren-imu}
 
 Beschleunigungssensoren, oder inertiale Messeinheit (inertial
 measurement unit IMU) messen die Beschleunigung von Objekten mit dem
@@ -2787,16 +2892,12 @@ Raumfahrt, der Medizintechnik (Beschleunigungssensoren in
 Herzschrittmachern) und der Unterhaltungselektronik (Smartphones für die
 Ausrichtung des Bildschirms).
 
-\section*{\texorpdfstring{ICM20948 9DoF Motion
+\section{\texorpdfstring{ICM20948 9DoF Motion
 Sensor\index{ICM20948}}{ICM20948 9DoF Motion Sensor}}\label{icm20948-9dof-motion-sensor}
-\addcontentsline{toc}{section}{ICM20948 9DoF Motion
-Sensor\index{ICM20948}}
-
-\markright{ICM20948 9DoF Motion Sensor\index{ICM20948}}
 
 Der ICM-20948 von
 \href{https://invensense.tdk.com/products/motion-tracking/9-axis/icm-20948}{TDK
-InvenSense} (Abbildung~\ref{fig-icm20948}) ist ein 9-Achsen MEMS
+InvenSense} (Abb.~\ref{fig-icm20948}) ist ein 9-Achsen MEMS
 Bewegungssensor, mit einem 3-Achsen Gyroskop, einem 3-Achsen
 Beschleunigungssensor und einem 3-Achsen Magnetometer und sehr geringem
 Stromverbrauch. Er enthält zwei Chip, einen für die Bewegungsmessung mit
@@ -2845,10 +2946,7 @@ Sensoren.}
 
 \end{figure}%
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau-2}
-\addcontentsline{toc}{section}{Übungsaufbau}
-
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau-2}
 
 \begin{itemize}
 \tightlist
@@ -2872,8 +2970,9 @@ Sensoren.}
 \item
   Kontrolliere, ob die Library \texttt{icm20948} installiert ist mit
   \texttt{python\ -c\ "import\ icm20948"}. Installiere die Library mit
-  \texttt{sudo\ pip3\ install\ icm20948} falls sie nicht installiert
-  ist.
+  in der aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ icm20948}, falls sie nicht installiert ist.
 \end{itemize}
 
 Wechsle in den Ordner \emph{Documents} und kopiere mit folgenden
@@ -2887,25 +2986,24 @@ Befehlen die Library auf Deinen Raspberry Pi.
 \end{Highlighting}
 \end{Shaded}
 
-\section*{Aufgabe 1: Bewegungsmessungen
+\section{Aufgabe 1: Bewegungsmessungen
 durchführen}\label{aufgabe-1-bewegungsmessungen-durchfuxfchren}
-\addcontentsline{toc}{section}{Aufgabe 1: Bewegungsmessungen
-durchführen}
-
-\markright{Aufgabe 1: Bewegungsmessungen durchführen}
 
 Teste das Beispiel \texttt{read-all.py} im Ordner \emph{examples}.
 Dieses Beispiel gibt die Messungen der einzelnen Bewegungsmessungen aus,
 der Beschleunigung, Winkelgeschwindigkeit und Orientierung mit dem
 Accelerometer, Gyrometer und Magnetometer.
 
-Startet das Script mit \texttt{python3\ read-all.py}. Mit
+Startet das Script mit \texttt{python\ read-all.py}\footnote{Nicht
+  vergessen zuerst die korrekte virtuelle Environment mit den
+  installierten Libraries über
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} zu starten}. Mit
 \texttt{Ctrl+c} kann das Script wieder gestopppt werden. Die Ausgabe
 sollte in etwa so aussehen (gekürzt):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ read{-}all.py}
+\ExtensionTok{python}\NormalTok{ read{-}all.py}
 \ExtensionTok{read{-}all.py}
 \ExtensionTok{Reads}\NormalTok{ all ranges of movement: accelerometer, gyroscope and compass heading.}
 \ExtensionTok{Press}\NormalTok{ Ctrl+C to exit!}
@@ -2924,7 +3022,7 @@ Folgendes Code Snippet zeigt eine gekürzte Version des
 \texttt{read-all.py} Python Beispiels für die Ausgabe der
 Beschleunigungsmessung.
 
-\phantomsection\label{annotated-cell-17}%
+\phantomsection\label{annotated-cell-20}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/usr/bin/env python}
@@ -2960,7 +3058,7 @@ Messwerte auf der Konsole ausgeben
 Warten 0.25 Sekunden (damit die Ausgabe nicht zu schnell ist)
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-bewegungsmessung}{}\label{exr-bewegungsmessung}
 
 \textbf{Bewegungsmessung}\\
 
@@ -2987,47 +3085,21 @@ Warten 0.25 Sekunden (damit die Ausgabe nicht zu schnell ist)
   die Datei als \texttt{read-csv.py}, so dass die Messungen zeilenweise
   mit einem Separator gespeichert werden. Ausgaben aus einem Plot können
   mit dem Befehl
-  \texttt{python3\ read-csv.py\ \textgreater{}\ imu\_horizontal.csv} in
+  \texttt{python\ read-csv.py\ \textgreater{}\ imu\_horizontal.csv} in
   eine Datei geschrieben werden. Nun könnt ihr verschiedene Versuche mit
   der IMU durchführen und in einer Datei speichern. Die Datei könnt ihr
   beispielsweise mit \emph{LibreOffice Calc} oder \emph{Excel} öffnen
   und die Daten visualisieren.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\begin{solution}
-Die Datei \texttt{read-csv.py} mit den Messwerten mit Semikolon als
-Separator:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#!/usr/bin/env python}
-\ImportTok{import}\NormalTok{ time}
-\ImportTok{from}\NormalTok{ icm20948 }\ImportTok{import}\NormalTok{ ICM20948}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"ax; ay; az; gx; gy; gz; x; y; z"}\NormalTok{)}
-\NormalTok{imu }\OperatorTok{=}\NormalTok{ ICM20948()}
-
-\ControlFlowTok{while} \VariableTok{True}\NormalTok{:}
-\NormalTok{    x, y, z }\OperatorTok{=}\NormalTok{ imu.read\_magnetometer\_data()}
-\NormalTok{    ax, ay, az, gx, gy, gz }\OperatorTok{=}\NormalTok{ imu.read\_accelerometer\_gyro\_data()}
-    \BuiltInTok{print}\NormalTok{(}\StringTok{"""}\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{; }\SpecialCharTok{\{:05.2f\}}\StringTok{"""}\NormalTok{.}\BuiltInTok{format}\NormalTok{(}
-\NormalTok{        ax, ay, az, gx, gy, gz, x, y, z ))}
-\NormalTok{    time.sleep(}\FloatTok{0.25}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\end{solution}
-
-\section*{Aufgabe 2: Magnetometer}\label{aufgabe-2-magnetometer}
-\addcontentsline{toc}{section}{Aufgabe 2: Magnetometer}
-
-\markright{Aufgabe 2: Magnetometer}
+\section{Aufgabe 2: Magnetometer}\label{aufgabe-2-magnetometer}
 
 Das Beispiel \texttt{bargraph.py} zeigt die Messwerte des Magnetometers
 in einem Balkendiagramm an und zeigt die Orientierung des Sensors an je
 nach dem über welche Achse gemessen wird. Der Befehl
-\texttt{python3\ bargraph.py\ -\/-help} zeigt die Optionen des Skripts
+\texttt{python\ bargraph.py\ -\/-help} zeigt die Optionen des Skripts
 an.
 
 Die Ausgabe sollte für die Option \texttt{-\/-graph} in etwa so
@@ -3035,7 +3107,7 @@ aussehen:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ bargraph.py }\AttributeTok{{-}{-}graph}
+\ExtensionTok{python}\NormalTok{ bargraph.py }\AttributeTok{{-}{-}graph}
 \ExtensionTok{bargraph.py} \AttributeTok{{-}}\NormalTok{ Convert raw values to heading}
 
 \ExtensionTok{Rotate}\NormalTok{ the sensor through 360 degrees to calibrate.}
@@ -3046,7 +3118,7 @@ aussehen:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-bewegungsmessung-heading}{}\label{exr-bewegungsmessung-heading}
 
 \textbf{Bar graph}
 
@@ -3057,23 +3129,31 @@ aussehen:
   den Himmelsrichtungen
 \item
   Vergleiche die Ausgaben auch mit der Orientierung des Smartphones und
-  den Messwerten der App \emph{phyphox}.
+  den Messwerten der App \emph{\href{https://phyphox.org}{phyphox}}.
 \item
   Studiert den Code und versucht die Funktionsweise zu verstehen.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\chapter*{E04 Distanzmessung}\label{e04-distanzmessung}
-\addcontentsline{toc}{chapter}{E04 Distanzmessung}
+\chapter{Distanzmessung}\label{distanzmessung}
 
-\markboth{E04 Distanzmessung}{E04 Distanzmessung}
+Distanzmessungen sind essentiell im Bereich der Geomatik.
+Unterschiedliche Messverfahren ermöglichen Distanzmessungen unter
+anderem Time-of-Flight Sensoren, die in dieser Übung praktisch genutzt
+und getestet werden.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung-3}
 
 Ziel dieser Übung ist es Distanzmessungen mit dem VL53L5CX Sensor kennen
 zu lernen und die Sensordaten auszulesen und testen. Der \emph{VL53L5CX}
 ist ein 8x8 Time of Flight (ToF) Array Sensor, der über eine I2C
 Schnittstelle mit dem Raspberry Pi verbunden wird und einer Python
 Library angesteuert werden kann.
+
+\textbf{Unterlagen:} \emph{ E04\_Distanzmessung.zip}
 
 \textbf{Vorbereitung}
 
@@ -3085,8 +3165,10 @@ Library angesteuert werden kann.
   \href{https://www.youtube.com/embed/nf527vcKRSE?si=Q2Wm_pS2O1n99-ha}{EYE
   ON NPI - ST VL53L5CX Time-of-Flight Ranging Sensor}
 \item
-  Studiere das Datenblatt zum VL53L5CX (STMicroelectronics 2021), sowie
-  die \emph{Application Note} (STMicroelectronics 2023)
+  Studiere das Datenblatt zum VL53L5CX
+  (\citeproc{ref-st2021}{STMicroelectronics, 2021}), sowie die
+  \emph{Application Note} (\citeproc{ref-st2023}{STMicroelectronics,
+  2023})
 
   \begin{itemize}
   \tightlist
@@ -3106,7 +3188,9 @@ Library angesteuert werden kann.
 }
 
 \caption{Adafruit - EYE ON NPI - ST VL53L5CX Time-of-Flight Ranging
-Sensor}
+Sensor
+\href{https://www.youtube.com/embed/nf527vcKRSE?si=Q2Wm_pS2O1n99-ha}{Youtube
+Video}}
 
 \end{figure}%
 
@@ -3131,13 +3215,8 @@ GitHub &
 \href{https://github.com/pimoroni/vl53l5cx-python}{vl53l5cx-python} \\
 \end{longtable}
 
-\section*{\texorpdfstring{VL53L5CX 8x8 Time of Flight (ToF) Array
+\section{\texorpdfstring{VL53L5CX 8x8 Time of Flight (ToF) Array
 Sensor\index{VL53L5CX}}{VL53L5CX 8x8 Time of Flight (ToF) Array Sensor}}\label{vl53l5cx-8x8-time-of-flight-tof-array-sensor}
-\addcontentsline{toc}{section}{VL53L5CX 8x8 Time of Flight (ToF) Array
-Sensor\index{VL53L5CX}}
-
-\markright{VL53L5CX 8x8 Time of Flight (ToF) Array
-Sensor\index{VL53L5CX}}
 
 Der VL53L5CX ist hochentwickelter Distanzsensor mit einer
 8x8-Multizonenmessung und einem großen Sichtfeld, ideal für Roboter und
@@ -3178,14 +3257,11 @@ VL53L5CX 8x8 Time of Flight (ToF) Array Sensor Breakout
 
 \caption{\label{fig-vl53l5cx}links: VL53L5CX Breakout von Pimoroni,
 rechts: schematische Darstellung TOF Moduls Quelle: STMicroelectronics
-(2023)}
+(\citeproc{ref-st2023}{2023})}
 
 \end{figure}%
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau-3}
-\addcontentsline{toc}{section}{Übungsaufbau}
-
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau-3}
 
 \begin{itemize}
 \tightlist
@@ -3209,8 +3285,9 @@ rechts: schematische Darstellung TOF Moduls Quelle: STMicroelectronics
 \item
   Kontrolliere, ob die Library \texttt{vl53l5cx\_ctypes} installiert ist
   mit \texttt{python\ -c\ "import\ vl53l5cx\_ctypes"}. Installiere die
-  Library mit \texttt{sudo\ pip3\ install\ vl53l5cx-ctypes} falls sie
-  nicht installiert ist.
+  Library mit in der aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ st7789}, falls sie nicht installiert ist
 \end{itemize}
 
 Wechsle in den Ordner \emph{Documents} und kopiere mit folgenden
@@ -3224,11 +3301,8 @@ Befehlen die Library auf Deinen Raspberry Pi.
 \end{Highlighting}
 \end{Shaded}
 
-\section*{Aufgabe 1: Distanzmessung
+\section{Aufgabe 1: Distanzmessung
 Konsole}\label{aufgabe-1-distanzmessung-konsole}
-\addcontentsline{toc}{section}{Aufgabe 1: Distanzmessung Konsole}
-
-\markright{Aufgabe 1: Distanzmessung Konsole}
 
 Teste das Beispiel \texttt{test.py} im Ordner \emph{examples}. Dieses
 Beispiel liest die Werte der 8x8 Time of Flight Messung aus mit Werten
@@ -3241,7 +3315,7 @@ Starten lädt.
 
 \end{boxtitle}
 
-Startet das Script mit \texttt{python3\ test.py}. Mit \texttt{Ctrl+c}
+Startet das Script mit \texttt{python\ test.py}. Mit \texttt{Ctrl+C}
 kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so
 aussehen (gekürzt):
 
@@ -3281,7 +3355,7 @@ aussehen (gekürzt):
 Folgendes Code Snippet zeigt eine gekürzte Version des \texttt{test.py}
 Python Beispiels für die Ausgabe der Distanzmatrix.
 
-\phantomsection\label{annotated-cell-21}%
+\phantomsection\label{annotated-cell-25}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ time}
@@ -3330,7 +3404,7 @@ Messung initialisieren
 Warten 0.1 Sekunden (damit die Ausgabe nicht zu schnell ist)
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-distanzmessung}{}\label{exr-distanzmessung}
 
 \textbf{Bewegungsmessung}
 
@@ -3348,14 +3422,10 @@ Warten 0.1 Sekunden (damit die Ausgabe nicht zu schnell ist)
   einzelnen Werte zu verstehen.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\section*{Aufgabe 2: Distanzmessung mit LCD
+\section{Aufgabe 2: Distanzmessung mit LCD
 Bildschirm}\label{aufgabe-2-distanzmessung-mit-lcd-bildschirm}
-\addcontentsline{toc}{section}{Aufgabe 2: Distanzmessung mit LCD
-Bildschirm}
-
-\markright{Aufgabe 2: Distanzmessung mit LCD Bildschirm}
 
 Folgende Aufgabe nutzt den 1.54'' LCD Bildschirm mit einer 240x240 Pixel
 Auflösung. Die Library \texttt{vl53l5cx\_ctypes} enthält mehrere
@@ -3382,20 +3452,19 @@ SPI Slot}
 \begin{itemize}
 \tightlist
 \item
-  Kontrolliert mit \texttt{python\ -c\ "import\ ST7789"} ob die Library
-  \emph{ST7789} installiert ist. Installiere die Library mit
-  \texttt{sudo\ pip3\ install\ st7789}, falls sie nicht installiert ist.
-  Testet auch, ob die Bibliotheken \texttt{numpy} und
-  \texttt{matplotlib} installiert sind und installiert diese ansonsten
-  mit \texttt{sudo\ apt\ install\ python3-matplotlib\ python3-numpy}.
+  Kontrolliert mit \texttt{python\ -c\ "import\ st7789"} ob die Library
+  \emph{st7789} installiert ist. Testet auch, ob die Bibliotheken
+  \texttt{numpy} und \texttt{matplotlib} installiert sind und
+  installiert diese ansonsten mit
+  \texttt{sudo\ apt\ install\ python3-matplotlib\ python3-numpy}.
 \item
   Kontrolliere, ob der Raspberry Pi den \emph{Breakout Garden HAT} mit
   den 2 SPI Anschlüssen und 4 I2C Anschlüssen bestückt ist
-  (Abbildung~\ref{fig-vl53l5cx-LCD}).
+  (Abb.~\ref{fig-vl53l5cx-LCD}).
 \item
   Montiere den Bildschirm im hinteren SPI Slot des \emph{Breakout Garden
-  HAT}s wie in Abbildung~\ref{fig-vl53l5cx-LCD}, da er sonst die Messung
-  des VL53L5CX Sensors verdeckt.
+  HAT}s wie in Abb.~\ref{fig-vl53l5cx-LCD}, da er sonst die Messung des
+  VL53L5CX Sensors verdeckt.
 \end{itemize}
 
 Führt nun folgende Scripts aus und beobachtet die Ausgabe auf dem LCD
@@ -3405,16 +3474,16 @@ Starten geladen wird.
 \begin{itemize}
 \tightlist
 \item
-  \texttt{python3\ distance\_240x240\_lcd.py}
+  \texttt{python\ distance\_240x240\_lcd.py}
 \item
-  \texttt{python3\ motion\_240x240\_lcd.py}
+  \texttt{python\ motion\_240x240\_lcd.py}
 \item
-  \texttt{python3\ reflectance\_240x240\_lcd.py}
+  \texttt{python\ reflectance\_240x240\_lcd.py}
 \item
-  \texttt{python3\ motion\_tracking.py}
+  \texttt{python\ motion\_tracking.py}
 \end{itemize}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-distanzmessung-LCD}{}\label{exr-distanzmessung-LCD}
 
 \textbf{Distanzmessung}
 
@@ -3438,21 +3507,31 @@ Starten geladen wird.
   Studiere den Code der Beispiele und versuche die Funktionsweise zu
   verstehen.
 \item
-  Überlege Dir wie Du die Beispiele erweitern könntest.
+  Überlege Dir Anwendungsfälle für diesen Sensor allgemein und im
+  speziellen für die Geomatik.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\chapter*{E05 Thermale Aufnahmen}\label{e05-thermale-aufnahmen}
-\addcontentsline{toc}{chapter}{E05 Thermale Aufnahmen}
+\chapter{Thermale Aufnahmen}\label{thermale-aufnahmen}
 
-\markboth{E05 Thermale Aufnahmen}{E05 Thermale Aufnahmen}
+In der Fernerkundung sind Thermalkameras ein wichtiges Instrument zur
+Erfassung von Wärmebildern, beispielsweise für die Zählung von
+Tierbeständen oder auch für Untersuchungen von Gebäudeisolationen. Diese
+Übung nutzt die MLX90640 Thermalkamera und zeigt wie thermale Aufnahmen
+mit dem Raspberry Pi gemacht werden können.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung-4}
 
 Ziel dieser Übung ist es thermale Kamera mit der MLX90640 Kamera kennen
 zu lernen und die thermalen Bilddaten auszulesen und testen. Die
 \emph{MLX90640} ist eine weitwinkel Kamera mit einer Auflösung von 24x32
 Pixel. Sie wird über eine I2C Schnittstelle mit dem Raspberry Pi
 verbunden und kann über eine Python Library angesteuert werden.
+
+\textbf{Unterlagen:} \emph{ E05\_Thermalkamera.zip}
 
 \textbf{Vorbereitung}
 
@@ -3464,8 +3543,9 @@ verbunden und kann über eine Python Library angesteuert werden.
   \href{https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG}{Far
   Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)}
 \item
-  Studiere das Datenblatt zum VL53L5CX (Melexis 2019) und beantworte
-  folgende Fragen:
+  Studiere das Datenblatt zum VL53L5CX
+  (\citeproc{ref-melexis2019}{Melexis, 2019}) und beantworte folgende
+  Fragen:
 
   \begin{itemize}
   \tightlist
@@ -3484,7 +3564,9 @@ verbunden und kann über eine Python Library angesteuert werden.
 
 }
 
-\caption{Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)}
+\caption{Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)
+\href{https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG}{Youtube
+Video}}
 
 \end{figure}%
 
@@ -3511,11 +3593,8 @@ GitHub &
 MLX90640} \\
 \end{longtable}
 
-\section*{\texorpdfstring{MLX90640
+\section{\texorpdfstring{MLX90640
 Thermalkamera\index{MLX90640}}{MLX90640 Thermalkamera}}\label{mlx90640-thermalkamera}
-\addcontentsline{toc}{section}{MLX90640 Thermalkamera\index{MLX90640}}
-
-\markright{MLX90640 Thermalkamera\index{MLX90640}}
 
 Der MLX90640 ist eine Thermalkamera mit einer Auflösung von 32x24 Pixel
 mit einem Sichtfeld von 55°. Die Kamera misst in einem Temperaturbereich
@@ -3548,14 +3627,12 @@ MLX90640 Thermal Camera
 
 \caption{\label{fig-MLX90640}links: MLX90640 Thermalkamera, oben:
 schematische Darstellung der Kamera und ihrer Anschlüsse rechts:
-Pixelpositionaufbau Quelle: STMicroelectronics (2023)}
+Pixelpositionaufbau Quelle: STMicroelectronics
+(\citeproc{ref-st2023}{2023})}
 
 \end{figure}%
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau-4}
-\addcontentsline{toc}{section}{Übungsaufbau}
-
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau-4}
 
 \begin{itemize}
 \tightlist
@@ -3581,37 +3658,36 @@ Pixelpositionaufbau Quelle: STMicroelectronics (2023)}
   \texttt{adafruit-blinka},\texttt{adafruit-circuitpython-mlx90640} und
   \texttt{RPI.GPIO} installiert sind mit
   \texttt{python\ -c\ "import\ adafruit\_mlx90640"}. Installiere die
-  Library mit \texttt{sudo\ pip3\ install\ RPI.GPIO\ adafruit-blinka}
-  und \texttt{sudo\ pip3\ install\ adafruit-circuitpython-mlx90640}
-  falls sie nicht installiert ist.
+  Library mit in der aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ RPI.GPIO\ adafruit-blinka} und
+  \texttt{pip\ install\ adafruit-circuitpython-mlx90640}, falls sie
+  nicht installiert ist
 \end{itemize}
 
 Wechsle in den Ordner \emph{Documents} und kopiere in diesen den Ordner
 \emph{MLX90640} mit den Code Beispielen.
 
-\section*{Aufgabe 1: Punktuelle
+\section{Aufgabe 1: Punktuelle
 Temperaturmessung}\label{aufgabe-1-punktuelle-temperaturmessung}
-\addcontentsline{toc}{section}{Aufgabe 1: Punktuelle Temperaturmessung}
 
-\markright{Aufgabe 1: Punktuelle Temperaturmessung}
-
-Teste das Beispiel \texttt{thermal\_camera\_average\_temperature.py} im
-Ordner \emph{examples}. Dieses Beispiel liest die Werte aus der Matrix
-der Thermalkamera und gibt den Mittelwert der Temperatur aus. Die
-Ausgabe sollte in etwa so aussehen (gekürzt):
+Teste das Beispiel \texttt{average\_temperature.py} im Ordner
+\emph{examples}. Dieses Beispiel liest die Werte aus der Matrix der
+Thermalkamera und gibt den Mittelwert der Temperatur aus. Die Ausgabe
+sollte in etwa so aussehen (gekürzt):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ average\_temperature.py }
+\ExtensionTok{python}\NormalTok{ average\_temperature.py }
 \ExtensionTok{Average}\NormalTok{ MLX90640 Temperature: 23.6C }\ErrorTok{(}\ExtensionTok{74.5F}\KeywordTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 Folgendes Code Snippet zeigt eine gekürzte Version des
-\texttt{thermal\_camera\_average\_temperature.py} Python Beispiels für
-die Ausgabe der Distanzmatrix.
+\texttt{average\_temperature.py} Python Beispiels für die Ausgabe der
+Distanzmatrix.
 
-\phantomsection\label{annotated-cell-23}%
+\phantomsection\label{annotated-cell-28}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ time,board,busio}
@@ -3631,8 +3707,8 @@ die Ausgabe der Distanzmatrix.
         \ControlFlowTok{continue} \hspace*{\fill}\NormalTok{\circled{4}}
 
 \CommentTok{\# print out the average temperature from the MLX90640}
-\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}Average MLX90640 Temperature: }\SpecialCharTok{\{0:2.1f\}}\StringTok{C (}\SpecialCharTok{\{1:2.1f\}}\StringTok{F)\textquotesingle{}}\NormalTok{.\textbackslash{} }\hspace*{\fill}\NormalTok{\circled{5}}
-      \BuiltInTok{format}\NormalTok{(np.mean(frame),(((}\FloatTok{9.0}\OperatorTok{/}\FloatTok{5.0}\NormalTok{)}\OperatorTok{*}\NormalTok{np.mean(frame))}\OperatorTok{+}\FloatTok{32.0}\NormalTok{))) }
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}Average MLX90640 Temperature: }\SpecialCharTok{\{0:2.1f\}}\StringTok{C (}\SpecialCharTok{\{1:2.1f\}}\StringTok{F)\textquotesingle{}}\NormalTok{.\textbackslash{}   }
+      \BuiltInTok{format}\NormalTok{(np.mean(frame),(((}\FloatTok{9.0}\OperatorTok{/}\FloatTok{5.0}\NormalTok{)}\OperatorTok{*}\NormalTok{np.mean(frame))}\OperatorTok{+}\FloatTok{32.0}\NormalTok{))) }\hspace*{\fill}\NormalTok{\circled{5}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3652,7 +3728,7 @@ Falls ein Fehler eintritt, nochmals versuchen den Sensor auszulesen
 Temperaturmittelwert ausgeben
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-thermalkamera}{}\label{exr-thermalkamera}
 
 \textbf{Einzelne Temperaturmessung}
 
@@ -3666,14 +3742,10 @@ Temperaturmittelwert ausgeben
   Kaffeetasse, Hand, etc.).
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\section*{Aufgabe 2: Thermale Aufnahme mit LCD
+\section{Aufgabe 2: Thermale Aufnahme mit LCD
 Bildschirm}\label{aufgabe-2-thermale-aufnahme-mit-lcd-bildschirm}
-\addcontentsline{toc}{section}{Aufgabe 2: Thermale Aufnahme mit LCD
-Bildschirm}
-
-\markright{Aufgabe 2: Thermale Aufnahme mit LCD Bildschirm}
 
 Folgende Aufgabe nutzt den 1.54'' LCD Bildschirm mit einer 240x240 Pixel
 Auflösung. Der Ordner enthält mehrere Beispiele zur Thermalkamera, die
@@ -3699,26 +3771,28 @@ SPI Slot}
 \begin{itemize}
 \tightlist
 \item
-  Kontrolliert mit \texttt{python\ -c\ "import\ ST7789"} ob die Library
-  \emph{ST7789} installiert ist. Installiere die Library mit
-  \texttt{sudo\ pip3\ install\ st7789}, falls sie nicht installiert ist.
-  Testet auch, ob die Bibliotheken \texttt{numpy} und
-  \texttt{matplotlib} installiert sind und installiert diese ansonsten
-  mit \texttt{sudo\ apt\ install\ python3-matplotlib\ python3-numpy}.
+  Kontrolliert mit \texttt{python\ -c\ "import\ st7789"} ob die Library
+  \emph{st7789} installiert ist. Installiere die Library mit in der
+  aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ st7789}, falls sie nicht installiert ist. Testet
+  auch, ob die Bibliotheken \texttt{numpy} und \texttt{matplotlib}
+  installiert sind und installiert diese ansonsten mit
+  \texttt{sudo\ apt\ install\ python3-matplotlib\ python3-numpy}.
 \item
   Kontrolliere, ob der Raspberry Pi den \emph{Breakout Garden HAT} mit
   den 2 SPI Anschlüssen und 4 I2C Anschlüssen bestückt ist
-  (Abbildung~\ref{fig-mlx90640-LCD}).
+  (Abb.~\ref{fig-mlx90640-LCD}).
 \item
   Montiere den Bildschirm im vorderen SPI Slot des \emph{Breakout Garden
-  HAT}s wie in Abbildung~\ref{fig-mlx90640-LCD}, oder passe das Script,
-  an so dass die Werte der hinteren SPI Schnittstelle verwendet werden.
+  HAT}s wie in Abb.~\ref{fig-mlx90640-LCD}, oder passe das Script, an so
+  dass die Werte der hinteren SPI Schnittstelle verwendet werden.
 \item
   Teste die Beispiele im Ordner \texttt{MLX90640} und beobachte die
   Ausgabe auf dem LCD Bildschirm.
 \end{itemize}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-thermalkamera-LCD}{}\label{exr-thermalkamera-LCD}
 
 \textbf{Experimente mit der Thermalkamera und dem LCD Bildschirm}
 
@@ -3740,12 +3814,20 @@ SPI Slot}
   Überlege Dir, wie Du die Beispiele erweitern könntest.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\chapter*{E06 Biometrie}\label{e06-biometrie}
-\addcontentsline{toc}{chapter}{E06 Biometrie}
+\chapter{Biometrie}\label{biometrie}
 
-\markboth{E06 Biometrie}{E06 Biometrie}
+Biometrische Messungen ermöglichen die Erfassung von physiologischen
+Daten wie Herzfrequenz oder Sauerstoffsättigung. Während diese Sensoren
+nicht typische Sensoren für IoT Projekte sind, können sie für spezielle
+Anwendungen wie Gesundheitsüberwachung oder Fitness eingesetzt werden.
+Diese Übung führt in die biometrischen Messungen mit dem MAX30101 Sensor
+ein und zeigt wie die Herzfrequenz gemessen werden kann.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung-5}
 
 Ziel dieser Übung ist es biometrische Messungen mit dem \emph{MAX30101}
 Sensor durchzuführen und den Sensor in seiner funktionsweise zu
@@ -3753,6 +3835,8 @@ untersuchen. Der \emph{MAX30101} ist ein Sensor zur Messung der
 Herzfrequenz und der Sauerstoffsättigung im Blut und ein
 Rauch-/Partikelsensor. Er verfügt über eine I2C Schnittstelle und kann
 über eine Python Library angesteuert werden.
+
+\textbf{Unterlagen:} \emph{ E06\_Biometrie.zip}
 
 \textbf{Vorbereitung}
 
@@ -3764,7 +3848,8 @@ Rauch-/Partikelsensor. Er verfügt über eine I2C Schnittstelle und kann
   \href{https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof}{Photoplethysmography
   in a minute (and a bit) - Peter Charlton}
 \item
-  Studiere das Datenblatt zum MAX30101 (maxim integrated 2020)
+  Studiere das Datenblatt zum MAX30101
+  (\citeproc{ref-maximintegrated2020}{maxim integrated, 2020})
 
   \begin{itemize}
   \tightlist
@@ -3783,7 +3868,9 @@ Rauch-/Partikelsensor. Er verfügt über eine I2C Schnittstelle und kann
 
 }
 
-\caption{Photoplethysmography in a minute (and a bit) - Peter Charlton}
+\caption{Photoplethysmography in a minute (and a bit) - Peter Charlton
+\href{https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof}{Youtube
+Video}}
 
 \end{figure}%
 
@@ -3808,13 +3895,8 @@ GitHub &
 \href{https://github.com/pimoroni/max30105-python}{max30105-python} \\
 \end{longtable}
 
-\section*{\texorpdfstring{MAX30101 Breakout Heart Rate, Oximeter, Smoke
+\section{\texorpdfstring{MAX30101 Breakout Heart Rate, Oximeter, Smoke
 Sensor\index{MAX30101}}{MAX30101 Breakout Heart Rate, Oximeter, Smoke Sensor}}\label{max30101-breakout-heart-rate-oximeter-smoke-sensor}
-\addcontentsline{toc}{section}{MAX30101 Breakout Heart Rate, Oximeter,
-Smoke Sensor\index{MAX30101}}
-
-\markright{MAX30101 Breakout Heart Rate, Oximeter, Smoke
-Sensor\index{MAX30101}}
 
 Der MAX30101 ist hochentwickelter Herzfrequenz-, Oximeter- und
 Rauch-/Partikelsensor. Der Sensor verfügt über drei LEDs (rot, grün, IR)
@@ -3851,14 +3933,11 @@ MAX30101 Breakout - Heart Rate, Oximeter, Smoke Sensor Breakout
 
 \caption{\label{fig-MAX30101}links: MAX30101 Breakout von Pimoroni,
 rechts: funktionale Diagram des MAX30101 Moduls Quelle: maxim integrated
-(2020)}
+(\citeproc{ref-maximintegrated2020}{2020})}
 
 \end{figure}%
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau-5}
-\addcontentsline{toc}{section}{Übungsaufbau}
-
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau-5}
 
 \begin{itemize}
 \tightlist
@@ -3882,8 +3961,10 @@ rechts: funktionale Diagram des MAX30101 Moduls Quelle: maxim integrated
 \item
   Kontrolliere, ob die Library \texttt{vl53l5cx\_ctypes} installiert ist
   mit \texttt{python\ -c\ "import\ vl53l5cx\_ctypes"}. Installiere die
-  Library mit \texttt{sudo\ pip3\ install\ vl53l5cx-ctypes} falls sie
-  nicht installiert ist.
+  Library mit in der aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ vl53l5cx\_ctypes}, falls sie nicht installiert
+  ist
 \end{itemize}
 
 Wechsle in den Ordner \emph{Documents} und kopiere mit folgenden
@@ -3897,24 +3978,21 @@ Befehlen die Library auf Deinen Raspberry Pi.
 \end{Highlighting}
 \end{Shaded}
 
-\section*{Aufgabe 1: Distanzmessung
-Konsole}\label{aufgabe-1-distanzmessung-konsole-1}
-\addcontentsline{toc}{section}{Aufgabe 1: Distanzmessung Konsole}
-
-\markright{Aufgabe 1: Distanzmessung Konsole}
+\section{Aufgabe 1: Biometriemessung
+Konsole}\label{aufgabe-1-biometriemessung-konsole}
 
 Teste das Beispiel \texttt{read-heartbeat.py} im Ordner \emph{examples}.
 Dieses Beispiel liest die Pulsschläge pro Minute in PPM (beats per
 minute). Ein erkannter Pulsschlag wird mit einem \texttt{\textless{}3}
 angezeigt.
 
-Startet das Script mit \texttt{python3\ read-heartbeat.py}. Mit
+Startet das Script mit \texttt{python\ read-heartbeat.py}. Mit
 \texttt{Ctrl+c} kann das Script wieder gestopppt wrden. Die Ausgabe
 sollte in etwa so aussehen (gekürzt):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{python3}\NormalTok{ read{-}heartbeat.py }
+\ExtensionTok{python}\NormalTok{ read{-}heartbeat.py }
 \ExtensionTok{NOTE!}\NormalTok{ This code should not be used for medical diagnosis. }
 \ExtensionTok{...}
 \ExtensionTok{Starting}\NormalTok{ readings in 10 seconds...}
@@ -3935,7 +4013,7 @@ Folgendes Code Snippet zeigt eine gekürtzte Version des
 \texttt{read-heartbeat.py} Python Beispiels für die Ausgabe des
 Herzschlags.
 
-\phantomsection\label{annotated-cell-26}%
+\phantomsection\label{annotated-cell-32}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/usr/bin/env python}
@@ -3990,7 +4068,7 @@ Bei einem erkannten Herzschlag wird die Funktion
 Sekunden gemittelt in der Konsole ausgegeben.
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-pulsmessung}{}\label{exr-pulsmessung}
 
 \textbf{Pulsmessung}
 
@@ -4009,20 +4087,29 @@ Sekunden gemittelt in der Konsole ausgegeben.
   verstehen.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\chapter*{E07 MQTT}\label{e07-mqtt}
-\addcontentsline{toc}{chapter}{E07 MQTT}
+\chapter{IoT Monitoring}\label{iot-monitoring}
 
-\markboth{E07 MQTT}{E07 MQTT}
+IoT Monitoring ermöglicht die Erfassung von Sensordaten, die
+Kommunikation und Visualisierung von Daten in Echtzeit. Dies erfordert
+eine Architektur, die die Daten erfasst, Echtzeitkommunikation,
+asynchroner Kommunikation, Datenspeicherung und Visualisierung
+ermöglicht. Diese Übung baut einen typischen IoT Stack auf mit MQTT,
+Node-Red, InfluxDB und Grafana und zeigt wie Sensordaten über MQTT
+publiziert und abonniert werden können.
+
+\hfill\break
+
+\section{Einführung}\label{einfuxfchrung-6}
 
 Ein IoT Datenfluss erstreckt sich über verschiedene Instanzen, die für
 die einzelnen Prozesse zuständig sind, von der Erfassung von
 Sensormesswerten im IoT Gerät über die Kommunikation der Messwerte bis
 zur Datenverarbeitung, Speicherung und Visualisierung
-(Abbildung~\ref{fig-iotpipeline}). Hierbei können alle Schritte auf
-einem Gerät durchgeführt werden oder jeder einzelne über ein anderes
-Gerät oder Server. In der Abbildung aufgezeigt sind typische
+(Abb.~\ref{fig-iotpipeline}). Hierbei können alle Schritte auf einem
+Gerät durchgeführt werden oder jeder einzelne über ein anderes Gerät
+oder Server. In der Abbildung aufgezeigt sind typische
 Softwarekomponenten, die in IoT eingesetzt werden, wie Node-Red für die
 Datenverarbeitung, die InfluxDB Datenbank, welche für das Speichern von
 Zeitreihendaten entwickelt wurde und Grafana eine
@@ -4052,13 +4139,12 @@ mit Node-Red, Datenspeicherung und und Visalisierung.}
 Ziel dieser Übung ist es MQTT näher kennenzulernen und die MQTT
 Kommunikation mit dem Raspberry Pi zu testen. MQTT ist ein
 leichtgewichtiges Kommunikationsprotokoll, welches das
-\emph{Publish-Subscribe} Muster verwendet und gut für die Anwendung in
-IoT Projekten geeignet.
+\emph{Publish-Subscribe} Muster verwendet und sich gut für die Anwendung
+in IoT Projekten geeignet.
 
-\section*{Übungsaufbau}\label{uxfcbungsaufbau-6}
-\addcontentsline{toc}{section}{Übungsaufbau}
+\textbf{Unterlagen:} \emph{ E07\_MQTT.zip}
 
-\markright{Übungsaufbau}
+\section{Übungsaufbau}\label{uxfcbungsaufbau-6}
 
 \begin{itemize}
 \tightlist
@@ -4080,27 +4166,43 @@ IoT Projekten geeignet.
   Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse
   \texttt{0x76} erkannt werden.
 \item
-  Kontrolliere, ob die Library \texttt{sudo\ pip3\ install\ bme680}
-  installiert ist mit
-  \texttt{python\ -c\ "import\ sudo\ pip3\ install\ bme680"}.
-  Installiere die Library mit
-  \texttt{sudo\ pip3\ install\ sudo\ pip3\ install\ bme680} falls sie
-  nicht installiert ist.
+  Kontrolliere, ob die Library \texttt{bme680} installiert ist mit
+  \texttt{python\ -c\ "import\ bme680"}. Installiere die Library mit in
+  der aktivierten virtuellen Environment
+  \texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+  \texttt{pip\ install\ bme680}, falls sie nicht installiert ist.
 \item
   Wechsle in den Ordner \emph{Documents} und erstelle einen Ordner
   \emph{mqtt} für diese Übung.
 \end{itemize}
 
-\section*{Aufgabe 1: MQTT
+\section{Aufgabe 1: MQTT
 kennenlernen}\label{aufgabe-1-mqtt-kennenlernen}
-\addcontentsline{toc}{section}{Aufgabe 1: MQTT kennenlernen}
 
-\markright{Aufgabe 1: MQTT kennenlernen}
+\href{https://mosquitto.org}{Mosquitto} ist eine kompakter open-source
+Message Broker der Eclipse Foundation, welcher das MQTT Protokoll
+implementiert und auf Produktionsserver, wie auch auf stromsparenden
+Geräten wie dem Raspberry Pi eingesetzt werden kann. Wir testen die
+Kommunikation mit dem MQTT Broker und den Clients auf dem Raspberry Pi.
+Der Mosquitto Broker ist auf dem Raspberry Pi Image vorkonfiguriert und
+läuft als Service im Hintegrund. Die Clients \texttt{mosquitto\_pub} und
+\texttt{mosquitto\_sub} sind ebenfalls installiert und können für das
+Testen der Kommunikation MQTT verwendet werden. Mosquitto Dokumentation:
+\url{https://mosquitto.org/documentation}
 
-Testen ob der \href{https://mosquitto.org}{Mosquitto} Broker und Clients
-lokal auf dem Raspberry Pi funktionieren.
+\begin{figure}[H]
 
-\includegraphics{images/mqtt-publish-subscribe.jpg}
+{\centering \includegraphics{images/mqtt-publish-subscribe.jpg}
+
+}
+
+\caption{MQTT Device publiziert an den MQTT Broker über ein definiertes
+Topic Messdaten. Der Broker publiziert die Daten über die definierten
+Topics. Diese werden vom Subscriber abonniert und empfangen mit dem
+Vorteil, dass keines der Geräte zur gleichen Zeit synchron senden und
+empfangen muss.}
+
+\end{figure}%
 
 Erstelle einen Subscriber der für das Topic \texttt{iot/temperature}
 eine Subscription erstellt.
@@ -4119,7 +4221,38 @@ eine Subscription erstellt.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{description}
+\tightlist
+\item[MQTT Message]
+Die MQTT Nachrichten (Messages) bestehen aus einem \emph{Topic} (Thema)
+und einer \emph{Payload} dem Nachrichteninhalt.
+\item[MQTT Topics]
+MQTT verwendet Themen (Topic) und hierarchische Themenebenden getrennt
+über einem Schrägstrich \texttt{/} ähnlich einem Ordnersystem auf einem
+Computer. Dies ermöglicht eine Strukturierung und auch Filterung der
+Messages. Topics sind case-sensitive, sollten nicht mit einem
+\texttt{/}, \texttt{\$} beginnen und keine Leerzeichen enthalten, sowie
+kurz und aussagekräftig sein. Filtern von Topics ist mit dem Wildcard
+\texttt{+} für ein einzelnes Thema und \texttt{\#} für alle Themen
+möglich\footnote{Topics, die mit \texttt{\$} beginnen sind reserviert
+  für interne Informationen des Brokers und Clientstatistiken, oft in
+  der Form \texttt{\$SYS/}. Beispielsweise zeigt
+  \texttt{\$SYS/broker/clients/connected} die Anzahl der verbundenen
+  Clients. Mit dem Wildcard \texttt{\#} Filter könnt Ihr mit
+  \texttt{\$SYS/\#} alle Systeminformationen der Brokers anzeigen
+  lassen.}.
+\item[MQTT Payload]
+Die Nachrichten (Messages) die über MQTT übertragen werden, werden als
+Payload bezeichnet. Diese Payload ist nicht an eine bestimmte Struktur
+gebunden und kann ein Text- oder Binärformat sein. Eine festgelegte
+Struktur für die Payload ist jedoch sinnvoll für eine reibungslose
+Datenverarbeitung beispielsweise im JSON Format. Übliche Fromate sind
+Text, JSON, Binärdaten, Hex Strings oder auch Protocol Buffer.
+\end{description}
+
+\begin{exercise}[]\protect\hypertarget{exr-mqtt}{}\label{exr-mqtt}
+
+~
 
 \begin{itemize}
 \tightlist
@@ -4129,9 +4262,17 @@ eine Subscription erstellt.
   Teste einen weiteren Mosquitto Server auf einem anderen Raspberry Pi
   und teste die Kommunikation. Hierbei muss die IP Adresse entsprechend
   angepasst werden.
+\item
+  Einigt Euch auf einen MQTT Broker und eine Topic-Struktur
+  beispielweise \texttt{iot/temperature} und \texttt{iot/humidity} und
+  publiziert und abonniert Nachrichten. Was fällt Euch auf, wenn Ihr die
+  Nachrichten empfängt?
+\item
+  Welche Angaben sollten zusätzlich zu den Messwerten in der Payload der
+  Nachrichten enthalten sein?
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
 Falls der Mosquitto Brokers und Clients nicht installiert sind, können
 diese mit folgenden Befehlen installiert werden.
@@ -4141,6 +4282,7 @@ diese mit folgenden Befehlen installiert werden.
 \FunctionTok{sudo}\NormalTok{ apt install mosquitto }\AttributeTok{{-}y}
 \FunctionTok{sudo}\NormalTok{ apt install mosquitto{-}clients }\AttributeTok{{-}y}
 \FunctionTok{sudo}\NormalTok{ systemctl enable mosquitto.service}
+\FunctionTok{sudo}\NormalTok{ systemctl status mosquitto}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4154,21 +4296,30 @@ weiterentwickelt zu werden.
 
 \end{boxtitle}
 
-\section*{Aufgabe 2: MQTT mit Python
+\section{Aufgabe 2: MQTT mit Python
 verwenden}\label{aufgabe-2-mqtt-mit-python-verwenden}
-\addcontentsline{toc}{section}{Aufgabe 2: MQTT mit Python verwenden}
 
-\markright{Aufgabe 2: MQTT mit Python verwenden}
+Nun verwenden wir die Bibliothek \texttt{paho-mqtt} in Python um MQTT
+Messages zu senden oder empfangen. Folgende zwei Code Snippets zeigen
+wie ein Publisher und Subscriber in Python minimal implementiert werden
+können.
 
-Nun verwenden wir die Bibliothek \texttt{paho-mqtt} in Python um MQTT zu
-verwenden. Folgende zwei Code Snippets zeigen wie ein Publisher und
-Subscriber in Python implementiert werden können.
+\begin{figure}[H]
 
-\includegraphics{images/mqtt-sensor-subscribe.jpg}
+{\centering \includegraphics{images/mqtt-sensor-subscribe.jpg}
+
+}
+
+\caption{Device sendet Sensordaten und Topic an den MQTT Broker, ein
+weiteres Gerät abonniert (subscribe) dieses Topic und kann so die
+gesendeten Daten an das entsprechende Topic empfangen. In dieser Übung
+über ein Python Script für \emph{Publish} und \emph{Subscribe}}
+
+\end{figure}%
 
 \textbf{Script 1:} \texttt{mqtt\_sub.py} - Subscriber
 
-\phantomsection\label{annotated-cell-30}%
+\phantomsection\label{annotated-cell-37}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ paho.mqtt.client }\ImportTok{as}\NormalTok{ mqtt }
@@ -4215,7 +4366,7 @@ warten (loop\_forever)
 
 \textbf{Script 2: }\texttt{mqtt\_pub.py} - Publisher
 
-\phantomsection\label{annotated-cell-31}%
+\phantomsection\label{annotated-cell-38}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ paho.mqtt.publish }\ImportTok{as}\NormalTok{ publish }
@@ -4233,7 +4384,9 @@ IP Adresse des MQTT Brokers und Topic definieren
 Nachricht mit Topic an den MQTT Broker (ip,port) senden
 \end{description}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-mqtt-python}{}\label{exr-mqtt-python}
+
+~
 
 \begin{itemize}
 \tightlist
@@ -4244,21 +4397,19 @@ Nachricht mit Topic an den MQTT Broker (ip,port) senden
   (Optional: Passe die IP Adresse des MQTT Brokers an, falls ein anderer
   MQTT Broker genutzt werden soll.)
 \item
-  Öffne zwei Terminals und führe diese mit
-  \texttt{python3\ mqtt\_pub.py} und \texttt{python3\ mqtt\_sub.py} aus.
+  Öffne zwei Terminals und führe diese mit \texttt{python\ mqtt\_pub.py}
+  und \texttt{python\ mqtt\_sub.py} aus.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-Falls die Library paho-mqtt nicht installiert ist, kann diese mit
-\texttt{sudo\ pip3\ install\ paho-mqtt} installiert werden.
+Falls die Library paho-mqtt nicht installiert ist, kann diese in der
+aktivierten virtuellen Environment
+\texttt{source\ \textasciitilde{}/.env/bin/activate} mit
+\texttt{pip\ install\ paho-mqtt}.
 
-\section*{Aufgabe 3: Sensordaten mit MQTT
+\section{Aufgabe 3: Sensordaten mit MQTT
 übertragen}\label{aufgabe-3-sensordaten-mit-mqtt-uxfcbertragen}
-\addcontentsline{toc}{section}{Aufgabe 3: Sensordaten mit MQTT
-übertragen}
-
-\markright{Aufgabe 3: Sensordaten mit MQTT übertragen}
 
 Passe nun das Script \texttt{mqtt\_pub.py} an, so dass die Temperatur
 vom Sensor \texttt{BME688} ausgelesen und über MQTT übertragen wird. Die
@@ -4266,7 +4417,9 @@ Temperatur soll alle 10 Sekunden übertragen werden. Nutze hierfür das
 Script zum Auslesen der Sensordaten aus der Übung
 \href{E01_Luftqualitaet.qmd}{E01 Luftqualität} und passe dieses an.
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-mqtt-bme688}{}\label{exr-mqtt-bme688}
+
+~
 
 \begin{itemize}
 \tightlist
@@ -4286,17 +4439,14 @@ Script zum Auslesen der Sensordaten aus der Übung
   es als \texttt{mqtt\_sub\_bme688.py} ab.
 \item
   Öffne zwei Terminals und führe diese mit
-  \texttt{python3\ mqtt\_pub\_bme688.py} und
-  \texttt{python3\ mqtt\_sub\_bme688.py} aus.
+  \texttt{python\ mqtt\_pub\_bme688.py} und
+  \texttt{python\ mqtt\_sub\_bme688.py} aus.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\section*{Aufgabe 4: MQTT mit Node-RED
+\section{Aufgabe 4: MQTT mit Node-RED
 verwenden}\label{aufgabe-4-mqtt-mit-node-red-verwenden}
-\addcontentsline{toc}{section}{Aufgabe 4: MQTT mit Node-RED verwenden}
-
-\markright{Aufgabe 4: MQTT mit Node-RED verwenden}
 
 Node-Red\index{Node-Red} ist ein grafisches Entwicklungswerkzeug für
 IoT, ein low-code Tool für \emph{event-driven applications}. Es bietet
@@ -4305,7 +4455,7 @@ für die Verarbeitung von Sensordaten (ähnlich wie FME oder graphische
 Modellierungswerkzeuge in GIS). Die Implementation von Node-Red ist in
 JavaScript und basiert auf node.js. Datenverarbeitungsflows können
 gespeichert und wiederverwendet werden. Im Arbeitsbereich
-(Abbildung~\ref{fig-noderedmqttflow}) können sogenannte Nodes, die
+(Abb.~\ref{fig-noderedmqttflow}) können sogenannte Nodes, die
 unterschiedliche Funktionen erfüllen, zu einem Daten-``Flow'' werden.
 Nodes können auch selbst erstellt werden. Es gibt eine Vielzahl von
 Nodes, die von der Community entwickelt wurden, die über den Node-Red
@@ -4363,7 +4513,7 @@ der eine Nachricht mit einem Zeitstempel ausgibt.
 
 \end{figure}%
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-nodered-flow}{}\label{exr-nodered-flow}
 
 Erstelle einen Flow der Nachrichten an den MQTT Broker senden und
 Nachrichten vom MQTT Broker empfangen kann.
@@ -4374,16 +4524,15 @@ Nachrichten vom MQTT Broker empfangen kann.
 \item
   Füge hierfür einen Inject Node, einen Debug Node und einen MQTT Output
   Node hinzu. Öffne die Einstellungen des MQTT Output Nodes (siehe
-  Abbildung~\ref{fig-noderedmqttnodesetup}) und setze die IP Adresse des
-  MQTT Brokers und das Topic auf \texttt{iot/temperature}. Starte den
-  Flow und überprüfe, ob die Nachrichten an den MQTT Broker gesendet
-  werden.
+  Abb.~\ref{fig-noderedmqttnodesetup}) und setze die IP Adresse des MQTT
+  Brokers und das Topic auf \texttt{iot/temperature}. Starte den Flow
+  und überprüfe, ob die Nachrichten an den MQTT Broker gesendet werden.
 \item
   Erstelle nun einen weiteren Flow, der die Nachrichten vom MQTT Broker
   empfängt und in der Debug Sidebar anzeigt. Füge hierfür einen MQTT
-  Input Node (siehe Abbildung~\ref{fig-noderedmqttnodesetup}) und einen
-  Debug Node hinzu. Öffne die Einstellungen des MQTT Input Nodes und
-  setze die IP Adresse des MQTT Brokers und das Topic auf
+  Input Node (siehe Abb.~\ref{fig-noderedmqttnodesetup}) und einen Debug
+  Node hinzu. Öffne die Einstellungen des MQTT Input Nodes und setze die
+  IP Adresse des MQTT Brokers und das Topic auf
   \texttt{iot/temperature}. Starte den Flow und überprüfe, ob die
   Nachrichten vom MQTT Broker empfangen werden.
 \item
@@ -4393,7 +4542,7 @@ Nachrichten vom MQTT Broker empfangen kann.
   Broker empfangen werden.
 \end{enumerate}
 
-\end{boxtitle}
+\end{exercise}
 
 \begin{figure}
 
@@ -4413,28 +4562,26 @@ topic wählen und (5) Topic \texttt{iot/temperature} setzen.}
 \begin{boxtitle}{Hinweis}{colPrimary}
 
 Flows stoppen: Um einen Flow in der Ausführung zu stoppen, kann dieser
-über den Tab (rechte Maustaste) Flow deaktiviert werden (disable flow)
+über den Tab Flow (rechte Maustaste) deaktiviert werden (disable flow)
 und mit einem erneuten Übernehmen (Deploy) wird der Flow gestoppt.
 
 \end{boxtitle}
 
-\section*{Aufgabe 5: Node-Red MQTT mit InfluxDB
+\section{Aufgabe 5: Node-Red MQTT mit InfluxDB
 verwenden}\label{aufgabe-5-node-red-mqtt-mit-influxdb-verwenden}
-\addcontentsline{toc}{section}{Aufgabe 5: Node-Red MQTT mit InfluxDB
-verwenden}
-
-\markright{Aufgabe 5: Node-Red MQTT mit InfluxDB verwenden}
 
 InfluxDB ist die Datenbank, die für die Erfassung, Speicherung,
 Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde.
-Zeitreihendaten sind Datenpunkt, die in zeitlicher Sequenz erfasst
+Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst
 wurden und bestehen in der Regele aus aufeinanderfolgenden Messungen aus
 derselben Quelle, wie beispielsweise die Temperaturdaten des BME688.
-InfluxDB organisiert die Zeitreihendaten in Buckets (anstatt
-Datenbanken) und Messungen. Ein Bucket kann mehrere Messungen enthalten,
-wobei Messungen Felder und Tags enthalten können (influxdata 2023). Eine
-Messung ist enthält Felder mit key-value Paaren von Messwerten, die sich
-über die Zeit ändern. Tags sind key-value Paare, die sich nicht über die
+
+InfluxDB organisiert die Zeitreihendaten in \emph{Buckets} (anstatt
+Datenbanken) und Messungen (Measurements). Ein Bucket kann mehrere
+Messungen enthalten, wobei Messungen Felder und Tags enthalten können
+(\citeproc{ref-influxdata2023}{influxdata, 2023}). Eine Messung enthält
+\emph{Felder} mit key-value Paaren von Messwerten, die sich über die
+Zeit ändern. \emph{Tags} sind key-value Paare, die sich nicht über die
 Zeit ändern und für die Filterung und Gruppierung verwendet werden
 können.
 
@@ -4442,13 +4589,24 @@ Das Tutorial
 \href{https://docs.influxdata.com/influxdb/v2/get-started/}{Getting
 Started} zeigt die ersten Schritte mit InfluxDB.
 
-\includegraphics{images/mqtt-sensor-broker-influxdb.jpg}
+\begin{figure}[H]
+
+{\centering \includegraphics{images/mqtt-sensor-broker-influxdb.jpg}
+
+}
+
+\caption{IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script
+publiziert (publish) die Sensormesswerte und das Topic an den MQTT
+Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und
+speichert die Sensormesswerte in einer InlfuxDB Datenbank.}
+
+\end{figure}%
 
 Die graphische Oberfläche von InfluxDB kann über den Browser auf dem
-Raspberry Pi oder via Laptop gestartet werden.
+Raspberry Pi oder via Laptop gestartet werden. Öffnet nun den Browser
+und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein:
+\texttt{http://\textless{}ip-adresse\textgreater{}:8086}.
 
-Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem
-Port 8086 ein: \texttt{http://\textless{}ip-adresse\textgreater{}:8086}.
 Erstellt über die linke Menuleiste unter \emph{Load Data} einen neuen
 Bucket mit dem Namen \texttt{iot}, falls dieser nicht schon existiert.
 Kopiert unter \emph{load Data / API Tokens} den Token für den Zugang zur
@@ -4457,11 +4615,11 @@ Datenbank.
 Diese Angaben (\emph{bucket} und \emph{API Token}) werden für den
 InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node
 benötigen die Angaben, wohin die Daten in der Datenbank gespeichert
-werden (links in Abbildung~\ref{fig-noderedinfluxdb}) mit Angaben zum
-Bucket (Datenbankname), Organisation\footnote{wird bei der Erstellung
-  der Datenbank definiert} und measurement und die Serververbindung
-(rechts in Abbildung~\ref{fig-noderedinfluxdb}) mit der IP Adresse und
-das Token für den Zugang zur Datenbank.
+werden (links in Abb.~\ref{fig-noderedinfluxdb}) mit Angaben zum Bucket
+(Datenbankname), Organisation\footnote{wird bei der Erstellung der
+  Datenbank definiert} und measurement und die Serververbindung (rechts
+in Abb.~\ref{fig-noderedinfluxdb}) mit der IP Adresse und das Token für
+den Zugang zur Datenbank.
 
 \begin{boxtitle}{Hinweis}{colPrimary}
 
@@ -4491,15 +4649,15 @@ Datenbank.}
 Die Messwerte können direkt in die InfluxDB geschrieben werden, jedoch
 fehlen da noch die Tags, die für die Filterung und Gruppierung verwendet
 werden können. Diese können über den Change Node hinzugefügt werden, wie
-in Abbildung~\ref{fig-noderedpayload} gezeigt. Hierbei wird der Wert der
+in Abb.~\ref{fig-noderedpayload} gezeigt. Hierbei wird der Wert der
 Payload in ein Feld mit dem Namen \emph{temperature} geschrieben und die
 Tags \emph{device} und \emph{sensor} werden hinzugefügt. Dieselbe
 Struktur kann alternativ auch mit dem Function Node erstellt werden,
-siehe Abbildung~\ref{fig-noderedpayload} rechts. Hierbei wird der Wert
-der Payload in ein Feld mit dem Namen \emph{temperature} geschrieben und
-die Tags \emph{device} und \emph{sensor} werden hinzugefügt. Die
-Bezeichnung der Messung \emph{temperature} wird im InfluxDB Node
-definiert oder kann im Function Node überschrieben werden.
+siehe Abb.~\ref{fig-noderedpayload} rechts. Hierbei wird der Wert der
+Payload in ein Feld mit dem Namen \emph{temperature} geschrieben und die
+Tags \emph{device} und \emph{sensor} werden hinzugefügt. Die Bezeichnung
+der Messung \emph{temperature} wird im InfluxDB Node definiert oder kann
+im Function Node überschrieben werden.
 
 \begin{figure}
 
@@ -4515,7 +4673,7 @@ werden und diesen für den Import in die InfluxDB angepasst werden.}
 
 \end{figure}%
 
-\phantomsection\label{annotated-cell-32}%
+\phantomsection\label{annotated-cell-39}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{msg}\OperatorTok{.}\AttributeTok{payload} \OperatorTok{=}\NormalTok{ [\{ }
@@ -4539,11 +4697,11 @@ Funktionsknoten definiert werden
 
 InfluxDB bietet über das Menu \emph{Data Explorer} eine einfache
 Möglichkeit die Daten zu visualisieren. Der Query Builder
-(Abbildung~\ref{fig-influxdbdataexplorer}) hilft bei der Erstellung von
+(Abb.~\ref{fig-influxdbdataexplorer}) hilft bei der Erstellung von
 Abfragen mit der über die Fields und Tags gefiltert werden kann, die
 dann über den Button \emph{Submit} ausgeführt und dargestellt werden
 können. Die erstellte Query kann über den \emph{Script Editor}
-(Abbildung~\ref{fig-influxdbdataexplorer}) angezeigt werden.
+(Abb.~\ref{fig-influxdbdataexplorer}) angezeigt werden.
 
 \begin{figure}
 
@@ -4559,7 +4717,9 @@ können in InfluxDB einfach Abfragen zusammengestellt und über
 
 \end{figure}%
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-nodered-influxb}{}\label{exr-nodered-influxb}
+
+~
 
 \begin{itemize}
 \tightlist
@@ -4585,25 +4745,51 @@ können in InfluxDB einfach Abfragen zusammengestellt und über
   Messwerte.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\section*{Aufgabe 6: InfluxDB mit Grafana
+\section{Aufgabe 6: InfluxDB mit Grafana
 verwenden}\label{aufgabe-6-influxdb-mit-grafana-verwenden}
-\addcontentsline{toc}{section}{Aufgabe 6: InfluxDB mit Grafana
-verwenden}
 
-\markright{Aufgabe 6: InfluxDB mit Grafana verwenden}
+Grafana ist eine Open-Source Anwendung für die grafische Darstellung von
+Daten aus den verschiedenen Datenquellen, wie Postgres, SQLite oder
+InfluxDB. Über Grafana können interaktive Dashboards mit vielen
+Visualisierungsansätzen erstellt werden. In dieser Übung wird Grafana
+mit der InfluxDB Datenbank verwendet.
 
-Grafana ist eine Open-Source Anwendung für die Darstellung von Daten aus
-den unterschiedlichsten Messquellen, wie Postgres, SQLite oder InfluxDB.
-In dieser Übung wird Grafana mit der InfluxDB Datenbank verwendet.
+\begin{boxtitle}{Hinweis}{colPrimary}
+
+\textbf{Monitoring der Lichtverschmutzung am Nachthimmel} TESS
+(Telescope Encoder and Sky Sensor) ist ein Photometer
+(\citeproc{ref-Zamorano2016}{Zamorano et al., 2016}) für das Stars4All
+Citizen Science Projekt mit dem Ziel die Lichtverschmutzung weltweit in
+der Nacht zu vermessen, welche nicht nur für die Umwelt problematisch
+ist, sondern auch für astronomische Beobachtungen. Die TESS Geräte
+senden von verschiedenen Standorten weltweit ihre Messungen welche über
+der folgende Dashboard mit Grafana der Öffentlichkeit zur Verfügung
+gestellt werden. Dashboard: \url{https://tess.dashboards.stars4all.eu/},
+Messungen der Lichtverschmutzung am Beispiel des Naturparks Gantrisch in
+der Schweiz.
+\url{https://tess.dashboards.stars4all.eu/d/datasheet_stars926/stars926?orgId=1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/mqtt_grafana_tess4all.png}
+
+}
+
+\caption{Grafana Dashboard der Messdaten des TESS Photometes im
+Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz}
+
+\end{figure}%
+
+\end{boxtitle}
 
 Öffnet nun den Browser und gebt die IP Adresse des Raspberry Pi mit dem
 Port 3000 ein: \texttt{http://\textless{}ip-adresse\textgreater{}:3000}.
 Unter Connections / Data Sources können Grafana Datenquellen hinzugefügt
 werden, wählt nun \emph{InfluxDB} um Grafana mit der InfluxDB zu
-verbinden. Setzt folgende Einstellungen
-(Abbildung~\ref{fig-grafanainfluxdb}) und speichert diese:
+verbinden. Setzt folgende Einstellungen (Abb.~\ref{fig-grafanainfluxdb})
+und speichert diese:
 
 \begin{itemize}
 \tightlist
@@ -4639,8 +4825,8 @@ hinzufügen mit den entsprechenden Angaben.}
 Ist die Verbindung erstellt, können neue Dashboards erstellt werden. Die
 Queries, die für die Visualisierung verwendet werden sollen, können über
 den \emph{Query Builder} in InfluxDB erstellt und in Grafana beim
-Erstellen der Panels (Abbildung~\ref{fig-grafanainfluxdbquery})
-reinkopiert werden.
+Erstellen der Panels (Abb.~\ref{fig-grafanainfluxdbquery}) reinkopiert
+werden.
 
 \begin{figure}
 
@@ -4656,7 +4842,9 @@ genutzt werden.}
 
 \end{figure}%
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-influxb-grafana}{}\label{exr-influxb-grafana}
+
+~
 
 \begin{itemize}
 \tightlist
@@ -4667,14 +4855,10 @@ genutzt werden.}
   Luftfeuchtigkeit und Luftdruck des BME688 Sensors.
 \end{itemize}
 
-\end{boxtitle}
+\end{exercise}
 
-\section*{Aufgabe 7: InfluxDB mit Python verwenden
+\section{Aufgabe 7: InfluxDB mit Python verwenden
 (optional)}\label{aufgabe-7-influxdb-mit-python-verwenden-optional}
-\addcontentsline{toc}{section}{Aufgabe 7: InfluxDB mit Python verwenden
-(optional)}
-
-\markright{Aufgabe 7: InfluxDB mit Python verwenden (optional)}
 
 Anstatt mit Node-Red können die Daten des Sensors direkt in die InfluxDB
 geschrieben werden. Folgender Code zeigt wie die Daten des BME688
@@ -4686,7 +4870,17 @@ die Daten mit Python in die InfluxDB geschrieben werden können:
 \href{https://www.influxdata.com/blog/getting-started-with-python-and-influxdb-v2-0/}{Getting
 Started with Python and InfluxDB v2.0}.
 
-\includegraphics{images/mqtt-sensor-influxdb.jpg}
+\begin{figure}[H]
+
+{\centering \includegraphics{images/mqtt-sensor-influxdb.jpg}
+
+}
+
+\caption{Direktes Speichern der Sensormessdaten in der Influxdb ohne
+MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive
+Verbindung haben.}
+
+\end{figure}%
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4710,28 +4904,28 @@ Started with Python and InfluxDB v2.0}.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{exercise}[]\protect\hypertarget{exr-python-influxb}{}\label{exr-python-influxb}
 
 Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python
 Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des
 BME688 Sensors ausliest und in die InfluxDB schreibt.
 
-\end{boxtitle}
+\end{exercise}
 
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{part}{Anhang}
 \appendix
 
-\chapter{\texorpdfstring{Raspberry
-Pi\index{Raspberry Pi}}{Raspberry Pi}}\label{raspberry-pi}
+\chapter{Raspberry Pi IoT Image}\label{raspberry-pi-iot-image}
 
 Open Source Einplatinenrechner werden in Bildung und Forschung
 eingesetzt und haben eine breite Anwendung in weiteren Bereichen wie
 IoT. SBCs haben grosse Bedeutung in der Ingenieur- und
 Informatikausbildung, da sie sich gut für Hands-on Vermittlung komplexer
 Themen eignen, und verbessern technische Fähigkeiten, stärken das
-Interesse und Motivation (Ariza und Baez 2022).
+Interesse und Motivation (\citeproc{ref-ariza2022}{Ariza \& Baez,
+2022}).
 
 \begin{description}
 \tightlist
@@ -4749,14 +4943,15 @@ Hardware, tendenziell günstig, jedoch schwierig Anpassungen vorzunehmen,
 weniger Möglichkeiten als «Multi Board Computer».
 \end{description}
 
-Der \href{https://www.raspberrypi.com}{Raspberry Pi} ist ein
-preisgünstiger Einplatinencomputer (Single Board Computer SBC) in
-Kreditkartenformat zum Experimentieren und Erlernen des Programmierens.
-Die Motivation für die Entwicklung des Raspberry Pi war die sinkende
-Anzahl Informatikstudierender an der Universität Cambridge und der
-Rückgang der Informatikkenntnisse der Studierenden. Der Raspberry Pi
-wird von der britischen \href{https://www.raspberrypi.org}{Raspberry Pi
-Foundation} entwickelt seit 2009 entwickelt.
+Der \href{https://www.raspberrypi.com}{Raspberry Pi}\index{Raspberry Pi}
+ist ein preisgünstiger Einplatinencomputer (Single Board Computer SBC)
+in Kreditkartenformat zum Experimentieren und Erlernen des
+Programmierens. Die Motivation für die Entwicklung des Raspberry Pi war
+die sinkende Anzahl Informatikstudierender an der Universität Cambridge
+und der Rückgang der Informatikkenntnisse der Studierenden. Der
+Raspberry Pi wird von der britischen
+\href{https://www.raspberrypi.org}{Raspberry Pi Foundation} entwickelt
+seit 2009 entwickelt.
 
 Url: \url{https://www.raspberrypi.com}
 
@@ -4822,9 +5017,9 @@ betroffen und hatte seit 2020 tiefe Lagerbestände von elektronischen
 Komponenten. Die Nachfrage nach Raspberry Pi ist seit 2020 stark
 gestiegen und die Produktionskapazitäten konnten nicht erhöht werden.
 Die Produktionsengpässe werden sich voraussichtlich ab Ende 2023
-verbessern (Upton 2022). Die Knappheit führte zu einem Preisanstieg von
-50\% bis 100\% bei den Raspberry Pi Modellen und zu einer Verknappung
-der Raspberry Pi Modelle. Der Dienst
+verbessern (\citeproc{ref-upton2022}{Upton, 2022}). Die Knappheit führte
+zu einem Preisanstieg von 50\% bis 100\% bei den Raspberry Pi Modellen
+und zu einer Verknappung der Raspberry Pi Modelle. Der Dienst
 \href{https://rpilocator.com/?country=CH}{Raspberry Pi Stock Scraper}
 führt eine Übersicht der Verfügbarkeit der weltweiten Raspberry Pi
 Lagerbeständen von online Shops. Der
@@ -4908,7 +5103,7 @@ beispielsweise mit einem aktivierten SSH Zugang.
 
 \end{boxtitle}
 
-\begin{boxtitle}{Excercise}{colPrimary}
+\begin{boxtitle}{Übung}{colPrimary}
 
 \textbf{Raspberry Pi Image auf SD-Karte schreiben}
 
@@ -4998,17 +5193,8 @@ Mobile herstellen.}
 \section{\texorpdfstring{SSH Verbindung
 herstellen\index{SSH}}{SSH Verbindung herstellen}}\label{ssh-verbindung-herstellen}
 
-\begin{marginfigure}
-
-\centering{
-
-\includegraphics{images/raspberry_pi_shell.jpg}
-
-}
-
-\caption{\label{fig-shell}Shell über die Softwareleiste öffnen}
-
-\end{marginfigure}%
+\includegraphics{images/raspberry_pi_shell.jpg}\{\#fig-shell
+width=``30\%''\,``\}
 
 Das SSH Protokoll ermöglicht den direkten auf den Raspberry Pi über das
 Konsolenfenster. Hierfür wird die IP Adresse des Raspberry Pi benötigt.
@@ -5157,8 +5343,8 @@ jeder Installation von Softwarepaketen folgende Befehle durchzuführen
 \end{Highlighting}
 \end{Shaded}
 
-\section{Raspberry Pi im Netzerk
-auffinden}\label{raspberry-pi-im-netzerk-auffinden}
+\section{Raspberry Pi im Netzwerk
+auffinden}\label{raspberry-pi-im-netzwerk-auffinden}
 
 Sobald der Raspberry Pi und auch andere Geräte mit dem Netzwerk
 verbunden sind kann deren IP Adresse mit Scanner Tools wie
@@ -5358,7 +5544,13 @@ angeschlossen.}
 
 Einen unvollständige Übersicht gängiger Konsolen Befehle in Linux.
 
-\textbf{Raspberry Pi runterfahren:} \texttt{sudo\ shutdown\ now}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Raspberry Pi runterfahren:} \texttt{sudo\ shutdown\ now}
+\item
+  \textbf{Raspberry Pi neu starten:} \texttt{sudo\ reboot\ now}
+\end{itemize}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4059}}
@@ -5501,7 +5693,7 @@ Suche, ob ein Softwarepaket verfügbar ist, ev zuerst die Paketliste mit
 \texttt{sudo\ apt\ update} aktualisieren. \\
 \end{longtable}
 
-\chapter{Raspberry Pi IoT Image}\label{raspberry-pi-iot-image}
+\chapter{Raspberry Pi IoT Image}\label{raspberry-pi-iot-image-1}
 
 Für eine möglichst reibungslose Durchführung der Übungen ist ein
 vorkonfiguriertes Image hilfreich. Dies gewährleistet, dass alle
@@ -5594,16 +5786,55 @@ Script anpassen.
 
 Shell Script: \texttt{install\_iot\_software.sh} - Bash Script zu
 Installation der Software und Libraries für das fächerübergreifende
-Modul 5200 IoT Installation von: - Python Libraries für die Pimoroni
-Sensoren - Klonen der Libraries mit Beispielen in Documents/Libraries -
-Jupyter Notebook - MQTT, Mosquitto Broker und Clients - Node-Red -
-InfluxDB - Grafana - VNC
+Modul 5200 IoT Installation von:
+
+\begin{itemize}
+\tightlist
+\item
+  Python Libraries Beispielcode für die Pimoroni Sensoren
+\item
+  Klonen der Libraries mit Beispielen in Documents/Libraries
+\item
+  Jupyter Notebook
+\item
+  MQTT, Mosquitto Broker und Clients
+\item
+  Node-Red
+\item
+  InfluxDB
+\item
+  Grafana
+\item
+  VNC
+\end{itemize}
+
+\begin{boxtitle}{Hinweis}{colPrimary}
+
+\textbf{Zeilenumbrüche EOL} Zeilenunterbrüche von Textdateien
+unterscheiden sich zwischen Unix \texttt{LF} und Windows \texttt{CRLF}
+Systemen. Bash Script müssen auf Linux Systemen Unix Zeilenumbrüche
+(EOL) \texttt{LF} aufweisen. Dies ist vor allem dann wichtig, wenn das
+Script auf einem Windows System erstellt wird. Windows verwendet
+standardmässig \texttt{CRLF} Zeilenumbrüche. In Visual Studio Code
+können die EOL Zeichen mit \texttt{Ctrl+Shift+P} und
+\texttt{Change\ End\ of\ Line\ Sequence} auf \texttt{LF} umgestellt
+werden oder über die Statusleiste unten rechts bei \texttt{CRLF}. In
+Notepad++ kann dies über \texttt{Edit/EOL\ Conversion/Unix\ (LF)}
+umgestellt werden.
+
+\end{boxtitle}
+
+\emph{install\_iot\_software.sh}: Bash Installations-Script mit Unix
+Zeilenumbrüchen EOL
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#!/bin/bash}
-\VariableTok{COL}\OperatorTok{=}\StringTok{\textquotesingle{}\textbackslash{}033[0;32m\textquotesingle{}} \CommentTok{\# Farbcodes für die Shell setzen}
+\VariableTok{COL}\OperatorTok{=}\StringTok{\textquotesingle{}\textbackslash{}033[0;32m\textquotesingle{}} \CommentTok{\# Primary Color}
 \VariableTok{NC}\OperatorTok{=}\StringTok{\textquotesingle{}\textbackslash{}033[0m\textquotesingle{}} \CommentTok{\# No Color}
+\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Raspberry Pi Version}\VariableTok{$\{NC\}}\StringTok{"}
+\ExtensionTok{hostnamectl}
+\FunctionTok{cat}\NormalTok{ /proc/cpuinfo }\KeywordTok{|} \FunctionTok{grep}\NormalTok{ Model}
 
 \BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Raspberry Pi aktualisieren}\VariableTok{$\{NC\}}\StringTok{"}
 \FunctionTok{sudo}\NormalTok{ apt update}
@@ -5618,44 +5849,17 @@ InfluxDB - Grafana - VNC
 \FunctionTok{sudo}\NormalTok{ apt install python3{-}smbus}
 \FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ i2c{-}tools}
 
-\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Installation der Python Bibliotheken}\VariableTok{$\{NC\}}\StringTok{"}
-\FunctionTok{sudo}\NormalTok{ pip3 install matplotlib scipy pigments numpy}
-\FunctionTok{sudo}\NormalTok{ pip3 install jupyter}
-\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Installation der Pimoroni \& Adafruit Python Bibliotheken}\VariableTok{$\{NC\}}\StringTok{"}
-\FunctionTok{sudo}\NormalTok{ apt install python3{-}rpi.gpio python3{-}spidev python3{-}pip python3{-}pil python3{-}numpy}
-\FunctionTok{sudo}\NormalTok{ pip3 install st7789}
-\FunctionTok{sudo}\NormalTok{ pip3 install bme680}
-\FunctionTok{sudo}\NormalTok{ pip3 install icm20948}
-\FunctionTok{sudo}\NormalTok{ pip3 install as7262}
-\FunctionTok{sudo}\NormalTok{ pip3 install max30105}
-\FunctionTok{sudo}\NormalTok{ pip3 install vl53l5cx{-}ctypes}
-\FunctionTok{sudo}\NormalTok{ pip3 install RPI.GPIO adafruit{-}blinka}
-\FunctionTok{sudo}\NormalTok{ pip3 install adafruit{-}circuitpython{-}mlx90640}
-
-\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Klonen der Pimoroni Python Bibliotheken}\VariableTok{$\{NC\}}\StringTok{"}
-\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{in Documents/Libraries}\VariableTok{$\{NC\}}\StringTok{"}
-\BuiltInTok{cd}\NormalTok{ Documents}
-\FunctionTok{mkdir}\NormalTok{ Libraries}
-\BuiltInTok{cd}\NormalTok{ Libraries}
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/st7789{-}python}
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/bme680{-}python }
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/icm20948{-}python}
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/as7262{-}python}
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/max30105{-}python}
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/vl53l5cx{-}python}
-\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/mlx90640{-}library}
-\BuiltInTok{cd}\NormalTok{ ../../}
-
 \BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Mosquitto Server, Clients und Python Libraries Installation}\VariableTok{$\{NC\}}\StringTok{"}
 \FunctionTok{sudo}\NormalTok{ apt install mosquitto }\AttributeTok{{-}y}
 \FunctionTok{sudo}\NormalTok{ apt install mosquitto{-}clients }\AttributeTok{{-}y}
 \FunctionTok{sudo}\NormalTok{ systemctl enable mosquitto.service}
 \FunctionTok{sudo}\NormalTok{ systemctl restart mosquitto}
-\FunctionTok{sudo}\NormalTok{ pip3 install paho{-}mqtt}
 
 \BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Node{-}Red Installation}\VariableTok{$\{NC\}}\StringTok{"}
-\CommentTok{\# add {-}{-}help to display install options}
-\FunctionTok{bash} \OperatorTok{\textless{}(}\ExtensionTok{curl} \AttributeTok{{-}sL}\NormalTok{ https://raw.githubusercontent.com/node{-}red/linux{-}installers/master/deb/update{-}nodejs{-}and{-}nodered}\OperatorTok{)} \AttributeTok{{-}{-}confirm{-}root} \AttributeTok{{-}{-}confirm{-}pi} \AttributeTok{{-}{-}confirm{-}install}
+\ExtensionTok{curl} \AttributeTok{{-}sL}\NormalTok{ https://raw.githubusercontent.com/node{-}red/linux{-}installers/master/deb/update{-}nodejs{-}and{-}nodered }\AttributeTok{{-}o}\NormalTok{ update{-}nodejs{-}and{-}nodered.sh}
+\FunctionTok{chmod}\NormalTok{ +x update{-}nodejs{-}and{-}nodered.sh}
+\FunctionTok{bash}\NormalTok{ update{-}nodejs{-}and{-}nodered.sh }\AttributeTok{{-}{-}confirm{-}root} \AttributeTok{{-}{-}confirm{-}pi} \AttributeTok{{-}{-}confirm{-}install} \AttributeTok{{-}{-}no{-}init}
+\FunctionTok{rm}\NormalTok{ update{-}nodejs{-}and{-}nodered.sh}
 \FunctionTok{sudo}\NormalTok{ systemctl enable nodered.service}
 \FunctionTok{sudo}\NormalTok{ systemctl start nodered.service}
 
@@ -5676,6 +5880,89 @@ InfluxDB - Grafana - VNC
 \FunctionTok{sudo}\NormalTok{ systemctl start grafana{-}server}
 \FunctionTok{sudo}\NormalTok{ systemctl enable grafana{-}server.service}
 \FunctionTok{sudo}\NormalTok{ apt autoremove }\AttributeTok{{-}y}
+
+\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{Klonen der Pimoroni Python Bibliotheken}\VariableTok{$\{NC\}}\StringTok{"}
+\BuiltInTok{echo} \StringTok{"}\VariableTok{$\{COL\}}\StringTok{in Documents/Libraries}\VariableTok{$\{NC\}}\StringTok{"}
+\BuiltInTok{cd}\NormalTok{ Documents}
+\FunctionTok{mkdir}\NormalTok{ Libraries}
+\BuiltInTok{cd}\NormalTok{ Libraries}
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/st7789{-}python}
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/bme680{-}python }
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/icm20948{-}python}
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/as7262{-}python}
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/max30105{-}python}
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/vl53l5cx{-}python}
+\FunctionTok{git}\NormalTok{ clone https://github.com/pimoroni/mlx90640{-}library}
+\BuiltInTok{cd}\NormalTok{ ../../}
+\end{Highlighting}
+\end{Shaded}
+
+Zip Datei des Ordners Libraries erstellen für das Backup der
+Beispielcode der einzelnen Sensoren.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}/Documents/}
+\FunctionTok{zip} \AttributeTok{{-}r}\NormalTok{ Libraries.zip Libraries}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{\texorpdfstring{Installation der Python Libraries mit
+\emph{venv}}{Installation der Python Libraries mit venv}}\label{installation-der-python-libraries-mit-venv}
+
+Mit dem Upgrade auf \emph{Raspberry Pi Bookworm} wird Python auf die
+Version 3.11 aktualisiert. Ab dieser Version können Python Libraries
+nicht mehr systemweit installiert werden. \emph{Python Virtual
+Environment} sind nun erfordert, entweder pro Projekt oder pro Userkonto
+siehe \url{http://rptl.io/venv} für weitere Informationen.
+
+Erstelle eine Python Virtual Environment \texttt{.env} im Homeordner
+\texttt{\textasciitilde{}/} mit folgenden Befehlen für den User
+\texttt{iot} und aktiviere die Virtual Environment mit
+\texttt{source\ \textasciitilde{}/.env/bin/activate} und deaktiviere die
+Virtual Environment mit \texttt{deactivate}. Wenn die Virtual
+Environment projetbasiert im Projektordner erstellt wird reicht es den
+Pfad zum Projektordner anzugeben z.B.
+\texttt{python\ -m\ venv\ \textasciitilde{}/Development/Projekt1/env}
+und die Virtual Environment wird im Projektordner erstellt.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python} \AttributeTok{{-}m}\NormalTok{ venv \textasciitilde{}/.env}
+\BuiltInTok{source}\NormalTok{ \textasciitilde{}/.env/bin/activate}
+\end{Highlighting}
+\end{Shaded}
+
+Requirements.txt Datei erstellen mit den Python Libraries, die in der
+Virtual Environment installiert werden sollen. Die Datei kann mit
+\texttt{nano\ requirements.txt} erstellt und mit \texttt{Ctrl+o} und
+\texttt{Ctrl+x} gespeichert werden. Python Libraries in der Virtual
+Environment installieren mit
+\texttt{pip\ install\ -r\ requirements.txt}. Nutze für die Installation
+folgende \texttt{requirements.txt} Datei. Kontrolliere mit
+\texttt{pip\ list} ob die Libraries installiert wurden.
+
+\emph{requirements.txt}: Python Libraries für die Pimoroni Sensoren
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matplotlib}
+\NormalTok{scipy}
+\NormalTok{pigments}
+\NormalTok{numpy}
+\NormalTok{jupyter}
+\NormalTok{rpi.gpio}
+\NormalTok{spidev}
+\NormalTok{pillow}
+\NormalTok{numpy}
+\NormalTok{st7789}
+\NormalTok{bme680}
+\NormalTok{icm20948}
+\NormalTok{as7262}
+\NormalTok{max30105}
+\NormalTok{vl53l5cx{-}ctypes}
+\NormalTok{RPI.GPIO}
+\NormalTok{adafruit{-}blinka}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5687,48 +5974,88 @@ anpassen}\label{raspberry-pi-einstellungen-fuxfcr-i2c-spi-ssh-vnc-anpassen}
 
 \textbf{Interface Options aktivieren} In den Raspberry Pi
 Konfigurationseinstellungen mit \texttt{sudo\ raspi-config} die
-Interface Optionen \emph{I2C, SPI, SSH und ev VNC} (Virtual Network
-Computing) aktivieren.
+Interface Optionen \emph{I2C, SPI, SSH und ev VNC (Virtual Network
+Computing) oder RPi Connect} aktivieren. VNC, RPi Connect Hollingworth
+(\citeproc{ref-Hollingworth2024}{2024})\footnote{RPI Connect erlaubt
+  über einen Relay Server die Verbindung zu einem Raspberry Pi
+  herzustellen über WebRTC wie Browser Clients für Zoom, Slack,
+  Microsoft Teams. Der Relay Server wird nur für die Erstellung der
+  Verbindung benötigt und wird von Raspberry Pi kostenlos betrieben. RPi
+  Connect installieren mit \texttt{sudo\ apt\ install\ rpi-connect} und
+  mit \texttt{sudo\ reboot} neu starten.} werden nur benötigt, wenn der
+Raspberry Pi über Fernzugriff gesteuert werden soll.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/raspberry_pi_enable_ssh_spi_i2c.png}
+
+}
+
+\caption{Über die Konsole \texttt{raspi-config} starten und über das
+Konsolenmenu (links) die Einstellungen in den \emph{Interface Options}
+(rechts) \emph{I2C, SPI, SSH und ev VNC} aktivieren.}
+
+\end{figure}%
 
 \subsection{Baud rate des I2C Protokolls
 anpassen}\label{baud-rate-des-i2c-protokolls-anpassen}
 
-Baud rate des I2C Protokolls mit \texttt{sudo\ nano\ /boot/config.txt}
-öffnen und folgende Zeile ergänzen. Mit \texttt{Ctrl+o} und
-\texttt{Ctrl+x} speichern.
+Baud rate des I2C Protokolls mit
+\texttt{sudo\ nano\ /boot/firmware/config.txt} öffnen und folgende Zeile
+ergänzen. Mit \texttt{Ctrl+o} und \texttt{Ctrl+x} speichern (siehe
+\citeproc{ref-RaspberryPiLtd2024a}{Raspberry Pi Ltd, 2024b}).
 
-\begin{verbatim}
-dtparam=i2c_arm=on,i2c_arm_baudrate=400000
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{dtparam}\OperatorTok{=}\NormalTok{i2c\_arm=on,i2c\_arm\_baudrate=400000}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Mosquitto Server
 Konfiguration}\label{mosquitto-server-konfiguration}
 
 \textbf{Mosquitto Server Konfiguration} anpassen mit
-\texttt{sudo\ nano\ /etc/mosquitto/mosquitto.conf}\# und am Ende der
-Datei folgendes einfügen ohne \#!
+\texttt{sudo\ nano\ /etc/mosquitto/mosquitto.conf} und am Ende der Datei
+folgendes einfügen (\citeproc{ref-EclipseFoundation2021}{Eclipse
+Foundation, 2021}).
 
-\begin{verbatim}
-listener 1883
-allow_anonymous true
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{listener}\NormalTok{ 1883}
+\ExtensionTok{allow\_anonymous}\NormalTok{ true}
+\end{Highlighting}
+\end{Shaded}
 
 Mosquitto Server neu starten mit
 \texttt{sudo\ systemctl\ restart\ mosquitto}
 
 \textbf{Node-Red Einstellungen initialisieren} mit
-\texttt{node-red\ admin\ init} - \emph{yes} installation customise
-settings - \emph{yes} keep settings file at default location - \emph{no}
-setup user security - \emph{yes} enable project features - select
-\emph{manual} workflow - select \emph{default theme} - \emph{yes} allow
-function nodes to load external modules
+\texttt{sudo\ node-red\ admin\ init}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{yes} installation customise settings
+\item
+  \emph{yes} keep settings file at default location
+\item
+  \emph{no} setup user security
+\item
+  \emph{yes} enable project features
+\item
+  select \emph{manual} workflow
+\item
+  select \emph{default theme}
+\item
+  \emph{yes} allow function nodes to load external modules
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ExtensionTok{Node{-}RED}\NormalTok{ Settings File initialisation}
 \ExtensionTok{=====================================}
 \ExtensionTok{This}\NormalTok{ tool will help you create a Node{-}RED settings file.}
-\ExtensionTok{✔}\NormalTok{ Settings file · /home/iot/.node{-}red/settings.js}
+\ExtensionTok{✔}\NormalTok{ Settings file · /root/.node{-}red/settings.js}
 
 \ExtensionTok{User}\NormalTok{ Security}
 \ExtensionTok{=============}
@@ -5737,6 +6064,7 @@ function nodes to load external modules
 \ExtensionTok{Projects}
 \ExtensionTok{========}
 \ExtensionTok{The}\NormalTok{ Projects feature allows you to version control your flow using a local git repository.}
+
 \ExtensionTok{✔}\NormalTok{ Do you want to enable the Projects feature}\PreprocessorTok{?}\NormalTok{ · Yes}
 \ExtensionTok{✔}\NormalTok{ What project workflow do you want to use}\PreprocessorTok{?}\NormalTok{ · manual }\AttributeTok{{-}}\NormalTok{ you must manually commit changes}
 
@@ -5748,6 +6076,8 @@ function nodes to load external modules
 \ExtensionTok{Node}\NormalTok{ settings}
 \ExtensionTok{=============}
 \ExtensionTok{✔}\NormalTok{ Allow Function nodes to load external modules}\PreprocessorTok{?} \ErrorTok{(}\ExtensionTok{functionExternalModules}\KeywordTok{)} \ExtensionTok{·}\NormalTok{ Yes}
+
+\ExtensionTok{Settings}\NormalTok{ file written to /root/.node{-}red/settings.js}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5854,7 +6184,7 @@ genutzt werden.
 \item
   Backup Image auf den lokalen Rechner mit
   \href{https://sourceforge.net/projects/win32diskimager/}{Win32DiskImager}
-  schreiben.
+  \emph{lesen} und in eine Image Datei schreiben.
 \item
   Virtuelle Machine mit Linux Ubuntu/Debian mit \emph{gemeinsamen
   Ordner} starten
@@ -5876,7 +6206,9 @@ genutzt werden.
 Tutorial: \href{https://www.youtube.com/watch?v=5pdgO3Ncl6k}{How I
 Backup and Shrink My SD Card Images - Youtube}
 
-Backup Image mit Win32DiskImager schreiben
+Backup Image mit Win32DiskImager schreiben, mit der Funktion
+\emph{Lesen/Read} und diese als Image Datei auf den lokalen Rechner
+speichern.
 
 \begin{figure}[H]
 
@@ -5884,13 +6216,15 @@ Backup Image mit Win32DiskImager schreiben
 
 }
 
-\caption{Backup Image mit Win32DiskImager schreiben}
+\caption{Backup Image der SD Karte schreiben mit Win32DiskImager und der
+Funktion \emph{Lesen/Read}}
 
 \end{figure}%
 
-Virtuelle Machine mit VM VirtualBox starten und in den Einstellungen der
-VM über \emph{Geräte/Gemeinsame Ordner} einen gemeinsamen Ordner
-zwischen VM und dem lokalen Rechner einrichten.
+Virtuelle Machine mit VM \href{https://www.virtualbox.org/}{VirtualBox}
+starten und in den Einstellungen der VM über \emph{Geräte/Gemeinsame
+Ordner} einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner
+einrichten.
 
 \begin{figure}[H]
 
@@ -5922,16 +6256,16 @@ und ausgeführt werden kann.
 \textbf{Tipp:} Falls das Terminal nicht öffnet mit \texttt{Ctrl+Alt+F3}
 in das TTY Terminal wechseln.
 
-\textbf{Tipp:} Falls der VM User noch keine Adminrechte hat (per Default
-hat der \emph{User} kein Adminrechte), können diese nachträglich gesetzt
-werden mit:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{su} \AttributeTok{{-}} 
-\ExtensionTok{usermod} \AttributeTok{{-}a} \AttributeTok{{-}G}\NormalTok{ sudo vboxuser}
-\end{Highlighting}
-\end{Shaded}
+\textbf{Tipp:} Falls der VM User noch keine Adminrechte hat (bei einer
+Neuinstallation von Ubuntu ist das \texttt{root} Passwort nocht nicht
+gesetzt), können diese nachträglich gesetzt werden mit
+\texttt{sudo\ passwd}. Bei der Passwortabfrage das aktuelle User
+Passwort eingeben und das neue Root Passwort zweimal eingeben.
+Anschliessend als Root User anmelden mit \texttt{su\ -}.\footnote{Einem
+  User Adminrechte zuweisen:
+  \texttt{sudo\ usermod\ -a\ -G\ sudo\ \textless{}username\textgreater{}},
+  Kontoinformationen \texttt{id\ \textless{}username\textgreater{}}
+  aufzeigen.}
 
 GitHub: \url{https://github.com/Drewsif/PiShrink}
 
@@ -5944,7 +6278,9 @@ GitHub: \url{https://github.com/Drewsif/PiShrink}
 \CommentTok{\# make the script executable}
 \FunctionTok{chmod}\NormalTok{ +x ./pishrink.sh}
 \CommentTok{\# run pishrink on the .img file}
-\FunctionTok{sudo}\NormalTok{ ./pishrink.sh }\AttributeTok{{-}v}\NormalTok{ /host/≪\%imagename.img\%≫}
+\FunctionTok{sudo}\NormalTok{ ./pishrink.sh }\AttributeTok{{-}v}\NormalTok{ /host/}\OperatorTok{\textless{}}\NormalTok{rpi{-}imagefile}\OperatorTok{\textgreater{}}\NormalTok{.img}
+\CommentTok{\# Komprimiere die Image als .xz Archive (eher langsam)}
+\FunctionTok{xz} \AttributeTok{{-}z} \AttributeTok{{-}9e}\NormalTok{ /host/}\OperatorTok{\textless{}}\NormalTok{rpi{-}imagefile}\OperatorTok{\textgreater{}}\NormalTok{.img}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5960,7 +6296,7 @@ GitHub: \url{https://github.com/Drewsif/PiShrink}
 
 Image mit 7-Zip zusätzlich komprimieren File Kontextmenu \emph{7-Zip/Add
 to Archive} und als Archive Format \texttt{.xz} sowie den Compression
-Level \emph{9-Utlra} wählen.
+Level \emph{9-Ultra} wählen.
 
 \begin{figure}[H]
 

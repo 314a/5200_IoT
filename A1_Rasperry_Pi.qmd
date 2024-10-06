@@ -1,4 +1,13 @@
-# Raspberry Pi\index{Raspberry Pi}
+---
+title: "Raspberry Pi IoT Image"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/A1_Rasperry_Pi.pdf
+---
+
 Open Source Einplatinenrechner werden in Bildung und Forschung eingesetzt und haben eine breite Anwendung in weiteren Bereichen wie IoT. SBCs haben grosse Bedeutung in der Ingenieur- und Informatikausbildung, da sie sich gut für Hands-on Vermittlung komplexer Themen eignen, und verbessern technische Fähigkeiten, stärken das Interesse und Motivation [@ariza2022].
 
 System on Chip SOC \index{System on Chip SOC}
@@ -7,7 +16,7 @@ System on Chip SOC \index{System on Chip SOC}
 Single Board Computer SBC \index{Single Board Computer SBC}
 : ist ein Computer auf einer Leiterplatine mit allen erforderlichen Komponenten und Anschlüssen wie CPU, RAM, GPU I/O Schnittstellen etc. &rarr; Einfach zu nutzen, tiefer Stromverbrauch, kosteneffizient, getestete Hardware, tendenziell günstig, jedoch schwierig Anpassungen vorzunehmen, weniger Möglichkeiten als «Multi Board Computer».
 
-Der [Raspberry Pi](https://www.raspberrypi.com) ist ein preisgünstiger Einplatinencomputer (Single Board Computer SBC) in Kreditkartenformat zum Experimentieren und Erlernen des Programmierens. Die Motivation für die Entwicklung des Raspberry Pi war die sinkende Anzahl Informatikstudierender an der Universität Cambridge und der Rückgang der Informatikkenntnisse der Studierenden. Der Raspberry Pi wird von der britischen [Raspberry Pi Foundation](https://www.raspberrypi.org) entwickelt seit 2009 entwickelt.
+Der [Raspberry Pi](https://www.raspberrypi.com)\index{Raspberry Pi} ist ein preisgünstiger Einplatinencomputer (Single Board Computer SBC) in Kreditkartenformat zum Experimentieren und Erlernen des Programmierens. Die Motivation für die Entwicklung des Raspberry Pi war die sinkende Anzahl Informatikstudierender an der Universität Cambridge und der Rückgang der Informatikkenntnisse der Studierenden. Der Raspberry Pi wird von der britischen [Raspberry Pi Foundation](https://www.raspberrypi.org) entwickelt seit 2009 entwickelt.
 
 Url: [https://www.raspberrypi.com](https://www.raspberrypi.com)
 
@@ -88,7 +97,7 @@ Für die Verbindung mit dem Internet am Campus muss das Netzwerk *fhnw-public* a
 
 ## SSH Verbindung herstellen\index{SSH}
 
-![Shell über die Softwareleiste öffnen](images/raspberry_pi_shell.jpg){.column-margin #fig-shell}
+![Shell über die Softwareleiste öffnen](images/raspberry_pi_shell.jpg){#fig-shell width="30%""}
 
 Das SSH Protokoll ermöglicht den direkten auf den Raspberry Pi über das Konsolenfenster. Hierfür wird die IP Adresse des Raspberry Pi benötigt. Die IP Adresse kann über das Programm `ifconfig` oder `ip addr` in der Konsole abgefragt werden. 
 
@@ -138,10 +147,14 @@ sudo apt upgrade
 sudo apt-get clean
 ```
 
-## Raspberry Pi im Netzerk auffinden
+## Raspberry Pi im Netzwerk auffinden
 
 Sobald der Raspberry Pi und auch andere Geräte mit dem Netzwerk verbunden sind kann deren IP Adresse mit Scanner Tools wie [Angry IP Scanner ](https://angryip.org), `arp -a`[^ `arp -a` listet die IP- und die MAC Adressen der einzelnen Geräte. Es kann ohne das Aufführen von Hostnamen jedoch aufwendig werden, die einzelnen Einträge durchzugehen um zu eruieren. Tipp: `arp -a` vor dem Booten des Raspberry Pi ausführen und ein zweites mal nachdem der Raspberry Pi vollständig gebootet hat nochmals und eruieren welche IP Adresse hinzugekommen ist.] oder `nmap` gefunden werden. Für Android und iOS existieren diverse Scanner Apps wie [Fing](https://www.fing.com/products/fing-app) oder [Net Analyzer](https://techet.net/netanalyzer).
 
 Dienste, die dass Netzwerk durchleuchten wie der Angry IP Scanner sind in grösseren Netzwerken wie bei Firmen oder Universitäten aus Sicherheitsgründen blockiert. Für den Nutzen im lokalen Netzwerk zu Hause ist der Angry IP Scanner jedoch ein nützliches Tool.
 
 ![Beispiel Scan eines lokalen Netzwerks mit dem Angry IP Scanner](images/angryip_scanner.png)
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
+:::

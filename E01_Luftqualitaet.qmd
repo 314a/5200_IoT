@@ -1,7 +1,24 @@
-# E01 Luftqualitätmessung {.unnumbered}
+---
+title: "Luftqualitätmessung"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/E01_Luftqualitaet.pdf
+code-links:
+  - text: Ausgangsdaten
+    icon: file-zip
+    href: data/E01_Luftqualitaet.zip
+resources:
+  - data/E01_Luftqualitaet.zip
+abstract: "Diese Übung zeigt wie Sensoren mit dem Raspberry Pi genutzt werden können am Beispiel des BME688 Sensors. Dieser Sensor erfasst Temperatur, Luftdruck, Luftfeuchtigkeit und Gas Scanner VOC. Die Übung zeigt wie der Sensor angeschlossen wird, wie die Sensordaten ausgelesen werden und wie die Sensordaten in einer Datei gespeichert werden können."
+---
 
-
+## Einführung
 Ziel dieser ersten Übung ist es den BME688 Sensor kennen zu lernen und die Sensordaten auszulesen. Der BME688 ist ein 4-in-1 Sensor für Temperatur, Luftdruck, Luftfeuchtigkeit und Gas Scanner VOC. Der Sensor verfügt über eine I2C Schnittstelle, die mit der Python Library [bme680-python](https://github.com/pimoroni/bme680-python) angesteuert und die Sensordaten ausgelesen werden können.
+
+**Unterlagen:** *<i class="bi-file-zip"></i> E01_Luftqualitaet.zip* 
 
 **Vorbereitung**
 
@@ -15,7 +32,7 @@ Ziel dieser ersten Übung ist es den BME688 Sensor kennen zu lernen und die Sens
 :::
 
 ::: {.content-visible unless-format="html"}
-[![Youtube Video: How gas sensing gets intelligent with BME688 and BME AI-Studio](images/youtube_bosch_bme688.png)](https://www.youtube.com/embed/4vdliMRtxBY)
+![Youtube Video: How gas sensing gets intelligent with BME688 and BME AI-Studio [Youtube Video](https://www.youtube.com/embed/4vdliMRtxBY)](images/youtube_bosch_bme688.png)
 :::
  **Unterlagen** |                                                                                                                                            |
 |---------------|---------------------------------------------------------|
@@ -95,10 +112,11 @@ ImportError: No module named numpy      # <2>
 1.  `math` Modul existiert
 2.  `numpy` Modul existiert nicht
 
-Installiere das Modul mit folgendem Befehl, falls es nicht installiert ist.
+Installiere das Modul mit folgendem Befehl, falls es nicht installiert ist. Aktiviere die virtuelle Umgebung (hier unter `~/.env`) und installiere das Modul^[In dieser Übung wird die Python Virtual Environment `.env` im Homeordner `~/` erstellt und aktiviert. Diese kann auch an einem Ort erstellt werden, beispielweise projektbasiert. Erstellen einer Virtual Environment: `python -m venv ~/Development/Projekt1/env`].
 
-``` bash
-sudo pip3 install bme680
+``` bash	
+source ~/.env/bin/activate
+pip install bme680
 ```
 
 ### Kopiere (Clone) die Library mit den Beispielen auf den Raspberry Pi
@@ -116,7 +134,7 @@ cd bme680-python/examples
 Teste das Beispiel `read-all.py` im Ordner *examples*. Dieses Beispiel gibt die Temperatur, Luftdruck und Luftfeuchtigkeit des Sensors BME 688 aus.
 
 ``` bash
-python3 read-all.py
+python read-all.py
 ```
 
 Mit `Ctrl+c` kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):
@@ -182,28 +200,33 @@ except KeyboardInterrupt:
 2.  Oversampling Einstellungen können Messungen durch Mitteln verbessern und das Rauschen und Drifts reduzieren
 3.  Sensordaten auslesen
 
-::: exercise
+
+::: {#exr-luftqualitaet}
 **BME 688**\
 Studiert die Python Skripte und online Tutorial zum Sensor
 
 -   Wie wird auf den Sensor zugegriffen?
--   Wie wir die Temperatur kompensiert?
--   Wie kann ein Temperaturoffset gesetzt werden?
 -   Wie reagiert der Feuchtigkeitssensor auf Änderungen?
--   Wie sieht es mit dem Luftdruck aus, was sind Vergleichswerte?
--   Wie könnt ihr einfach Werte in eine Datei schreiben?
+-   Wie hoch sind die Werte für den Luftdruck, was sind Vergleichswerte?
+-   Wie könnt Ihr einfach Sensorwerte in eine Datei schreiben?
 :::
 
-::: solution
-Messwerte in eine Textdatei schreiben `python3 read-all.py > bme680-data.txt`. Die erstellte Datei kann mit dem Befehl `cat bme680-data.txt` angezeigt werden.
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-luftqualitaet}
+Verbindng über I2C. Messwerte in eine Textdatei schreiben `python3 read-all.py > bme680-data.txt`. Die erstellte Datei kann mit dem Befehl `cat bme680-data.txt` angezeigt werden. Der Sensor kann mit oder ohne Gasmessung betrieben werden `set_gas_status`. Die Messung von Gas erfordern eine aktivie Miniaturheizung innerhalb des Sensors. Deaktiviert können die anderen Messwerte schneller erhoben werden. Die Filteroption glättet die Messwerte und reduziert beispielsweise momentane Events, wie eine Tür die zugeschlagen wird und den Luftdruck ändert. Die Einheiten sind Grad Celsius, Hektopascal und Prozent relativer Luftfeuchtigkeit.
+:::
 :::
 
 ## Aufgabe 2: Berechnung der Atmosphärenkorrektur für Distanzmessungen (optional)
 
-Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Die Korrektur wird als *Atmosphärenkorrektur* bezeichnet und ist abhängig von der *Temperatur*, dem *Luftdruck* und der *Luftfeuchtigkeit*. Die Korrektur wird in ppm (parts per million) angegeben und kann mit folgender  @eq-atmosphaerenkorrektur berechnet werden [@grimm2023; @leicageosystems2022]:
+Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Über eine *Massstabskorrektur* (ppm [mm/km]) können distanzproportionale Reduzierungen berücksichtigt werden, die *Projektionsverzerrung*, *Reduktion auf Meereshöhe* und die *Atmophärenkorrektur* berücksichtigen.
+Die Luftfeichtigkeit beeinflusst Distanzmessungen in feuchtem und heissen Klima. Diese muss den zur Messzeit geltenden atmosphärischen Bedingungen angepasst werden.
 
+Die Korrektur wird als *Atmosphärenkorrektur* bezeichnet und ist abhängig von der *Temperatur*, dem *Luftdruck* und der *Luftfeuchtigkeit*. Die Korrektur wird in ppm (parts per million [mm/km]) angegeben und kann mit folgender @eq-atmosphaerenkorrektur berechnet werden [@grimm2023; @leicageosystems2022 S.87] und gilt für die Distanzmessung mit sichtbaren roten Laser
 
-$$\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}$$ {#eq-atmosphaerenkorrektur}
+$$
+\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}
+$$ {#eq-atmosphaerenkorrektur}
 
 $$\begin{aligned}
 & \Delta D_1 && \text{Atmosphärische Korrektur} && [ppm]\\
@@ -245,11 +268,18 @@ def calculate_atmospheric_correction(temperature, air_pressure, humidity):
     return result
 ```
 
-::: exercise
+Für Distanzmessungen höchster Genauigkeit sollte die atmosphärische Korrektur auf $1 ppm$ genau bestimmt werden, folglich sollten die Messwerte mindestens folgenden Genauigkeit aufweisen: die Temperatur auf $1°C$, der Luftdruck auf $3 mbar$ ($1 Millibar= 1 hPa$) und die Luftfeuchtigkeit auf $20 %$ genau bestimmt werden [@leicageosystems2022 S.87].
+
+::: {#exr-atmosphaerenkorrektur}
 **Atmosphärenkorrektur**\
-Nutzt die Funktion `calculate_atmospheric_correction` um die Korrektur für die folgenden Messwerte zu berechnen:
+Nutzt die Funktion `calculate_atmospheric_correction` um eine atmosphärische Korrektur mit den momentan gemessenen amtmosphärischen Bedingungen zu berechnen.
 
 - Wie hoch ist die Korrektur mit den Werten des BME688 Sensors?
 - Wie hoch ist dieselbe Korrektur bei doppelter Luftfeuchtigkeit?
 - Wie hoch ist die Korrektur bei 20°C, 1000hPa und 50% sowie 100% Luftfeuchtigkeit?
+- Erfüllt der BME688 Sensor die Anforderungen für Distanzmessungen höchster Genauigkeit?
+:::
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
 :::

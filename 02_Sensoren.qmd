@@ -73,5 +73,11 @@ Für Prototypenentwicklung können über verschiedene Hersteller und Distributor
 
 ::: exercise
 **Sensoren**\
-Suche Dir auf den aufgelisteten Websites für elektronische Bauteile und Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren. Suche drei bis vier interessante Sensoren aus und überlege anhand der aufgeführten Aspekte zur Sensorauswahl, was alles benötigt wird um diese zu betreiben und was die Einschränkungen sind.
+Suche Dir auf den aufgelisteten Websites für elektronische Bauteile und Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren. 
+
+Suche drei bis vier interessante Sensoren aus und überlege anhand der aufgeführten Aspekte zur Sensorauswahl, was alles benötigt wird um diese zu betreiben und was die Einschränkungen sind.
+:::
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
 :::

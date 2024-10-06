@@ -10,13 +10,13 @@
 -- https://tex.stackexchange.com/questions/443755/how-to-customize-color-in-tcolorbox-having-counter
 -- Stick Notes mit TIKZ picture https://tex.stackexchange.com/questions/159679/sticky-notes-image, https://tex.stackexchange.com/questions/22873/tikzpicture-with-overlay-takes-up-space
 local latexDefinitions = [[
-	%\@ifpackageloaded{igeo}{}{
-	%	\usepackage[]{igeo}%check if option can be reset
-	%}
-	\definecolor{colShade}{HTML}{DCE6EB}% shade color - usually light grey 
-	\definecolor{colPrimary}{HTML}{227FA6} 
-	\definecolor{colSecondary}{HTML}{6E986A}      
-	\definecolor{colTertiary}{HTML}{CE8243}  
+%\@ifpackageloaded{igeo}{}{
+%	\usepackage[]{igeo}%check if option can be reset
+%}
+\definecolor{colShade}{HTML}{DCE6EB}% shade color - usually light grey 
+\definecolor{colPrimary}{HTML}{227FA6} 
+\definecolor{colSecondary}{HTML}{6E986A}      
+\definecolor{colTertiary}{HTML}{CE8243}  
 ]] 
 
 -- erweitert die header-includes um die tcolorbox style definitionen für latex
@@ -130,11 +130,11 @@ function styleDiv (elem)
     -- --elseif elem.classes[1] == "exercise" then
       -- --return {pandoc.RawBlock('latex', '\\begin{exercise-box}'),elem,pandoc.RawBlock('latex', '\\end{exercise-box}')}
     elseif elem.classes[1] == "exercise" then
-      return {pandoc.RawBlock('latex', '\\begin{boxtitle}{Excercise}{colPrimary}'),elem,pandoc.RawBlock('latex', '\\end{boxtitle}')}
+      return {pandoc.RawBlock('latex', '\\begin{boxtitle}{Übung}{colPrimary}'),elem,pandoc.RawBlock('latex', '\\end{boxtitle}')}
     elseif elem.classes[1] == "summary" then
-      return {pandoc.RawBlock('latex', '\\begin{boxtitle}{Summary}{colTertiary}'),elem,pandoc.RawBlock('latex', '\\end{boxtitle}')}
+      return {pandoc.RawBlock('latex', '\\begin{boxtitle}{Zusammenfassung}{colTertiary}'),elem,pandoc.RawBlock('latex', '\\end{boxtitle}')}
     elseif elem.classes[1] == "solution" then
-	  return {pandoc.RawBlock('latex', '\\begin{boxtitle}{Solution}{colSecondary}'),elem,pandoc.RawBlock('latex', '\\end{boxtitle}')} 
+	  return {pandoc.RawBlock('latex', '\\begin{boxtitle}{Lösung}{colSecondary}'),elem,pandoc.RawBlock('latex', '\\end{boxtitle}')} 
     elseif elem.classes[1] == "sticky" then
 	  return {pandoc.RawBlock('latex', '\\begin{sticky}'),elem,pandoc.RawBlock('latex', '\\end{sticky}')}
     elseif elem.classes[1] == "sidenote" then
@@ -171,7 +171,7 @@ end
 -- [4]{.lines} -> latex: \lines{4}
 -- [3]{.numberedlines data-latex="2"} -> latex: \numberedlines[2]{3}
 -- [30]{.grid} -> latex: \grid{30}
--- [30]{.dottedgrid} -> dottedgrid: \grid{30}
+-- [30]{.dottedgrid} -> dottedgrid: \dottedgrid{30}
 
 function Span (el)
 	if FORMAT:match 'latex' then

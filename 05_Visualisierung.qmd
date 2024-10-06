@@ -1,2 +1,5 @@
 # Visualisierung von Sensordaten WIP
 
+::: {.content-visible when-profile="chapter"}
+## Referenzen
+:::

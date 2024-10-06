@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pia Bereuter">
 
 <title>Anhang D — Raspberry Pi IoT Image – Einführung in IoT</title>
 <style>
@@ -54,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -75,6 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -201,43 +225,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -254,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -286,14 +310,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#raspberry-pi-zugangsdaten" id="toc-raspberry-pi-zugangsdaten" class="nav-link active" data-scroll-target="#raspberry-pi-zugangsdaten">Raspberry Pi Zugangsdaten</a></li>
-  <li><a href="#installation-shell-script" id="toc-installation-shell-script" class="nav-link" data-scroll-target="#installation-shell-script">Installation Shell Script</a></li>
-  <li><a href="#konfigurationsdateien-editieren" id="toc-konfigurationsdateien-editieren" class="nav-link" data-scroll-target="#konfigurationsdateien-editieren">Konfigurationsdateien editieren</a></li>
-  <li><a href="#installationen-testen-und-initialisieren" id="toc-installationen-testen-und-initialisieren" class="nav-link" data-scroll-target="#installationen-testen-und-initialisieren">Installationen testen und initialisieren</a></li>
+  <li><a href="#installation-shell-script" id="toc-installation-shell-script" class="nav-link" data-scroll-target="#installation-shell-script">Installation Shell Script</a>
+  <ul class="collapse">
+  <li><a href="#installation-der-python-libraries-mit-venv" id="toc-installation-der-python-libraries-mit-venv" class="nav-link" data-scroll-target="#installation-der-python-libraries-mit-venv">Installation der Python Libraries mit <em>venv</em></a></li>
+  </ul></li>
+  <li><a href="#konfigurationsdateien-editieren" id="toc-konfigurationsdateien-editieren" class="nav-link" data-scroll-target="#konfigurationsdateien-editieren">Konfigurationsdateien editieren</a>
+  <ul class="collapse">
+  <li><a href="#raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen" id="toc-raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen" class="nav-link" data-scroll-target="#raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen">Raspberry Pi Einstellungen für I2C, SPI, SSH, VNC anpassen</a></li>
+  <li><a href="#baud-rate-des-i2c-protokolls-anpassen" id="toc-baud-rate-des-i2c-protokolls-anpassen" class="nav-link" data-scroll-target="#baud-rate-des-i2c-protokolls-anpassen">Baud rate des I2C Protokolls anpassen</a></li>
+  <li><a href="#mosquitto-server-konfiguration" id="toc-mosquitto-server-konfiguration" class="nav-link" data-scroll-target="#mosquitto-server-konfiguration">Mosquitto Server Konfiguration</a></li>
+  </ul></li>
+  <li><a href="#installationen-testen-und-initialisieren" id="toc-installationen-testen-und-initialisieren" class="nav-link" data-scroll-target="#installationen-testen-und-initialisieren">Installationen testen und initialisieren</a>
+  <ul class="collapse">
+  <li><a href="#mosquitto-broker" id="toc-mosquitto-broker" class="nav-link" data-scroll-target="#mosquitto-broker">Mosquitto Broker</a></li>
+  <li><a href="#node-red" id="toc-node-red" class="nav-link" data-scroll-target="#node-red">Node-Red</a></li>
+  <li><a href="#influxdb" id="toc-influxdb" class="nav-link" data-scroll-target="#influxdb">InfluxDB</a></li>
+  <li><a href="#grafana" id="toc-grafana" class="nav-link" data-scroll-target="#grafana">Grafana</a></li>
+  <li><a href="#jupyter-notebook" id="toc-jupyter-notebook" class="nav-link" data-scroll-target="#jupyter-notebook">Jupyter Notebook</a></li>
+  <li><a href="#vnc-testen" id="toc-vnc-testen" class="nav-link" data-scroll-target="#vnc-testen">VNC Testen</a></li>
+  </ul></li>
   <li><a href="#raspberry-pi-image-verkleinern" id="toc-raspberry-pi-image-verkleinern" class="nav-link" data-scroll-target="#raspberry-pi-image-verkleinern">Raspberry Pi Image verkleinern</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/A4_Setup.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/A4_Setup.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div><div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="chapters/A4_Setup.pdf"><i class="bi bi-file-pdf"></i>Kapitel PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code-Links</h2><ul><li><a href="data/install_iot_software.sh"><i class="bi bi-file-code"></i>Installations Script</a></li><li><a href="data/requirements.txt"><i class="bi bi-file-code"></i>requirements.txt</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -307,7 +347,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor:in</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pia Bereuter </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">6. Oktober. 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -371,124 +423,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="hint">
 <p>InfluxDB Version: Die Version der InfluxDB auf die neuste Version im Script anpassen.</p>
 </div>
-<p>Shell Script: <code>install_iot_software.sh</code> - Bash Script zu Installation der Software und Libraries für das fächerübergreifende Modul 5200 IoT Installation von: - Python Libraries für die Pimoroni Sensoren - Klonen der Libraries mit Beispielen in Documents/Libraries - Jupyter Notebook - MQTT, Mosquitto Broker und Clients - Node-Red - InfluxDB - Grafana - VNC</p>
+<p>Shell Script: <code>install_iot_software.sh</code> - Bash Script zu Installation der Software und Libraries für das fächerübergreifende Modul 5200 IoT Installation von:</p>
+<ul>
+<li>Python Libraries Beispielcode für die Pimoroni Sensoren</li>
+<li>Klonen der Libraries mit Beispielen in Documents/Libraries</li>
+<li>Jupyter Notebook</li>
+<li>MQTT, Mosquitto Broker und Clients</li>
+<li>Node-Red</li>
+<li>InfluxDB</li>
+<li>Grafana</li>
+<li>VNC</li>
+</ul>
+<div class="hint">
+<p><strong>Zeilenumbrüche EOL</strong> Zeilenunterbrüche von Textdateien unterscheiden sich zwischen Unix <code>LF</code> und Windows <code>CRLF</code> Systemen. Bash Script müssen auf Linux Systemen Unix Zeilenumbrüche (EOL) <code>LF</code> aufweisen. Dies ist vor allem dann wichtig, wenn das Script auf einem Windows System erstellt wird. Windows verwendet standardmässig <code>CRLF</code> Zeilenumbrüche. In Visual Studio Code können die EOL Zeichen mit <code>Ctrl+Shift+P</code> und <code>Change End of Line Sequence</code> auf <code>LF</code> umgestellt werden oder über die Statusleiste unten rechts bei <code>CRLF</code>. In Notepad++ kann dies über <code>Edit/EOL Conversion/Unix (LF)</code> umgestellt werden.</p>
+</div>
+<p><em>install_iot_software.sh</em>: Bash Installations-Script mit Unix Zeilenumbrüchen EOL</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">COL</span><span class="op">=</span><span class="st">'\033[0;32m'</span> <span class="co"># Farbcodes für die Shell setzen</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">COL</span><span class="op">=</span><span class="st">'\033[0;32m'</span> <span class="co"># Primary Color</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">NC</span><span class="op">=</span><span class="st">'\033[0m'</span> <span class="co"># No Color</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Raspberry Pi aktualisieren</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt full-upgrade <span class="at">-y</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt autoremove <span class="at">-y</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">VNC Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install realvnc-vnc-server</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install realvnc-vnc-viewer</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">i2c-tools Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-smbus</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> i2c-tools</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Installation der Python Bibliotheken</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install matplotlib scipy pigments numpy</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install jupyter</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Installation der Pimoroni &amp; Adafruit Python Bibliotheken</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-rpi.gpio python3-spidev python3-pip python3-pil python3-numpy</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install st7789</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install bme680</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install icm20948</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install as7262</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install max30105</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install vl53l5cx-ctypes</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install RPI.GPIO adafruit-blinka</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install adafruit-circuitpython-mlx90640</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Klonen der Pimoroni Python Bibliotheken</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">in Documents/Libraries</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> Libraries</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Libraries</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/st7789-python</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/bme680-python </span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/icm20948-python</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/as7262-python</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/max30105-python</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/vl53l5cx-python</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/mlx90640-library</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../../</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Mosquitto Server, Clients und Python Libraries Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mosquitto <span class="at">-y</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mosquitto-clients <span class="at">-y</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable mosquitto.service</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart mosquitto</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install paho-mqtt</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Raspberry Pi Version</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">hostnamectl</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /proc/cpuinfo <span class="kw">|</span> <span class="fu">grep</span> Model</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Raspberry Pi aktualisieren</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt full-upgrade <span class="at">-y</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt autoremove <span class="at">-y</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">VNC Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install realvnc-vnc-server</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install realvnc-vnc-viewer</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">i2c-tools Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-smbus</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> i2c-tools</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Mosquitto Server, Clients und Python Libraries Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mosquitto <span class="at">-y</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install mosquitto-clients <span class="at">-y</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable mosquitto.service</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart mosquitto</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Node-Red Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-sL</span> https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered <span class="at">-o</span> update-nodejs-and-nodered.sh</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x update-nodejs-and-nodered.sh</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> update-nodejs-and-nodered.sh <span class="at">--confirm-root</span> <span class="at">--confirm-pi</span> <span class="at">--confirm-install</span> <span class="at">--no-init</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> update-nodejs-and-nodered.sh</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable nodered.service</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start nodered.service</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">InfluxDB Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.1-arm64.deb</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> influxdb2-2.7.1-arm64.deb</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> service influxdb start</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Grafana Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> apt-transport-https software-properties-common wget</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /etc/apt/keyrings/</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-q</span> <span class="at">-O</span> <span class="at">-</span> https://apt.grafana.com/gpg.key <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/keyrings/grafana.gpg <span class="op">&gt;</span> /dev/null</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/sources.list.d/grafana.list</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install grafana <span class="at">-y</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start grafana-server</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable grafana-server.service</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt autoremove <span class="at">-y</span></span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Node-Red Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># add --help to display install options</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> <span class="op">&lt;(</span><span class="ex">curl</span> <span class="at">-sL</span> https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered<span class="op">)</span> <span class="at">--confirm-root</span> <span class="at">--confirm-pi</span> <span class="at">--confirm-install</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable nodered.service</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start nodered.service</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">InfluxDB Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.1-arm64.deb</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> influxdb2-2.7.1-arm64.deb</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> service influxdb start</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Grafana Installation</span><span class="va">${NC}</span><span class="st">"</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install <span class="at">-y</span> apt-transport-https software-properties-common wget</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /etc/apt/keyrings/</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-q</span> <span class="at">-O</span> <span class="at">-</span> https://apt.grafana.com/gpg.key <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/keyrings/grafana.gpg <span class="op">&gt;</span> /dev/null</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/sources.list.d/grafana.list</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install grafana <span class="at">-y</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start grafana-server</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable grafana-server.service</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt autoremove <span class="at">-y</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">Klonen der Pimoroni Python Bibliotheken</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"</span><span class="va">${COL}</span><span class="st">in Documents/Libraries</span><span class="va">${NC}</span><span class="st">"</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> Libraries</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Libraries</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/st7789-python</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/bme680-python </span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/icm20948-python</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/as7262-python</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/max30105-python</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/vl53l5cx-python</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/pimoroni/mlx90640-library</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../../</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Zip Datei des Ordners Libraries erstellen für das Backup der Beispielcode der einzelnen Sensoren.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Documents/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">zip</span> <span class="at">-r</span> Libraries.zip Libraries</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="installation-der-python-libraries-mit-venv" class="level3">
+<h3 class="anchored" data-anchor-id="installation-der-python-libraries-mit-venv">Installation der Python Libraries mit <em>venv</em></h3>
+<p>Mit dem Upgrade auf <em>Raspberry Pi Bookworm</em> wird Python auf die Version 3.11 aktualisiert. Ab dieser Version können Python Libraries nicht mehr systemweit installiert werden. <em>Python Virtual Environment</em> sind nun erfordert, entweder pro Projekt oder pro Userkonto siehe <a href="http://rptl.io/venv">http://rptl.io/venv</a> für weitere Informationen.</p>
+<p>Erstelle eine Python Virtual Environment <code>.env</code> im Homeordner <code>~/</code> mit folgenden Befehlen für den User <code>iot</code> und aktiviere die Virtual Environment mit <code>source ~/.env/bin/activate</code> und deaktiviere die Virtual Environment mit <code>deactivate</code>. Wenn die Virtual Environment projetbasiert im Projektordner erstellt wird reicht es den Pfad zum Projektordner anzugeben z.B. <code>python -m venv ~/Development/Projekt1/env</code> und die Virtual Environment wird im Projektordner erstellt.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv ~/.env</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.env/bin/activate</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Requirements.txt Datei erstellen mit den Python Libraries, die in der Virtual Environment installiert werden sollen. Die Datei kann mit <code>nano requirements.txt</code> erstellt und mit <code>Ctrl+o</code> und <code>Ctrl+x</code> gespeichert werden. Python Libraries in der Virtual Environment installieren mit <code>pip install -r requirements.txt</code>. Nutze für die Installation folgende <code>requirements.txt</code> Datei. Kontrolliere mit <code>pip list</code> ob die Libraries installiert wurden.</p>
+<p><em>requirements.txt</em>: Python Libraries für die Pimoroni Sensoren</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>matplotlib</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>scipy</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pigments</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>numpy</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>jupyter</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>rpi.gpio</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>spidev</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>pillow</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>numpy</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>st7789</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>bme680</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>icm20948</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>as7262</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>max30105</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>vl53l5cx-ctypes</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>RPI.GPIO</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>adafruit-blinka</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="konfigurationsdateien-editieren" class="level2">
 <h2 class="anchored" data-anchor-id="konfigurationsdateien-editieren">Konfigurationsdateien editieren</h2>
 <section id="raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen" class="level3">
 <h3 class="anchored" data-anchor-id="raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen">Raspberry Pi Einstellungen für I2C, SPI, SSH, VNC anpassen</h3>
-<p><strong>Interface Options aktivieren</strong> In den Raspberry Pi Konfigurationseinstellungen mit <code>sudo raspi-config</code> die Interface Optionen <em>I2C, SPI, SSH und ev VNC</em> (Virtual Network Computing) aktivieren.</p>
+<p><strong>Interface Options aktivieren</strong> In den Raspberry Pi Konfigurationseinstellungen mit <code>sudo raspi-config</code> die Interface Optionen <em>I2C, SPI, SSH und ev VNC (Virtual Network Computing) oder RPi Connect</em> aktivieren. VNC, RPi Connect <span class="citation" data-cites="RaspberryPiLtd2024">Hollingworth (<a href="references.html#ref-Hollingworth2024" role="doc-biblioref">2024</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> werden nur benötigt, wenn der Raspberry Pi über Fernzugriff gesteuert werden soll.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/raspberry_pi_enable_ssh_spi_i2c.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Über die Konsole raspi-config starten und über das Konsolenmenu (links) die Einstellungen in den Interface Options (rechts) I2C, SPI, SSH und ev VNC aktivieren."><img src="images/raspberry_pi_enable_ssh_spi_i2c.png" class="img-fluid figure-img" alt="Über die Konsole raspi-config starten und über das Konsolenmenu (links) die Einstellungen in den Interface Options (rechts) I2C, SPI, SSH und ev VNC aktivieren."></a></p>
+<figcaption>Über die Konsole <code>raspi-config</code> starten und über das Konsolenmenu (links) die Einstellungen in den <em>Interface Options</em> (rechts) <em>I2C, SPI, SSH und ev VNC</em> aktivieren.</figcaption>
+</figure>
+</div>
 </section>
 <section id="baud-rate-des-i2c-protokolls-anpassen" class="level3">
 <h3 class="anchored" data-anchor-id="baud-rate-des-i2c-protokolls-anpassen">Baud rate des I2C Protokolls anpassen</h3>
-<p>Baud rate des I2C Protokolls mit <code>sudo nano /boot/config.txt</code> öffnen und folgende Zeile ergänzen. Mit <code>Ctrl+o</code> und <code>Ctrl+x</code> speichern.</p>
-<pre><code>dtparam=i2c_arm=on,i2c_arm_baudrate=400000</code></pre>
+<p>Baud rate des I2C Protokolls mit <code>sudo nano /boot/firmware/config.txt</code> öffnen und folgende Zeile ergänzen. Mit <code>Ctrl+o</code> und <code>Ctrl+x</code> speichern <span class="citation" data-cites="RaspberryPiLtd2024a">(siehe <a href="references.html#ref-RaspberryPiLtd2024a" role="doc-biblioref">Raspberry Pi Ltd, 2024b</a>)</span>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">dtparam</span><span class="op">=</span>i2c_arm=on,i2c_arm_baudrate=400000</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="mosquitto-server-konfiguration" class="level3">
 <h3 class="anchored" data-anchor-id="mosquitto-server-konfiguration">Mosquitto Server Konfiguration</h3>
-<p><strong>Mosquitto Server Konfiguration</strong> anpassen mit <code>sudo nano /etc/mosquitto/mosquitto.conf</code># und am Ende der Datei folgendes einfügen ohne #!</p>
-<pre><code>listener 1883
-allow_anonymous true</code></pre>
+<p><strong>Mosquitto Server Konfiguration</strong> anpassen mit <code>sudo nano /etc/mosquitto/mosquitto.conf</code> und am Ende der Datei folgendes einfügen <span class="citation" data-cites="EclipseFoundation2021">(<a href="references.html#ref-EclipseFoundation2021" role="doc-biblioref">Eclipse Foundation, 2021</a>)</span>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">listener</span> 1883</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">allow_anonymous</span> true</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Mosquitto Server neu starten mit <code>sudo systemctl restart mosquitto</code></p>
-<p><strong>Node-Red Einstellungen initialisieren</strong> mit <code>node-red admin init</code> - <em>yes</em> installation customise settings - <em>yes</em> keep settings file at default location - <em>no</em> setup user security - <em>yes</em> enable project features - select <em>manual</em> workflow - select <em>default theme</em> - <em>yes</em> allow function nodes to load external modules</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Node-RED</span> Settings File initialisation</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">=====================================</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">This</span> tool will help you create a Node-RED settings file.</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Settings file · /home/iot/.node-red/settings.js</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">User</span> Security</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">=============</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Do you want to setup user security<span class="pp">?</span> · No</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Projects</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ex">========</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> Projects feature allows you to version control your flow using a local git repository.</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Do you want to enable the Projects feature<span class="pp">?</span> · Yes</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> What project workflow do you want to use<span class="pp">?</span> · manual <span class="at">-</span> you must manually commit changes</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Editor</span> settings</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ex">===============</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Select a theme for the editor. To use any theme other than <span class="st">"default"</span>, you will need to install @node-red-contrib-themes/theme-collection in your Node-RED user directory. · default</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Select the text editor component to use in the Node-RED Editor · monaco <span class="er">(</span><span class="ex">default</span><span class="kw">)</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Node</span> settings</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ex">=============</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Allow Function nodes to load external modules<span class="pp">?</span> <span class="er">(</span><span class="ex">functionExternalModules</span><span class="kw">)</span> <span class="ex">·</span> Yes</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Node-Red Einstellungen initialisieren</strong> mit <code>sudo node-red admin init</code></p>
+<ul>
+<li><em>yes</em> installation customise settings</li>
+<li><em>yes</em> keep settings file at default location</li>
+<li><em>no</em> setup user security</li>
+<li><em>yes</em> enable project features</li>
+<li>select <em>manual</em> workflow</li>
+<li>select <em>default theme</em></li>
+<li><em>yes</em> allow function nodes to load external modules</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Node-RED</span> Settings File initialisation</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">=====================================</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">This</span> tool will help you create a Node-RED settings file.</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Settings file · /root/.node-red/settings.js</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">User</span> Security</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">=============</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Do you want to setup user security<span class="pp">?</span> · No</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Projects</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">========</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> Projects feature allows you to version control your flow using a local git repository.</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Do you want to enable the Projects feature<span class="pp">?</span> · Yes</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> What project workflow do you want to use<span class="pp">?</span> · manual <span class="at">-</span> you must manually commit changes</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Editor</span> settings</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ex">===============</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Select a theme for the editor. To use any theme other than <span class="st">"default"</span>, you will need to install @node-red-contrib-themes/theme-collection in your Node-RED user directory. · default</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Select the text editor component to use in the Node-RED Editor · monaco <span class="er">(</span><span class="ex">default</span><span class="kw">)</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Node</span> settings</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ex">=============</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ex">✔</span> Allow Function nodes to load external modules<span class="pp">?</span> <span class="er">(</span><span class="ex">functionExternalModules</span><span class="kw">)</span> <span class="ex">·</span> Yes</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="ex">Settings</span> file written to /root/.node-red/settings.js</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="installationen-testen-und-initialisieren" class="level2">
@@ -496,19 +599,19 @@ allow_anonymous true</code></pre>
 <section id="mosquitto-broker" class="level3">
 <h3 class="anchored" data-anchor-id="mosquitto-broker">Mosquitto Broker</h3>
 <p>Testen ob der Mosquitto Broker und Clients lokal auf dem Raspberry Pi funktionieren. Erstelle einen Subscriber der für das Topic <code>iot/temperature</code> eine Subscription erstellt.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_sub</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-v</span> <span class="at">-t</span> <span class="st">'iot/temperature'</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_sub</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-v</span> <span class="at">-t</span> <span class="st">'iot/temperature'</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Öffne ein zweite Shell und erstelle einen Publisher für dasselbe Topic</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_pub</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-t</span> <span class="st">'iot/temperature'</span> <span class="at">-m</span> <span class="st">'Aussentemperatur: 22° Celsius'</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mosquitto_pub</span> <span class="at">-h</span> 127.0.0.1 <span class="at">-t</span> <span class="st">'iot/temperature'</span> <span class="at">-m</span> <span class="st">'Aussentemperatur: 22° Celsius'</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="node-red" class="level3">
 <h3 class="anchored" data-anchor-id="node-red">Node-Red</h3>
 <p>Node-Red Server testen : <code>&lt;IP-Adresse&gt;:1880</code> http://192.168.1.205:1880 Influxerweiterung <em>Palette</em> installieren: <em>Hamburgermenu oben-rechts / Paletten verwalten</em> und unter <em>Palette</em> / <em>Installation</em> die Palette <code>node-red-contrib-influxdb</code> installieren.</p>
-<p><img src="images/5200_iot_nodered_influxdb_erweiterung.png" class="img-fluid"></p>
+<p><a href="images/5200_iot_nodered_influxdb_erweiterung.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/5200_iot_nodered_influxdb_erweiterung.png" class="img-fluid"></a></p>
 </section>
 <section id="influxdb" class="level3">
 <h3 class="anchored" data-anchor-id="influxdb">InfluxDB</h3>
 <p>InfluxDB Server testen: <code>&lt;IP-Adresse&gt;:8086</code> http://192.168.1.205:8086 Den <em>Initial User</em> erstellen mit <em>Username, Password, Organisation</em> und einem <em>Bucket</em> Name, der ersten Datenbank. Im Anschluss mit Logout/Login den Zugang verifizieren.</p>
-<p><img src="images/5200_iot_influxdb_setup.png" class="img-fluid"></p>
+<p><a href="images/5200_iot_influxdb_setup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/5200_iot_influxdb_setup.png" class="img-fluid"></a></p>
 <div class="hint">
 <p><strong>Operator API token speichern!</strong> Das Superuser Passwort wird nur einmal angezeigt. Das <strong>Operator API token</strong> kopieren und an einem sicheren Ort speichern! Nach dem Logout/Login ist das Passwort nicht mehr sichtbar.</p>
 </div>
@@ -516,26 +619,26 @@ allow_anonymous true</code></pre>
 <section id="grafana" class="level3">
 <h3 class="anchored" data-anchor-id="grafana">Grafana</h3>
 <p>Grafana Server testen: <code>&lt;IP-Adresse&gt;:3000</code> http://192.168.1.205:3000 Grafana startet mit dem Default Admin User: <code>admin</code> und Passwort: <code>admin</code>. Das Passwort ändern und im Anschluss mit Logout/Login den Zugang verifizieren.</p>
-<p><img src="images/5200_iot_grafana_setup.png" class="img-fluid"></p>
+<p><a href="images/5200_iot_grafana_setup.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/5200_iot_grafana_setup.png" class="img-fluid"></a></p>
 </section>
 <section id="jupyter-notebook" class="level3">
 <h3 class="anchored" data-anchor-id="jupyter-notebook">Jupyter Notebook</h3>
 <p>Jupyter Notebook testen <code>&lt;IP-Adresse&gt;:9999</code> http://192.168.1.205:9999</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># jupter notebook installation testen</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-notebook</span> <span class="at">--no-browser</span> <span class="at">--ip</span><span class="op">=</span>192.168.1.205 <span class="at">--port</span> 9999 <span class="at">--notebook-dir</span> ~/Documents</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># jupter notebook installation testen</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter-notebook</span> <span class="at">--no-browser</span> <span class="at">--ip</span><span class="op">=</span>192.168.1.205 <span class="at">--port</span> 9999 <span class="at">--notebook-dir</span> ~/Documents</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="vnc-testen" class="level3">
 <h3 class="anchored" data-anchor-id="vnc-testen">VNC Testen</h3>
 <p>VNC Viewer auf dem PC installieren. <a href="https://www.realvnc.com/en/connect/download/viewer">Real VNC Viewer</a> (standalone .exe, d.h. es ist keine Installation erforderlich).</p>
 <p><strong>Hinweis:</strong> Beim Starten des VNC Viewers muss man sich nicht anmelden sondern nur die Option <strong>Verwenden Sie RealVNC Viewer ohne sich anzumelden</strong> wählen.</p>
-<p><img src="images/raspberrypi_realvnc.png" class="img-fluid"></p>
+<p><a href="images/raspberrypi_realvnc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images/raspberrypi_realvnc.png" class="img-fluid"></a></p>
 </section>
 </section>
 <section id="raspberry-pi-image-verkleinern" class="level2">
 <h2 class="anchored" data-anchor-id="raspberry-pi-image-verkleinern">Raspberry Pi Image verkleinern</h2>
 <p>Das Raspberry Pi Image kann mit dem Tool <a href="https://github.com/Drewsif/PiShrink">PiShrink</a> verkleinert werden. PiShrink kann auf dem Raspberry Pi oder auf einen anderen Linux System wie Ubuntu oder einer virtuellen Machine mit einem Linux installiert und genutzt werden.</p>
 <ol type="1">
-<li>Backup Image auf den lokalen Rechner mit <a href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a> schreiben.</li>
+<li>Backup Image auf den lokalen Rechner mit <a href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a> <em>lesen</em> und in eine Image Datei schreiben.</li>
 <li>Virtuelle Machine mit Linux Ubuntu/Debian mit <em>gemeinsamen Ordner</em> starten</li>
 <li>Mit dem Script https://github.com/Drewsif/PiShrink das Image verkleinern</li>
 <li>SD Karte Formatieren mit <a href="https://www.sdcard.org/downloads/formatter">SD Card Formatter</a></li>
@@ -543,63 +646,84 @@ allow_anonymous true</code></pre>
 <li>Für die Archivierung kann das Image mit 7zip zusätzlich komprimiert werden (Archive Format <code>.xz</code> und Kompressionsstufe <code>Ultra</code>)</li>
 </ol>
 <p>Tutorial: <a href="https://www.youtube.com/watch?v=5pdgO3Ncl6k">How I Backup and Shrink My SD Card Images - Youtube</a></p>
-<p>Backup Image mit Win32DiskImager schreiben</p>
+<p>Backup Image mit Win32DiskImager schreiben, mit der Funktion <em>Lesen/Read</em> und diese als Image Datei auf den lokalen Rechner speichern.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberrypi_image_verkleinern_01.png" class="img-fluid figure-img"></p>
-<figcaption>Backup Image mit Win32DiskImager schreiben</figcaption>
+<p><a href="images/raspberrypi_image_verkleinern_01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Backup Image der SD Karte schreiben mit Win32DiskImager und der Funktion Lesen/Read"><img src="images/raspberrypi_image_verkleinern_01.png" class="img-fluid figure-img" alt="Backup Image der SD Karte schreiben mit Win32DiskImager und der Funktion Lesen/Read"></a></p>
+<figcaption>Backup Image der SD Karte schreiben mit Win32DiskImager und der Funktion <em>Lesen/Read</em></figcaption>
 </figure>
 </div>
-<p>Virtuelle Machine mit VM VirtualBox starten und in den Einstellungen der VM über <em>Geräte/Gemeinsame Ordner</em> einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.</p>
+<p>Virtuelle Machine mit VM <a href="https://www.virtualbox.org/">VirtualBox</a> starten und in den Einstellungen der VM über <em>Geräte/Gemeinsame Ordner</em> einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberrypi_image_verkleinern_02.png" class="img-fluid figure-img"></p>
+<p><a href="images/raspberrypi_image_verkleinern_02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Gemeinsamer Ordner in der VM VirtualBox einrichten"><img src="images/raspberrypi_image_verkleinern_02.png" class="img-fluid figure-img" alt="Gemeinsamer Ordner in der VM VirtualBox einrichten"></a></p>
 <figcaption>Gemeinsamer Ordner in der VM VirtualBox einrichten</figcaption>
 </figure>
 </div>
 <p>Das Image sollte nun im File Explorer unter “+ Other Locations” als Ordner <em>host</em> eingebunden und sichtbar sein.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberrypi_image_verkleinern_03.png" class="img-fluid figure-img"></p>
+<p><a href="images/raspberrypi_image_verkleinern_03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Gemeinsamer Ordner host auf der VM Virtualbox eingebunden"><img src="images/raspberrypi_image_verkleinern_03.png" class="img-fluid figure-img" alt="Gemeinsamer Ordner host auf der VM Virtualbox eingebunden"></a></p>
 <figcaption>Gemeinsamer Ordner <em>host</em> auf der VM Virtualbox eingebunden</figcaption>
 </figure>
 </div>
 <p>Öffne nun ein Terminal damit das Script <code>pishrink.sh</code> installiert und ausgeführt werden kann.</p>
 <p><strong>Tipp:</strong> Falls das Terminal nicht öffnet mit <code>Ctrl+Alt+F3</code> in das TTY Terminal wechseln.</p>
-<p><strong>Tipp:</strong> Falls der VM User noch keine Adminrechte hat (per Default hat der <em>User</em> kein Adminrechte), können diese nachträglich gesetzt werden mit:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">su</span> <span class="at">-</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">usermod</span> <span class="at">-a</span> <span class="at">-G</span> sudo vboxuser</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Tipp:</strong> Falls der VM User noch keine Adminrechte hat (bei einer Neuinstallation von Ubuntu ist das <code>root</code> Passwort nocht nicht gesetzt), können diese nachträglich gesetzt werden mit <code>sudo passwd</code>. Bei der Passwortabfrage das aktuelle User Passwort eingeben und das neue Root Passwort zweimal eingeben. Anschliessend als Root User anmelden mit <code>su -</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>GitHub: <a href="https://github.com/Drewsif/PiShrink" class="uri">https://github.com/Drewsif/PiShrink</a></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install prerequisites</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install parted xz-utils</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download the pishrink script</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./pishrink.sh https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make the script executable</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ./pishrink.sh</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># run pishrink on the .img file</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./pishrink.sh <span class="at">-v</span> /host/≪%imagename.img%≫</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install prerequisites</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install parted xz-utils</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download the pishrink script</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./pishrink.sh https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make the script executable</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ./pishrink.sh</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># run pishrink on the .img file</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./pishrink.sh <span class="at">-v</span> /host/<span class="op">&lt;</span>rpi-imagefile<span class="op">&gt;</span>.img</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Komprimiere die Image als .xz Archive (eher langsam)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">xz</span> <span class="at">-z</span> <span class="at">-9e</span> /host/<span class="op">&lt;</span>rpi-imagefile<span class="op">&gt;</span>.img</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberrypi_image_verkleinern_04.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p><a href="images/raspberrypi_image_verkleinern_04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Screenshot des Terminals während der Ausführung von pishrink"><img src="images/raspberrypi_image_verkleinern_04.png" class="img-fluid figure-img" style="width:50.0%" alt="Screenshot des Terminals während der Ausführung von pishrink"></a></p>
 <figcaption>Screenshot des Terminals während der Ausführung von pishrink</figcaption>
 </figure>
 </div>
-<p>Image mit 7-Zip zusätzlich komprimieren File Kontextmenu <em>7-Zip/Add to Archive</em> und als Archive Format <code>.xz</code> sowie den Compression Level <em>9-Utlra</em> wählen.</p>
+<p>Image mit 7-Zip zusätzlich komprimieren File Kontextmenu <em>7-Zip/Add to Archive</em> und als Archive Format <code>.xz</code> sowie den Compression Level <em>9-Ultra</em> wählen.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberrypi_image_verkleinern_05.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p><a href="images/raspberrypi_image_verkleinern_05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="7-Zip Einstellungen für die zusätzliche Kompression des Images mit .xz."><img src="images/raspberrypi_image_verkleinern_05.png" class="img-fluid figure-img" style="width:50.0%" alt="7-Zip Einstellungen für die zusätzliche Kompression des Images mit .xz."></a></p>
 <figcaption>7-Zip Einstellungen für die zusätzliche Kompression des Images mit <code>.xz</code>.</figcaption>
 </figure>
 </div>
 <p>Falls die SD Karte schon früher für Raspberry Pi Images benutzt wurde und mehrerere Partionen aufweist, kann es helfen die Karte mit dem <a href="https://www.sdcard.org/downloads/formatter/">SD Card Formatter</a> nochmals von Grund auf zu formatieren.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberrypi_image_verkleinern_06.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p><a href="images/raspberrypi_image_verkleinern_06.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Screenshot des SD Card Formatter"><img src="images/raspberrypi_image_verkleinern_06.png" class="img-fluid figure-img" style="width:50.0%" alt="Screenshot des SD Card Formatter"></a></p>
 <figcaption>Screenshot des SD Card Formatter</figcaption>
 </figure>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-EclipseFoundation2021" class="csl-entry" role="listitem">
+Eclipse Foundation. (2021). Authentication Methods. In <em>Eclipse Mosquitto</em>. https://mosquitto.org/documentation/authentication-methods/.
+</div>
+<div id="ref-Hollingworth2024" class="csl-entry" role="listitem">
+Hollingworth, G. (2024). Raspberry <span>Pi Connect</span>. In <em>Raspberry Pi</em>.
+</div>
+<div id="ref-RaspberryPiLtd2024" class="csl-entry" role="listitem">
+Raspberry Pi Ltd. (2024a). Raspberry <span>Pi Connect Beta</span> - <span>Access</span> Your <span>Raspberry Pi</span> from Anywhere. In <em>Raspberry Pi</em>. https://www.raspberrypi.com/software/connect/.
+</div>
+<div id="ref-RaspberryPiLtd2024a" class="csl-entry" role="listitem">
+Raspberry Pi Ltd. (2024b). Raspberry <span>Pi Documentation</span> Config.Txt. In <em>Raspberry Pi</em>. https://www.raspberrypi.com/documentation/computers/config_txt.html.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>RPI Connect erlaubt über einen Relay Server die Verbindung zu einem Raspberry Pi herzustellen über WebRTC wie Browser Clients für Zoom, Slack, Microsoft Teams. Der Relay Server wird nur für die Erstellung der Verbindung benötigt und wird von Raspberry Pi kostenlos betrieben. RPi Connect installieren mit <code>sudo apt install rpi-connect</code> und mit <code>sudo reboot</code> neu starten.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Einem User Adminrechte zuweisen: <code>sudo usermod -a -G sudo &lt;username&gt;</code>, Kontoinformationen <code>id &lt;username&gt;</code> aufzeigen.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1036,7 +1160,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -1046,6 +1170,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

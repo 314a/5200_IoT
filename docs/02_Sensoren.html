@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -42,6 +42,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -168,43 +171,43 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,11 +256,11 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#sensoren-in-iot" id="toc-sensoren-in-iot" class="nav-link active" data-scroll-target="#sensoren-in-iot">Sensoren in IoT</a></li>
   <li><a href="#sensoren" id="toc-sensoren" class="nav-link" data-scroll-target="#sensoren">Sensoren</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/02_Sensoren.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/02_Sensoren.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -289,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Viele Sensoren sind in Smartphones integriert, wie z.B. Beschleunigungssensoren, Gyroskope, Magnetometer, GPS, Lichtsensoren, Näherungssensoren, Barometer, Temperatursensoren, Feuchtigkeitssensoren, Mikrofone, Kameras, etc. Ihr Einsatz ist vielfältig, von der Unterhaltung über die Navigation bis hin zur Gesundheitsüberwachung. Mit der Applikation <em><a href="https://phyphox.org">phyphox</a> - physical phone experiments</em> einer digitalien Experimentierbox, entwickelt von der RWTH Aachen University, können die Sensoren von Smartphones für physikalische Experimente genutzt werden.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/phyphox.png" class="img-fluid figure-img"></p>
+<p><a href="images/phyphox.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="phyphox Anwendung für physikalische Experimente mit Sensoren in Mobiletelefonen, Screenshot der Anwendung mit dem Menu und einzelnen Experimenten am Beispiel von Magnetfeld, Licht und Beschleunigung."><img src="images/phyphox.png" class="img-fluid figure-img" alt="phyphox Anwendung für physikalische Experimente mit Sensoren in Mobiletelefonen, Screenshot der Anwendung mit dem Menu und einzelnen Experimenten am Beispiel von Magnetfeld, Licht und Beschleunigung."></a></p>
 <figcaption>phyphox Anwendung für physikalische Experimente mit Sensoren in Mobiletelefonen, Screenshot der Anwendung mit dem Menu und einzelnen Experimenten am Beispiel von Magnetfeld, Licht und Beschleunigung.</figcaption>
 </figure>
 </div>
@@ -386,7 +389,8 @@ Installiere auf deinem Smartphone die Applikation <em><a href="https://phyphox.o
 </ul>
 <div class="exercise">
 <p><strong>Sensoren</strong><br>
-Suche Dir auf den aufgelisteten Websites für elektronische Bauteile und Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren. Suche drei bis vier interessante Sensoren aus und überlege anhand der aufgeführten Aspekte zur Sensorauswahl, was alles benötigt wird um diese zu betreiben und was die Einschränkungen sind.</p>
+Suche Dir auf den aufgelisteten Websites für elektronische Bauteile und Kits, wie dem Raspberry Pi, welche Art von Sensoren existieren.</p>
+<p>Suche drei bis vier interessante Sensoren aus und überlege anhand der aufgeführten Aspekte zur Sensorauswahl, was alles benötigt wird um diese zu betreiben und was die Einschränkungen sind.</p>
 </div>
 
 
@@ -835,7 +839,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -845,6 +849,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

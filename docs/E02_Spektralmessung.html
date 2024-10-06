@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pia Bereuter">
 
-<title>E02 Spektralmessung – Einführung in IoT</title>
+<title>5&nbsp; Spektralmessung – Einführung in IoT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,6 +97,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -137,7 +141,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E02_Spektralmessung.html">E02 Spektralmessung</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E02_Spektralmessung.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -222,43 +226,43 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,7 +279,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -307,44 +311,66 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
-  <ul class="collapse">
-  <li><a href="#spektrometer" id="toc-spektrometer" class="nav-link active" data-scroll-target="#spektrometer">Spektrometer</a></li>
+  <ul>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
+  <li><a href="#spektrometer" id="toc-spektrometer" class="nav-link" data-scroll-target="#spektrometer">Spektrometer</a></li>
   <li><a href="#as7262-multispektralsensor" id="toc-as7262-multispektralsensor" class="nav-link" data-scroll-target="#as7262-multispektralsensor">AS7262 Multispektralsensor</a></li>
   <li><a href="#übungsaufbau" id="toc-übungsaufbau" class="nav-link" data-scroll-target="#übungsaufbau">Übungsaufbau</a></li>
   <li><a href="#aufgabe-1-spektralmessungen-durchführen" id="toc-aufgabe-1-spektralmessungen-durchführen" class="nav-link" data-scroll-target="#aufgabe-1-spektralmessungen-durchführen">Aufgabe 1: Spektralmessungen durchführen</a></li>
   <li><a href="#aufgabe-2-spektralmessungen-mit-visualisierung-in-der-konsole" id="toc-aufgabe-2-spektralmessungen-mit-visualisierung-in-der-konsole" class="nav-link" data-scroll-target="#aufgabe-2-spektralmessungen-mit-visualisierung-in-der-konsole">Aufgabe 2: Spektralmessungen mit Visualisierung in der Konsole</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/E02_Spektralmessung.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/E02_Spektralmessung.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div><div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="chapters/E02_Spektralmessung.pdf"><i class="bi bi-file-pdf"></i>Kapitel PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code-Links</h2><ul><li><a href="data/E02_Spektralmessung.zip"><i class="bi bi-file-zip"></i>Ausgangsdaten</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E02_Spektralmessung.html">E02 Spektralmessung</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E02_Spektralmessung.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">E02 Spektralmessung</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor:in</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pia Bereuter </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">6. Oktober. 2024</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Zusammenfassung</div>
+    Diese Übung führt einen Spektralsensor ein und zeigt wie Spektralmessungen durchgeführt werden können. Der AS7262 Spektralsensor misst über 6-Kanäle im sichtbaren Bereich und kann für spektroskopische Messungen eingesetzt werden.
+  </div>
+</div>
 
 
 </header>
 
 
+<section id="einführung" class="level2">
+<h2 class="anchored" data-anchor-id="einführung">Einführung</h2>
 <p>Ziel dieser Übung ist es den AS7262 Spektralsensor kennen zu lernen und die Sensordaten auszulesen. Der <em>AS7262</em> ist ein Spektralsensor, der über eine I2C Schnittstelle mit dem Raspberry Pi verbunden wird und einer Python Library angesteuert werden kann.</p>
+<p><strong>Unterlagen:</strong> <em><i class="bi-file-zip"></i> E02_Spektralmessung.zip</em></p>
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Schaut das Video von AMS zum <a href="https://www.youtube.com/embed/KKyHxXyaVPM?si=hvO1IVbdwbjnDI40">AS7262 Spektralsensor</a> (bis Minute 2:20)</li>
-<li>Lest das White Paper von <span class="citation" data-cites="jensen2020">Jensen (<a href="references.html#ref-jensen2020" role="doc-biblioref">2020</a>)</span> über Spektralsensoren
+<li>Lest das White Paper von <span class="citation" data-cites="Jensen2020">Jensen (<a href="references.html#ref-Jensen2020" role="doc-biblioref">2020</a>)</span> über Spektralsensoren
 <ul>
-<li>Konzentriere Dich da auf die Beschreibung der <em>Multi-channel spectral sensors</em> und in welchen Gebieten diese Sensoren eingesetzt werden</li>
+<li>Konzentriere Dich da auf die Beschreibung der <em>Multi-channel spectral sensors</em> und in welchen Gebieten diese Sensoren eingesetzt werden.</li>
 </ul></li>
 <li>Studiert das Datenblatt zum AS7262 Spektralsensor <span class="citation" data-cites="ams2022">AMS OSRAM Group (<a href="references.html#ref-ams2022" role="doc-biblioref">2022</a>)</span>
 <ul>
@@ -378,16 +404,17 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+</section>
 <section id="spektrometer" class="level2">
 <h2 class="anchored" data-anchor-id="spektrometer">Spektrometer</h2>
-<p>Spektrometer, sind Sensoren, die das Licht auf einzelne Bänder der Wellenlänge (in Nanometer nm) messen. Für das menschliche Auge wird das sichtbare Spektrum zwischen 360nm bis 830nm angegeben, wobei sich der Bereich unter optimalen Bedingungen in UV und NIR erstrecken kann <span class="citation" data-cites="sliney2016">(<a href="references.html#ref-sliney2016" role="doc-biblioref">Sliney 2016</a>)</span>.</p>
+<p>Spektrometer, sind Sensoren, die das Licht auf einzelne Bänder der Wellenlänge (in Nanometer nm) messen. Für das menschliche Auge wird das sichtbare Spektrum zwischen 360nm bis 830nm angegeben, wobei sich der Bereich unter optimalen Bedingungen in UV und NIR erstrecken kann <span class="citation" data-cites="sliney2016">(<a href="references.html#ref-sliney2016" role="doc-biblioref">Sliney, 2016</a>)</span>.</p>
 <p>Auf kleinen Chip verbaute Spektralsensoren ermöglichen zahlreiche neue Anwendungen, die früher mit grossen Spektroskopen durchgeführt wurden. Die Spektralsensorsysteme finden Anwendung wie Farbbestimmung, Authentifizierung und Spektralanalyse von Substanzen, Materialien, Lebensmitteln und Flüssigkeiten und werden in den Bereichen von Konsumgütern, Industrie und Medizin eingesetzt.</p>
-<p>Ein Multispektralsensor liefert die Antwort auf die Frage, ob eine orangefarbene Probe eine Mischung aus Rot und Gelb oder ein reines Orange ist. Multispektralsensoren teilen das gewählte Spektrum in Spektralkanäle auf (siehe <a href="#fig-as7262" class="quarto-xref">Abb.&nbsp;<span>1</span></a>) und sind so angeordnet, dass die Spektralkanäle kontinuierlich gut abgedeckt sind. Die Messung erfolgt im sichtbaren Bereich radiometrisch <span class="citation" data-cites="jensen2020">(<a href="references.html#ref-jensen2020" role="doc-biblioref">Jensen 2020</a>)</span>. Das heißt, der Sensor misst die spektrale Leistungsverteilung der Messung.</p>
+<p>Ein Multispektralsensor liefert die Antwort auf die Frage, ob eine orangefarbene Probe eine Mischung aus Rot und Gelb oder ein reines Orange ist. Multispektralsensoren teilen das gewählte Spektrum in Spektralkanäle auf (siehe <a href="#fig-as7262" class="quarto-xref">Abb.&nbsp;<span>5.1</span></a>) und sind so angeordnet, dass die Spektralkanäle kontinuierlich gut abgedeckt sind. Die Messung erfolgt im sichtbaren Bereich radiometrisch <span class="citation" data-cites="Jensen2020">(<a href="references.html#ref-Jensen2020" role="doc-biblioref">Jensen, 2020</a>)</span>. Das heißt, der Sensor misst die spektrale Leistungsverteilung der Messung.</p>
 </section>
 <section id="as7262-multispektralsensor" class="level2">
 <h2 class="anchored" data-anchor-id="as7262-multispektralsensor">AS7262 Multispektralsensor</h2>
 <p>Der AS7262 ist ein sehr kompakter Multispektralsensor, der über 6 Spektralkanäle im sichtbaren Bereich misst. Der Sensor eignet sich für spektroskopische Messungen wie <em>Farbmessung, Absorption, Bestrahlungsstärke, Reflexion</em> und <em>Transmission</em>. Der Sensor ist auf einem Breakout Board verbaut und kann über die I2C Schnittstelle mit dem Raspberry Pi verbunden werden, zusätzlich sind zwei LEDs verbaut, die den Messbereich für Messungen beleuchten können.</p>
-<p>AS7262 - 6-Kanal Spektral Sensor (<a href="#fig-as7262" class="quarto-xref">Abb.&nbsp;<span>1</span></a>)</p>
+<p>AS7262 - 6-Kanal Spektral Sensor (<a href="#fig-as7262" class="quarto-xref">Abb.&nbsp;<span>5.1</span></a>)</p>
 <ul>
 <li>6 Spektralkanäle (450, 500, 550, 570, 600, 650nm)</li>
 <li>2 on-board Beleuchtungs-LEDs</li>
@@ -398,10 +425,10 @@ div.csl-indent {
 <div id="fig-as7262" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-as7262-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/AS7262_wide.jpg" class="img-fluid figure-img">
+<a href="images/AS7262_wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;5.1: links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout von Pimoroni, unten: AS7262 Photodioden Array"><img src="images/AS7262_wide.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-as7262-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;1: links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout von Pimoroni, unten: AS7262 Photodioden Array
+Abb.&nbsp;5.1: links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout von Pimoroni, unten: AS7262 Photodioden Array
 </figcaption>
 </figure>
 </div>
@@ -413,7 +440,7 @@ Abb.&nbsp;1: links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout vo
 <li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>AS7262</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
 <li>Schliesse den Sensor <strong>AS7262</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
 <li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x49</code> erkannt werden.</li>
-<li>Kontrolliere, ob die Library <code>as7262</code> installiert ist mit <code>python -c "import as7262"</code>. Installiere die Library mit <code>sudo pip3 install as7262</code> falls sie nicht installiert ist.</li>
+<li>Kontrolliere, ob die Library <code>as7262</code> installiert ist mit <code>python -c "import as7262"</code>. Installiere die Library mit in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install as7262</code>, falls sie nicht installiert ist.</li>
 </ul>
 <p>Wechsle in den Ordner <em>Documents</em> und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
@@ -423,8 +450,8 @@ Abb.&nbsp;1: links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout vo
 <section id="aufgabe-1-spektralmessungen-durchführen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1-spektralmessungen-durchführen">Aufgabe 1: Spektralmessungen durchführen</h2>
 <p>Teste das Beispiel <code>spectrum.py</code> im Ordner <em>examples</em>. Dieses Beispiel gibt die Messungen der einzelnen Spektralkänale aus.</p>
-<p>Startet das Script mit <code>python3 spectrum.py</code>. Mit <code>Ctrl+c</code> kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> spectrum.py</span>
+<p>Startet das Script mit <code>python spectrum.py</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Mit <code>Ctrl+c</code> kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> spectrum.py</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Orange:</span> 30.22943878173828</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Red:</span>    14.262250900268555</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Orange:</span> 22.67207908630371</span>
@@ -465,8 +492,8 @@ Abb.&nbsp;1: links: Spektrale Sensitivität des AS7262, oben: AS7262 Breakout vo
 <span data-code-cell="annotated-cell-3" data-code-lines="11" data-code-annotation="2">Kalibrierte Messwerte auslesen und darstellen</span>
 </dd>
 </dl>
-<div class="exercise">
-<p><strong>AS7262 Messwerte interpretieren</strong><br>
+<div id="exr-spektralmessung" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 5.1</strong></span> <strong>AS7262 Messwerte interpretieren</strong><br>
 Führt einige Messungen mit unterschiedlichen Lichtquellen und Materialien durch und notiert Euch die Messwerte. Was beobachtet Ihr?</p>
 <ul>
 <li>Messung mit Tageslicht</li>
@@ -480,14 +507,14 @@ Führt einige Messungen mit unterschiedlichen Lichtquellen und Materialien durch
 <h2 class="anchored" data-anchor-id="aufgabe-2-spektralmessungen-mit-visualisierung-in-der-konsole">Aufgabe 2: Spektralmessungen mit Visualisierung in der Konsole</h2>
 <p>Das Beispiel <code>bargraph.py</code> zeigt die Messwerte der Spektralkanäle in einem Balkendiagramm an. Die Messwerte werden in der Konsole ausgegeben, nach einem Weissabgleich. Der Weissabgleich wird benötigt damit der Sensoren die Messwerte korrekt in Referenz zu Weiss interpretiert.</p>
 <p>Für diese Aufgabe benötigt Ihr ein weisse Blatt Papier, mit welchem der Sensor den Weissabgleich durchführt. Dafür hält ihr dieses circa 5cm vor den Sensor, drückt eine Taste und der Sensor führt den Weissabgleich durch. Danach könnt Ihr das Papier wieder wegnehmen und die Messungen durchführen.</p>
-<div class="exercise">
-<p><strong>Verteilung der Spektralkanäle untersuchen</strong></p>
+<div id="exr-spektralmessung-graph" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 5.2</strong></span> <strong>Verteilung der Spektralkanäle untersuchen</strong></p>
 <ul>
 <li>Führt verschiedene Messungen durch mit unterschiedlichen Lichtquellen und Materialien und interpretiert die Ausgabe des <code>bargraph.py</code>.</li>
 <li>Studiert den Code und versucht die Funktionsweise zu verstehen.</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> bargraph.py </span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> bargraph.py </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Setting</span> white point baseline.</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Hold</span> a white sheet of paper ~5cm in front of the sensor and press a key...</span>
@@ -495,23 +522,29 @@ Führt einige Messungen mit unterschiedlichen Lichtquellen und Materialien durch
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Baseline</span> set. Press a key to continue...   </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/as7262_bargraph.png" class="img-fluid figure-img"></p>
+<p><a href="images/as7262_bargraph.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Beispiel Ausgabe von bargraph.py Spectrometer Bar Graph"><img src="images/as7262_bargraph.png" class="img-fluid figure-img" alt="Beispiel Ausgabe von bargraph.py Spectrometer Bar Graph"></a></p>
 <figcaption>Beispiel Ausgabe von <code>bargraph.py</code> Spectrometer Bar Graph</figcaption>
 </figure>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-ams2022" class="csl-entry" role="listitem">
-AMS OSRAM Group, 2022. <a href="https://ams.com/documents/20143/36005/AS7262\_DS000486\_5-00.pdf">Datasheet <span>AS7262</span> 6-<span>Channel Visible Spectral</span>_<span>ID Device</span> with <span>Electronic Shutter</span> and <span>Smart Interface</span></a>.
+AMS OSRAM Group. (2022). <em>Datasheet <span>AS7262</span> 6-<span>Channel Visible Spectral</span>_<span>ID Device</span> with <span>Electronic Shutter</span> and <span>Smart Interface</span></em>. AMS OSRAM Group.
 </div>
-<div id="ref-jensen2020" class="csl-entry" role="listitem">
-Jensen, K., 2020. <em>White <span>Paper Chip-scale</span> Spectral Sensing: Understanding the New Uses for Ultra-Precise Light-Source Measurement</em>. <span>Premstaetten, Austria</span>: <span>AMS</span>, White {{Paper}}.
+<div id="ref-Jensen2020" class="csl-entry" role="listitem">
+Jensen, K. (2020). <em>White <span>Paper Chip-scale</span> Spectral Sensing: Understanding the New Uses for Ultra-Precise Light-Source Measurement</em> (S. 10) [White {{Paper}}]. AMS.
 </div>
 <div id="ref-sliney2016" class="csl-entry" role="listitem">
-Sliney, D.H., 2016. <a href="https://doi.org/10.1038/eye.2015.252">What Is Light? <span>The</span> Visible Spectrum and Beyond</a>. <em>Eye</em>, 30 (2), 222–229.
+Sliney, D. H. (2016). What Is Light? <span>The</span> Visible Spectrum and Beyond. <em>Eye</em>, <em>30</em>(2), 222–229. <a href="https://doi.org/10.1038/eye.2015.252">https://doi.org/10.1038/eye.2015.252</a>
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Nicht vergessen zuerst die korrekte virtuelle Environment mit den installierten Libraries über <code>source ~/.env/bin/activate</code> zu starten<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -937,13 +970,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./E01_Luftqualitaet.html" class="pagination-link" aria-label="E01 Luftqualitätmessung">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">E01 Luftqualitätmessung</span>
+      <a href="./E01_Luftqualitaet.html" class="pagination-link" aria-label="Luftqualitätmessung">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./E03_Bewegungsmessung.html" class="pagination-link" aria-label="E03 Bewegungsmessung">
-        <span class="nav-page-text">E03 Bewegungsmessung</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./E03_Bewegungsmessung.html" class="pagination-link" aria-label="Bewegungsmessung">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -951,7 +984,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -961,6 +994,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

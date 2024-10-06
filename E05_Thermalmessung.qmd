@@ -1,7 +1,25 @@
-# E05 Thermale Aufnahmen {.unnumbered}
+---
+title: "Thermale Aufnahmen"
+author: "Pia Bereuter"
+date: today
+other-links:
+  - text: Kapitel PDF
+    icon: file-pdf
+    href: chapters/E05_Thermalkamera.pdf
+code-links:
+  - text: Ausgangsdaten
+    icon: file-zip
+    href: data/E05_Thermalkamera.zip
+resources:
+  - data/E05_Thermalkamera.zip
+abstract: "In der Fernerkundung sind Thermalkameras ein wichtiges Instrument zur Erfassung von Wärmebildern, beispielsweise für die Zählung von Tierbeständen oder auch für Untersuchungen von Gebäudeisolationen. Diese Übung nutzt die MLX90640 Thermalkamera und zeigt wie thermale Aufnahmen mit dem Raspberry Pi gemacht werden können."
+---
 
+## Einführung
 
 Ziel dieser Übung ist es thermale Kamera mit der MLX90640 Kamera kennen zu lernen und die thermalen Bilddaten auszulesen und testen. Die *MLX90640* ist eine weitwinkel Kamera mit einer Auflösung von 24x32 Pixel. Sie wird über eine I2C Schnittstelle mit dem Raspberry Pi verbunden und kann über eine Python Library angesteuert werden.
+
+**Unterlagen:** *<i class="bi-file-zip"></i> E05_Thermalkamera.zip* 
 
 **Vorbereitung**
 
@@ -15,7 +33,7 @@ Ziel dieser Übung ist es thermale Kamera mit der MLX90640 Kamera kennen zu lern
 {{< video https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG >}}
 :::
 ::: {.content-visible unless-format="html"}
-[![Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)](images/youtube_adafruit_VL53L5CX.png)](https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG)
+![Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640) [Youtube Video](https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG)](images/youtube_adafruit_VL53L5CX.png)
 :::
 
 | **Unterlagen** |                                                          |
@@ -43,19 +61,19 @@ MLX90640 Thermal Camera
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `MLX90640`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **MLX90640** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x33` erkannt werden.
-- Kontrolliere, ob folgende Libraries `adafruit-blinka`,`adafruit-circuitpython-mlx90640` und `RPI.GPIO` installiert sind mit `python -c "import adafruit_mlx90640"`. Installiere die Library mit `sudo pip3 install RPI.GPIO adafruit-blinka` und `sudo pip3 install adafruit-circuitpython-mlx90640` falls sie nicht installiert ist.
+- Kontrolliere, ob folgende Libraries `adafruit-blinka`,`adafruit-circuitpython-mlx90640` und `RPI.GPIO` installiert sind mit `python -c "import adafruit_mlx90640"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install RPI.GPIO adafruit-blinka` und `pip install adafruit-circuitpython-mlx90640`, falls sie nicht installiert ist
 
 Wechsle in den Ordner *Documents* und kopiere in diesen den Ordner *MLX90640* mit den Code Beispielen.
 
 ## Aufgabe 1: Punktuelle Temperaturmessung
-Teste das Beispiel `thermal_camera_average_temperature.py` im Ordner *examples*. Dieses Beispiel liest die Werte aus der Matrix der Thermalkamera und gibt den Mittelwert der Temperatur aus. Die Ausgabe sollte in etwa so aussehen (gekürzt):
+Teste das Beispiel `average_temperature.py` im Ordner *examples*. Dieses Beispiel liest die Werte aus der Matrix der Thermalkamera und gibt den Mittelwert der Temperatur aus. Die Ausgabe sollte in etwa so aussehen (gekürzt):
 
 ``` bash
-python3 average_temperature.py 
+python average_temperature.py 
 Average MLX90640 Temperature: 23.6C (74.5F)
 ```
 
-Folgendes Code Snippet zeigt eine gekürzte Version des `thermal_camera_average_temperature.py` Python Beispiels für die Ausgabe der Distanzmatrix.
+Folgendes Code Snippet zeigt eine gekürzte Version des `average_temperature.py` Python Beispiels für die Ausgabe der Distanzmatrix.
 
 ```{.python}
 import time,board,busio
@@ -75,7 +93,7 @@ while True:
         continue                                                # <4>
 
 # print out the average temperature from the MLX90640
-print('Average MLX90640 Temperature: {0:2.1f}C ({1:2.1f}F)'.\   # <5>
+print('Average MLX90640 Temperature: {0:2.1f}C ({1:2.1f}F)'.\   
       format(np.mean(frame),(((9.0/5.0)*np.mean(frame))+32.0))) # <5>
 ```
 1. Setup von I2C, Initialisierung des MLX90640 Sensors und Setzen der Abtastrate auf 2 Hz
@@ -84,11 +102,17 @@ print('Average MLX90640 Temperature: {0:2.1f}C ({1:2.1f}F)'.\   # <5>
 4. Falls ein Fehler eintritt, nochmals versuchen den Sensor auszulesen
 5. Temperaturmittelwert ausgeben
 
-::: exercise
+::: {#exr-thermalkamera}
 **Einzelne Temperaturmessung**
 
 - Führe das Beispiel `average_temperature.py` aus und beobachte die Messwerte.
 - Teste das Script mit unterschiedlichen warmen Objekten (z.B. Kaffeetasse, Hand, etc.).
+:::
+
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-thermalkamera}
+Das Beispiel `average_temperature.py` liest die Temperaturwerte aus der Matrix der Thermalkamera und gibt den Mittelwert der Temperatur aus. Die Ausgabe sollte in etwa so aussehen:  `Average MLX90640 Temperature: 23.6C (74.5F)`.
+:::
 :::
 
 ## Aufgabe 2: Thermale Aufnahme mit LCD Bildschirm
@@ -98,12 +122,13 @@ Folgende Aufgabe nutzt den 1.54" LCD Bildschirm mit einer 240x240 Pixel Auflösu
 
 **Vorbereitung**
 
-- Kontrolliert mit `python -c "import ST7789"` ob die Library *ST7789* installiert ist. Installiere die Library mit `sudo pip3 install st7789`, falls sie nicht installiert ist. Testet auch, ob die Bibliotheken `numpy` und `matplotlib` installiert sind und installiert diese ansonsten mit `sudo apt install python3-matplotlib python3-numpy`.
+- Kontrolliert mit `python -c "import st7789"` ob die Library *st7789* installiert ist. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install st7789`, falls sie nicht installiert ist. Testet auch, ob die Bibliotheken `numpy` und `matplotlib` installiert sind und installiert diese ansonsten mit `sudo apt install python3-matplotlib python3-numpy`.
 - Kontrolliere, ob der Raspberry Pi den *Breakout Garden HAT* mit den 2 SPI Anschlüssen und 4 I2C Anschlüssen bestückt ist (@fig-mlx90640-LCD).
 - Montiere den Bildschirm im vorderen SPI Slot des *Breakout Garden HAT*s wie in @fig-mlx90640-LCD, oder passe das Script, an so dass die Werte der hinteren SPI Schnittstelle verwendet werden.
 - Teste die Beispiele im Ordner `MLX90640` und beobachte die Ausgabe auf dem LCD Bildschirm.
 
-::: exercise
+
+::: {#exr-thermalkamera-LCD}
 **Experimente mit der Thermalkamera und dem LCD Bildschirm**
 
 - Teste mit unterschiedlichen Objekten die Temperaturmessung und beobachte die Ausgabe auf dem LCD Bildschirm.
@@ -111,4 +136,14 @@ Folgende Aufgabe nutzt den 1.54" LCD Bildschirm mit einer 240x240 Pixel Auflösu
 - Wie gut lassen sich Objekte erkennen, die sich in der Temperatur nur wenig oder stark unterscheiden?
 - Studiere den Code der Beispiele und versuche die Funktionsweise zu verstehen.
 - Überlege Dir, wie Du die Beispiele erweitern könntest.
+:::
+
+::: {.content-hidden unless-meta="solution"}
+::: {#sol-thermalkamera-LCD}
+Die Beispiele im Ordner `MLX90640` zeigen die Temperaturmatrix auf dem LCD Bildschirm an. Bei der Darstellung von Text auf dem LCD Bildschirm wird die Datei `Roboto-Regular.ttf` benötigt und sollte im gleichen Ordner wie das Python Script liegen. 
+:::
+:::
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
 :::

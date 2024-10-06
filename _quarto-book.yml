@@ -1,0 +1,166 @@
+project:
+  type: book
+  output-dir: docs
+  pre-render:
+    - _resources/scripts/batch.cmd docs
+filters:
+  - _resources/scripts/filter_styleDiv.lua
+  # - _resources/scripts/filter_hideSolution.lua
+book:
+  title: "Einführung in IoT"
+  subtitle: "Modulübergreifender Kurs Vertiefung II"
+  #abstract: "Einführung in IoT ist ein Modulübergreifender Kurs Vertiefung II des Bachelor Geomatik. Er behandelt IoT-Grundlagen, Sensoren, Datenverwaltung, Datenübertragung und Visualisierung mit praktischen Übungen mit dem Raspberry Pi mit einem Fokus auf Sensoren."
+  output-file: "5200_IoT"
+  author:
+    - name: Pia Bereuter
+      url: https://www.fhnw.ch/de/personen/pia-bereuter
+      affiliation: Institut Geomatik, Fachhochschule Nordwestschweiz
+      affiliation-url: https://fhnw.ch/igeo
+  date: today
+  #navbar:  
+  #  logo: images/fhnw.png
+  #  search: true
+  page-footer: 
+    left: "![](images/fhnw_white.png)"
+    center: "Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
+    right: "Institut Geomatik, Fachhochschule Nordwestschweiz" 
+    border: false
+  chapters:
+    - index.qmd
+    - part: "Theorie"
+      chapters:
+      - 01_IoT.qmd
+      - 02_Sensoren.qmd
+      - 03_Datenübertragung.qmd
+      #- 04_Datenverwaltung.qmd
+      #- 05_Visualisierung.qmd
+      - references.qmd
+      #- summary.qmd
+    - part: "Praktika"
+      chapters:
+      - E01_Luftqualitaet.qmd
+      - E02_Spektralmessung.qmd
+      - E03_Bewegungsmessung.qmd
+      - E04_Distanzmessung.qmd
+      - E05_Thermalmessung.qmd
+      - E06_Biometrie.qmd
+      - E07_MQTT.qmd
+  appendices: 
+    - A1_Rasperry_Pi.qmd
+    - A2_Sensorbox.qmd
+    - A3_CheatSheet.qmd
+    - A4_Setup.qmd
+  site-url: https://314a.github.io/5200_IoT
+  repo-url: https://github.com/314a/5200_IoT
+  repo-branch: master
+  repo-actions: [edit, issue]
+  downloads: [pdf]
+  site-path: /
+  search: true
+  page-navigation: true
+  license: CC BY
+  cover-image: images/cover.png
+  favicon: images/favicon.ico
+  sidebar:
+    logo: images/logo.jpg
+
+lightbox: true
+bibliography: references.bib
+csl: "_resources/templates/apa.csl"
+solution: false
+number-depth: 1
+date-format: "D. MMMM. YYYY"
+highlight-style: arrow
+lang: de
+thanks: Thanks to the Quarto team for their great work on this project.
+copyright: Pia Bereuter © 2024 
+license: Diese Arbeit ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
+engine: knitr
+
+format:
+  html:
+    theme:
+      - cosmo
+      - custom.scss
+    mermaid:
+      theme: neutral
+    cover-image: images/cover.png
+    code-link: true
+    crossref:
+      custom:
+        - kind: float
+          reference-prefix: Video
+          key: vid      
+          latex-env: video
+  docx:
+    reference-doc: _resources/templates/template.dotx
+  pdf:
+    documentclass: scrbook
+    classoption: oneside, openany
+    template: "_resources/templates/eisvogel_314a.tex"
+    mermaid:
+      theme: neutral
+    keep-tex: true
+    toc: true
+    toc-depth: 2    
+    highlight-style: arrow
+    papersize: a4paper
+    fontfamily: arial
+    fontsize: 11pt
+    mainfont: Arial
+    sansfont: Arial
+    monofont: "Courier New"
+    monofontoptions: "Scale=0.9"
+    geometry: inner=2.1cm, outer=4cm, top=3cm, bottom=3cm,marginpar=3cm,headsep=8mm
+    chapterPrefix: false
+    # add \adjustmtc \mtcaddchapter after unnumbered chapters to update minitoc
+    minitoc: false
+    titlepage: false
+    coverpage: true
+    colorlinks: true
+    linkcolor: gray
+    title-image: images/title-image.jpg
+    cover-image: images/background.jpg
+    logo: images/fhnw.eps
+    link-citations: true
+    crossref:
+      # custom Environment have to be listed before the the following settings, otherwise the compilation failes
+      # with error: \@ifundefined{c@chapter}{\newfloat{video}{h}{lovid}}{\newfloat{video}...
+      title-delim: ":"       # (default is ":")
+      ref-hyperlink: true    # (default is true)
+      labels: arabic         # (default is arabic)
+      subref-labels: alpha a # (default is alpha a)
+      # fig-title: Abbildung   # (default is "Figure")
+      # tbl-title: Tabelle     # (default is "Table")
+      # eq-title: Formel       # (default is "Equation") 
+      # fig-prefix: Abbildung  # (default is "Figure")
+      # tbl-prefix: Tabelle    # (default is "Table")
+      # eq-prefix: Formel      # (default is "Equation")
+      custom:
+        - kind: float
+          reference-prefix: Video
+          key: vid      
+          latex-env: video          
+    include-in-header: 
+      text: |
+        \usepackage{makeidx}
+        \makeindex     
+    #    % Kommentarzeile(?) in Latex hier führt zu Fehlermeldung bei Rendering PDF
+    #      with error: \@ifundefined{c@chapter}{\newfloat{video}{h}{lovid}}{\newfloat{video}...
+      
+    include-after-body: 
+      text: |
+        \printindex
+    impressum: |
+      5200 Einführung in IoT   
+      Herbstsemester 2023, 2024
+
+      Institut Geomatik, Fachhochschule Nordwestschweiz, Hofackerstrasse 30, 4132 Muttenz   
+      Autorin: Prof. Dr. Pia Bereuter  
+      Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) 
+      
+      Titelbild: Rasperry Pi mit Sensoren, 2022, Bereuter
+
+
+
+      \includegraphics[height=8mm]{images/fhnw.eps}

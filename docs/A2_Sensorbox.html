@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -42,6 +42,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -168,43 +171,43 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -253,11 +256,11 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#raspberry-pi-4-set" id="toc-raspberry-pi-4-set" class="nav-link active" data-scroll-target="#raspberry-pi-4-set">Raspberry Pi 4 Set</a></li>
   <li><a href="#sensorbox" id="toc-sensorbox" class="nav-link" data-scroll-target="#sensorbox">Sensorbox</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/A2_Sensorbox.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/A2_Sensorbox.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -285,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="raspberry-pi-4-set">Raspberry Pi 4 Set</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberry_pi_box.jpg" class="img-fluid figure-img"></p>
+<p><a href="images/raspberry_pi_box.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Inhalt des Raspberry Pi 4 Set, mit dem Brekaout Garden HAT, HDMI-HDMI Mini Kabel, Netzteil mit USB-C Anschluss und MicroSD Karte mit Adapter"><img src="images/raspberry_pi_box.jpg" class="img-fluid figure-img" alt="Inhalt des Raspberry Pi 4 Set, mit dem Brekaout Garden HAT, HDMI-HDMI Mini Kabel, Netzteil mit USB-C Anschluss und MicroSD Karte mit Adapter"></a></p>
 <figcaption>Inhalt des Raspberry Pi 4 Set, mit dem Brekaout Garden HAT, HDMI-HDMI Mini Kabel, Netzteil mit USB-C Anschluss und MicroSD Karte mit Adapter</figcaption>
 </figure>
 </div>
@@ -387,7 +390,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberry_pi_set_number.jpg" class="img-fluid figure-img"></p>
+<p><a href="images/raspberry_pi_set_number.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Raspberry Pi mit der Breakout Garden HAT Erweiterung (1) von Pimoroni und den Sensoren, (2) VL53L5CX Time of Flight, (3) BME688 Temperatur, Luftfeuchtigkeit und Gas, (4) ICM20948 9DoF Motion Accelero-, Gyro-, Magnetometer, (5) AS7262 Spektral Sensor, (6) MAX30101 Herzfrequenz, Oximeter, (7) MLX90640 Thermal Kamera, (8) 1.54” LCD Bildschirm Rauchsensor"><img src="images/raspberry_pi_set_number.jpg" class="img-fluid figure-img" alt="Raspberry Pi mit der Breakout Garden HAT Erweiterung (1) von Pimoroni und den Sensoren, (2) VL53L5CX Time of Flight, (3) BME688 Temperatur, Luftfeuchtigkeit und Gas, (4) ICM20948 9DoF Motion Accelero-, Gyro-, Magnetometer, (5) AS7262 Spektral Sensor, (6) MAX30101 Herzfrequenz, Oximeter, (7) MLX90640 Thermal Kamera, (8) 1.54” LCD Bildschirm Rauchsensor"></a></p>
 <figcaption>Raspberry Pi mit der Breakout Garden HAT Erweiterung (1) von Pimoroni und den Sensoren, (2) VL53L5CX Time of Flight, (3) BME688 Temperatur, Luftfeuchtigkeit und Gas, (4) ICM20948 9DoF Motion Accelero-, Gyro-, Magnetometer, (5) AS7262 Spektral Sensor, (6) MAX30101 Herzfrequenz, Oximeter, (7) MLX90640 Thermal Kamera, (8) 1.54” LCD Bildschirm Rauchsensor</figcaption>
 </figure>
 </div>
@@ -396,7 +399,7 @@ ul.task-list li input[type="checkbox"] {
 Beim Anschliessen der Sensoren in die Schnittstellen des Breakout Garden <strong>unbedingt</strong> die korrekte Ausrichtung beachten! Die Beschriftung der Anschlüsse auf dem Sensor und dem Breakout Garden müssen übereinstimmen!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberry_pi_correct_sensor_mount.png" class="img-fluid figure-img"></p>
+<p><a href="images/raspberry_pi_correct_sensor_mount.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen."><img src="images/raspberry_pi_correct_sensor_mount.png" class="img-fluid figure-img" alt="Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen."></a></p>
 <figcaption>Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen.</figcaption>
 </figure>
 </div>
@@ -834,8 +837,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./A1_Rasperry_Pi.html" class="pagination-link" aria-label="Raspberry Pi\index{Raspberry Pi}">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span>
+      <a href="./A1_Rasperry_Pi.html" class="pagination-link" aria-label="Raspberry Pi IoT Image">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -848,7 +851,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -858,6 +861,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

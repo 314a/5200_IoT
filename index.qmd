@@ -1,18 +1,12 @@
 # Inhalt {.unnumbered}
 
-Internet of Things ermöglicht durch die Vernetzung physischer und virtueller Objekte Infrastrukturen auszubauen die Echtzeit Datenerfassung und Verarbeitung ermöglichen, was für die Geomatik und GIS zunehmend an Bedeutung gewinnt. Dieser zunehmende Fokus spiegelt auch den Bedarf an Geomatiker:innen, die sich diesen Themen annehmen, innovative Lösungen finden und in Arbeitsprozesse reflektiert einbinden.
+Internet of Things ermöglicht durch die Vernetzung physischer und virtueller Objekte Infrastrukturen auszubauen die Echtzeit Datenerfassung und Verarbeitung ermöglichen, was für die Geomatik und GIS zunehmend an Bedeutung gewinnt. Vor allem in den Bereichen Smart Cities oder Geomonitoring wird IoT eingesetzt um automatisiert Sensordaten zu erfassen, diese zu analysieren und für Entscheidungsprozesse zu nutzen. Dieser zunehmende Fokus spiegelt auch den Bedarf an Geomatiker:innen, die sich in diese Themen vertiefen und geeignete Lösungen entwickeln können.
 
-In dieser Einführung gibt einen Überblick über die Grundlagen von IoT mit einem Fokus auf die Geomatik und Geoinformation und führt anwendungsbezogen mit praktischen Beispielen mit Raspberry Pi und unterschiedlichen Sensoren in das Thema ein.
-
-![[xkcd: Smart Home Security](https://xkcd.com/1966/), cc-by-nc 2.5](images/xkcd_1966_smart_home_security.png){width=70%}
+In dieser Einführung gibt einen Überblick über die Grundlagen von IoT mit einem Fokus auf die Geomatik und Geoinformation und führt anwendungsbezogen mit praktischen Beispielen mit Raspberry Pi und unterschiedlichen Sensoren in das Thema ein. Der Anhang bietet eine Einführung in Raspberry Pi mit den wichtigsten Befehlen und Anleitungen für die Installation und Konfiguration. Zusätzlich bietet er eine praktische Anleitung für den Aufbau des vorkonfigurierten Image mit den erforderlichen Installationen wie Python, Python Bibliotheken, MQTT, Node-RED, InfluxDB und Grafana, deren Konfiguration und einfache Funktionstests.
 
 ## Aufbau
 
-Das Skript führt in Sensorik ein und zeigt typische Anwendungen zum Thema IoT, des Weiteren zeigt es auf wie Sensordaten genutzt, gespeichert, übertragen und visualisiert werden können.
-
-- Teil 1: Sensoren
-- Teil 2: Datenspeicherung
-- Teil 3: Datenkommunikation und Visualisierung
+Das Skript führt in Sensorik ein und zeigt typische Anwendungen zum Thema IoT, des Weiteren zeigt es auf wie Sensordaten genutzt, gespeichert, übertragen und visualisiert werden können mittels detaillierten Beispielen und Übungen. 
 
 Die begleitenden Übungen nutzen den Einplatinenrechner Raspberry Pi mit unterschiedlichen Sensoren für die Datenerfassung, -analyse und Visualisierung. Die Programmiersprache für diesen Kurs ist Python und das genutzte Betriebssystem ist Raspberry Pi OS, eine für den Raspberry Pi angepasste Distribution von Debian (Linux).
 
@@ -34,7 +28,7 @@ Für den Fernzugriff auf den Raspberry Pi und entwickeln ist ein SSH-Client (SSH
 - SSH-Clients: [Putty](https://www.putty.org), [Tabby](https://tabby.sh/)
 - Python: [Anaconda](https://www.anaconda.com/download), [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/), [Python](https://www.python.org/)
 
-## Raspberry Pi Image Einstellungen
+## Raspberry Pi Image Kontoinformationen
 
 Für die Übungen wird ein Raspberry Pi Image mit vorinstallierten Paketen und Einstellungen verwendet. Die SD-Karte mit dem Image wird von der Kursleitung zur Verfügung gestellt. Das Image kann über Moodle bezogen werden.
 

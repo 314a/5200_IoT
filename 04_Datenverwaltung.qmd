@@ -29,3 +29,7 @@ Technologien
 | Anwendungen     | Geofencing,  Parkplatz Management,  Fahrstuhl-Monitoring, Agrar-Monitoring.. |
 
 Table: IoT Technologien und Anwendungen 
+
+::: {.content-visible when-profile="chapter"}
+## Referenzen
+:::

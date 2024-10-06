@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Pia Bereuter">
 
-<title>E01 Luftqualitätmessung – Einführung in IoT</title>
+<title>4&nbsp; Luftqualitätmessung – Einführung in IoT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,6 +97,9 @@ div.csl-indent {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -166,7 +170,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">E01 Luftqualitätmessung</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -251,43 +255,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E01_Luftqualitaet.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">E01 Luftqualitätmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E02_Spektralmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E02 Spektralmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E03_Bewegungsmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E03 Bewegungsmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bewegungsmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E04_Distanzmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E04 Distanzmessung</span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distanzmessung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E05_Thermalmessung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E05 Thermale Aufnahmen</span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Thermale Aufnahmen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E06_Biometrie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E06 Biometrie</span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Biometrie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./E07_MQTT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">E07 MQTT</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">IoT Monitoring</span></span></a>
   </div>
 </li>
       </ul>
@@ -304,7 +308,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./A1_Rasperry_Pi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Raspberry Pi IoT Image</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -336,44 +340,71 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
+  <ul>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung">Einführung</a></li>
+  <li><a href="#bme688" id="toc-bme688" class="nav-link" data-scroll-target="#bme688">BME688</a></li>
+  <li><a href="#übungsaufbau" id="toc-übungsaufbau" class="nav-link" data-scroll-target="#übungsaufbau">Übungsaufbau</a>
   <ul class="collapse">
-  <li><a href="#bme688" id="toc-bme688" class="nav-link active" data-scroll-target="#bme688">BME688</a></li>
-  <li><a href="#übungsaufbau" id="toc-übungsaufbau" class="nav-link" data-scroll-target="#übungsaufbau">Übungsaufbau</a></li>
+  <li><a href="#kontrolle-der-hardware" id="toc-kontrolle-der-hardware" class="nav-link" data-scroll-target="#kontrolle-der-hardware">Kontrolle der Hardware</a></li>
+  <li><a href="#kontrolle-der-installation" id="toc-kontrolle-der-installation" class="nav-link" data-scroll-target="#kontrolle-der-installation">Kontrolle der Installation</a></li>
+  <li><a href="#kopiere-clone-die-library-mit-den-beispielen-auf-den-raspberry-pi" id="toc-kopiere-clone-die-library-mit-den-beispielen-auf-den-raspberry-pi" class="nav-link" data-scroll-target="#kopiere-clone-die-library-mit-den-beispielen-auf-den-raspberry-pi">Kopiere (Clone) die Library mit den Beispielen auf den Raspberry Pi</a></li>
+  </ul></li>
   <li><a href="#aufgabe-1-sensormessungen-ausführen" id="toc-aufgabe-1-sensormessungen-ausführen" class="nav-link" data-scroll-target="#aufgabe-1-sensormessungen-ausführen">Aufgabe 1: Sensormessungen ausführen</a></li>
   <li><a href="#aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional" id="toc-aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional" class="nav-link" data-scroll-target="#aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional">Aufgabe 2: Berechnung der Atmosphärenkorrektur für Distanzmessungen (optional)</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/314a/5200_IoT/edit/master/E01_Luftqualitaet.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/314a/5200_IoT/edit/master/E01_Luftqualitaet.qmd" class="toc-action"><i class="bi bi-github"></i>Seite editieren</a></li><li><a href="https://github.com/314a/5200_IoT/issues/new" class="toc-action"><i class="bi empty"></i>Problem melden</a></li></ul></div><div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="chapters/E01_Luftqualitaet.pdf"><i class="bi bi-file-pdf"></i>Kapitel PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code-Links</h2><ul><li><a href="data/E01_Luftqualitaet.zip"><i class="bi bi-file-zip"></i>Ausgangsdaten</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">E01 Luftqualitätmessung</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html">Praktika</a></li><li class="breadcrumb-item"><a href="./E01_Luftqualitaet.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">E01 Luftqualitätmessung</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Luftqualitätmessung</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor:in</div>
+    <div class="quarto-title-meta-contents">
+             <p>Pia Bereuter </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">6. Oktober. 2024</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Zusammenfassung</div>
+    Diese Übung zeigt wie Sensoren mit dem Raspberry Pi genutzt werden können am Beispiel des BME688 Sensors. Dieser Sensor erfasst Temperatur, Luftdruck, Luftfeuchtigkeit und Gas Scanner VOC. Die Übung zeigt wie der Sensor angeschlossen wird, wie die Sensordaten ausgelesen werden und wie die Sensordaten in einer Datei gespeichert werden können.
+  </div>
+</div>
 
 
 </header>
 
 
+<section id="einführung" class="level2">
+<h2 class="anchored" data-anchor-id="einführung">Einführung</h2>
 <p>Ziel dieser ersten Übung ist es den BME688 Sensor kennen zu lernen und die Sensordaten auszulesen. Der BME688 ist ein 4-in-1 Sensor für Temperatur, Luftdruck, Luftfeuchtigkeit und Gas Scanner VOC. Der Sensor verfügt über eine I2C Schnittstelle, die mit der Python Library <a href="https://github.com/pimoroni/bme680-python">bme680-python</a> angesteuert und die Sensordaten ausgelesen werden können.</p>
+<p><strong>Unterlagen:</strong> <em><i class="bi-file-zip"></i> E01_Luftqualitaet.zip</em></p>
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Lest das Kapitel im Anhang zu <a href="./A1_Rasperry_Pi.html">Raspberry Pi</a>
 <ul>
 <li>Konzentriere Dich auf die wichtigsten Details zur Inbetriebnahme des Raspberry Pi</li>
 </ul></li>
-<li>Lest die Dokumentation zum BME688 Sensor <span class="citation" data-cites="bosch2022">Gas Sensor <span>BME688</span> (<a href="references.html#ref-bosch2022" role="doc-biblioref">o.&nbsp;J.</a>)</span>
+<li>Lest die Dokumentation zum BME688 Sensor <span class="citation" data-cites="bosch2022"><span>„Gas Sensor <span>BME688</span>“</span> (<a href="references.html#ref-bosch2022" role="doc-biblioref">o.&nbsp;J.</a>)</span>
 <ul>
 <li>Konzentriere Dich auf die Beschreibung der Schnittstelle und technische Spezifikation auf dem Datenblatt</li>
 </ul></li>
@@ -405,9 +436,10 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</section>
 <section id="bme688" class="level2">
 <h2 class="anchored" data-anchor-id="bme688">BME688</h2>
-<p>BME688 - Bosch Sensor für Temperatur, Luftdruck, Luftfeuchtigkeit, Gas Scanner VOC (<a href="#fig-bme688" class="quarto-xref">Abb.&nbsp;<span>1</span></a>)</p>
+<p>BME688 - Bosch Sensor für Temperatur, Luftdruck, Luftfeuchtigkeit, Gas Scanner VOC (<a href="#fig-bme688" class="quarto-xref">Abb.&nbsp;<span>4.1</span></a>)</p>
 <ul>
 <li>Temperatur +/-0.5°C (-40° .. -85°)</li>
 <li>Luftdruck +/-0.12hPa (300…1100hPa)</li>
@@ -419,10 +451,10 @@ window.Quarto = {
 <div id="fig-bme688" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bme688-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/BME688_wide.jpg" class="img-fluid figure-img">
+<a href="images/BME688_wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;4.1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild für den Grössenvergleich"><img src="images/BME688_wide.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bme688-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild für den Grössenvergleich
+Abb.&nbsp;4.1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild für den Grössenvergleich
 </figcaption>
 </figure>
 </div>
@@ -439,7 +471,7 @@ Abb.&nbsp;1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild fü
 <p>Beim Anschliessen der Sensoren in die Schnittstellen des Breakout Garden <strong>unbedingt</strong> die korrekte Ausrichtung beachten! Die Beschriftung der Anschlüsse auf dem Sensor und dem Breakout Garden müssen übereinstimmen!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/raspberry_pi_correct_sensor_mount.png" class="img-fluid figure-img"></p>
+<p><a href="images/raspberry_pi_correct_sensor_mount.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen."><img src="images/raspberry_pi_correct_sensor_mount.png" class="img-fluid figure-img" alt="Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen."></a></p>
 <figcaption>Sensor links korrekt angeschlossen, rechts falsch ausgerichtet angeschlossen.</figcaption>
 </figure>
 </div>
@@ -482,8 +514,9 @@ Abb.&nbsp;1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild fü
 <span data-code-cell="annotated-cell-3" data-code-lines="4,5,6" data-code-annotation="2"><code>numpy</code> Modul existiert nicht</span>
 </dd>
 </dl>
-<p>Installiere das Modul mit folgendem Befehl, falls es nicht installiert ist.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> pip3 install bme680</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Installiere das Modul mit folgendem Befehl, falls es nicht installiert ist. Aktiviere die virtuelle Umgebung (hier unter <code>~/.env</code>) und installiere das Modul<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.env/bin/activate</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install bme680</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="kopiere-clone-die-library-mit-den-beispielen-auf-den-raspberry-pi" class="level3">
 <h3 class="anchored" data-anchor-id="kopiere-clone-die-library-mit-den-beispielen-auf-den-raspberry-pi">Kopiere (Clone) die Library mit den Beispielen auf den Raspberry Pi</h3>
@@ -496,7 +529,7 @@ Abb.&nbsp;1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild fü
 <section id="aufgabe-1-sensormessungen-ausführen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1-sensormessungen-ausführen">Aufgabe 1: Sensormessungen ausführen</h2>
 <p>Teste das Beispiel <code>read-all.py</code> im Ordner <em>examples</em>. Dieses Beispiel gibt die Temperatur, Luftdruck und Luftfeuchtigkeit des Sensors BME 688 aus.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> read-all.py</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> read-all.py</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Mit <code>Ctrl+c</code> kann das Script wieder gestopppt werden. Die Ausgabe sollte in etwa so aussehen (gekürzt):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output Beispiel</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">read-all.py</span> <span class="at">-</span> Displays temperature, pressure, humidity, and gas.</span>
@@ -562,26 +595,24 @@ Abb.&nbsp;1: BME688 Bosch Sensor für Luftqualitätsmessung mit Referenzbild fü
 <span data-code-cell="annotated-cell-8" data-code-lines="17,18,19,20,21" data-code-annotation="3">Sensordaten auslesen</span>
 </dd>
 </dl>
-<div class="exercise">
-<p><strong>BME 688</strong><br>
+<div id="exr-luftqualitaet" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 4.1</strong></span> <strong>BME 688</strong><br>
 Studiert die Python Skripte und online Tutorial zum Sensor</p>
 <ul>
 <li>Wie wird auf den Sensor zugegriffen?</li>
-<li>Wie wir die Temperatur kompensiert?</li>
-<li>Wie kann ein Temperaturoffset gesetzt werden?</li>
 <li>Wie reagiert der Feuchtigkeitssensor auf Änderungen?</li>
-<li>Wie sieht es mit dem Luftdruck aus, was sind Vergleichswerte?</li>
-<li>Wie könnt ihr einfach Werte in eine Datei schreiben?</li>
+<li>Wie hoch sind die Werte für den Luftdruck, was sind Vergleichswerte?</li>
+<li>Wie könnt Ihr einfach Sensorwerte in eine Datei schreiben?</li>
 </ul>
-</div>
-<div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span>Messwerte in eine Textdatei schreiben <code>python3 read-all.py &gt; bme680-data.txt</code>. Die erstellte Datei kann mit dem Befehl <code>cat bme680-data.txt</code> angezeigt werden.</p>
 </div>
 </section>
 <section id="aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional">Aufgabe 2: Berechnung der Atmosphärenkorrektur für Distanzmessungen (optional)</h2>
-<p>Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Die Korrektur wird als <em>Atmosphärenkorrektur</em> bezeichnet und ist abhängig von der <em>Temperatur</em>, dem <em>Luftdruck</em> und der <em>Luftfeuchtigkeit</em>. Die Korrektur wird in ppm (parts per million) angegeben und kann mit folgender <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>1</span></a> berechnet werden <span class="citation" data-cites="grimm2023 leicageosystems2022">(<a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems 2022</a>, <a href="references.html#ref-grimm2023" role="doc-biblioref">Grimm 2023</a>)</span>:</p>
-<p><span id="eq-atmosphaerenkorrektur"><span class="math display">\[\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix} \tag{1}\]</span></span></p>
+<p>Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Über eine <em>Massstabskorrektur</em> (ppm [mm/km]) können distanzproportionale Reduzierungen berücksichtigt werden, die <em>Projektionsverzerrung</em>, <em>Reduktion auf Meereshöhe</em> und die <em>Atmophärenkorrektur</em> berücksichtigen. Die Luftfeichtigkeit beeinflusst Distanzmessungen in feuchtem und heissen Klima. Diese muss den zur Messzeit geltenden atmosphärischen Bedingungen angepasst werden.</p>
+<p>Die Korrektur wird als <em>Atmosphärenkorrektur</em> bezeichnet und ist abhängig von der <em>Temperatur</em>, dem <em>Luftdruck</em> und der <em>Luftfeuchtigkeit</em>. Die Korrektur wird in ppm (parts per million [mm/km]) angegeben und kann mit folgender <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>4.1</span></a> berechnet werden <span class="citation" data-cites="grimm2023 leicageosystems2022">(<a href="references.html#ref-grimm2023" role="doc-biblioref">Grimm, 2023</a>; <a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems, 2022, S. 87</a>)</span> und gilt für die Distanzmessung mit sichtbaren roten Laser</p>
+<p><span id="eq-atmosphaerenkorrektur"><span class="math display">\[
+\Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}
+\tag{4.1}\]</span></span></p>
 <p><span class="math display">\[\begin{aligned}
 &amp; \Delta D_1 &amp;&amp; \text{Atmosphärische Korrektur} &amp;&amp; [ppm]\\
 &amp; p &amp;&amp; \text{Luftdruck} &amp;&amp; [mbar]\\
@@ -591,7 +622,7 @@ Studiert die Python Skripte und online Tutorial zum Sensor</p>
 &amp; x &amp;&amp; = (7.5 \cdot \frac{t}{237.3 +t}) + 0.7857 \\
 \end{aligned}
 \]</span></p>
-<p>Folgende Funktion in Python berechnet die Atmosphärenkorrektur für Geodätische Distanzmessverfahren basierend auf der <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>1</span></a></p>
+<p>Folgende Funktion in Python berechnet die Atmosphärenkorrektur für Geodätische Distanzmessverfahren basierend auf der <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>4.1</span></a></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_atmospheric_correction(temperature, air_pressure, humidity):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constants</span></span>
@@ -617,28 +648,36 @@ Studiert die Python Skripte und online Tutorial zum Sensor</p>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"correction_ppm"</span>: correction_ppm</span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="exercise">
-<p><strong>Atmosphärenkorrektur</strong><br>
-Nutzt die Funktion <code>calculate_atmospheric_correction</code> um die Korrektur für die folgenden Messwerte zu berechnen:</p>
+<p>Für Distanzmessungen höchster Genauigkeit sollte die atmosphärische Korrektur auf <span class="math inline">\(1 ppm\)</span> genau bestimmt werden, folglich sollten die Messwerte mindestens folgenden Genauigkeit aufweisen: die Temperatur auf <span class="math inline">\(1°C\)</span>, der Luftdruck auf <span class="math inline">\(3 mbar\)</span> (<span class="math inline">\(1 Millibar= 1 hPa\)</span>) und die Luftfeuchtigkeit auf <span class="math inline">\(20 %\)</span> genau bestimmt werden <span class="citation" data-cites="leicageosystems2022">(<a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems, 2022, S. 87</a>)</span>.</p>
+<div id="exr-atmosphaerenkorrektur" class="theorem exercise">
+<p><span class="theorem-title"><strong>Übung 4.2</strong></span> <strong>Atmosphärenkorrektur</strong><br>
+Nutzt die Funktion <code>calculate_atmospheric_correction</code> um eine atmosphärische Korrektur mit den momentan gemessenen amtmosphärischen Bedingungen zu berechnen.</p>
 <ul>
 <li>Wie hoch ist die Korrektur mit den Werten des BME688 Sensors?</li>
 <li>Wie hoch ist dieselbe Korrektur bei doppelter Luftfeuchtigkeit?</li>
 <li>Wie hoch ist die Korrektur bei 20°C, 1000hPa und 50% sowie 100% Luftfeuchtigkeit?</li>
+<li>Erfüllt der BME688 Sensor die Anforderungen für Distanzmessungen höchster Genauigkeit?</li>
 </ul>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-bosch2022" class="csl-entry" role="listitem">
-<a href="https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688/">Gas Sensor <span>BME688</span></a>, o.&nbsp;J. <em>Bosch Sensortec</em>.
+Gas Sensor <span>BME688</span>. (o.&nbsp;J.). In <em>Bosch Sensortec</em>. https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688/.
 </div>
 <div id="ref-grimm2023" class="csl-entry" role="listitem">
-Grimm, D., 2023. <a href="https://moodle.fhnw.ch/course/view.php?id=37277">2030 <span>Geod<span>ä</span>tische Messtechnik GMT I</span></a>.
+Grimm, D. (2023). <em>2030 <span>Geod<span>ä</span>tische Messtechnik GMT I</span></em>.
 </div>
 <div id="ref-leicageosystems2022" class="csl-entry" role="listitem">
-Leica Geosystems, 2022. Leica <span>TS60</span>/<span>MS60</span>/<span>TM60 Gebrauchsanweisung</span>.
+Leica Geosystems. (2022). <em>Leica <span>TS60</span>/<span>MS60</span>/<span>TM60 Gebrauchsanweisung</span></em>.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>In dieser Übung wird die Python Virtual Environment <code>.env</code> im Homeordner <code>~/</code> erstellt und aktiviert. Diese kann auch an einem Ort erstellt werden, beispielweise projektbasiert. Erstellen einer Virtual Environment: <code>python -m venv ~/Development/Projekt1/env</code><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1069,8 +1108,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./E02_Spektralmessung.html" class="pagination-link" aria-label="E02 Spektralmessung">
-        <span class="nav-page-text">E02 Spektralmessung</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./E02_Spektralmessung.html" class="pagination-link" aria-label="Spektralmessung">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spektralmessung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1078,7 +1117,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><img src="images/fhnw_white.png" class="img-fluid"></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -1088,6 +1127,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

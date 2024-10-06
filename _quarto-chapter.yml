@@ -1,0 +1,103 @@
+# Das erste Profil überschreibt die Werte des Zweiten.
+# quarto render --profile solution,chapter
+# quarto render --profile solution,chapter --output-dir chapter-solution
+# quarto render --profile chapter --output-dir chapter-solution --metadata solution:true
+project:
+  type: default
+  output-dir: chapters
+  render:
+    - 01_IoT.qmd
+    - 02_Sensoren.qmd
+    - 03_Datenübertragung.qmd
+    - E01_Luftqualitaet.qmd
+    - E02_Spektralmessung.qmd
+    - E03_Bewegungsmessung.qmd
+    - E04_Distanzmessung.qmd
+    - E05_Thermalmessung.qmd
+    - E06_Biometrie.qmd
+    - E07_MQTT.qmd
+    - A1_Rasperry_Pi.qmd
+    - A2_Sensorbox.qmd
+    - A3_CheatSheet.qmd
+    - A4_Setup.qmd
+ # pre-render:
+ # - quarto --version
+filters:
+  # - _resources/scripts/filter_cite.lua
+  - _resources/scripts/filter_styleDiv.lua
+bibliography: references.bib
+solution: false
+number-depth: 1
+format:
+  pdf:
+    documentclass: scrartcl
+    classoption: oneside, openany, toc=listof
+    #,toc=left, toc=flat,
+    template: "_resources/templates/eisvogel_314a.tex"
+    shift-heading-level-by: -1
+    keep-tex: false
+    toc: true
+    toc-depth: 1
+    number-sections: true
+    minitoc: false
+    highlight-style: arrow
+    papersize: a4paper
+    fontfamily: arial
+    fontsize: 11pt
+    mainfont: Arial
+    sansfont: Arial
+    monofont: "Courier New"
+    monofontoptions: "Scale=0.9"
+    geometry: inner=2.1cm, outer=3cm, top=3cm, bottom=3cm,marginpar=2.5cm,headsep=8mm
+    logo: images/fhnw.eps
+    # titlepage: false
+    link-citations: true
+    crossref:
+      custom:
+        - kind: float
+          reference-prefix: Video
+          key: vid      
+          latex-env: video    
+      # custom Environment have to be listed before the the following settings, otherwise the compilation failes
+      # with error: \@ifundefined{c@chapter}{\newfloat{video}{h}{lovid}}{\newfloat{video}...
+      # unclear when this error happens.. todo
+      title-delim: ":"       # (default is ":")
+      ref-hyperlink: true    # (default is true)
+      labels: arabic         # (default is arabic)
+      subref-labels: alpha a # (default is alpha a)
+    #    % LaTeX Kommentarzeile(?) in Latex hier führt zu Fehlermeldung bei Rendering PDF - nach include-in-header
+    #      Kein Problem wenn der letzte Befehl ein gültiger Befehl ist und vorher keine Kommentarzeile steht.
+    #      with error: \@ifundefined{c@chapter}{\newfloat{video}{h}{lovid}}{\newfloat{video}...
+    # include-after-body: 
+    #   text: |
+    #     \printindex
+    include-in-header: 
+      text: |
+        % LaTeX index
+        %\usepackage{makeidx}
+        %\makeindex     
+        % \AfterTOCHead[toc]{\setkomafont{disposition}{\normalcolor\normalfont}}
+        \AfterTOCHead{
+          \setkomafont{disposition}{\normalcolor\normalfont}
+          \KOMAoptions{parskip=false}% no parskip in ToC
+          \RedeclareSectionCommand[afterskip=1sp minus 1sp]{section}% no skip after ToC title
+        }
+        \DeclareTOCStyleEntry[beforeskip=0cm]{section}{section}
+        \DeclareTOCStyleEntry[beforeskip=0cm]{default}{subsection}
+        %\renewcommand\titlepagestyle{empty}
+        %\renewcommand{\arraystretch}{0.5}     % reduce row height of tables todo test
+        % Abstand Überschriften anpassen / reduzieren
+        % https://tex.stackexchange.com/questions/647739/change-spacing-before-and-after-subsections-in-koma-class
+        \RedeclareSectionCommands[
+          runin=false,
+          afterindent=false,
+          beforeskip=.5\baselineskip,
+          afterskip=0pt]{section, subsection}
+        \RedeclareSectionCommands[% Command*s*, plural
+          runin=true,
+          beforeskip=.5\baselineskip,
+          afterskip=-1ex]{paragraph,subparagraph}
+# https://tex.stackexchange.com/questions/461390/modifying-toc-in-koma-script
+# https://tex.stackexchange.com/questions/645631/eliminate-bold-font-from-toc-only
+# https://tex.stackexchange.com/questions/405307/koma-script-spacing-in-table-of-contents
+engine: knitr
