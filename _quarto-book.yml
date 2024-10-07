@@ -98,7 +98,7 @@ format:
     template: "_resources/templates/eisvogel_314a.tex"
     mermaid:
       theme: neutral
-    keep-tex: true
+    keep-tex: false
     toc: true
     toc-depth: 2    
     highlight-style: arrow
