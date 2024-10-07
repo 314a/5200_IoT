@@ -29,7 +29,7 @@ quarto render --profile book
 ```
 
 ## Anzeigen der Lösungen
-Die Option `solution:true` in den YAML Dateien aktiviert die Lösungen für die Übungen, default ist `solution:false`. Die Lösungen sind in den .Qmd Dateien als 
+Die Option `solution:true` in den YAML Dateien aktiviert die Lösungen für die Übungen, default ist `solution:false`. Die Lösungen sind in den .Qmd Dateien folgendermassen aufgebaut und werden über die Option `unless-meta="solution"` ausgeblendet: 
 
 ```markdown
 ::: {#exr-e01}
