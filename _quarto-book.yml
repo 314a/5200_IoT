@@ -52,7 +52,7 @@ book:
     - A4_Setup.qmd
   site-url: https://314a.github.io/5200_IoT
   repo-url: https://github.com/314a/5200_IoT
-  repo-branch: master
+  repo-branch: main
   repo-actions: [edit, issue]
   downloads: [pdf]
   site-path: /
@@ -65,8 +65,6 @@ book:
     logo: images/logo.jpg
 
 lightbox: true
-bibliography: references.bib
-csl: "_resources/templates/apa.csl"
 solution: false
 number-depth: 1
 date-format: "D. MMMM. YYYY"

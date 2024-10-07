@@ -3,17 +3,10 @@ project:
   
 profile:
   default: chapters
-  # output-dir: chapters
-  # render:
-  #   #- "intro.qmd"
-  #   - L00_minimal_chapter.qmd
-
-# pre-render:
-# - quarto --version
 
 
 bibliography: references.bib
-csl: "_resources/templates/harvard-x.csl"
+csl: "_resources/templates/apa.csl"
 date-format: "DD.MM.YYYY"
 lang: de-CH
 #code-block-background: true      
