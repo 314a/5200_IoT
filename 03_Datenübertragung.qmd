@@ -37,7 +37,7 @@ Der Publisher sendet *publish* eine Nachricht zu einem Topic (beispielsweise *ge
 
 Mit zunehmender Rechenleistung auf IoT Geräten können diese vermehrt selbst Daten prozessieren, was eine Verlagerung der Analyse ermöglicht. Die Begriffe Cloud, Edge und Fog bezeichnen im wesentlichen wo in Infrastrukturen die Datenprozessierung durchgeführt wird. In **Cloud** Infrastrukturen erfolgt die Prozessierung zentralisiert in der Cloud und grossen Recheninfrastrukturen, wohingegen **Edge**-Computing eine Infrastruktur bezeichnet, in der die lokalen Geräte selbst einen Teil der Daten dezentral und möglichst lokal verarbeiten. Fog - ein von Cisco eingeführter Begriff - bezeichnet Cloud Computing im lokalen Netzwerk, beispielsweise könnte ein Transportunternehmen die Verwaltung der Datenprozessierung in der eigenen Cloud durchführen.
 
-![Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der "Hype" *Cloud-Out to Edge* den Peak of Inflated Expectations [@gartner2023]](images/gartner_hypecycle_2023.png){width=50%}
+![Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der "Hype" *Cloud-Out to Edge* den Peak of Inflated Expectations [@Gartner2023]. Das Hype Cycle Thema "Cloud-Out to Edge" wurde im aktualisierten Hype Cycle [-@Gartner2024] als Hype Thema entfernt.](images/gartner_hypecycle_2023.png){width=50%}
 
 ::: {.content-visible when-profile="chapter"}
 ## Referenzen
