@@ -205,16 +205,3 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 
 \xkcd[Hi there.. you know]{How cool is this.. to just nerd around-}\xkcd[Tell me ..]{In a lecture script. Yes, totally!}
 
-## Tweets - how to include them
-Select Tweet, open the small menu top-right of the tweet and select "Tweet einbeten" (embed tweet) copy the html content to the markdown document.
-
-```{.html}
-<blockquote class="twitter-tweet">
-    <p lang="de" dir="ltr">Infoabend zum CAS Spatial Data Analytics (CAS Start am 22.08.2022) Mo 13.06 ab 17.00 - Stärkt Euch, Euer Team in digitalen Prozessen, Analysen und Dienstleistungen mit Geodaten. <a href="https://t.co/cJ2o6WUNGI">https://t.co/cJ2o6WUNGI</a>
-    </p> &mdash; 3.14a (&#64;314a) 
-    <a href="https://twitter.com/314a/status/1531578910109990913?ref_src=twsrc%5Etfw">May 31, 2022</a>
-</blockquote> 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-```
-
-<blockquote class="twitter-tweet"><p lang="de" dir="ltr">Infoabend zum CAS Spatial Data Analytics (CAS Start am 22.08.2022) Mo 13.06 ab 17.00 - Stärkt Euch, Euer Team in digitalen Prozessen, Analysen und Dienstleistungen mit Geodaten.<a href="https://t.co/cJ2o6WUNGI">https://t.co/cJ2o6WUNGI</a></p>&mdash; 3.14a (&#64;314a) <a href="https://twitter.com/314a/status/1531578910109990913?ref_src=twsrc%5Etfw">May 31, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

@@ -55,27 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -231,7 +211,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Datenübertragung.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_Datenuebertragung.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datenübertragung</span></span></a>
   </div>
 </li>
@@ -376,7 +356,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">10. Oktober. 2024</p>
+      <p class="date">14. Oktober. 2024</p>
     </div>
   </div>
   
@@ -404,7 +384,7 @@ window.Quarto = {
 <ul>
 <li>Konzentriere Dich auf die wichtigsten Details zur Inbetriebnahme des Raspberry Pi</li>
 </ul></li>
-<li>Lest die Dokumentation zum BME688 Sensor <span class="citation" data-cites="bosch2022"><span>„Gas Sensor <span>BME688</span>“</span> (<a href="references.html#ref-bosch2022" role="doc-biblioref">o.&nbsp;J.</a>)</span>
+<li>Lest die Dokumentation zum BME688 Sensor <span class="citation" data-cites="bosch2022">@bosch2022</span>
 <ul>
 <li>Konzentriere Dich auf die Beschreibung der Schnittstelle und technische Spezifikation auf dem Datenblatt</li>
 </ul></li>
@@ -609,7 +589,7 @@ Studiert die Python Skripte und online Tutorial zum Sensor</p>
 <section id="aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-berechnung-der-atmosphärenkorrektur-für-distanzmessungen-optional">Aufgabe 2: Berechnung der Atmosphärenkorrektur für Distanzmessungen (optional)</h2>
 <p>Geödätische Distanzmessverfahren wie bei der Tachymetrie (Totalstationen) und Laserscanning benötigen eine Korrektur der Messwerte, um die Distanz zwischen zwei Punkten auf der Erde zu berechnen. Über eine <em>Massstabskorrektur</em> (ppm [mm/km]) können distanzproportionale Reduzierungen berücksichtigt werden, die <em>Projektionsverzerrung</em>, <em>Reduktion auf Meereshöhe</em> und die <em>Atmophärenkorrektur</em> berücksichtigen. Die Luftfeichtigkeit beeinflusst Distanzmessungen in feuchtem und heissen Klima. Diese muss den zur Messzeit geltenden atmosphärischen Bedingungen angepasst werden.</p>
-<p>Die Korrektur wird als <em>Atmosphärenkorrektur</em> bezeichnet und ist abhängig von der <em>Temperatur</em>, dem <em>Luftdruck</em> und der <em>Luftfeuchtigkeit</em>. Die Korrektur wird in ppm (parts per million [mm/km]) angegeben und kann mit folgender <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>4.1</span></a> berechnet werden <span class="citation" data-cites="grimm2023 leicageosystems2022">(<a href="references.html#ref-grimm2023" role="doc-biblioref">Grimm, 2023</a>; <a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems, 2022, S. 87</a>)</span> und gilt für die Distanzmessung mit sichtbaren roten Laser</p>
+<p>Die Korrektur wird als <em>Atmosphärenkorrektur</em> bezeichnet und ist abhängig von der <em>Temperatur</em>, dem <em>Luftdruck</em> und der <em>Luftfeuchtigkeit</em>. Die Korrektur wird in ppm (parts per million [mm/km]) angegeben und kann mit folgender <a href="#eq-atmosphaerenkorrektur" class="quarto-xref">Gleichung&nbsp;<span>4.1</span></a> berechnet werden <span class="citation" data-cites="grimm2023 leicageosystems2022">[@grimm2023; @leicageosystems2022 S.87]</span> und gilt für die Distanzmessung mit sichtbaren roten Laser</p>
 <p><span id="eq-atmosphaerenkorrektur"><span class="math display">\[
 \Delta D_1 = 286.338 - \begin{bmatrix}\frac{0.29535 \cdot p}{(1+\alpha \cdot t)}-\frac{4.126 \cdot 10^{-4} \cdot h}{(1+\alpha \cdot t)} \cdot 10^x\end{bmatrix}
 \tag{4.1}\]</span></span></p>
@@ -648,7 +628,7 @@ Studiert die Python Skripte und online Tutorial zum Sensor</p>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"correction_ppm"</span>: correction_ppm</span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Für Distanzmessungen höchster Genauigkeit sollte die atmosphärische Korrektur auf <span class="math inline">\(1 ppm\)</span> genau bestimmt werden, folglich sollten die Messwerte mindestens folgenden Genauigkeit aufweisen: die Temperatur auf <span class="math inline">\(1°C\)</span>, der Luftdruck auf <span class="math inline">\(3 mbar\)</span> (<span class="math inline">\(1 Millibar= 1 hPa\)</span>) und die Luftfeuchtigkeit auf <span class="math inline">\(20 %\)</span> genau bestimmt werden <span class="citation" data-cites="leicageosystems2022">(<a href="references.html#ref-leicageosystems2022" role="doc-biblioref">Leica Geosystems, 2022, S. 87</a>)</span>.</p>
+<p>Für Distanzmessungen höchster Genauigkeit sollte die atmosphärische Korrektur auf <span class="math inline">\(1 ppm\)</span> genau bestimmt werden, folglich sollten die Messwerte mindestens folgenden Genauigkeit aufweisen: die Temperatur auf <span class="math inline">\(1°C\)</span>, der Luftdruck auf <span class="math inline">\(3 mbar\)</span> (<span class="math inline">\(1 Millibar= 1 hPa\)</span>) und die Luftfeuchtigkeit auf <span class="math inline">\(20 %\)</span> genau bestimmt werden <span class="citation" data-cites="leicageosystems2022">[@leicageosystems2022 S.87]</span>.</p>
 <div id="exr-atmosphaerenkorrektur" class="theorem exercise">
 <p><span class="theorem-title"><strong>Übung 4.2</strong></span> <strong>Atmosphärenkorrektur</strong><br>
 Nutzt die Funktion <code>calculate_atmospheric_correction</code> um eine atmosphärische Korrektur mit den momentan gemessenen amtmosphärischen Bedingungen zu berechnen.</p>
@@ -661,17 +641,6 @@ Nutzt die Funktion <code>calculate_atmospheric_correction</code> um eine atmosph
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-bosch2022" class="csl-entry" role="listitem">
-Gas Sensor <span>BME688</span>. (o.&nbsp;J.). In <em>Bosch Sensortec</em>. https://www.bosch-sensortec.com/products/environmental-sensors/gas-sensors/bme688/.
-</div>
-<div id="ref-grimm2023" class="csl-entry" role="listitem">
-Grimm, D. (2023). <em>2030 <span>Geod<span>ä</span>tische Messtechnik GMT I</span></em>.
-</div>
-<div id="ref-leicageosystems2022" class="csl-entry" role="listitem">
-Leica Geosystems. (2022). <em>Leica <span>TS60</span>/<span>MS60</span>/<span>TM60 Gebrauchsanweisung</span></em>.
-</div>
-</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -1127,7 +1096,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -55,27 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -202,7 +182,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Datenübertragung.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_Datenuebertragung.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datenübertragung</span></span></a>
   </div>
 </li>
@@ -341,7 +321,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">10. Oktober. 2024</p>
+      <p class="date">14. Oktober. 2024</p>
     </div>
   </div>
   
@@ -366,7 +346,7 @@ div.csl-indent {
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Schaut Euch folgendes von Video von Peter Charlton zur Funktionsweise der Herzfrequenzmessung an: <a href="https://www.youtube.com/embed/HnXDvN4WNX8?si=EeIAlSWW2Z1SJBof">Photoplethysmography in a minute (and a bit) - Peter Charlton</a></li>
-<li>Studiere das Datenblatt zum MAX30101 <span class="citation" data-cites="maximintegrated2020">(<a href="references.html#ref-maximintegrated2020" role="doc-biblioref">maxim integrated, 2020</a>)</span>
+<li>Studiere das Datenblatt zum MAX30101 <span class="citation" data-cites="maximintegrated2020">[@maximintegrated2020]</span>
 <ul>
 <li>In welchen Temperaturbereichen kann der Sensor eingesetzt werden?</li>
 <li>Welches ist die höchste Abtastrate für die Sauerstoffmessungen?</li>
@@ -414,7 +394,7 @@ div.csl-indent {
 <a href="images/MAX30101_wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram des MAX30101 Moduls Quelle: @maximintegrated2020"><img src="images/MAX30101_wide.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MAX30101-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram des MAX30101 Moduls Quelle: <span class="citation" data-cites="maximintegrated2020">maxim integrated (<a href="references.html#ref-maximintegrated2020" role="doc-biblioref">2020</a>)</span>
+Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagram des MAX30101 Moduls Quelle: <span class="citation" data-cites="maximintegrated2020">@maximintegrated2020</span>
 </figcaption>
 </figure>
 </div>
@@ -520,11 +500,6 @@ Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagra
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-maximintegrated2020" class="csl-entry" role="listitem">
-maxim integrated. (2020). <em><span>MAX30101 High-Sensitivity Pulse Oximeter</span> and <span>Heart-Rate Sensor</span> for <span>Wearable Health</span></em>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -974,7 +949,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

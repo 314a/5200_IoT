@@ -71,7 +71,7 @@ Die drei wesentlichen technologischen IoT Komponenten sind folglich:
 
 Betrachtet man die Dimensionen von IoT fügt sich aus der Sicht der Kommunikationstechnologie das *thing* mit ein [@ITU2005]. Aus Sicht der Geoinformation, sind diese drei Dimensionen sehr vertraut mit *Zeit*, *Ort* und *Objekt* dem *thing*. 
 
-![Dimensionen der IoT, eine neue Dimension aus Sicht der Kommunikationstechnologie](images/iot_dimension.jpg){width=80%}
+![Dimensionen der IoT, eine neue Dimension aus Sicht der Kommunikationstechnologie [@ITU2005]](images/iot_dimension.jpg){width=80%}
 
 IoT Geräte haben neben der wichtigsten Eigenschaft, dass sie mit dem Netzwerk/Internet kommunizieren können, folgende typischen Eigenschaften. Sie sind oft **funkbasiert** und oft **batteriebetrieben**. Sie lassen sich daher einfach installieren, jedoch muss im Betrieb dem Batteriebetrieb der Verbrauch berücksichtigt werden und nach Anforderung (Laufzeit vs häufige Updates) priorisiert werden^[Der Raspberry Pi ist insofern mit dem verhältnissmässigen hohen Stromverbrauch kein typisches IoT Device]. 
 
@@ -83,7 +83,7 @@ Der Vizepräsident der USA AL Gore führte 1998 in seiner Rede das Konzept der d
 
 Die Umsetzung der Vision "Digital Earth"\index{Digital Earth} erfordert wie auch die IoT eine entsprechende Infrastruktur, die das Auffinden, den Zugriff, die Analyse und die Verarbeitung von raumbezogenen Daten ermöglicht. @granell2020 fordern eine permanente und verstärkte Zusammenarbeit beider Bereiche. Betrachtet man die Rolle der Netzwerke und Interaktion in beiden Bereichen, kann ein Worklow von (1) der Auffindbarkeit, Erfassung und Kommunikation räumlicher Informationen, zu (2) Verständnis räumlicher Objekte und ihrer Beziehungen, dann (3) Bestimmung des raum-zeitlichen Verhaltens und der Simulationsregeln und dem (4) Handeln und Ergreifen fundierter Maßnahmen gezeichnet werden. Bei (1) kann IoT mit neuen Quellen und höheren Aufnahme- und Übertragungsfrequenzen den Workflow anreichern und (2) erfordert eine kontinuierliche vertiefte Zusammenarbeit beider Infrastrukturen. Im Bereich IoT werden räumlichen Analysen wird aufgrund der aufkommenden Edge-Fog-Cloud Paradigmen zunehmen.
 
-![IoT und Digital Earth Workflow @granell2020](images/digital_earth_iot.png){width=50%}
+![IoT und Digital Earth Workflow [@granell2020]](images/digital_earth_iot.png){width=50%}
 
 **Die Auffindbarkeit, Erfassung und Kommunikation** räumlicher Informationen erfordert das Geräte und ihre Daten auffindbar und zugänglich sind mit standardisierten Methoden in globalen zentralisierten Sammlungen, oder über dezentralen oder hierarchischen Ansätzen. Viele dieser Dienste erfordern Fachkenntnisse und einfache Zugänge zu IoT Daten fehlen. Der OGC Standard Sensor Web Enablement SWE standardisiert die Erkennung und der Zugriff auf Sensoren. Bei der räumlichen Datenerfassung in IoT haben Sensor-Metadaten eine hohe Bedeutung, wobei der SensorML-Standard einer der wichtigsten ist [@granell2020].
 
@@ -111,7 +111,7 @@ Ansätze zur räumlichen-zeitlichen Datenanalyse in Echtzeit haben noch keine st
 
 @kamilaris2018 klassieren und geben eine Übersicht von IoT Anwendungen\index{IoT Anwendungen} und Forschungsprojekte im Kontext der GIScience und IoT. Die Anwendungsbiete sind vielfältig, wie in folgender Abbildung illustriert. In fast allen aufgeführten Anwendungsgebieten sind Aussagen zum Standort relevant.
 
-![Ökosystem der Anwendungen in mobile Computing im Zusammenspiel mit Sensoren von IoT Geräten.](images/iot_ecosystem_mobile.png){width=50%}
+![Ökosystem der Anwendungen in mobile Computing im Zusammenspiel mit Sensoren von IoT Geräten [@kamilaris2018]](images/iot_ecosystem_mobile.png){width=50%}
 
 Sie führen für die verschiedenen Anwendungsgebiete die benutzten Methodenklassen der räumlichen Analyse\index{Räumliche Analysemethoden}.
 

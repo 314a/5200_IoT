@@ -3,6 +3,8 @@ project:
   output-dir: docs
   pre-render:
     - _resources/scripts/batch.cmd docs
+  post-render:
+    - _resources/scripts/delete_auxiliary_latex_files.cmd
 filters:
   - _resources/scripts/filter_styleDiv.lua
   # - _resources/scripts/filter_hideSolution.lua
@@ -31,7 +33,7 @@ book:
       chapters:
       - 01_IoT.qmd
       - 02_Sensoren.qmd
-      - 03_Datenübertragung.qmd
+      - 03_Datenuebertragung.qmd
       #- 04_Datenverwaltung.qmd
       #- 05_Visualisierung.qmd
       - references.qmd

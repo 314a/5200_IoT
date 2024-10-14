@@ -55,27 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -202,7 +182,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Datenübertragung.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_Datenuebertragung.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datenübertragung</span></span></a>
   </div>
 </li>
@@ -343,7 +323,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">10. Oktober. 2024</p>
+      <p class="date">14. Oktober. 2024</p>
     </div>
   </div>
   
@@ -368,11 +348,11 @@ div.csl-indent {
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Schaut das Video von AMS zum <a href="https://www.youtube.com/embed/KKyHxXyaVPM?si=hvO1IVbdwbjnDI40">AS7262 Spektralsensor</a> (bis Minute 2:20)</li>
-<li>Lest das White Paper von <span class="citation" data-cites="Jensen2020">Jensen (<a href="references.html#ref-Jensen2020" role="doc-biblioref">2020</a>)</span> über Spektralsensoren
+<li>Lest das White Paper von <span class="citation" data-cites="Jensen2020">@Jensen2020</span> über Spektralsensoren
 <ul>
 <li>Konzentriere Dich da auf die Beschreibung der <em>Multi-channel spectral sensors</em> und in welchen Gebieten diese Sensoren eingesetzt werden.</li>
 </ul></li>
-<li>Studiert das Datenblatt zum AS7262 Spektralsensor <span class="citation" data-cites="ams2022">AMS OSRAM Group (<a href="references.html#ref-ams2022" role="doc-biblioref">2022</a>)</span>
+<li>Studiert das Datenblatt zum AS7262 Spektralsensor <span class="citation" data-cites="ams2022">@ams2022</span>
 <ul>
 <li>In welchen Temperaturbereichen kann der Sensor eingesetzt werden?</li>
 </ul></li>
@@ -407,9 +387,9 @@ div.csl-indent {
 </section>
 <section id="spektrometer" class="level2">
 <h2 class="anchored" data-anchor-id="spektrometer">Spektrometer</h2>
-<p>Spektrometer, sind Sensoren, die das Licht auf einzelne Bänder der Wellenlänge (in Nanometer nm) messen. Für das menschliche Auge wird das sichtbare Spektrum zwischen 360nm bis 830nm angegeben, wobei sich der Bereich unter optimalen Bedingungen in UV und NIR erstrecken kann <span class="citation" data-cites="sliney2016">(<a href="references.html#ref-sliney2016" role="doc-biblioref">Sliney, 2016</a>)</span>.</p>
+<p>Spektrometer, sind Sensoren, die das Licht auf einzelne Bänder der Wellenlänge (in Nanometer nm) messen. Für das menschliche Auge wird das sichtbare Spektrum zwischen 360nm bis 830nm angegeben, wobei sich der Bereich unter optimalen Bedingungen in UV und NIR erstrecken kann <span class="citation" data-cites="sliney2016">[@sliney2016]</span>.</p>
 <p>Auf kleinen Chip verbaute Spektralsensoren ermöglichen zahlreiche neue Anwendungen, die früher mit grossen Spektroskopen durchgeführt wurden. Die Spektralsensorsysteme finden Anwendung wie Farbbestimmung, Authentifizierung und Spektralanalyse von Substanzen, Materialien, Lebensmitteln und Flüssigkeiten und werden in den Bereichen von Konsumgütern, Industrie und Medizin eingesetzt.</p>
-<p>Ein Multispektralsensor liefert die Antwort auf die Frage, ob eine orangefarbene Probe eine Mischung aus Rot und Gelb oder ein reines Orange ist. Multispektralsensoren teilen das gewählte Spektrum in Spektralkanäle auf (siehe <a href="#fig-as7262" class="quarto-xref">Abb.&nbsp;<span>5.1</span></a>) und sind so angeordnet, dass die Spektralkanäle kontinuierlich gut abgedeckt sind. Die Messung erfolgt im sichtbaren Bereich radiometrisch <span class="citation" data-cites="Jensen2020">(<a href="references.html#ref-Jensen2020" role="doc-biblioref">Jensen, 2020</a>)</span>. Das heißt, der Sensor misst die spektrale Leistungsverteilung der Messung.</p>
+<p>Ein Multispektralsensor liefert die Antwort auf die Frage, ob eine orangefarbene Probe eine Mischung aus Rot und Gelb oder ein reines Orange ist. Multispektralsensoren teilen das gewählte Spektrum in Spektralkanäle auf (siehe <a href="#fig-as7262" class="quarto-xref">Abb.&nbsp;<span>5.1</span></a>) und sind so angeordnet, dass die Spektralkanäle kontinuierlich gut abgedeckt sind. Die Messung erfolgt im sichtbaren Bereich radiometrisch <span class="citation" data-cites="Jensen2020">[@Jensen2020]</span>. Das heißt, der Sensor misst die spektrale Leistungsverteilung der Messung.</p>
 </section>
 <section id="as7262-multispektralsensor" class="level2">
 <h2 class="anchored" data-anchor-id="as7262-multispektralsensor">AS7262 Multispektralsensor</h2>
@@ -528,17 +508,6 @@ Führt einige Messungen mit unterschiedlichen Lichtquellen und Materialien durch
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-ams2022" class="csl-entry" role="listitem">
-AMS OSRAM Group. (2022). <em>Datasheet <span>AS7262</span> 6-<span>Channel Visible Spectral</span>_<span>ID Device</span> with <span>Electronic Shutter</span> and <span>Smart Interface</span></em>. AMS OSRAM Group.
-</div>
-<div id="ref-Jensen2020" class="csl-entry" role="listitem">
-Jensen, K. (2020). <em>White <span>Paper Chip-scale</span> Spectral Sensing: Understanding the New Uses for Ultra-Precise Light-Source Measurement</em> (S. 10) [White {{Paper}}]. AMS.
-</div>
-<div id="ref-sliney2016" class="csl-entry" role="listitem">
-Sliney, D. H. (2016). What Is Light? <span>The</span> Visible Spectrum and Beyond. <em>Eye</em>, <em>30</em>(2), 222–229. <a href="https://doi.org/10.1038/eye.2015.252">https://doi.org/10.1038/eye.2015.252</a>
-</div>
-</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -994,7 +963,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

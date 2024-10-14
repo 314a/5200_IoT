@@ -164,7 +164,7 @@ cython_debug/
 /.luarc.json
 .Rproj.user
 
-# Latex
+# LaTeX
 .maf
 .mtc
 .mtc0

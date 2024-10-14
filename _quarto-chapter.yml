@@ -8,7 +8,7 @@ project:
   render:
     - 01_IoT.qmd
     - 02_Sensoren.qmd
-    - 03_Datenübertragung.qmd
+    - 03_Datenuebertragung.qmd
     - E01_Luftqualitaet.qmd
     - E02_Spektralmessung.qmd
     - E03_Bewegungsmessung.qmd
@@ -22,6 +22,8 @@ project:
     - A4_Setup.qmd
  # pre-render:
  # - quarto --version
+  post-render:
+    - _resources/scripts/delete_auxiliary_latex_files.cmd
 filters:
   # - _resources/scripts/filter_cite.lua
   - _resources/scripts/filter_styleDiv.lua
@@ -35,6 +37,7 @@ format:
     template: "_resources/templates/eisvogel_314a.tex"
     shift-heading-level-by: -1
     keep-tex: false
+    # latex-clean: true <- verlangsamt den Build-Prozess
     toc: true
     toc-depth: 1
     number-sections: true

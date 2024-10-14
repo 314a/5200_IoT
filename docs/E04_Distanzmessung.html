@@ -55,27 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -202,7 +182,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_Datenübertragung.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_Datenuebertragung.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datenübertragung</span></span></a>
   </div>
 </li>
@@ -342,7 +322,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">10. Oktober. 2024</p>
+      <p class="date">14. Oktober. 2024</p>
     </div>
   </div>
   
@@ -367,7 +347,7 @@ div.csl-indent {
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Schaut folgende von Video von Adafruit Industries zur Funktionsweise des VL53L5CX Sensors an: <a href="https://www.youtube.com/embed/nf527vcKRSE?si=Q2Wm_pS2O1n99-ha">EYE ON NPI - ST VL53L5CX Time-of-Flight Ranging Sensor</a></li>
-<li>Studiere das Datenblatt zum VL53L5CX <span class="citation" data-cites="st2021">(<a href="references.html#ref-st2021" role="doc-biblioref">STMicroelectronics, 2021</a>)</span>, sowie die <em>Application Note</em> <span class="citation" data-cites="st2023">(<a href="references.html#ref-st2023" role="doc-biblioref">STMicroelectronics, 2023</a>)</span>
+<li>Studiere das Datenblatt zum VL53L5CX <span class="citation" data-cites="st2021">[@st2021]</span>, sowie die <em>Application Note</em> <span class="citation" data-cites="st2023">[@st2023]</span>
 <ul>
 <li>In welchen Temperaturbereichen kann der Sensor eingesetzt werden?</li>
 <li>Welches ist die höchste Abtastrate für die Distanzfeldmessungen?</li>
@@ -415,7 +395,7 @@ div.csl-indent {
 <a href="images/VL53L5CX_wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;7.1: links: VL53L5CX Breakout von Pimoroni, rechts: schematische Darstellung TOF Moduls Quelle: @st2023"><img src="images/VL53L5CX_wide.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vl53l5cx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;7.1: links: VL53L5CX Breakout von Pimoroni, rechts: schematische Darstellung TOF Moduls Quelle: <span class="citation" data-cites="st2023">STMicroelectronics (<a href="references.html#ref-st2023" role="doc-biblioref">2023</a>)</span>
+Abb.&nbsp;7.1: links: VL53L5CX Breakout von Pimoroni, rechts: schematische Darstellung TOF Moduls Quelle: <span class="citation" data-cites="st2023">@st2023</span>
 </figcaption>
 </figure>
 </div>
@@ -569,14 +549,6 @@ Abb.&nbsp;7.2: Aufbau der Versuchsanordnung für die Distanzmessung mit dem LCD 
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-st2021" class="csl-entry" role="listitem">
-STMicroelectronics. (2021). <em><span>VL53L5CX</span> - <span>Datasheet</span> - <span>Time-of-Flight</span> 8x8 Multizone Ranging Sensor with Wide Field of View</em>.
-</div>
-<div id="ref-st2023" class="csl-entry" role="listitem">
-STMicroelectronics. (2023). <em>Description of the Fields of View of <span>STMicroelectronics</span>’ <span>Time-of-Flight</span> Sensors</em>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -1026,7 +998,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
