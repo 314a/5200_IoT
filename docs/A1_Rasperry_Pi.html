@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -341,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Open Source Einplatinenrechner werden in Bildung und Forschung eingesetzt und haben eine breite Anwendung in weiteren Bereichen wie IoT. SBCs haben grosse Bedeutung in der Ingenieur- und Informatikausbildung, da sie sich gut für Hands-on Vermittlung komplexer Themen eignen, und verbessern technische Fähigkeiten, stärken das Interesse und Motivation <span class="citation" data-cites="ariza2022">[@ariza2022]</span>.</p>
+<p>Open Source Einplatinenrechner werden in Bildung und Forschung eingesetzt und haben eine breite Anwendung in weiteren Bereichen wie IoT. SBCs haben grosse Bedeutung in der Ingenieur- und Informatikausbildung, da sie sich gut für Hands-on Vermittlung komplexer Themen eignen, und verbessern technische Fähigkeiten, stärken das Interesse und Motivation <span class="citation" data-cites="ariza2022">(<a href="references.html#ref-ariza2022" role="doc-biblioref">Ariza &amp; Baez, 2022</a>)</span>.</p>
 <dl>
 <dt>System on Chip SOC </dt>
 <dd>
@@ -377,7 +397,7 @@ ist ein Computer auf einer Leiterplatine mit allen erforderlichen Komponenten un
 <figcaption>links: Die Website <a href="https://.pinout.xyz" class="uri">https://.pinout.xyz</a> bietet eine interaktive Übersicht und Dokumentation der Pinouts der einzelnen Raspberry Pi Modellen, wie beispielsweise welche Pins die Schnittstelle I2C ansteuern. rechts: Der Befehl <code>pinout</code> liefert direkt über das Terminal das Pinout des Raspberry Pi</figcaption>
 </figure>
 </div>
-<p>Raspberry Pi war von der weltweiten Chip- und Halbleiterknappheit betroffen und hatte seit 2020 tiefe Lagerbestände von elektronischen Komponenten. Die Nachfrage nach Raspberry Pi ist seit 2020 stark gestiegen und die Produktionskapazitäten konnten nicht erhöht werden. Die Produktionsengpässe werden sich voraussichtlich ab Ende 2023 verbessern <span class="citation" data-cites="upton2022">[@upton2022]</span>. Die Knappheit führte zu einem Preisanstieg von 50% bis 100% bei den Raspberry Pi Modellen und zu einer Verknappung der Raspberry Pi Modelle. Der Dienst <a href="https://rpilocator.com/?country=CH">Raspberry Pi Stock Scraper</a> führt eine Übersicht der Verfügbarkeit der weltweiten Raspberry Pi Lagerbeständen von online Shops. Der <a href="https://www.pi-shop.ch/bundles-kits">Pi-Shop</a> hat teilweise Kits und Boards in der Schweiz an Lager.</p>
+<p>Raspberry Pi war von der weltweiten Chip- und Halbleiterknappheit betroffen und hatte seit 2020 tiefe Lagerbestände von elektronischen Komponenten. Die Nachfrage nach Raspberry Pi ist seit 2020 stark gestiegen und die Produktionskapazitäten konnten nicht erhöht werden. Die Produktionsengpässe werden sich voraussichtlich ab Ende 2023 verbessern <span class="citation" data-cites="upton2022">(<a href="references.html#ref-upton2022" role="doc-biblioref">Upton, 2022</a>)</span>. Die Knappheit führte zu einem Preisanstieg von 50% bis 100% bei den Raspberry Pi Modellen und zu einer Verknappung der Raspberry Pi Modelle. Der Dienst <a href="https://rpilocator.com/?country=CH">Raspberry Pi Stock Scraper</a> führt eine Übersicht der Verfügbarkeit der weltweiten Raspberry Pi Lagerbeständen von online Shops. Der <a href="https://www.pi-shop.ch/bundles-kits">Pi-Shop</a> hat teilweise Kits und Boards in der Schweiz an Lager.</p>
 <section id="raspberry-pi-image-schreiben" class="level2">
 <h2 class="anchored" data-anchor-id="raspberry-pi-image-schreiben">Raspberry Pi Image schreiben</h2>
 <p>Der Raspberry Pi führt keinen internen Speicher mit sich, sondern benötigt eine SD-Karte. Auf dieser SD-Karte wird das Betriebssystem installiert, respektive als Image auf die MicroSD Karte geschrieben. Die SD-Karte muss mindestens 8 GB Speicherplatz haben idealerweise 16 GB oder mehr.</p>
@@ -530,6 +550,14 @@ Abb.&nbsp;A.1: Shell über die Softwareleiste öffnen
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-ariza2022" class="csl-entry" role="listitem">
+Ariza, J. Á., &amp; Baez, H. (2022). Understanding the Role of Single-Board Computers in Engineering and Computer Science Education: <span>A</span> Systematic Literature Review. <em>Computer Applications in Engineering Education</em>, <em>30</em>(1), 304–329. <a href="https://doi.org/10.1002/cae.22439">https://doi.org/10.1002/cae.22439</a>
+</div>
+<div id="ref-upton2022" class="csl-entry" role="listitem">
+Upton, E. (2022). Supply Chain Update - It’s Good News! In <em>Raspberry Pi</em>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -979,7 +1007,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

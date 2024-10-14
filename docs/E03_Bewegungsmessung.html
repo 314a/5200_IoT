@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -352,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Video: <a href="https://www.youtube.com/embed/eqZgxR6eRjo?si=u28t9yfD4BLPeYGd">How MEMS Accelerometer Gyroscope Magnetometer Work</a> (bis Minute 2:50), sowie folgendes</li>
 <li>Video: <a href="https://www.youtube.com/embed/swCTbz5sIQM?si=Uga2sPKfiQW7EO6z">Bosch Funktionsprinzip eines Beschleunigungssensors</a></li>
 </ul></li>
-<li>Studiere das Datenblatt zum ICM-20948 <span class="citation" data-cites="tdk2021">[@tdk2021]</span>
+<li>Studiere das Datenblatt zum ICM-20948 <span class="citation" data-cites="tdk2021">(<a href="references.html#ref-tdk2021" role="doc-biblioref">InvenSense, 2021</a>)</span>
 <ul>
 <li>In welchen Temperaturbereichen kann der Sensor eingesetzt werden?</li>
 </ul></li>
@@ -515,6 +535,11 @@ Abb.&nbsp;6.1: a) schematische Darstellung eines MEMS Beschleunigungssensors Que
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-tdk2021" class="csl-entry" role="listitem">
+InvenSense, T. (2021). <em><span>ICM-20948 World</span>’s <span>Lowest Power</span> 9-<span>Axis MEMS MotionTracking</span>™ <span>Device</span></em>.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -970,7 +995,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

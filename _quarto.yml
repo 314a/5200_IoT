@@ -7,9 +7,9 @@ profile:
 
 bibliography: references.bib
 csl: "_resources/templates/apa.csl"
-cite-method: biblatex
-biblatexoptions:
-  - citestyle = authoryear
+# cite-method: biblatex
+# biblatexoptions:
+#   - citestyle = authoryear
 date-format: "DD.MM.YYYY"
 lang: de-CH
 #code-block-background: true      

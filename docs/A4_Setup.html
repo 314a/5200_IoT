@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -517,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="konfigurationsdateien-editieren">Konfigurationsdateien editieren</h2>
 <section id="raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen" class="level3">
 <h3 class="anchored" data-anchor-id="raspberry-pi-einstellungen-für-i2c-spi-ssh-vnc-anpassen">Raspberry Pi Einstellungen für I2C, SPI, SSH, VNC anpassen</h3>
-<p><strong>Interface Options aktivieren</strong> In den Raspberry Pi Konfigurationseinstellungen mit <code>sudo raspi-config</code> die Interface Optionen <em>I2C, SPI, SSH und ev VNC (Virtual Network Computing) oder RPi Connect</em> aktivieren. VNC, RPi Connect <span class="citation" data-cites="RaspberryPiLtd2024">[@RaspberryPiLtd2024,@Hollingworth2024]</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> werden nur benötigt, wenn der Raspberry Pi über Fernzugriff gesteuert werden soll.</p>
+<p><strong>Interface Options aktivieren</strong> In den Raspberry Pi Konfigurationseinstellungen mit <code>sudo raspi-config</code> die Interface Optionen <em>I2C, SPI, SSH und ev VNC (Virtual Network Computing) oder RPi Connect</em> aktivieren. VNC, RPi Connect <span class="citation" data-cites="RaspberryPiLtd2024">Hollingworth (<a href="references.html#ref-Hollingworth2024" role="doc-biblioref">2024</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> werden nur benötigt, wenn der Raspberry Pi über Fernzugriff gesteuert werden soll.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/raspberry_pi_enable_ssh_spi_i2c.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Über die Konsole raspi-config starten und über das Konsolenmenu (links) die Einstellungen in den Interface Options (rechts) I2C, SPI, SSH und ev VNC aktivieren."><img src="images/raspberry_pi_enable_ssh_spi_i2c.png" class="img-fluid figure-img" alt="Über die Konsole raspi-config starten und über das Konsolenmenu (links) die Einstellungen in den Interface Options (rechts) I2C, SPI, SSH und ev VNC aktivieren."></a></p>
@@ -527,12 +547,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="baud-rate-des-i2c-protokolls-anpassen" class="level3">
 <h3 class="anchored" data-anchor-id="baud-rate-des-i2c-protokolls-anpassen">Baud rate des I2C Protokolls anpassen</h3>
-<p>Baud rate des I2C Protokolls mit <code>sudo nano /boot/firmware/config.txt</code> öffnen und folgende Zeile ergänzen. Mit <code>Ctrl+o</code> und <code>Ctrl+x</code> speichern <span class="citation" data-cites="RaspberryPiLtd2024a">[siehe @RaspberryPiLtd2024a]</span>.</p>
+<p>Baud rate des I2C Protokolls mit <code>sudo nano /boot/firmware/config.txt</code> öffnen und folgende Zeile ergänzen. Mit <code>Ctrl+o</code> und <code>Ctrl+x</code> speichern <span class="citation" data-cites="RaspberryPiLtd2024a">(siehe <a href="references.html#ref-RaspberryPiLtd2024a" role="doc-biblioref">Raspberry Pi Ltd, 2024b</a>)</span>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">dtparam</span><span class="op">=</span>i2c_arm=on,i2c_arm_baudrate=400000</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="mosquitto-server-konfiguration" class="level3">
 <h3 class="anchored" data-anchor-id="mosquitto-server-konfiguration">Mosquitto Server Konfiguration</h3>
-<p><strong>Mosquitto Server Konfiguration</strong> anpassen mit <code>sudo nano /etc/mosquitto/mosquitto.conf</code> und am Ende der Datei folgendes einfügen <span class="citation" data-cites="EclipseFoundation2021">[@EclipseFoundation2021]</span>.</p>
+<p><strong>Mosquitto Server Konfiguration</strong> anpassen mit <code>sudo nano /etc/mosquitto/mosquitto.conf</code> und am Ende der Datei folgendes einfügen <span class="citation" data-cites="EclipseFoundation2021">(<a href="references.html#ref-EclipseFoundation2021" role="doc-biblioref">Eclipse Foundation, 2021</a>)</span>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">listener</span> 1883</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">allow_anonymous</span> true</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Mosquitto Server neu starten mit <code>sudo systemctl restart mosquitto</code></p>
@@ -683,6 +703,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-EclipseFoundation2021" class="csl-entry" role="listitem">
+Eclipse Foundation. (2021). Authentication Methods. In <em>Eclipse Mosquitto</em>. https://mosquitto.org/documentation/authentication-methods/.
+</div>
+<div id="ref-Hollingworth2024" class="csl-entry" role="listitem">
+Hollingworth, G. (2024). Raspberry <span>Pi Connect</span>. In <em>Raspberry Pi</em>.
+</div>
+<div id="ref-RaspberryPiLtd2024" class="csl-entry" role="listitem">
+Raspberry Pi Ltd. (2024a). Raspberry <span>Pi Connect Beta</span> - <span>Access</span> Your <span>Raspberry Pi</span> from Anywhere. In <em>Raspberry Pi</em>. https://www.raspberrypi.com/software/connect/.
+</div>
+<div id="ref-RaspberryPiLtd2024a" class="csl-entry" role="listitem">
+Raspberry Pi Ltd. (2024b). Raspberry <span>Pi Documentation</span> Config.Txt. In <em>Raspberry Pi</em>. https://www.raspberrypi.com/documentation/computers/config_txt.html.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -1136,7 +1170,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

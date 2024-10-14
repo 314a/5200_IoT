@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -285,7 +305,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Drahtlose Kommunikationstechnologien basieren heutzutage auf IEEE 802.15.4 sowie IEEE 802.15.4e Übertragungsprotokoll <span class="citation" data-cites="celebi2020">[@celebi2020]</span>. Das Protokoll beschreibt den die untersten beiden Schichten des OSI Modells (<a href="#fig-osimodell" class="quarto-xref">Abb.&nbsp;<span>3.1</span></a>), die Bitübertragung und den MAC-Layer für Wireless Personal Area Networks (WPAN).</p>
+<p>Drahtlose Kommunikationstechnologien basieren heutzutage auf IEEE 802.15.4 sowie IEEE 802.15.4e Übertragungsprotokoll <span class="citation" data-cites="celebi2020">(<a href="references.html#ref-celebi2020" role="doc-biblioref">Celebi et al., 2020</a>)</span>. Das Protokoll beschreibt den die untersten beiden Schichten des OSI Modells (<a href="#fig-osimodell" class="quarto-xref">Abb.&nbsp;<span>3.1</span></a>), die Bitübertragung und den MAC-Layer für Wireless Personal Area Networks (WPAN).</p>
 <p>Einige der relevanten Technologien für die Datenübertragung sind, Wi-Fi, Bluetooth, ZigBee, LoRa, RFID, SigFox und Mobilfunk. Die Technologien unterscheiden sich in der Reichweite, der Datenrate, der Energieeffizienz und der Anzahl der Geräte, die angeschlossen werden können. Die Wahl der Technologie hängt von der Anwendung ab. Für die Übertragung von Sensordaten über kurze Distanzen eignet sich Bluetooth, ZigBee oder WiFi. Für die Übertragung von Sensordaten über lange Distanzen eignet sich LoRa oder Mobilfunk. Für die Übertragung von Sensordaten über kurze Distanzen mit hoher Datenrate eignet sich Wi-Fi. Für die Übertragung von Sensordaten über kurze Distanzen mit geringer Datenrate eignet sich RFID.</p>
 <p>Je nach Anwendungsfall (Use Case) sind die Werte für die Latenzzeit (Latency), Verlässlichkeit (Reliability), Größe der Datenmenge (Data size), Reichweite (Range) für die Wahl der Kommunikationstechnologie relevant.</p>
 <div id="fig-osimodell" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -301,7 +321,7 @@ Abb.&nbsp;3.1: Das ISO OSI Schichtenmodell mit einer Auswahl von Protokollen fü
 <dl>
 <dt>ISO OSI Schichtenmodell</dt>
 <dd>
-Das ISO OSI Schichtenmodell (Open Systems Interconnection Model) ist ein konzeptuelles Referenzmodell welches die Funktionsweise von Netzwerksystemen beschreibt mit dem Ziel Kommunikation über die unterschiedlichen Technologien hinweg zu beschreiben von der Übertragung von einzelnen Bits über den Datentransport bis hin zur Anwendung beispielsweise HTTPS oder FTP <span class="citation" data-cites="iso1994">[@iso1994]</span>. Das ISO/OSI Schichtenmodell besteht aus sieben hierarchisch aufgebauten Schichten und jeder einzelnen Schicht ist eine Aufgabe zugeordnet, wobei das Übertragungsmedium nicht definiert ist. Die Schichten eins bis vier sind transportorientierte Schichten und die Schichten fünf bis sieben sind anwendungsorientierte Schichten.
+Das ISO OSI Schichtenmodell (Open Systems Interconnection Model) ist ein konzeptuelles Referenzmodell welches die Funktionsweise von Netzwerksystemen beschreibt mit dem Ziel Kommunikation über die unterschiedlichen Technologien hinweg zu beschreiben von der Übertragung von einzelnen Bits über den Datentransport bis hin zur Anwendung beispielsweise HTTPS oder FTP <span class="citation" data-cites="iso1994">(<a href="references.html#ref-iso1994" role="doc-biblioref">ISO, 1994</a>)</span>. Das ISO/OSI Schichtenmodell besteht aus sieben hierarchisch aufgebauten Schichten und jeder einzelnen Schicht ist eine Aufgabe zugeordnet, wobei das Übertragungsmedium nicht definiert ist. Die Schichten eins bis vier sind transportorientierte Schichten und die Schichten fünf bis sieben sind anwendungsorientierte Schichten.
 </dd>
 <dt>Long Range Wide Area Network (LoRaWAN) oder LoRa</dt>
 <dd>
@@ -310,7 +330,7 @@ LoRaWan, Long Range Wide Area Network ermöglicht ein energieeffizientes übertr
 </dl>
 <section id="kommunikation" class="level2">
 <h2 class="anchored" data-anchor-id="kommunikation">Kommunikation</h2>
-<p>Zwei Kommunikationsparadigmen kommen in IoT Systemen zum Einsatz, <em>Publish-Subscribe</em> und <em>Request-Response</em>. Je nach Szenario und Anwendungsfall kommt der eine oder andere Ansatz zum Einsatz. In der <em>Publish-Subscribe</em> Kommunikation sind zwei Entitäten involviert, der Publisher, der die Daten publiziert und der Subscriber, der die Daten konsumiert, eine <em>one-to-many Kommunication</em>. Dies ist gerade in IoT Systemen von Vorteil, wo mehrere Geräte die Daten von einem Gerät konsumieren können ohne, dass zu jedem einzelnen Gerät eine Verbindung aufgebaut werden muss. Eine one-to-one Kommunikation ist hingehen eine <em>Request-Response</em> Kommunikation, in der Daten zwischen zwei Entitäten ausgetauscht werden, wobei hier der Empfänger (Adresse) der Nachricht oder der Daten bekannt sein muss. In der <em>Request-Response</em> Kommunikation ist der Server zentraler Bestandteil der Kommunikation, wohingegen in der <em>Publish-Subscribe</em> Kommunikation der Broker zentraler Bestandteil der Kommunikation ist <span class="citation" data-cites="hirmer2023">[@hirmer2023]</span>. Bei <em>Publish-Subscribe</em> muss der Broker bekannt sein wohingegen die Indentität der Publisher und Subscriber nicht erforderlich ist.</p>
+<p>Zwei Kommunikationsparadigmen kommen in IoT Systemen zum Einsatz, <em>Publish-Subscribe</em> und <em>Request-Response</em>. Je nach Szenario und Anwendungsfall kommt der eine oder andere Ansatz zum Einsatz. In der <em>Publish-Subscribe</em> Kommunikation sind zwei Entitäten involviert, der Publisher, der die Daten publiziert und der Subscriber, der die Daten konsumiert, eine <em>one-to-many Kommunication</em>. Dies ist gerade in IoT Systemen von Vorteil, wo mehrere Geräte die Daten von einem Gerät konsumieren können ohne, dass zu jedem einzelnen Gerät eine Verbindung aufgebaut werden muss. Eine one-to-one Kommunikation ist hingehen eine <em>Request-Response</em> Kommunikation, in der Daten zwischen zwei Entitäten ausgetauscht werden, wobei hier der Empfänger (Adresse) der Nachricht oder der Daten bekannt sein muss. In der <em>Request-Response</em> Kommunikation ist der Server zentraler Bestandteil der Kommunikation, wohingegen in der <em>Publish-Subscribe</em> Kommunikation der Broker zentraler Bestandteil der Kommunikation ist <span class="citation" data-cites="hirmer2023">(<a href="references.html#ref-hirmer2023" role="doc-biblioref">Hirmer, 2023</a>)</span>. Bei <em>Publish-Subscribe</em> muss der Broker bekannt sein wohingegen die Indentität der Publisher und Subscriber nicht erforderlich ist.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/publish-subcribe_request-response.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Kommunikationsparadigmen in der IoT Request-Response versus Publish-Subscribe"><img src="images/publish-subcribe_request-response.png" class="img-fluid figure-img" alt="Kommunikationsparadigmen in der IoT Request-Response versus Publish-Subscribe"></a></p>
@@ -318,7 +338,7 @@ LoRaWan, Long Range Wide Area Network ermöglicht ein energieeffizientes übertr
 </figure>
 </div>
 <p>Die zentrale Komponente beim Publish-Subscribe Modells ist der Message Broker, der für das Empfangen, Zwischenspeichern und die Vermittlung der Nachrichten zu den Subscriber verantwortlich ist. Die Nachrichten oder Datenpakete werden Topics (Themen) zugeordnert die hierarchisch strukturiert sind. So können Subscriber gewisse Topics oder Untertopics subscriben, wie beispielweise den Temperaturdaten einer Wetterstation mit <em>stationA/temperature</em>.</p>
-<p>Message Broker können <em>Quality of Service</em> parameter definieren, die die Zuverlässigkeit der Nachrichtenübertragung definieren, ob beispielsweise die Nachricht genau oder mindestens einmal zugestellt werden soll. Dies geht jedoch zu Lasten der Performance, was gerade bei Echtzeitkommunikation relevant ist. Einer der wesentlichen Vorteile des Publish-Subscribe Modells ist, dass Publisher und Subscriber nicht gleichzeitig online sein müssen, da der Broker die Nachrichten zwischenspeichert und diese bei der nächsten Verbindung zustellt. Dies ist ermöglicht eine asynchrone Kommunikation in Echtzeit, eine wichtige Anforderung von IoT. Dies ist vorallem bei batteriebetriebenen Geräten sinnvoll, die energiefizient arbeiten und folglich nicht kontinuierlich online sind. Eines der verbreitesten Protokolle, die <em>Publish-Subscribe</em> umsetzen ist MQTT. In <strong>GeoMQTT</strong> kann eine Nachricht mit einem Zeitstempel oder Interval und einer Geometrie zusätzlich dem Topic name hinzugefügt werden. Dies ermöglicht dem Subscriber zeitliche oder räumliche Filter zusätzlich zu den thematischen <em>Topic</em> Filter zu nutzen <span class="citation" data-cites="laska2018">[@laska2018, @herle2019]</span>. Ein umfangreicherer offener Standard ist AMQP, seit 2010, der auch <em>request-response</em> Kommunikation ermöglicht<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Message Broker können <em>Quality of Service</em> parameter definieren, die die Zuverlässigkeit der Nachrichtenübertragung definieren, ob beispielsweise die Nachricht genau oder mindestens einmal zugestellt werden soll. Dies geht jedoch zu Lasten der Performance, was gerade bei Echtzeitkommunikation relevant ist. Einer der wesentlichen Vorteile des Publish-Subscribe Modells ist, dass Publisher und Subscriber nicht gleichzeitig online sein müssen, da der Broker die Nachrichten zwischenspeichert und diese bei der nächsten Verbindung zustellt. Dies ist ermöglicht eine asynchrone Kommunikation in Echtzeit, eine wichtige Anforderung von IoT. Dies ist vorallem bei batteriebetriebenen Geräten sinnvoll, die energiefizient arbeiten und folglich nicht kontinuierlich online sind. Eines der verbreitesten Protokolle, die <em>Publish-Subscribe</em> umsetzen ist MQTT. In <strong>GeoMQTT</strong> kann eine Nachricht mit einem Zeitstempel oder Interval und einer Geometrie zusätzlich dem Topic name hinzugefügt werden. Dies ermöglicht dem Subscriber zeitliche oder räumliche Filter zusätzlich zu den thematischen <em>Topic</em> Filter zu nutzen <span class="citation" data-cites="laska2018">Herlé et al. (<a href="references.html#ref-herle2019" role="doc-biblioref">2019</a>)</span>. Ein umfangreicherer offener Standard ist AMQP, seit 2010, der auch <em>request-response</em> Kommunikation ermöglicht<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>Eine weitere wichtige Anforderung an IoT ist die asynchrone Kommunikation in Echtzeit. Synchrone Kommunikation in Echtzeit bedingt, dass die Uhren synchron sind und beide zur gleichen Zeit kommunizieren, was in vielen Anwendungsfällen der IoT nicht wünschenswert ist.</p>
 </section>
 <section id="mqtt---message-queuing-telemetry-transport-protocol" class="level2">
@@ -331,12 +351,35 @@ LoRaWan, Long Range Wide Area Network ermöglicht ein energieeffizientes übertr
 <p>Mit zunehmender Rechenleistung auf IoT Geräten können diese vermehrt selbst Daten prozessieren, was eine Verlagerung der Analyse ermöglicht. Die Begriffe Cloud, Edge und Fog bezeichnen im wesentlichen wo in Infrastrukturen die Datenprozessierung durchgeführt wird. In <strong>Cloud</strong> Infrastrukturen erfolgt die Prozessierung zentralisiert in der Cloud und grossen Recheninfrastrukturen, wohingegen <strong>Edge</strong>-Computing eine Infrastruktur bezeichnet, in der die lokalen Geräte selbst einen Teil der Daten dezentral und möglichst lokal verarbeiten. Fog - ein von Cisco eingeführter Begriff - bezeichnet Cloud Computing im lokalen Netzwerk, beispielsweise könnte ein Transportunternehmen die Verwaltung der Datenprozessierung in der eigenen Cloud durchführen.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/gartner_hypecycle_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der “Hype” Cloud-Out to Edge den Peak of Inflated Expectations [@Gartner2023]. Das Hype Cycle Thema “Cloud-Out to Edge” wurde im aktualisierten Hype Cycle [-@Gartner2024] als Hype Thema entfernt."><img src="images/gartner_hypecycle_2023.png" class="img-fluid figure-img" style="width:50.0%" alt="Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der “Hype” Cloud-Out to Edge den Peak of Inflated Expectations [@Gartner2023]. Das Hype Cycle Thema “Cloud-Out to Edge” wurde im aktualisierten Hype Cycle [-@Gartner2024] als Hype Thema entfernt."></a></p>
-<figcaption>Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der “Hype” <em>Cloud-Out to Edge</em> den Peak of Inflated Expectations <span class="citation" data-cites="Gartner2023">[@Gartner2023]</span>. Das Hype Cycle Thema “Cloud-Out to Edge” wurde im aktualisierten Hype Cycle <span class="citation" data-cites="Gartner2024">[-@Gartner2024]</span> als Hype Thema entfernt.</figcaption>
+<p><a href="images/gartner_hypecycle_2023.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der “Hype” Cloud-Out to Edge den Peak of Inflated Expectations [@Gartner2023]. Das Hype Cycle Thema “Cloud-Out to Edge” wurde im aktualisierten Hype Cycle [-@Gartner2024] als Hype Thema entfernt."><img src="images/gartner_hypecycle_2023.png" class="img-fluid figure-img" style="width:50.0%" alt="Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der “Hype” Cloud-Out to Edge den Peak of Inflated Expectations (Gartner, 2023). Das Hype Cycle Thema “Cloud-Out to Edge” wurde im aktualisierten Hype Cycle (2024) als Hype Thema entfernt."></a></p>
+<figcaption>Im Gartner Hype Cycle for Emerging Technologies 2023 erreicht der “Hype” <em>Cloud-Out to Edge</em> den Peak of Inflated Expectations <span class="citation" data-cites="Gartner2023">(<a href="references.html#ref-Gartner2023" role="doc-biblioref">Gartner, 2023</a>)</span>. Das Hype Cycle Thema “Cloud-Out to Edge” wurde im aktualisierten Hype Cycle <span class="citation" data-cites="Gartner2024">(<a href="references.html#ref-Gartner2024" role="doc-biblioref">2024</a>)</span> als Hype Thema entfernt.</figcaption>
 </figure>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-celebi2020" class="csl-entry" role="listitem">
+Celebi, H. B., Pitarokoilis, A., &amp; Skoglund, M. (2020). Wireless <span>Communication</span> for the <span>Industrial IoT</span>. In I. Butun (Hrsg.), <em>Industrial <span>IoT</span> : <span>Challenges</span>, <span>Design Principles</span>, <span>Applications</span>, and <span>Security</span></em> (S. 57–94). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-42500-5_2">https://doi.org/10.1007/978-3-030-42500-5_2</a>
+</div>
+<div id="ref-Gartner2023" class="csl-entry" role="listitem">
+Gartner. (2023). 4 <span>Exciting New Trends</span> in the <span>Gartner Emerging Technologies Hype Cycle</span>. In <em>Gartner</em>. https://www.gartner.com/en/articles/what-s-new-in-the-2023-gartner-hype-cycle-for-emerging-technologies.
+</div>
+<div id="ref-Gartner2024" class="csl-entry" role="listitem">
+Gartner. (2024). Gartner 2024 <span>Hype Cycle</span> for <span>Emerging Technologies Highlights Developer Productivity</span>, <span>Total Experience</span>, <span>AI</span> and <span>Security</span>. In <em>Gartner</em>. https://www.gartner.com/en/newsroom/press-releases/2024-08-21-gartner-2024-hype-cycle-for-emerging-technologies-highlights-developer-productivity-total-experience-ai-and-security.
+</div>
+<div id="ref-herle2019" class="csl-entry" role="listitem">
+Herlé, S., Bill, R., &amp; Blankenbach, J. M. (2019). <em><span>A GeoEvent-driven architecture based on GeoMQTT for the Geospatial IoT</span></em> (phdthesis RWTH-2019-10695). Dissertation, Rheinisch-Westf<span>ä</span>lische Technische Hochschule Aachen, 2019.
+</div>
+<div id="ref-hirmer2023" class="csl-entry" role="listitem">
+Hirmer, P. (2023). Foundations. In P. Hirmer (Hrsg.), <em>Model-<span>Based Approaches</span> to the <span>Internet</span> of <span>Things</span></em> (S. 7–15). Springer International Publishing. <a href="https://doi.org/10.1007/978-3-031-18884-8_2">https://doi.org/10.1007/978-3-031-18884-8_2</a>
+</div>
+<div id="ref-iso1994" class="csl-entry" role="listitem">
+ISO. (1994). <span>ISO</span>/<span>IEC</span> 7498-1:1994. In <em>ISO</em>. https://www.iso.org/standard/20269.html.
+</div>
+<div id="ref-laska2018" class="csl-entry" role="listitem">
+Laska, M., Herle, S., Klamma, R., &amp; Blankenbach, J. (2018). A <span>Scalable Architecture</span> for <span>Real-Time Stream Processing</span> of <span>Spatiotemporal IoT Stream Data</span>—<span>Performance Analysis</span> on the <span>Example</span> of <span>Map Matching</span>. <em>ISPRS International Journal of Geo-Information</em>, <em>7</em>(7), 238. <a href="https://doi.org/10.3390/ijgi7070238">https://doi.org/10.3390/ijgi7070238</a>
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -792,7 +835,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

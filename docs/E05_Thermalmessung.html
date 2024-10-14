@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -347,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Vorbereitung</strong></p>
 <ul>
 <li>Schaut folgende von Video von Melexis zur Funktionsweise der MLX90640 Thermalkamera an: <a href="https://www.youtube.com/embed/WSZ3GGDusTk?si=WTfxZ3m2axljCwDG">Far Infrared (IR) Thermal Sensor Array 32x24 RES (MLX90640)</a></li>
-<li>Studiere das Datenblatt zum VL53L5CX <span class="citation" data-cites="melexis2019">[@melexis2019]</span> und beantworte folgende Fragen:
+<li>Studiere das Datenblatt zum VL53L5CX <span class="citation" data-cites="melexis2019">(<a href="references.html#ref-melexis2019" role="doc-biblioref">Melexis, 2019</a>)</span> und beantworte folgende Fragen:
 <ul>
 <li>In welchen Temperaturbereichen kann der Sensor eingesetzt werden?</li>
 <li>Welches ist die höchste Abtastrate für die Distanzfeldmessungen?</li>
@@ -394,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <a href="images/MLX90640_wide.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abb.&nbsp;8.1: links: MLX90640 Thermalkamera, oben: schematische Darstellung der Kamera und ihrer Anschlüsse rechts: Pixelpositionaufbau Quelle: @st2023"><img src="images/MLX90640_wide.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MLX90640-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abb.&nbsp;8.1: links: MLX90640 Thermalkamera, oben: schematische Darstellung der Kamera und ihrer Anschlüsse rechts: Pixelpositionaufbau Quelle: <span class="citation" data-cites="st2023">@st2023</span>
+Abb.&nbsp;8.1: links: MLX90640 Thermalkamera, oben: schematische Darstellung der Kamera und ihrer Anschlüsse rechts: Pixelpositionaufbau Quelle: <span class="citation" data-cites="st2023">STMicroelectronics (<a href="references.html#ref-st2023" role="doc-biblioref">2023</a>)</span>
 </figcaption>
 </figure>
 </div>
@@ -497,6 +517,14 @@ Abb.&nbsp;8.2: Aufbau der Versuchsanordnung für die Distanzmessung mit dem LCD 
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-melexis2019" class="csl-entry" role="listitem">
+Melexis. (2019). <em><span>MLX90640</span> 32x24 <span>IR</span> Array <span>Datasheet</span></em>.
+</div>
+<div id="ref-st2023" class="csl-entry" role="listitem">
+STMicroelectronics. (2023). <em>Description of the Fields of View of <span>STMicroelectronics</span>’ <span>Time-of-Flight</span> Sensors</em>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -946,7 +974,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
