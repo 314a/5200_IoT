@@ -343,7 +343,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14. Oktober. 2024</p>
+      <p class="date">15. Oktober. 2024</p>
     </div>
   </div>
   
@@ -440,7 +440,7 @@ Abb.&nbsp;6.1: a) schematische Darstellung eines MEMS Beschleunigungssensors Que
 <li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>ICM20948</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
 <li>Schliesse den Sensor <strong>ICM20948</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
 <li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x68</code> erkannt werden.</li>
-<li>Kontrolliere, ob die Library <code>icm20948</code> installiert ist mit <code>python -c "import icm20948"</code>. Installiere die Library mit in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install icm20948</code>, falls sie nicht installiert ist.</li>
+<li>Aktiviere die virtuelle Environment von Python mit <code>source ~/.env/bin/activate</code> und kontrolliere, ob die Library <code>icm20948</code> installiert ist mit <code>python -c "import icm20948"</code>. Bei einer Fehlermeldung muss die Library in der aktivierten virtuellen Environment mit <code>pip install icm20948</code> installiert werden.</li>
 </ul>
 <p>Wechsle in den Ordner <em>Documents</em> und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
@@ -995,7 +995,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

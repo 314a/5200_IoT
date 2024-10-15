@@ -65,7 +65,7 @@ VL53L5CX 8x8 Time of Flight (ToF) Array Sensor Breakout
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `VL53L5CX`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **VL53L5CX** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x29` erkannt werden.
-- Kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install st7789`, falls sie nicht installiert ist
+- Aktiviere die virtuelle Environment von Python mit `source ~/.env/bin/activate` und kontrolliere, ob die Libraries `vl53l5cx_ctypes` und `st7789` installiert sind mit `python -c "import st7789"` und `python -c "import vl53l5cx_ctypes"`. Bei einer Fehlermeldung muss die jeweilige fehlende Library in der aktivierten virtuellen Environment mit `pip install st7789` oder `pip install vl53l5cx_ctypes` installiert werden.
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 
@@ -186,7 +186,7 @@ Führt nun folgende Scripts aus und beobachtet die Ausgabe auf dem LCD Bildschir
 - `python distance_240x240_lcd.py`
 - `python motion_240x240_lcd.py`
 - `python reflectance_240x240_lcd.py`
-- `python motion_tracking.py`
+- `python object_tracking.py`
 
 ::: {#exr-distanzmessung-LCD}
 **Distanzmessung**

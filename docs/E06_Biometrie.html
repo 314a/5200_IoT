@@ -341,7 +341,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14. Oktober. 2024</p>
+      <p class="date">15. Oktober. 2024</p>
     </div>
   </div>
   
@@ -425,8 +425,8 @@ Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagra
 <li>Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).</li>
 <li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>MAX30101</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
 <li>Schliesse den Sensor <strong>MAX30101</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
-<li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x29</code> erkannt werden.</li>
-<li>Kontrolliere, ob die Library <code>vl53l5cx_ctypes</code> installiert ist mit <code>python -c "import vl53l5cx_ctypes"</code>. Installiere die Library mit in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install vl53l5cx_ctypes</code>, falls sie nicht installiert ist</li>
+<li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x57</code> erkannt werden.</li>
+<li>Aktiviere die virtuelle Environment von Python mit <code>source ~/.env/bin/activate</code> und kontrolliere, ob die Library <code>vl53l5cx_ctypes</code> installiert ist mit <code>python -c "import vl53l5cx_ctypes"</code>. Bei einer Fehlermeldung muss die Library in der aktivierten virtuellen Environment mit <code>pip install vl53l5cx_ctypes</code> installiert werden.</li>
 </ul>
 <p>Wechsle in den Ordner <em>Documents</em> und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
@@ -502,7 +502,7 @@ Abb.&nbsp;9.1: links: MAX30101 Breakout von Pimoroni, rechts: funktionale Diagra
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="24,25,26" data-code-annotation="5">10 Sekeunden warten und dann die Herzschläge ausgeben</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="24,25,26" data-code-annotation="5">10 Sekunden warten und dann die Herzschläge ausgeben</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
 <dd>
@@ -974,7 +974,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

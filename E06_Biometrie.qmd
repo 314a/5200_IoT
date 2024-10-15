@@ -61,8 +61,9 @@ MAX30101 Breakout - Heart Rate, Oximeter, Smoke Sensor Breakout
 - Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `MAX30101`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **MAX30101** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
-- Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x29` erkannt werden.
-- Kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install vl53l5cx_ctypes`, falls sie nicht installiert ist
+- Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x57` erkannt werden.
+- Aktiviere die virtuelle Environment von Python mit `source ~/.env/bin/activate` und kontrolliere, ob die Library `vl53l5cx_ctypes` installiert ist mit `python -c "import vl53l5cx_ctypes"`. Bei einer Fehlermeldung muss die Library in der aktivierten virtuellen Environment mit `pip install vl53l5cx_ctypes` installiert werden.
+
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 
@@ -133,7 +134,7 @@ except KeyboardInterrupt:
 2. Sensor konfigurieren (LED Pulse Amplitude, Slot Mode der LED)
 3. Funktion zur Darstellung des Herzschlags in der Konsole
 4. Initialisierung des Herzschlagdetektors
-5. 10 Sekeunden warten und dann die Herzschläge ausgeben
+5. 10 Sekunden warten und dann die Herzschläge ausgeben
 6. Bei einem erkannten Herzschlag wird die Funktion `display_heartrate` aufgerufen und der Herzschlag wird über 4 Sekunden gemittelt in der Konsole ausgegeben.
 
 

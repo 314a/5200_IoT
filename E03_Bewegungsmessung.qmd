@@ -81,7 +81,7 @@ MEMS\index{MEMS} sind mikroelektromechanische Systeme, die aus mikroskopisch kle
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `ICM20948`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **ICM20948** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x68` erkannt werden.
-- Kontrolliere, ob die Library `icm20948` installiert ist mit `python -c "import icm20948"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install icm20948`, falls sie nicht installiert ist.
+- Aktiviere die virtuelle Environment von Python mit `source ~/.env/bin/activate` und kontrolliere, ob die Library `icm20948` installiert ist mit `python -c "import icm20948"`. Bei einer Fehlermeldung muss die Library in der aktivierten virtuellen Environment mit `pip install icm20948` installiert werden.
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 

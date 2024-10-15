@@ -98,7 +98,14 @@ sudo apt install i2c-tools
 
 ### Kontrolle der Installation
 
-Teste ob die für die Übung erforderlichen Python Libraries installiert sind.
+Aktiviere die virtuelle Python Environment (hier unter `~/.env`) und teste ob die für die Übung erforderlichen Python Libraries installiert sind.
+Aktiviere über folgenden Befehl die virtuelle Umgebung, welche für diese Übungen im Homeordner `~/.env` erstellt wurde^[In dieser Übung wird die Python Virtual Environment `.env` im Homeordner `~/` erstellt und aktiviert. Diese kann auch an einem Ort erstellt werden, beispielweise projektbasiert. Erstellen einer Virtual Environment: `python -m venv ~/Development/Projekt1/env`]. Die aktivierte Umgebung wird durch die Anzeige des Umgebungsname in der Kommandozeile angezeigt, hier mit `(.env)`.
+
+``` bash
+source ~/.env/bin/activate
+```
+
+Teste ob die für die Übung erforderlichen Python Libraries installiert sind. Ein einfacher Test zur Kontrolle, ob ein Modul installiert ist, ist über das Import Statement des Moduls über die Python Konsole im Terminal. Falls kein Fehler auftritt, ist das Modul in der virtuellen Environment installiert. 
 
 ``` bash
 python -c "import math"
@@ -112,10 +119,9 @@ ImportError: No module named numpy      # <2>
 1.  `math` Modul existiert
 2.  `numpy` Modul existiert nicht
 
-Installiere das Modul mit folgendem Befehl, falls es nicht installiert ist. Aktiviere die virtuelle Umgebung (hier unter `~/.env`) und installiere das Modul^[In dieser Übung wird die Python Virtual Environment `.env` im Homeordner `~/` erstellt und aktiviert. Diese kann auch an einem Ort erstellt werden, beispielweise projektbasiert. Erstellen einer Virtual Environment: `python -m venv ~/Development/Projekt1/env`].
+Installiere das Modul mit folgendem Befehl, falls es nicht installiert ist. 
 
 ``` bash	
-source ~/.env/bin/activate
 pip install bme680
 ```
 

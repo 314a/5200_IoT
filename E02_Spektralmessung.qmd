@@ -69,7 +69,7 @@ AS7262 - 6-Kanal Spektral Sensor (@fig-as7262)
 - Erstelle auf dem Raspberry Pi im `Documents` Ordner einen neuen Ordner `AS7262`, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.
 - Schliesse den Sensor **AS7262** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x49` erkannt werden.
-- Kontrolliere, ob die Library `as7262` installiert ist mit `python -c "import as7262"`. Installiere die Library mit in der aktivierten virtuellen Environment `source ~/.env/bin/activate` mit `pip install as7262`, falls sie nicht installiert ist.
+- Aktiviere die virtuelle Environment von Python mit `source ~/.env/bin/activate` und kontrolliere, ob die Library `as7262` installiert ist mit `python -c "import as7262"`. Bei einer Fehlermeldung muss die Library in der aktivierten virtuellen Environment mit `pip install as7262` installiert werden.
 
 Wechsle in den Ordner *Documents* und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.
 

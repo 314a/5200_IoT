@@ -342,7 +342,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14. Oktober. 2024</p>
+      <p class="date">15. Oktober. 2024</p>
     </div>
   </div>
   
@@ -427,7 +427,7 @@ Abb.&nbsp;7.1: links: VL53L5CX Breakout von Pimoroni, rechts: schematische Darst
 <li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>VL53L5CX</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
 <li>Schliesse den Sensor <strong>VL53L5CX</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
 <li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x29</code> erkannt werden.</li>
-<li>Kontrolliere, ob die Library <code>vl53l5cx_ctypes</code> installiert ist mit <code>python -c "import vl53l5cx_ctypes"</code>. Installiere die Library mit in der aktivierten virtuellen Environment <code>source ~/.env/bin/activate</code> mit <code>pip install st7789</code>, falls sie nicht installiert ist</li>
+<li>Aktiviere die virtuelle Environment von Python mit <code>source ~/.env/bin/activate</code> und kontrolliere, ob die Libraries <code>vl53l5cx_ctypes</code> und <code>st7789</code> installiert sind mit <code>python -c "import st7789"</code> und <code>python -c "import vl53l5cx_ctypes"</code>. Bei einer Fehlermeldung muss die jeweilige fehlende Library in der aktivierten virtuellen Environment mit <code>pip install st7789</code> oder <code>pip install vl53l5cx_ctypes</code> installiert werden.</li>
 </ul>
 <p>Wechsle in den Ordner <em>Documents</em> und kopiere mit folgenden Befehlen die Library auf Deinen Raspberry Pi.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
@@ -553,7 +553,7 @@ Abb.&nbsp;7.2: Aufbau der Versuchsanordnung für die Distanzmessung mit dem LCD 
 <li><code>python distance_240x240_lcd.py</code></li>
 <li><code>python motion_240x240_lcd.py</code></li>
 <li><code>python reflectance_240x240_lcd.py</code></li>
-<li><code>python motion_tracking.py</code></li>
+<li><code>python object_tracking.py</code></li>
 </ul>
 <div id="exr-distanzmessung-LCD" class="theorem exercise">
 <p><span class="theorem-title"><strong>Übung 7.2</strong></span> <strong>Distanzmessung</strong></p>
@@ -1026,7 +1026,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
