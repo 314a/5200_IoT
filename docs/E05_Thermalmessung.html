@@ -342,7 +342,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">15. Oktober. 2024</p>
+      <p class="date">16. Oktober. 2024</p>
     </div>
   </div>
   
@@ -422,12 +422,12 @@ Abb.&nbsp;8.1: links: MLX90640 Thermalkamera, oben: schematische Darstellung der
 <section id="übungsaufbau" class="level2">
 <h2 class="anchored" data-anchor-id="übungsaufbau">Übungsaufbau</h2>
 <ul>
-<li><p>Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).</p></li>
-<li><p>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>MLX90640</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</p></li>
-<li><p>Schliesse den Sensor <strong>MLX90640</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</p></li>
-<li><p>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x33</code> erkannt werden.</p></li>
-<li><p>Aktiviere die virtuelle Environment von Python mit <code>source ~/.env/bin/activate</code> und kontrolliere, ob die Libraries <code>adafruit-blinka</code>,<code>adafruit-circuitpython-mlx90640</code> und <code>RPI.GPIO</code> installiert sind mit <code>python -c "import adafruit-blinka"</code>, <code>python -c "import adafruit-circuitpython-mlx90640"</code> und <code>python -c "RPI.GPIO"</code>. Bei einer Fehlermeldung müssen die fehlenden Libraries in der aktivierten virtuellen Environment mit <code>pip install adafruit-blinka adafruit-circuitpython-mlx90640 RPI.GPIO</code> installiert werden.</p></li>
-<li><p>Die Python Scripts für die Thermalkamera werden in den <em>Unterlagen</em> zu dieser Übung bereitgestellt.</p></li>
+<li>Schliesse den Raspberry Pi an Monitor, Keyboard und Maus an oder verbinde Dich mit diesem über SSH (und SFTP).</li>
+<li>Erstelle auf dem Raspberry Pi im <code>Documents</code> Ordner einen neuen Ordner <code>MLX90640</code>, in welchem Du Änderungen und neue Dateien für diese Übung speichern kannst.</li>
+<li>Schliesse den Sensor <strong>MLX90640</strong> an den Raspberry Pi über die Breakout Garden <strong>I2C</strong> Schnittstelle korrekt an (siehe <a href="./E01_Luftqualitaet.html">E01 Luftqualität</a>), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.</li>
+<li>Kontrolliere mit dem Befehl <code>i2cdetect -y 1</code> ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse <code>0x33</code> erkannt werden.</li>
+<li>Aktiviere die virtuelle Environment von Python mit <code>source ~/.env/bin/activate</code> und kontrolliere, ob die Libraries <code>adafruit-blinka</code>,<code>adafruit-circuitpython-mlx90640</code> und <code>RPI.GPIO</code> installiert sind mit <code>python -c "import adafruit-blinka"</code>, <code>python -c "import adafruit-circuitpython-mlx90640"</code> und <code>python -c "RPI.GPIO"</code>. Bei einer Fehlermeldung müssen die fehlenden Libraries in der aktivierten virtuellen Environment mit <code>pip install adafruit-blinka adafruit-circuitpython-mlx90640 RPI.GPIO</code> installiert werden.</li>
+<li>Die Python Scripts für die Thermalkamera werden in den <em>Unterlagen</em> zu dieser Übung bereitgestellt.</li>
 </ul>
 <p>Wechsle in den Ordner <em>Documents</em> und kopiere in diesen den Ordner <em>MLX90640</em> mit den Code Beispielen.</p>
 </section>
@@ -975,7 +975,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

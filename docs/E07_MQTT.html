@@ -346,7 +346,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">15. Oktober. 2024</p>
+      <p class="date">16. Oktober. 2024</p>
     </div>
   </div>
   
@@ -580,25 +580,59 @@ Abb.&nbsp;10.3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) S
 </section>
 <section id="aufgabe-5-node-red-mqtt-mit-influxdb-verwenden" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-5-node-red-mqtt-mit-influxdb-verwenden">Aufgabe 5: Node-Red MQTT mit InfluxDB verwenden</h2>
-<p>InfluxDB ist die Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regele aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688.</p>
-<p>InfluxDB organisiert die Zeitreihendaten in <em>Buckets</em> (anstatt Datenbanken) und Messungen (Measurements). Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können <span class="citation" data-cites="influxdata2023">(<a href="references.html#ref-influxdata2023" role="doc-biblioref">influxdata, 2023</a>)</span>. Eine Messung enthält <em>Felder</em> mit key-value Paaren von Messwerten, die sich über die Zeit ändern. <em>Tags</em> sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können.</p>
-<p>Das Tutorial <a href="https://docs.influxdata.com/influxdb/v2/get-started/">Getting Started</a> zeigt die ersten Schritte mit InfluxDB.</p>
+<p>InfluxDB ist eine Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regel aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/mqtt-sensor-broker-influxdb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank."><img src="images/mqtt-sensor-broker-influxdb.jpg" class="img-fluid figure-img" alt="IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank."></a></p>
 <figcaption>IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank.</figcaption>
 </figure>
 </div>
+<p>InfluxDB organisiert die Zeitreihendaten in <em>Buckets</em> (anstatt Datenbanken) und Messungen (Measurements). Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können <span class="citation" data-cites="influxdata2023">(<a href="references.html#ref-influxdata2023" role="doc-biblioref">influxdata, 2023</a>)</span>. Eine Messung enthält <em>Felder</em> mit key-value Paaren von Messwerten, die sich über die Zeit ändern. <em>Tags</em> sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können.</p>
+<p>Das Tutorial <a href="https://docs.influxdata.com/influxdb/v2/get-started/">Getting Started</a> zeigt die ersten Schritte mit InfluxDB<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/influxdb_structure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Datenorganisation in der InfluxDB, über Buckets und Measurements, mit Tags für Metadaten, Feldern für die Speicherung der Messwerte und dem Zeitstempel."><img src="images/influxdb_structure.png" class="img-fluid figure-img" alt="Datenorganisation in der InfluxDB, über Buckets und Measurements, mit Tags für Metadaten, Feldern für die Speicherung der Messwerte und dem Zeitstempel."></a></p>
+<figcaption>Datenorganisation in der InfluxDB, über Buckets und Measurements, mit Tags für Metadaten, Feldern für die Speicherung der Messwerte und dem Zeitstempel.</figcaption>
+</figure>
+</div>
+<div class="cheatsheet">
+<dl>
+<dt>Bucket</dt>
+<dd>
+Ein Bucket ist ein benannter Container zur Speicherung der Zeitreihendaten. Buckets können mehrere Messungen enthalten und sind die oberste Ebene der Organisation in InfluxDB.
+</dd>
+<dt>Measurement</dt>
+<dd>
+Eine Messung ist eine logische Gruppierung von Zeitreihendaten, mehreren Einzelnmessungen (Data Point, points). Alle Messungen sollten dieselben Tags enthalten. Messungen können mehrere Tags und Felder enthalten
+</dd>
+<dt>Data Point</dt>
+<dd>
+Ein Datenpunkt ist eine Einzelnmessung, die zu einem bestimmten Zeitpunkt erfasst wurde. Ein Datenpunkt besteht aus einem <em>mesurement</em>, <em>field set</em>, <em>tag set</em> und einem <em>timestamp</em>.
+</dd>
+<dt>Tags</dt>
+<dd>
+Tags sind key-value Paare, die sich nicht (oder selten) über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können. Tags können für die Organisation und Strukturierung der Daten verwendet werden und werden indiziert. Die Indexierung ermöglicht eine effiziente Abfrage und Aggregation der Daten.
+</dd>
+<dt>Fields</dt>
+<dd>
+Felder sind key-value Paare von Messwerten, die sich über die Zeit ändern, wie Temperatur, Luftdruck etc. Felder können für die Speicherung von Messwerten verwendet werden. Felder werden nicht indiziert.
+</dd>
+<dt>Timestamp</dt>
+<dd>
+Der Zeitstempel ist der Zeitpunkt, zu dem die Messung erfasst wurde. Der Zeitstempel wird in InfluxDB automatisch hinzugefügt, wenn er nicht explizit in der Messung definiert ist.
+</dd>
+</dl>
+</div>
 <p>Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: <code>http://&lt;ip-adresse&gt;:8086</code>.</p>
 <p>Erstellt über die linke Menuleiste unter <em>Load Data</em> einen neuen Bucket mit dem Namen <code>iot</code>, falls dieser nicht schon existiert. Kopiert unter <em>load Data / API Tokens</em> den Token für den Zugang zur Datenbank.</p>
-<p>Diese Angaben (<em>bucket</em> und <em>API Token</em>) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit Angaben zum Bucket (Datenbankname), Organisation<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> und measurement und die Serververbindung (rechts in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit der IP Adresse und das Token für den Zugang zur Datenbank.</p>
+<p>Diese Angaben (<em>bucket</em> und <em>API Token</em>) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit Angaben zum Bucket (Datenbankname), Organisation<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> und measurement und die Serververbindung (rechts in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit der IP Adresse und das Token für den Zugang zur Datenbank.</p>
 <div class="hint">
 <p>Falls keine Nodes für InfluxDB in Node-Red vorhanden sind, kann die Erweiterung <code>node-red-contrib-influxdb</code> über das Hauptmenu <em>Palette verwalten</em> im Tab <em>Installation</em> installiert werden.</p>
 </div>
 <div id="fig-noderedinfluxdb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedinfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/node-red_influxdb_setup.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Abb.&nbsp;10.4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung measurement (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank."><img src="images/node-red_influxdb_setup.jpg" class="img-fluid figure-img"></a>
+<a href="images/node-red_influxdb_setup.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Abb.&nbsp;10.4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung measurement (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank."><img src="images/node-red_influxdb_setup.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noderedinfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abb.&nbsp;10.4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellungen zur Datenbank (1) mit Angaben zur Organisation (5), Bucket (6) und Namen der Messung <em>measurement</em> (7), rechts: Einstellungen zur Datenbankverbindung (2) mit der URL und Port der InfluxDB (3) und dem API Token (4), für den Zugang zur Datenbank.
@@ -609,7 +643,7 @@ Abb.&nbsp;10.4: Einstellungen der InflxDB Nodes in Node-Red, links: Einstellunge
 <div id="fig-noderedpayload" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-noderedpayload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/node-red_influxdb_change_function_node.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Abb.&nbsp;10.5: Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden."><img src="images/node-red_influxdb_change_function_node.jpg" class="img-fluid figure-img"></a>
+<a href="images/node-red_influxdb_change_function_node.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Abb.&nbsp;10.5: Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden."><img src="images/node-red_influxdb_change_function_node.jpg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noderedpayload-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abb.&nbsp;10.5: Über den Change Node, wie auch den Function Node kann mit JavaScript der Inhalt der Payload verändert werden und diesen für den Import in die InfluxDB angepasst werden.
@@ -639,7 +673,7 @@ Abb.&nbsp;10.5: Über den Change Node, wie auch den Function Node kann mit JavaS
 <div id="fig-influxdbdataexplorer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-influxdbdataexplorer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/influxdb_data_explorer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Abb.&nbsp;10.6: Über den Data Explorer können in InfluxDB einfach Abfragen zusammengestellt und über submit visualisiert werden"><img src="images/influxdb_data_explorer.png" class="img-fluid figure-img"></a>
+<a href="images/influxdb_data_explorer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Abb.&nbsp;10.6: Über den Data Explorer können in InfluxDB einfach Abfragen zusammengestellt und über submit visualisiert werden"><img src="images/influxdb_data_explorer.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-influxdbdataexplorer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abb.&nbsp;10.6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abfragen zusammengestellt und über <em>submit</em> visualisiert werden
@@ -665,7 +699,7 @@ Abb.&nbsp;10.6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abf
 <p><strong>Monitoring der Lichtverschmutzung am Nachthimmel</strong> TESS (Telescope Encoder and Sky Sensor) ist ein Photometer <span class="citation" data-cites="Zamorano2016">(<a href="references.html#ref-Zamorano2016" role="doc-biblioref">Zamorano et al., 2016</a>)</span> für das Stars4All Citizen Science Projekt mit dem Ziel die Lichtverschmutzung weltweit in der Nacht zu vermessen, welche nicht nur für die Umwelt problematisch ist, sondern auch für astronomische Beobachtungen. Die TESS Geräte senden von verschiedenen Standorten weltweit ihre Messungen welche über der folgende Dashboard mit Grafana der Öffentlichkeit zur Verfügung gestellt werden. Dashboard: <a href="https://tess.dashboards.stars4all.eu/">https://tess.dashboards.stars4all.eu/</a>, Messungen der Lichtverschmutzung am Beispiel des Naturparks Gantrisch in der Schweiz. <a href="https://tess.dashboards.stars4all.eu/d/datasheet_stars926/stars926?orgId=1">https://tess.dashboards.stars4all.eu/d/datasheet_stars926/stars926?orgId=1</a></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/mqtt_grafana_tess4all.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz"><img src="images/mqtt_grafana_tess4all.png" class="img-fluid figure-img" alt="Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz"></a></p>
+<p><a href="images/mqtt_grafana_tess4all.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz"><img src="images/mqtt_grafana_tess4all.png" class="img-fluid figure-img" alt="Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz"></a></p>
 <figcaption>Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz</figcaption>
 </figure>
 </div>
@@ -681,7 +715,7 @@ Abb.&nbsp;10.6: Über den <em>Data Explorer</em> können in InfluxDB einfach Abf
 <div id="fig-grafanainfluxdb" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grafanainfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/mqtt_grafana_influxdb_settings.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Abb.&nbsp;10.7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben."><img src="images/mqtt_grafana_influxdb_settings.png" class="img-fluid figure-img"></a>
+<a href="images/mqtt_grafana_influxdb_settings.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Abb.&nbsp;10.7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben."><img src="images/mqtt_grafana_influxdb_settings.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grafanainfluxdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abb.&nbsp;10.7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprechenden Angaben.
@@ -692,7 +726,7 @@ Abb.&nbsp;10.7: InfluxDB als Datenquelle in Grafana hinzufügen mit den entsprec
 <div id="fig-grafanainfluxdbquery" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grafanainfluxdbquery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/mqtt_grafana_influxdb_query.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden."><img src="images/mqtt_grafana_influxdb_query.png" class="img-fluid figure-img"></a>
+<a href="images/mqtt_grafana_influxdb_query.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden."><img src="images/mqtt_grafana_influxdb_query.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grafanainfluxdbquery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafana für die Visualisierung kopiert und genutzt werden.
@@ -712,7 +746,7 @@ Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafa
 <p>Anstatt mit Node-Red können die Daten des Sensors direkt in die InfluxDB geschrieben werden. Folgender Code zeigt wie die Daten des BME688 Sensors mit Python ausgelesen und in die InfluxDB geschrieben werden können. Teste erst, ob der <code>influxdb-client</code> installiert ist und installiere diesen falls nicht mit dem Befehl <code>pip3 install influxdb-client</code>. Folgendes Tutorial zeigt wie die Daten mit Python in die InfluxDB geschrieben werden können: <a href="https://www.influxdata.com/blog/getting-started-with-python-and-influxdb-v2-0/">Getting Started with Python and InfluxDB v2.0</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/mqtt-sensor-influxdb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben."><img src="images/mqtt-sensor-influxdb.jpg" class="img-fluid figure-img" alt="Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben."></a></p>
+<p><a href="images/mqtt-sensor-influxdb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben."><img src="images/mqtt-sensor-influxdb.jpg" class="img-fluid figure-img" alt="Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben."></a></p>
 <figcaption>Direktes Speichern der Sensormessdaten in der Influxdb ohne MQTT Protokoll. Hierbei gilt zu beachten, dass beide Geräte eine aktive Verbindung haben.</figcaption>
 </figure>
 </div>
@@ -731,7 +765,7 @@ Abb.&nbsp;10.8: Flux Queries der Datenabfragen im Data Explorer können in Grafa
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>write_api <span class="op">=</span> client.write_api(write_options <span class="op">=</span> SYNCHRONOUS)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">22.0</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> Point(<span class="st">"measures"</span>).tag(<span class="st">"fields"</span>, <span class="dv">2</span>).field(<span class="st">"temperature"</span>, temperature)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> Point(<span class="st">"measures"</span>).tag(<span class="st">"sensor"</span>,<span class="st">"BME688"</span>).tag(<span class="st">"device"</span>,<span class="st">"RPI_01"</span>).field(<span class="st">"temperature"</span>, temperature)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>write_api.write(bucket <span class="op">=</span> bucket, record <span class="op">=</span> data)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="exr-python-influxb" class="theorem exercise">
 <p><span class="theorem-title"><strong>Übung 10.7</strong></span> Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und in die InfluxDB schreibt.</p>
@@ -751,7 +785,8 @@ Zamorano, J., García, C., Tapia, C., Miguel, A. S. de, Pascual, S., &amp; Galle
 <hr>
 <ol>
 <li id="fn1"><p>Topics, die mit <code>$</code> beginnen sind reserviert für interne Informationen des Brokers und Clientstatistiken, oft in der Form <code>$SYS/</code>. Beispielsweise zeigt <code>$SYS/broker/clients/connected</code> die Anzahl der verbundenen Clients. Mit dem Wildcard <code>#</code> Filter könnt Ihr mit <code>$SYS/#</code> alle Systeminformationen der Brokers anzeigen lassen.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>wird bei der Erstellung der Datenbank definiert<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Die Dokumentation über die <a href="https://docs.influxdata.com/influxdb/v2/reference/key-concepts/">InfluxDB key concepts</a> und das <a href="https://docs.influxdata.com/influxdb/v2/write-data/best-practices/schema-design/">InfluxDB Schema Design</a> führen übersichtlich die Konzepte Best Practices des Schema Designs und effiziente Abfragen ein.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>wird bei der Erstellung der Datenbank definiert<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1192,7 +1227,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
+<p><a href="images/fhnw_white.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="images/fhnw_white.png" class="img-fluid"></a></p>
 </div>   
     <div class="nav-footer-center">
 <p>Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></p>
@@ -1202,7 +1237,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

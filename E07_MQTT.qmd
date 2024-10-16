@@ -275,13 +275,37 @@ Flows stoppen: Um einen Flow in der Ausführung zu stoppen, kann dieser über de
 :::
 
 ## Aufgabe 5: Node-Red MQTT mit InfluxDB verwenden
-InfluxDB ist die Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regele aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688. 
+InfluxDB ist eine Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regel aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688. 
+
+![IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank.](images/mqtt-sensor-broker-influxdb.jpg)
 
 InfluxDB organisiert die Zeitreihendaten in *Buckets* (anstatt Datenbanken) und Messungen (Measurements). Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können [@influxdata2023]. Eine Messung enthält *Felder* mit key-value Paaren von Messwerten, die sich über die Zeit ändern. *Tags* sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können. 
 
-Das Tutorial [Getting Started](https://docs.influxdata.com/influxdb/v2/get-started/) zeigt die ersten Schritte mit InfluxDB.
+Das Tutorial [Getting Started](https://docs.influxdata.com/influxdb/v2/get-started/) zeigt die ersten Schritte mit InfluxDB^[Die Dokumentation über die [InfluxDB key concepts](https://docs.influxdata.com/influxdb/v2/reference/key-concepts/) und das [InfluxDB Schema Design](https://docs.influxdata.com/influxdb/v2/write-data/best-practices/schema-design/) führen übersichtlich die Konzepte  Best Practices des Schema Designs und effiziente Abfragen ein.].
 
-![IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank.](images/mqtt-sensor-broker-influxdb.jpg)
+![Datenorganisation in der InfluxDB, über Buckets und Measurements, mit Tags für Metadaten, Feldern für die Speicherung der Messwerte und dem Zeitstempel.](images/influxdb_structure.png)
+
+::: cheatsheet
+
+Bucket
+: Ein Bucket ist ein benannter Container zur Speicherung der Zeitreihendaten. Buckets können mehrere Messungen enthalten und sind die oberste Ebene der Organisation in InfluxDB.
+
+Measurement
+: Eine Messung ist eine logische Gruppierung von Zeitreihendaten, mehreren Einzelnmessungen (Data Point, points). Alle Messungen sollten dieselben Tags enthalten. Messungen können mehrere Tags und Felder enthalten
+
+Data Point
+: Ein Datenpunkt ist eine Einzelnmessung, die zu einem bestimmten Zeitpunkt erfasst wurde. Ein Datenpunkt besteht aus einem *mesurement*, *field set*, *tag set* und einem *timestamp*.
+
+Tags
+: Tags sind key-value Paare, die sich nicht (oder selten) über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können. Tags können für die Organisation und Strukturierung der Daten verwendet werden und werden indiziert. Die Indexierung ermöglicht eine effiziente Abfrage und Aggregation der Daten.
+
+Fields
+: Felder sind key-value Paare von Messwerten, die sich über die Zeit ändern, wie Temperatur, Luftdruck etc. Felder können für die Speicherung von Messwerten verwendet werden. Felder werden nicht indiziert.
+
+Timestamp
+: Der Zeitstempel ist der Zeitpunkt, zu dem die Messung erfasst wurde. Der Zeitstempel wird in InfluxDB automatisch hinzugefügt, wenn er nicht explizit in der Messung definiert ist.
+
+:::
 
 Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: `http://<ip-adresse>:8086`. 
 
@@ -387,10 +411,9 @@ client = InfluxDBClient(url="http://localhost:8086", token= token, org= org)
 write_api = client.write_api(write_options = SYNCHRONOUS)
 
 temperature = 22.0
-data = Point("measures").tag("fields", 2).field("temperature", temperature)
+data = Point("measures").tag("sensor","BME688").tag("device","RPI_01").field("temperature", temperature)
 write_api.write(bucket = bucket, record = data)
 ```
-
 
 ::: {#exr-python-influxb}
 Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und in die InfluxDB schreibt.

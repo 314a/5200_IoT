@@ -62,7 +62,6 @@ MLX90640 Thermal Camera
 - Schliesse den Sensor **MLX90640** an den Raspberry Pi über die Breakout Garden **I2C** Schnittstelle korrekt an (siehe [E01 Luftqualität](E01_Luftqualitaet.qmd)), so dass die Beschriftung der Anschlüsse am Sensor und bei der Schnittstelle übereinstimmen.
 - Kontrolliere mit dem Befehl `i2cdetect -y 1` ob der Raspberry Pi mit dem Sensor verbunden ist. Der Sensor sollte auf der Adresse `0x33` erkannt werden.
 - Aktiviere die virtuelle Environment von Python mit `source ~/.env/bin/activate` und kontrolliere, ob die Libraries `adafruit-blinka`,`adafruit-circuitpython-mlx90640` und `RPI.GPIO` installiert sind mit `python -c "import adafruit-blinka"`,  `python -c "import adafruit-circuitpython-mlx90640"` und `python -c "RPI.GPIO"`. Bei einer Fehlermeldung müssen die fehlenden Libraries in der aktivierten virtuellen Environment mit `pip install adafruit-blinka adafruit-circuitpython-mlx90640 RPI.GPIO` installiert werden.
-
 - Die Python Scripts für die Thermalkamera werden in den *Unterlagen* zu dieser Übung bereitgestellt.
 
 Wechsle in den Ordner *Documents* und kopiere in diesen den Ordner *MLX90640* mit den Code Beispielen.
