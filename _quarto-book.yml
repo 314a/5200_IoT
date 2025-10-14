@@ -24,7 +24,7 @@ book:
   #  search: true
   page-footer: 
     left: "![](images/fhnw_white.png)"
-    center: "Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
+    center: "Einführung in IoT © 2025 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
     right: "Institut Geomatik, Fachhochschule Nordwestschweiz" 
     border: false
   chapters:
@@ -73,7 +73,7 @@ date-format: "D. MMMM. YYYY"
 highlight-style: arrow
 lang: de
 thanks: Thanks to the Quarto team for their great work on this project.
-copyright: Pia Bereuter © 2024 
+copyright: Pia Bereuter © 2025
 license: Diese Arbeit ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)"
 engine: knitr
 
@@ -147,17 +147,18 @@ format:
         \makeindex     
     #    % Kommentarzeile(?) in Latex hier führt zu Fehlermeldung bei Rendering PDF
     #      with error: \@ifundefined{c@chapter}{\newfloat{video}{h}{lovid}}{\newfloat{video}...
+    # linebreak url in bibliography https://tex.stackexchange.com/questions/134191/line-breaks-of-long-urls-in-biblatex-bibliography
       
     include-after-body: 
       text: |
         \printindex
     impressum: |
       5200 Einführung in IoT   
-      Herbstsemester 2023, 2024
+      Herbstsemester 2023, 2024, 2025
 
       Institut Geomatik, Fachhochschule Nordwestschweiz, Hofackerstrasse 30, 4132 Muttenz   
       Autorin: Prof. Dr. Pia Bereuter  
-      Einführung in IoT © 2024 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) 
+      Einführung in IoT © 2025 von Pia Bereuter ist lizenziert unter [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) 
       
       Titelbild: Rasperry Pi mit Sensoren, 2022, Bereuter
 

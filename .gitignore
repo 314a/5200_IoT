@@ -170,3 +170,4 @@ cython_debug/
 .mtc0
 .idx
 .log
+**/*.quarto_ipynb

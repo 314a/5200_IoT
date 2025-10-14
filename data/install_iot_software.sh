@@ -72,7 +72,7 @@ rm update-nodejs-and-nodered.sh
 # select default theme
 # select default text editor component
 # yes allow function nodes to load external modules
-
+# TODO: https://nodered.org/docs/user-guide/runtime/securing-node-red
 # node-red als admin initialisieren
 # node-red admin init
 
@@ -89,18 +89,35 @@ sudo systemctl start nodered.service
 echo "${COL}InfluxDB Installation${NC}"
 # Influx installieren
 # https://docs.influxdata.com/influxdb/v2/install/?t=Raspberry+Pi
-wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.7.1-arm64.deb
-sudo dpkg -i influxdb2-2.7.1-arm64.deb
-sudo service influxdb start
 # Test Installation und User aufsetzen: <IP>:8086
+# GPG key file: influxdata-archive.key
+# Primary key fingerprint: 24C975CBA61A024EE1B631787C3D57159FC2F927
+
+# Ubuntu and Debian
+# Add the InfluxData key to verify downloads and add the repository
+curl --silent --location -O https://repos.influxdata.com/influxdata-archive.key
+gpg --show-keys --with-fingerprint --with-colons ./influxdata-archive.key 2>&1 \
+| grep -q '^fpr:\+24C975CBA61A024EE1B631787C3D57159FC2F927:$' \
+&& cat influxdata-archive.key \
+| gpg --dearmor \
+| sudo tee /etc/apt/keyrings/influxdata-archive.gpg > /dev/null \
+&& echo 'deb [signed-by=/etc/apt/keyrings/influxdata-archive.gpg] https://repos.influxdata.com/debian stable main' \
+| sudo tee /etc/apt/sources.list.d/influxdata.list
+# Install influxdb
+sudo apt-get update && sudo apt-get install influxdb2 -y
+sudo service influxdb start
+# Influxdb Status verifizieren
+# sudo service influxdb status 
 
 echo "${COL}Grafana Installation${NC}"
 # Grafana installieren
 # https://grafana.com/docs/grafana/latest/setup-grafana/installation/
 # default username: admin, pw: admin
 sudo apt-get install -y apt-transport-https software-properties-common wget
+# import the GPG key
 sudo mkdir -p /etc/apt/keyrings/
 wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+# add repository for stable releases
 echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 # Updates the list of available packages
 sudo apt-get update
@@ -109,6 +126,7 @@ sudo apt-get install grafana -y
 
 sudo systemctl daemon-reload
 sudo systemctl start grafana-server
+
 # sudo systemctl status grafana-server
 # enable grafana to start on boot
 sudo systemctl enable grafana-server.service

@@ -159,6 +159,7 @@ Python Libraries in der Virtual Environment installieren mit `pip install -r req
 
 *requirements.txt*: Python Libraries für die Pimoroni Sensoren
 ```{.txt}
+smbus
 matplotlib
 scipy
 pigments
@@ -176,7 +177,20 @@ max30105
 vl53l5cx-ctypes
 RPI.GPIO
 adafruit-blinka
+paho-mqtt
 ```
+::: hint
+
+Hinweis: Falls die Environment auf systemweite Installationen von Python Bibliotheken zugreifen soll, kann die Virtual Environment mit dem Flag `--system-site-packages` erstellt werden z.B. `python -m venv --system-site-packages ~/.env`. Dies ist beispielsweise bei Bibliotheken wie den SenseHat HAT erforderlich, die systemweit installiert werden. 
+
+Hinweis: Um die Environment als solche in Jupyter Notebooks sichtbar zu machen, muss diese über die Installation von ipykernel hinzugefügt werden.
+
+```bash
+pip install ipykernel
+python -m ipykernel install --user --name=.env --display-name "Python (.env)"
+```
+ 
+:::
 
 ## Konfigurationsdateien editieren
 ### Raspberry Pi Einstellungen für I2C, SPI, SSH, VNC anpassen
@@ -252,14 +266,12 @@ mosquitto_pub -h 127.0.0.1 -t 'iot/temperature' -m 'Aussentemperatur: 22° Celsi
 ```
 
 ### Node-Red
-Node-Red Server testen : `<IP-Adresse>:1880` http://192.168.1.205:1880
-Influxerweiterung *Palette* installieren: *Hamburgermenu oben-rechts / Paletten verwalten* und unter *Palette* / *Installation* die Palette `node-red-contrib-influxdb` installieren.
+Node-Red Server testen : `<IP-Adresse>:1880` und über die Influxerweiterung sogenannte *Palette* die Erweiterung für InfluxDB installieren: *Hamburgermenu oben-rechts / Paletten verwalten* und unter *Palette* / *Installation* die Palette `node-red-contrib-influxdb` installieren.
 
 ![](images/5200_iot_nodered_influxdb_erweiterung.png)
 
 ### InfluxDB
-InfluxDB Server testen: `<IP-Adresse>:8086` http://192.168.1.205:8086
-Den *Initial User* erstellen mit *Username, Password, Organisation* und einem *Bucket* Name, der ersten Datenbank. Im Anschluss mit Logout/Login den Zugang verifizieren.
+InfluxDB Server testen: `<IP-Adresse>:8086` und den *Initial User* erstellen mit *Username, Password, Organisation* und einem *Bucket* Name, der ersten Datenbank. Im Anschluss mit Logout/Login den Zugang verifizieren.
 
 ![](images/5200_iot_influxdb_setup.png)
 
@@ -268,16 +280,21 @@ Den *Initial User* erstellen mit *Username, Password, Organisation* und einem *B
 :::
 
 ### Grafana
-Grafana Server testen: `<IP-Adresse>:3000` http://192.168.1.205:3000
-Grafana startet mit dem Default Admin User: `admin` und Passwort: `admin`. Das Passwort ändern und im Anschluss mit Logout/Login den Zugang verifizieren.
+Grafana Server testen: `<IP-Adresse>:3000` aufrufen. Grafana startet mit dem Default Admin User: `admin` und Passwort: `admin`. Das Passwort ändern und im Anschluss mit Logout/Login den Zugang verifizieren.
 
 ![](images/5200_iot_grafana_setup.png)
 
 ### Jupyter Notebook
-Jupyter Notebook testen `<IP-Adresse>:9999` http://192.168.1.205:9999
+Jupyter Notebook testen `<IP-Adresse>:9999`
 ``` bash
+# python virtual environment aktivieren
+source ~/.env/bin/activate
 # jupter notebook installation testen
 jupyter-notebook --no-browser --ip=192.168.1.205 --port 9999 --notebook-dir ~/Documents
+# Erstelle ein Jupyter Notebook mit folgendem Code
+import numpy as np
+# liste alle installierten Libraries auf
+!pip list
 ```
 
 ### VNC Testen

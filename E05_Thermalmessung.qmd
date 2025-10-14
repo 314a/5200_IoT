@@ -119,7 +119,7 @@ Das Beispiel `average_temperature.py` liest die Temperaturwerte aus der Matrix d
 ## Aufgabe 2: Thermale Aufnahme mit LCD Bildschirm
 Folgende Aufgabe nutzt den 1.54" LCD Bildschirm mit einer 240x240 Pixel Auflösung. Der Ordner enthält mehrere Beispiele zur Thermalkamera, die die Temperaturmatrix auf dem Bildschirm anzeigen. Die Beispiele sind im Ordner `MLX90640` zu finden. 
 
-![Aufbau der Versuchsanordnung für die Distanzmessung mit dem LCD Bildschirm montiert im dem *hinteren* SPI Slot](images/MLX90640_LCD.jpg){#fig-mlx90640-LCD}
+![Aufbau der Versuchsanordnung für die Distanzmessung mit dem LCD Bildschirm montiert im dem *vorderen* SPI Slot](images/MLX90640_LCD.jpg){#fig-mlx90640-LCD}
 
 **Vorbereitung**
 

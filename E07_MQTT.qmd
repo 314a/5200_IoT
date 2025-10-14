@@ -92,7 +92,7 @@ sudo systemctl status mosquitto
 ```
 
 ::: hint
-[MQTTBox](https://apps.microsoft.com/detail/9NBLGGH55JZG) und [MQTT Explorer](https://mqtt-explorer.com) sind zwei MQTT Clients, die für die Entwicklung und das Testen von MQTT Applikationen verwendet werden können. Jedoch scheinen diese nicht mehr oder eher sporadisch weiterentwickelt zu werden. 
+[MQTTX](https://mqttx.app/downloads) und [MQTT Explorer](https://mqtt-explorer.com) sind zwei MQTT Clients, die für die Entwicklung und das Testen von MQTT Applikationen verwendet werden können. Jedoch scheinen diese nicht mehr oder eher sporadisch weiterentwickelt zu werden. 
 :::
 
 ## Aufgabe 2: MQTT mit Python verwenden
@@ -161,9 +161,9 @@ Nutze hierfür das Script zum Auslesen der Sensordaten aus der Übung [E01 Luftq
 
 ::: {#exr-mqtt-bme688}
 - Speichere das `mqtt_pub.py` als `mqtt_pub_bme688.py` im Ordner `mqtt` ab.
-- Ergänze das Script um die Funktionen zum auslesen der Temperatur des BME688 Sensors.
+- Ergänze das Script  `mqtt_pub_bme688.py` mit Codezeilen für das Auslesen der Temperatur des BME688 Sensors.
 - Ergänze das Script für das Auslesen der Luftfeuchtigkeit und Luftdruck und ergänze die topics mit `iot/humidity` und `iot/pressure`.
-- Erweitere das Script `mqtt_sub.py` um die Subscription für die Topics `iot/humidity` und `iot/pressure` und speichere es als `mqtt_sub_bme688.py` ab.
+- Erweitere das Script `mqtt_sub.py` mit den Subscriptions für die Topics `iot/humidity` und `iot/pressure` und speichere es als `mqtt_sub_bme688.py` ab.
 - Öffne zwei Terminals und führe diese mit `python mqtt_pub_bme688.py` und `python mqtt_sub_bme688.py` aus.
 :::
 
@@ -309,7 +309,7 @@ Timestamp
 
 Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: `http://<ip-adresse>:8086`. 
 
-Erstellt über die linke Menuleiste unter *Load Data* einen neuen Bucket mit dem Namen `iot`, falls dieser nicht schon existiert. Kopiert unter *load Data / API Tokens* den Token für den Zugang zur Datenbank.
+Erstellt über die linke Menuleiste unter *Load Data* einen neuen Bucket mit dem Namen `iot`, falls dieser nicht schon existiert. Erstellt ein sogenanntes *API Token* über "Generate API Token"^[Über *Generate API Token* können *All Access API Token* oder *Custom API Token* erstellt werden. Für diese Übung reicht der Einfachheit halber ein *All Access API Token* aus, welches den Token alle Rechte vergibt. In einer produktiven Umgebung sollten jedoch *Custom API Tokens* mit den entsprechenden Rechten erstellt werden.] und kopiert unter *load Data / API Tokens* den Token für den Zugang zur Datenbank.
 
 Diese Angaben (*bucket* und *API Token*) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in @fig-noderedinfluxdb) mit Angaben zum Bucket (Datenbankname), Organisation^[wird bei der Erstellung der Datenbank definiert] und measurement und die Serververbindung (rechts in @fig-noderedinfluxdb) mit der IP Adresse und das Token für den Zugang zur Datenbank.
 
@@ -364,7 +364,7 @@ TESS (Telescope Encoder and Sky Sensor) ist ein Photometer [@Zamorano2016] für 
 ![Grafana Dashboard der Messdaten des TESS Photometes im Naturpark Gantrisch dem ersten Dark Sky Park der Schweiz](images/mqtt_grafana_tess4all.png)
 :::
 
-Öffnet nun den Browser und gebt die IP Adresse des Raspberry Pi mit dem Port 3000 ein: `http://<ip-adresse>:3000`. Unter Connections / Data Sources können Grafana Datenquellen hinzugefügt werden, wählt nun *InfluxDB* um Grafana mit der InfluxDB zu verbinden. Setzt folgende Einstellungen (@fig-grafanainfluxdb) und speichert diese:
+Öffnet nun den Browser und gebt die IP Adresse des Raspberry Pi mit dem Port 3000 ein: `http://<ip-adresse>:3000`. Unter *Connections / Add new connection* können Grafana Datenquellen hinzugefügt werden, wählt nun *InfluxDB* um Grafana mit der InfluxDB zu verbinden. Setzt folgende Einstellungen (@fig-grafanainfluxdb) und speichert diese:
 
 - *Query Language*: Wählt in den Einstellungen zu *Query Language* die Abfragesprache `Flux`.
 - *HTTP*: Setzt die IP Adresse des Raspberry Pi und den Port 8086: `http://localhost:8086`. 
@@ -403,7 +403,7 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 # Generieren ein Token in der InfluxDB UI unter dem Tab "Data / Tokens Tab"
-token = "<influxdb-token>"
+token = "<influxdb-API-token>"
 org = "fhnw"
 bucket = "iot"
 
@@ -416,7 +416,7 @@ write_api.write(bucket = bucket, record = data)
 ```
 
 ::: {#exr-python-influxb}
-Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und in die InfluxDB schreibt.
+Schreibe nun mit Hilfe des Tutorials und dem Beispielcode ein Python Script, welches die Temperatur, Luftfeuchtigkeit und Luftdruck des BME688 Sensors ausliest und direkt in die InfluxDB schreibt.
 :::
 
 ::: {.content-visible when-profile="chapter"}

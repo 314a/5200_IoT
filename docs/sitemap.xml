@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://314a.github.io/5200_IoT/index.html</loc>
-    <lastmod>2024-10-07T08:21:48.363Z</lastmod>
+    <lastmod>2024-10-07T08:21:48.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/01_IoT.html</loc>
-    <lastmod>2024-10-13T13:25:01.155Z</lastmod>
+    <lastmod>2024-10-13T13:23:24.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/02_Sensoren.html</loc>
-    <lastmod>2024-10-06T18:08:11.978Z</lastmod>
+    <lastmod>2024-10-06T18:08:11.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/03_Datenuebertragung.html</loc>
-    <lastmod>2024-10-14T09:09:06.281Z</lastmod>
+    <lastmod>2024-10-10T13:33:04.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/references.html</loc>
@@ -22,35 +22,35 @@
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E01_Luftqualitaet.html</loc>
-    <lastmod>2024-10-15T12:36:55.174Z</lastmod>
+    <lastmod>2024-10-15T12:36:55.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E02_Spektralmessung.html</loc>
-    <lastmod>2024-10-15T12:43:44.737Z</lastmod>
+    <lastmod>2024-10-15T12:43:44.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E03_Bewegungsmessung.html</loc>
-    <lastmod>2024-10-15T12:44:06.343Z</lastmod>
+    <lastmod>2024-10-15T12:44:06.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E04_Distanzmessung.html</loc>
-    <lastmod>2024-10-15T12:46:45.507Z</lastmod>
+    <lastmod>2024-10-15T12:46:45.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E05_Thermalmessung.html</loc>
-    <lastmod>2024-10-16T13:47:34.007Z</lastmod>
+    <lastmod>2025-10-13T21:05:43.817Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E06_Biometrie.html</loc>
-    <lastmod>2024-10-15T12:53:11.840Z</lastmod>
+    <lastmod>2024-10-15T12:53:11.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/E07_MQTT.html</loc>
-    <lastmod>2024-10-16T15:28:00.106Z</lastmod>
+    <lastmod>2025-10-13T22:22:31.097Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/A1_Rasperry_Pi.html</loc>
-    <lastmod>2024-10-14T08:18:36.713Z</lastmod>
+    <lastmod>2024-10-14T08:18:36.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/A2_Sensorbox.html</loc>
@@ -58,18 +58,18 @@
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/A3_CheatSheet.html</loc>
-    <lastmod>2024-10-05T11:40:43.839Z</lastmod>
+    <lastmod>2024-10-05T11:40:43.000Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/A4_Setup.html</loc>
-    <lastmod>2024-10-06T18:52:58.616Z</lastmod>
+    <lastmod>2025-10-13T22:15:18.049Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/5200_IoT.docx</loc>
-    <lastmod>2024-10-22T08:50:36.959Z</lastmod>
+    <lastmod>2025-10-14T08:47:38.179Z</lastmod>
   </url>
   <url>
     <loc>https://314a.github.io/5200_IoT/5200_IoT.pdf</loc>
-    <lastmod>2024-10-22T08:52:44.744Z</lastmod>
+    <lastmod>2025-10-14T08:49:59.442Z</lastmod>
   </url>
 </urlset>

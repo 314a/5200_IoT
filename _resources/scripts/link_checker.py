@@ -141,7 +141,7 @@ try:
 		print(checkFile(path))
 	elif os.path.isdir(path):
 		for path, dirs, filenames in os.walk(path):
-			for filename in [i for i in filenames if i.endswith('.md')]:
+			for filename in [i for i in filenames if(i.endswith('.qmd') | i.endswith('.rmd') | i.endswith('.md'))]:
 				print(checkFile(os.path.join(path, filename)))
 	else:
 		print("Invalid path: "+path)
