@@ -350,7 +350,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14. Oktober. 2025</p>
+      <p class="date">16. Oktober. 2025</p>
     </div>
   </div>
   
@@ -584,7 +584,7 @@ Abb.&nbsp;10.3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) S
 </section>
 <section id="aufgabe-5-node-red-mqtt-mit-influxdb-verwenden" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-5-node-red-mqtt-mit-influxdb-verwenden">Aufgabe 5: Node-Red MQTT mit InfluxDB verwenden</h2>
-<p>InfluxDB ist eine Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regel aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688.</p>
+<p>InfluxDB ist eine Datenbank, die für die Erfassung, Speicherung, Verarbeitung und Visualisierung von Zeitreihendaten entwickelt wurde<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Zeitreihendaten sind Datenpunkte, die in zeitlicher Sequenz erfasst wurden und bestehen in der Regel aus aufeinanderfolgenden Messungen aus derselben Quelle, wie beispielsweise die Temperaturdaten des BME688.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/mqtt-sensor-broker-influxdb.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank."><img src="images/mqtt-sensor-broker-influxdb.jpg" class="img-fluid figure-img" alt="IoT Datenfluss mit Node-Red MQTT und InfluxDB. Python Script publiziert (publish) die Sensormesswerte und das Topic an den MQTT Broker, NodeRed abonniert (subscribe) ein oder mehrere Topics und speichert die Sensormesswerte in einer InlfuxDB Datenbank."></a></p>
@@ -592,7 +592,7 @@ Abb.&nbsp;10.3: Node-Red MQTT Node Einstellungen setzen, (1) Name angeben, (2) S
 </figure>
 </div>
 <p>InfluxDB organisiert die Zeitreihendaten in <em>Buckets</em> (anstatt Datenbanken) und Messungen (Measurements). Ein Bucket kann mehrere Messungen enthalten, wobei Messungen Felder und Tags enthalten können <span class="citation" data-cites="influxdata2023">(<a href="references.html#ref-influxdata2023" role="doc-biblioref">influxdata, 2023</a>)</span>. Eine Messung enthält <em>Felder</em> mit key-value Paaren von Messwerten, die sich über die Zeit ändern. <em>Tags</em> sind key-value Paare, die sich nicht über die Zeit ändern und für die Filterung und Gruppierung verwendet werden können.</p>
-<p>Das Tutorial <a href="https://docs.influxdata.com/influxdb/v2/get-started/">Getting Started</a> zeigt die ersten Schritte mit InfluxDB<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Das Tutorial <a href="https://docs.influxdata.com/influxdb/v2/get-started/">Getting Started</a> zeigt die ersten Schritte mit InfluxDB<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/influxdb_structure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Datenorganisation in der InfluxDB, über Buckets und Measurements, mit Tags für Metadaten, Feldern für die Speicherung der Messwerte und dem Zeitstempel."><img src="images/influxdb_structure.png" class="img-fluid figure-img" alt="Datenorganisation in der InfluxDB, über Buckets und Measurements, mit Tags für Metadaten, Feldern für die Speicherung der Messwerte und dem Zeitstempel."></a></p>
@@ -628,8 +628,8 @@ Der Zeitstempel ist der Zeitpunkt, zu dem die Messung erfasst wurde. Der Zeitste
 </dl>
 </div>
 <p>Die graphische Oberfläche von InfluxDB kann über den Browser auf dem Raspberry Pi oder via Laptop gestartet werden. Öffnet nun den Browser und gebe die IP Adresse des Raspberry Pi mit dem Port 8086 ein: <code>http://&lt;ip-adresse&gt;:8086</code>.</p>
-<p>Erstellt über die linke Menuleiste unter <em>Load Data</em> einen neuen Bucket mit dem Namen <code>iot</code>, falls dieser nicht schon existiert. Erstellt ein sogenanntes <em>API Token</em> über “Generate API Token”<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> und kopiert unter <em>load Data / API Tokens</em> den Token für den Zugang zur Datenbank.</p>
-<p>Diese Angaben (<em>bucket</em> und <em>API Token</em>) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit Angaben zum Bucket (Datenbankname), Organisation<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> und measurement und die Serververbindung (rechts in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit der IP Adresse und das Token für den Zugang zur Datenbank.</p>
+<p>Erstellt über die linke Menuleiste unter <em>Load Data</em> einen neuen Bucket mit dem Namen <code>iot</code>, falls dieser nicht schon existiert<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Erstellt ein sogenanntes <em>API Token</em> über “Generate API Token”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> und kopiert unter <em>load Data / API Tokens</em> den Token für den Zugang zur Datenbank.</p>
+<p>Diese Angaben (<em>bucket</em> und <em>API Token</em>) werden für den InfluxDB Node in Node-Red benötigt. Die Einstellungen des InfluxDB Node benötigen die Angaben, wohin die Daten in der Datenbank gespeichert werden (links in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit Angaben zum Bucket (Datenbankname), Organisation<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> und measurement und die Serververbindung (rechts in <a href="#fig-noderedinfluxdb" class="quarto-xref">Abb.&nbsp;<span>10.4</span></a>) mit der IP Adresse und das Token für den Zugang zur Datenbank.</p>
 <div class="hint">
 <p>Falls keine Nodes für InfluxDB in Node-Red vorhanden sind, kann die Erweiterung <code>node-red-contrib-influxdb</code> über das Hauptmenu <em>Palette verwalten</em> im Tab <em>Installation</em> installiert werden.</p>
 </div>
@@ -789,9 +789,11 @@ Zamorano, J., García, C., Tapia, C., Miguel, A. S. de, Pascual, S., &amp; Galle
 <hr>
 <ol>
 <li id="fn1"><p>Topics, die mit <code>$</code> beginnen sind reserviert für interne Informationen des Brokers und Clientstatistiken, oft in der Form <code>$SYS/</code>. Beispielsweise zeigt <code>$SYS/broker/clients/connected</code> die Anzahl der verbundenen Clients. Mit dem Wildcard <code>#</code> Filter könnt Ihr mit <code>$SYS/#</code> alle Systeminformationen der Brokers anzeigen lassen.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Die Dokumentation über die <a href="https://docs.influxdata.com/influxdb/v2/reference/key-concepts/">InfluxDB key concepts</a> und das <a href="https://docs.influxdata.com/influxdb/v2/write-data/best-practices/schema-design/">InfluxDB Schema Design</a> führen übersichtlich die Konzepte Best Practices des Schema Designs und effiziente Abfragen ein.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Über <em>Generate API Token</em> können <em>All Access API Token</em> oder <em>Custom API Token</em> erstellt werden. Für diese Übung reicht der Einfachheit halber ein <em>All Access API Token</em> aus, welches den Token alle Rechte vergibt. In einer produktiven Umgebung sollten jedoch <em>Custom API Tokens</em> mit den entsprechenden Rechten erstellt werden.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>wird bei der Erstellung der Datenbank definiert<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Wir verwenden InfluxDB 2 in dieser Übung. Wobei zu bemerken ist, dass sich die Abfragesprache der InfluxDB seit der Veröffentlichung drei mal geändert hat, von InfluxQL bei Version 1.x, zu Flux in Version 2.x zurück zu InfluxQL in Version 3.x mit jeweils einem kompletten Rewrite des Backends, was bei den Anwendenden jeweils zu einem entsprechenden Migrationsaufwand führte. Eine Alternative wäre <a href="https://www.tigerdata.com/blog/what-influxdb-got-wrong">TimescaleDB</a> ein Zeitreihendatenbank auf der Basis von postgreSQL.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Die Dokumentation über die <a href="https://docs.influxdata.com/influxdb/v2/reference/key-concepts/">InfluxDB key concepts</a> und das <a href="https://docs.influxdata.com/influxdb/v2/write-data/best-practices/schema-design/">InfluxDB Schema Design</a> führen übersichtlich in die Best Practices des Schema Designs und effiziente Abfragen ein.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Falls es sich um den ersten Bucket handelt, der beim Erstellen des Adminkonto erstellt wurde, enthält dieser bei der ersten Filteroption viele Filtermöglichkeiten, die eher verwirren. Da kann es hilfreich sein, den Bucket zu löschen und einen neuen Bucket zu erstellen.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Über <em>Generate API Token</em> können <em>All Access API Token</em> oder <em>Custom API Token</em> erstellt werden. Für diese Übung reicht der Einfachheit halber ein <em>All Access API Token</em> aus, welches den Token alle Rechte vergibt. In einer produktiven Umgebung sollten jedoch <em>Custom API Tokens</em> mit den entsprechenden Rechten erstellt werden.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>wird bei der Erstellung der Datenbank definiert<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

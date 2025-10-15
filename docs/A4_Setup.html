@@ -361,7 +361,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">14. Oktober. 2025</p>
+      <p class="date">16. Oktober. 2025</p>
     </div>
   </div>
   
@@ -656,6 +656,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="raspberry-pi-image-verkleinern">Raspberry Pi Image verkleinern</h2>
 <p>Das Raspberry Pi Image kann mit dem Tool <a href="https://github.com/Drewsif/PiShrink">PiShrink</a> verkleinert werden. PiShrink kann auf dem Raspberry Pi oder auf einen anderen Linux System wie Ubuntu oder einer virtuellen Machine mit einem Linux installiert und genutzt werden.</p>
 <ol type="1">
+<li>Auf dem Raspberry Pi <code>/etc/rc.local</code> aktivieren damit PiShrink das Dateisystem verkleinern kann. Auf neuen Rasperry Pi OS Versionen ist <code>/etc/rc.local</code> nicht mehr aktiviert.</li>
 <li>Backup Image auf den lokalen Rechner mit <a href="https://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a> <em>lesen</em> und in eine Image Datei schreiben.</li>
 <li>Virtuelle Machine mit Linux Ubuntu/Debian mit <em>gemeinsamen Ordner</em> starten</li>
 <li>Mit dem Script https://github.com/Drewsif/PiShrink das Image verkleinern</li>
@@ -663,7 +664,43 @@ div.csl-indent {
 <li>Image auf SD Karte schreiben mit <em>Win 32 Disk Imager</em> oder <em>Raspberry Pi Imager</em></li>
 <li>Für die Archivierung kann das Image mit 7zip zusätzlich komprimiert werden (Archive Format <code>.xz</code> und Kompressionsstufe <code>Ultra</code>)</li>
 </ol>
-<p>Tutorial: <a href="https://www.youtube.com/watch?v=5pdgO3Ncl6k">How I Backup and Shrink My SD Card Images - Youtube</a></p>
+<p>Tutorial:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=5pdgO3Ncl6k">How I Backup and Shrink My SD Card Images - Youtube</a></li>
+<li><a href="https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd">How to Enable /etc/rc.local with Systemd</a></li>
+</ul>
+<p><code>/etc/rc.local</code> auf dem Raspberry Pi aktivieren</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste ob /etc/rc.local aktiviert ist </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rc-local</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Test ob sich rc.local aktivieren lässt</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable rc-local</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Erstelle nun eine folgende Datei mit <code>sudo nano /etc/systemd/system/rc-local.service</code> mit folgendem Inhalt und speichere die Datei mit <code>Ctrl+o</code> und <code>Ctrl+x</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[Unit]</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> <span class="va">Description</span><span class="op">=</span>/etc/rc.local <span class="ex">Compatibility</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> <span class="va">ConditionPathExists</span><span class="op">=</span>/etc/rc.local</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[Service]</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> <span class="va">Type</span><span class="op">=</span>forking</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="va">ExecStart</span><span class="op">=</span>/etc/rc.local <span class="ex">start</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a> <span class="va">TimeoutSec</span><span class="op">=</span>0</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> <span class="va">StandardOutput</span><span class="op">=</span>tty</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a> <span class="va">RemainAfterExit</span><span class="op">=</span>yes</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> <span class="va">SysVStartPriority</span><span class="op">=</span>99</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="ex">[Install]</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a> <span class="va">WantedBy</span><span class="op">=</span>multi-user.target</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ändere die Rechte der Datei und aktiviere den Dienst mit folgenden Befehlen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rechte der Datei anpassen</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod +x /etc/rc.local</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Falls eine Fehlermeldung, dass die Datei nicht existiert erscheint,</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># erstelle die Datei mit folgendem Befehl (Ab Ubuntu 16.10)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'%s\n'</span> <span class="st">'#!/bin/bash'</span> <span class="st">'exit 0'</span> <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/rc.local</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod +x /etc/rc.local</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aktiviere dass der Dienst beim booten gestartet wird</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable rc-local</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Starte den Dienst und teste ob der Dienst läuft</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl start rc-local.service</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl status rc-local.service</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Backup Image mit Win32DiskImager schreiben, mit der Funktion <em>Lesen/Read</em> und diese als Image Datei auf den lokalen Rechner speichern.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -671,7 +708,7 @@ div.csl-indent {
 <figcaption>Backup Image der SD Karte schreiben mit Win32DiskImager und der Funktion <em>Lesen/Read</em></figcaption>
 </figure>
 </div>
-<p>Virtuelle Machine mit VM <a href="https://www.virtualbox.org/">VirtualBox</a> starten und in den Einstellungen der VM über <em>Geräte/Gemeinsame Ordner</em> einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.</p>
+<p>Virtuelle Machine mit VM <a href="https://www.virtualbox.org/">VirtualBox</a> starten<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> und in den Einstellungen der VM über <em>Geräte/Gemeinsame Ordner</em> einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/raspberrypi_image_verkleinern_02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Gemeinsamer Ordner in der VM VirtualBox einrichten"><img src="images/raspberrypi_image_verkleinern_02.png" class="img-fluid figure-img" alt="Gemeinsamer Ordner in der VM VirtualBox einrichten"></a></p>
@@ -686,26 +723,26 @@ div.csl-indent {
 </figure>
 </div>
 <p>Öffne nun ein Terminal damit das Script <code>pishrink.sh</code> installiert und ausgeführt werden kann.</p>
-<p><strong>Tipp:</strong> Falls das Terminal nicht öffnet mit <code>Ctrl+Alt+F3</code> in das TTY Terminal wechseln.</p>
-<p><strong>Tipp:</strong> Falls der VM User noch keine Adminrechte hat (bei einer Neuinstallation von Ubuntu ist das <code>root</code> Passwort nocht nicht gesetzt), können diese nachträglich gesetzt werden mit <code>sudo passwd</code>. Bei der Passwortabfrage das aktuelle User Passwort eingeben und das neue Root Passwort zweimal eingeben. Anschliessend als Root User anmelden mit <code>su -</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><strong>Tipp:</strong> Terminal über <code>Ctrl+Alt+t</code> öffnen. Falls das Terminal nicht öffnet mit <code>Ctrl+Alt+F3</code> in das TTY Terminal wechseln, und <code>Ctrl+Alt+F2</code> um in die Desktop-Umgebung zurückzukehren.</p>
+<p><strong>Tipp:</strong> Falls der VM User noch keine Adminrechte hat (bei einer Neuinstallation von Ubuntu ist das <code>root</code> Passwort nocht nicht gesetzt), können diese nachträglich gesetzt werden mit <code>sudo passwd</code>. Bei der Passwortabfrage das aktuelle User Passwort eingeben und das neue Root Passwort zweimal eingeben. Anschliessend als Root User anmelden mit <code>su -</code>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>GitHub: <a href="https://github.com/Drewsif/PiShrink" class="uri">https://github.com/Drewsif/PiShrink</a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install prerequisites</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install parted xz-utils</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download the pishrink script</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./pishrink.sh https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make the script executable</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ./pishrink.sh</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># run pishrink on the .img file</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./pishrink.sh <span class="at">-v</span> /host/<span class="op">&lt;</span>rpi-imagefile<span class="op">&gt;</span>.img</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Komprimiere die Image als .xz Archive (eher langsam)</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">xz</span> <span class="at">-z</span> <span class="at">-9e</span> /host/<span class="op">&lt;</span>rpi-imagefile<span class="op">&gt;</span>.img</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install prerequisites</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install parted xz-utils</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download the pishrink script</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> ./pishrink.sh https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make the script executable</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ./pishrink.sh</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># run pishrink on the .img file</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./pishrink.sh <span class="at">-v</span> /host/<span class="op">&lt;</span>rpi-imagefile<span class="op">&gt;</span>.img</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Komprimiere die Image als .xz Archive (eher langsam)</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">xz</span> <span class="at">-z</span> <span class="at">-9e</span> /host/<span class="op">&lt;</span>rpi-imagefile<span class="op">&gt;</span>.img</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/raspberrypi_image_verkleinern_04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Screenshot des Terminals während der Ausführung von pishrink"><img src="images/raspberrypi_image_verkleinern_04.png" class="img-fluid figure-img" style="width:50.0%" alt="Screenshot des Terminals während der Ausführung von pishrink"></a></p>
 <figcaption>Screenshot des Terminals während der Ausführung von pishrink</figcaption>
 </figure>
 </div>
-<p>Image mit 7-Zip zusätzlich komprimieren File Kontextmenu <em>7-Zip/Add to Archive</em> und als Archive Format <code>.xz</code> sowie den Compression Level <em>9-Ultra</em> wählen.</p>
+<p>Für die Archivierung des Images, kann das Image mit 7-Zip zusätzlich komprimiert werden. Im File Kontextmenu <em>7-Zip/Add to Archive</em> und als Archive Format <code>.xz</code> sowie den Compression Level <em>9-Ultra</em> wählen und komprimieren.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/raspberrypi_image_verkleinern_05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="7-Zip Einstellungen für die zusätzliche Kompression des Images mit .xz."><img src="images/raspberrypi_image_verkleinern_05.png" class="img-fluid figure-img" style="width:50.0%" alt="7-Zip Einstellungen für die zusätzliche Kompression des Images mit .xz."></a></p>
@@ -719,6 +756,11 @@ div.csl-indent {
 <figcaption>Screenshot des SD Card Formatter</figcaption>
 </figure>
 </div>
+<p>Es empfiehlt sich das Image nochmals auf eine SD Karte zu schreiben und zu testen ob der Raspberry Pi mit dem Image startet. Und ob die Speichergrösse in etwas der Grösse der SD Karte entspricht.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Überprüfe die Partitionen und deren Größe</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Oder mit POSIX Standard Ausgabe</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="va">LC_ALL</span><span class="op">=</span>C <span class="va">POSIXLY_CORRECT</span><span class="op">=</span>1 <span class="fu">df</span> <span class="at">-P</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
@@ -740,7 +782,8 @@ Raspberry Pi Ltd. (2024b). Raspberry <span>Pi Documentation</span> Config.Txt. I
 <hr>
 <ol>
 <li id="fn1"><p>RPI Connect erlaubt über einen Relay Server die Verbindung zu einem Raspberry Pi herzustellen über WebRTC wie Browser Clients für Zoom, Slack, Microsoft Teams. Der Relay Server wird nur für die Erstellung der Verbindung benötigt und wird von Raspberry Pi kostenlos betrieben. RPi Connect installieren mit <code>sudo apt install rpi-connect</code> und mit <code>sudo reboot</code> neu starten.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Einem User Adminrechte zuweisen: <code>sudo usermod -a -G sudo &lt;username&gt;</code>, Kontoinformationen <code>id &lt;username&gt;</code> aufzeigen.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Falls das Einrichten von Ubuntu auf VirtualBox Probleme bereitet und viel zu langsam ist (Hyper-V), dann hilft nach einer vorbereiteten .vbox Datei mit einem Ubuntu Image in der gewünschten Version zu suchen und diese zu nutzen.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Einem User Adminrechte zuweisen: <code>sudo usermod -a -G sudo &lt;username&gt;</code>, Kontoinformationen <code>id &lt;username&gt;</code> aufzeigen.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

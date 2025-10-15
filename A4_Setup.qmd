@@ -307,21 +307,68 @@ VNC Viewer auf dem PC installieren. [Real VNC Viewer](https://www.realvnc.com/en
 ## Raspberry Pi Image verkleinern
 Das Raspberry Pi Image kann mit dem Tool [PiShrink](https://github.com/Drewsif/PiShrink) verkleinert werden. PiShrink kann auf dem Raspberry Pi oder auf einen anderen Linux System wie Ubuntu oder einer virtuellen Machine mit einem Linux installiert und genutzt werden.
 
+1. Auf dem Raspberry Pi `/etc/rc.local` aktivieren damit PiShrink das Dateisystem verkleinern kann. Auf neuen Rasperry Pi OS Versionen ist `/etc/rc.local` nicht mehr aktiviert.
+2. Backup Image auf den lokalen Rechner mit [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) *lesen* und in eine Image Datei schreiben.
+3. Virtuelle Machine mit Linux Ubuntu/Debian mit *gemeinsamen Ordner* starten
+4. Mit dem Script https://github.com/Drewsif/PiShrink das Image verkleinern
+5. SD Karte Formatieren mit [SD Card Formatter ](https://www.sdcard.org/downloads/formatter)
+6. Image auf SD Karte schreiben mit *Win 32 Disk Imager* oder *Raspberry Pi Imager*
+7. Für die Archivierung kann das Image mit 7zip zusätzlich komprimiert werden (Archive Format `.xz` und Kompressionsstufe `Ultra`)
 
-1. Backup Image auf den lokalen Rechner mit [Win32DiskImager](https://sourceforge.net/projects/win32diskimager/) *lesen* und in eine Image Datei schreiben.
-2. Virtuelle Machine mit Linux Ubuntu/Debian mit *gemeinsamen Ordner* starten
-3. Mit dem Script https://github.com/Drewsif/PiShrink das Image verkleinern
-4. SD Karte Formatieren mit [SD Card Formatter ](https://www.sdcard.org/downloads/formatter)
-5. Image auf SD Karte schreiben mit *Win 32 Disk Imager* oder *Raspberry Pi Imager*
-6. Für die Archivierung kann das Image mit 7zip zusätzlich komprimiert werden (Archive Format `.xz` und Kompressionsstufe `Ultra`)
+Tutorial: 
 
-Tutorial: [How I Backup and Shrink My SD Card Images - Youtube](https://www.youtube.com/watch?v=5pdgO3Ncl6k)
+- [How I Backup and Shrink My SD Card Images - Youtube](https://www.youtube.com/watch?v=5pdgO3Ncl6k)
+- [How to Enable /etc/rc.local with Systemd](https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd)
+
+
+`/etc/rc.local` auf dem Raspberry Pi aktivieren
+
+```bash
+# Teste ob /etc/rc.local aktiviert ist 
+sudo systemctl status rc-local
+# Test ob sich rc.local aktivieren lässt
+sudo systemctl enable rc-local
+```
+Erstelle nun eine folgende Datei mit `sudo nano /etc/systemd/system/rc-local.service` mit folgendem Inhalt und speichere die Datei mit `Ctrl+o` und `Ctrl+x`.
+
+```bash
+[Unit]
+ Description=/etc/rc.local Compatibility
+ ConditionPathExists=/etc/rc.local
+
+[Service]
+ Type=forking
+ ExecStart=/etc/rc.local start
+ TimeoutSec=0
+ StandardOutput=tty
+ RemainAfterExit=yes
+ SysVStartPriority=99
+
+[Install]
+ WantedBy=multi-user.target
+```
+
+Ändere die Rechte der Datei und aktiviere den Dienst mit folgenden Befehlen:
+```bash
+# Rechte der Datei anpassen
+sudo chmod +x /etc/rc.local
+# Falls eine Fehlermeldung, dass die Datei nicht existiert erscheint,
+# erstelle die Datei mit folgendem Befehl (Ab Ubuntu 16.10)
+printf '%s\n' '#!/bin/bash' 'exit 0' | sudo tee -a /etc/rc.local
+sudo chmod +x /etc/rc.local
+# Aktiviere dass der Dienst beim booten gestartet wird
+sudo systemctl enable rc-local
+# Starte den Dienst und teste ob der Dienst läuft
+sudo systemctl start rc-local.service
+sudo systemctl status rc-local.service
+```
+
 
 Backup Image mit Win32DiskImager schreiben, mit der Funktion *Lesen/Read* und diese als Image Datei auf den lokalen Rechner speichern.
 
 ![Backup Image der SD Karte schreiben mit Win32DiskImager und der Funktion *Lesen/Read*](images/raspberrypi_image_verkleinern_01.png)
 
-Virtuelle Machine mit VM [VirtualBox](https://www.virtualbox.org/) starten und in den Einstellungen der VM über *Geräte/Gemeinsame Ordner* einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.
+Virtuelle Machine mit VM [VirtualBox](https://www.virtualbox.org/) starten^[Falls das Einrichten von Ubuntu auf VirtualBox Probleme bereitet und viel zu langsam ist (Hyper-V), dann hilft nach einer vorbereiteten .vbox Datei mit einem Ubuntu Image in der gewünschten Version zu suchen und diese zu nutzen.] und in den Einstellungen der VM über *Geräte/Gemeinsame Ordner* einen gemeinsamen Ordner zwischen VM und dem lokalen Rechner einrichten.
 
 ![Gemeinsamer Ordner in der VM VirtualBox einrichten](images/raspberrypi_image_verkleinern_02.png)
 
@@ -331,8 +378,7 @@ Das Image sollte nun im File Explorer unter "+ Other Locations" als Ordner *host
 
 Öffne nun ein Terminal damit das Script `pishrink.sh` installiert und ausgeführt werden kann. 
 
-
-**Tipp:** Falls das Terminal nicht öffnet mit `Ctrl+Alt+F3` in das TTY Terminal wechseln.
+**Tipp:** Terminal über `Ctrl+Alt+t` öffnen. Falls das Terminal nicht öffnet mit `Ctrl+Alt+F3` in das TTY Terminal wechseln, und `Ctrl+Alt+F2` um in die Desktop-Umgebung zurückzukehren.
 
 **Tipp:** Falls der VM User noch keine Adminrechte hat (bei einer Neuinstallation von Ubuntu ist das `root` Passwort nocht nicht gesetzt), können diese nachträglich gesetzt werden mit `sudo passwd`. Bei der Passwortabfrage das aktuelle User Passwort eingeben und das neue Root Passwort zweimal eingeben. Anschliessend als Root User anmelden mit `su -`.^[Einem User Adminrechte zuweisen:  `sudo usermod -a -G sudo <username>`, Kontoinformationen `id <username>` aufzeigen.]
 
@@ -352,13 +398,22 @@ xz -z -9e /host/<rpi-imagefile>.img
 ```
 ![Screenshot des Terminals während der Ausführung von pishrink](images/raspberrypi_image_verkleinern_04.png){width=50%}
 
-Image mit 7-Zip zusätzlich komprimieren File Kontextmenu  *7-Zip/Add to Archive* und als Archive Format `.xz` sowie den Compression Level *9-Ultra* wählen.
+Für die Archivierung des Images, kann das Image mit 7-Zip zusätzlich komprimiert werden. Im File Kontextmenu  *7-Zip/Add to Archive* und als Archive Format `.xz` sowie den Compression Level *9-Ultra* wählen und komprimieren.
 
 ![7-Zip Einstellungen für die zusätzliche Kompression des Images mit `.xz`.](images/raspberrypi_image_verkleinern_05.png){width=50%}
 
 Falls die SD Karte schon früher für Raspberry Pi Images benutzt wurde und mehrerere Partionen aufweist, kann es helfen die Karte mit dem [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) nochmals von Grund auf zu formatieren.
 
 ![Screenshot des SD Card Formatter](images/raspberrypi_image_verkleinern_06.png){width=50%}
+
+Es empfiehlt sich das Image nochmals auf eine SD Karte zu schreiben und zu testen ob der Raspberry Pi mit dem Image startet. Und ob die Speichergrösse in etwas der Grösse der SD Karte entspricht.
+
+```bash
+# Überprüfe die Partitionen und deren Größe
+df -h
+# Oder mit POSIX Standard Ausgabe
+LC_ALL=C POSIXLY_CORRECT=1 df -P
+```
 
 ::: {.content-visible when-profile="chapter"}
 ## Referenzen

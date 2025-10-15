@@ -219,7 +219,7 @@ Studiert die Python Skripte und online Tutorial zum Sensor
 
 ::: {.content-hidden unless-meta="solution"}
 ::: {#sol-luftqualitaet}
-Verbindng über I2C. Messwerte in eine Textdatei schreiben `python3 read-all.py > bme680-data.txt`. Die erstellte Datei kann mit dem Befehl `cat bme680-data.txt` angezeigt werden. Der Sensor kann mit oder ohne Gasmessung betrieben werden `set_gas_status`. Die Messung von Gas erfordern eine aktivie Miniaturheizung innerhalb des Sensors. Deaktiviert können die anderen Messwerte schneller erhoben werden. Die Filteroption glättet die Messwerte und reduziert beispielsweise momentane Events, wie eine Tür die zugeschlagen wird und den Luftdruck ändert. Die Einheiten sind Grad Celsius, Hektopascal und Prozent relativer Luftfeuchtigkeit.
+Verbindung über I2C. Messwerte in eine Textdatei schreiben `python3 read-all.py > bme680-data.txt`. Die erstellte Datei kann mit dem Befehl `cat bme680-data.txt` angezeigt werden. Der Sensor kann mit oder ohne Gasmessung betrieben werden `set_gas_status`. Die Messung von Gas erfordert eine aktive Miniaturheizung innerhalb des Sensors. Deaktiviert können die anderen Messwerte schneller erhoben werden. Die Filteroption glättet die Messwerte und reduziert beispielsweise momentane Events, wie eine Tür die zugeschlagen wird und den Luftdruck ändert. Die Einheiten sind Grad Celsius, Hektopascal und Prozent relativer Luftfeuchtigkeit.
 :::
 :::
 
